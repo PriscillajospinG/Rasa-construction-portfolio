@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, HardHat } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import RasaLogo from "@/components/RasaLogo";
 
 const navLinks = [
   { label: "Home",         href: "#home" },
@@ -65,13 +66,8 @@ export default function Navbar() {
 
           {/* Logo */}
           <button onClick={() => go("#home")} aria-label="Rasa Construction">
-            <div className="flex items-center gap-3">
-              <div
-                className="w-9 h-9 rounded-lg flex items-center justify-center"
-                style={{ background: "linear-gradient(135deg, #D8B9A3, #c4a088)" }}
-              >
-                <HardHat size={18} color="#051f21" strokeWidth={2.5} />
-              </div>
+            <div className="flex items-center gap-3 group">
+              <RasaLogo size={40} color="#D8B9A3" className="transition-transform duration-300 group-hover:scale-105" />
               <div>
                 <div
                   className="font-montserrat text-white text-base tracking-tight"

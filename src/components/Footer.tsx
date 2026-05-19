@@ -1,15 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { HardHat, Phone, Mail, MapPin, Share2, Globe, Link2, Send } from "lucide-react";
+import { Phone, Mail, MapPin, Share2, Globe, Link2, Send } from "lucide-react";
+import RasaLogo from "@/components/RasaLogo";
 
-const quickLinks = [
-  { label: "Home", href: "#home" },
-  { label: "About Us", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Projects", href: "#projects" },
+const navLinks = [
+  { label: "Home",         href: "#home" },
+  { label: "About",        href: "#about" },
+  { label: "Services",     href: "#services" },
+  { label: "Projects",     href: "#projects" },
   { label: "Testimonials", href: "#testimonials" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact",      href: "#contact" },
 ];
 
 const services = [
@@ -22,168 +23,164 @@ const services = [
 
 const socials = [
   { icon: Share2, href: "#", label: "Facebook" },
-  { icon: Link2, href: "#", label: "Instagram" },
-  { icon: Globe, href: "#", label: "YouTube" },
-  { icon: Send, href: "#", label: "Twitter" },
+  { icon: Link2,  href: "#", label: "Instagram" },
+  { icon: Globe,  href: "#", label: "YouTube" },
+  { icon: Send,   href: "#", label: "Twitter" },
 ];
 
 export default function Footer() {
-  const scrollTo = (href: string) => {
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
+  const go = (href: string) => document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
 
   return (
     <footer
       className="relative overflow-hidden"
       style={{ background: "linear-gradient(160deg, #030f10 0%, #051f21 100%)" }}
     >
-      {/* Top accent line */}
+      {/* Top accent rule */}
       <div
-        className="w-full h-px"
-        style={{ background: "linear-gradient(90deg, transparent, #D8B9A3, transparent)" }}
+        className="w-full"
+        style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(216,185,163,0.4), transparent)" }}
       />
 
-      {/* Main footer content */}
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Brand */}
-          <div className="lg:col-span-1">
+      <div className="container py-16">
+        <div
+          className="grid gap-12"
+          style={{ gridTemplateColumns: "repeat(12, 1fr)" }}
+        >
+          {/* Brand — 3 cols */}
+          <div style={{ gridColumn: "1 / span 3" }} className="[grid-column:1/-1] sm:[grid-column:1/span_6] lg:[grid-column:1/span_3]">
             <div className="flex items-center gap-3 mb-5">
-              <div
-                className="w-10 h-10 rounded-lg flex items-center justify-center"
-                style={{ background: "linear-gradient(135deg, #D8B9A3, #c4a088)" }}
-              >
-                <HardHat size={20} color="#051f21" strokeWidth={2.5} />
-              </div>
+              <RasaLogo size={44} color="#D8B9A3" />
               <div>
-                <div className="font-montserrat font-black text-white text-lg tracking-tight">RASA</div>
-                <div className="text-[10px] tracking-[0.25em] uppercase font-poppins" style={{ color: "#D8B9A3" }}>
+                <div className="font-montserrat text-white font-black text-lg" style={{ letterSpacing: "-0.01em" }}>
+                  RASA
+                </div>
+                <div className="label-editorial" style={{ color: "#D8B9A3", fontSize: "0.58rem", letterSpacing: "0.25em" }}>
                   Construction
                 </div>
               </div>
             </div>
 
-            <p className="font-inter text-sm leading-relaxed mb-6" style={{ color: "rgba(255,255,255,0.45)" }}>
-              Building strength and delivering trust through premium scaffolding, concrete works, and equipment rental services across Tamil Nadu.
+            <p
+              className="font-inter mb-6"
+              style={{ fontSize: "var(--text-sm)", lineHeight: 1.75, color: "rgba(255,255,255,0.4)" }}
+            >
+              Building strength and delivering trust through premium scaffolding, concrete works, and equipment rental across Tamil Nadu.
             </p>
 
-            {/* Socials */}
-            <div className="flex gap-3">
+            <div className="flex gap-2">
               {socials.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200"
                   style={{
-                    background: "rgba(216,185,163,0.1)",
-                    border: "1px solid rgba(216,185,163,0.15)",
-                    color: "rgba(255,255,255,0.6)",
+                    background: "rgba(216,185,163,0.08)",
+                    border: "1px solid rgba(216,185,163,0.12)",
+                    color: "rgba(255,255,255,0.5)",
                   }}
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.background = "rgba(216,185,163,0.2)";
                     (e.currentTarget as HTMLElement).style.color = "#D8B9A3";
+                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(216,185,163,0.3)";
                   }}
                   onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.background = "rgba(216,185,163,0.1)";
-                    (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.6)";
+                    (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.5)";
+                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(216,185,163,0.12)";
                   }}
                 >
-                  <Icon size={16} />
+                  <Icon size={14} />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-poppins font-semibold text-white text-sm mb-5 tracking-wide">
-              Quick Links
+          {/* Quick Links — 2 cols */}
+          <div style={{ gridColumn: "5 / span 2" }} className="[grid-column:1/-1] sm:[grid-column:7/span_3] lg:[grid-column:5/span_2]">
+            <h4 className="label-editorial mb-5" style={{ color: "rgba(255,255,255,0.5)" }}>
+              Navigation
             </h4>
             <ul className="space-y-3">
-              {quickLinks.map((link) => (
-                <li key={link.label}>
+              {navLinks.map((l) => (
+                <li key={l.label}>
                   <button
-                    onClick={() => scrollTo(link.href)}
-                    className="font-inter text-sm transition-all duration-200 hover:translate-x-1 text-left"
-                    style={{ color: "rgba(255,255,255,0.45)" }}
+                    onClick={() => go(l.href)}
+                    className="font-inter text-sm transition-colors duration-200"
+                    style={{ color: "rgba(255,255,255,0.4)" }}
                     onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#D8B9A3"; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.45)"; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.4)"; }}
                   >
-                    → {link.label}
+                    {l.label}
                   </button>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Services */}
-          <div>
-            <h4 className="font-poppins font-semibold text-white text-sm mb-5 tracking-wide">
-              Our Services
+          {/* Services — 2 cols */}
+          <div style={{ gridColumn: "8 / span 2" }} className="[grid-column:1/-1] sm:[grid-column:1/span_6] lg:[grid-column:8/span_2]">
+            <h4 className="label-editorial mb-5" style={{ color: "rgba(255,255,255,0.5)" }}>
+              Services
             </h4>
             <ul className="space-y-3">
               {services.map((s) => (
                 <li key={s}>
-                  <span className="font-inter text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>
-                    {s}
-                  </span>
+                  <span className="font-inter text-sm" style={{ color: "rgba(255,255,255,0.4)" }}>{s}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact */}
-          <div>
-            <h4 className="font-poppins font-semibold text-white text-sm mb-5 tracking-wide">
-              Contact Info
+          {/* Contact — 3 cols */}
+          <div style={{ gridColumn: "11 / span 2" }} className="[grid-column:1/-1] sm:[grid-column:7/span_6] lg:[grid-column:11/span_2]">
+            <h4 className="label-editorial mb-5" style={{ color: "rgba(255,255,255,0.5)" }}>
+              Contact
             </h4>
             <ul className="space-y-4">
               <li>
-                <a
-                  href="tel:+919842766379"
-                  className="flex items-start gap-3 group"
-                >
-                  <Phone size={15} className="mt-0.5 flex-shrink-0" style={{ color: "#D8B9A3" }} />
+                <a href="tel:+919842766379" className="flex items-start gap-3 group">
+                  <Phone size={14} style={{ color: "#D8B9A3", flexShrink: 0, marginTop: "2px" }} />
                   <div>
-                    <div className="font-inter text-sm group-hover:text-white transition-colors" style={{ color: "rgba(255,255,255,0.6)" }}>
+                    <div className="font-inter text-sm group-hover:text-white transition-colors" style={{ color: "rgba(255,255,255,0.55)", lineHeight: 1.6 }}>
                       +91 98427 66379
                     </div>
-                    <div className="font-inter text-sm group-hover:text-white transition-colors" style={{ color: "rgba(255,255,255,0.6)" }}>
+                    <div className="font-inter text-sm group-hover:text-white transition-colors" style={{ color: "rgba(255,255,255,0.55)" }}>
                       +91 63807 29431
                     </div>
                   </div>
                 </a>
               </li>
               <li>
-                <a
-                  href="mailto:gurusamyrasa@gmail.com"
-                  className="flex items-start gap-3 group"
-                >
-                  <Mail size={15} className="mt-0.5 flex-shrink-0" style={{ color: "#D8B9A3" }} />
-                  <span className="font-inter text-sm group-hover:text-white transition-colors break-all" style={{ color: "rgba(255,255,255,0.6)" }}>
+                <a href="mailto:gurusamyrasa@gmail.com" className="flex items-start gap-3 group">
+                  <Mail size={14} style={{ color: "#D8B9A3", flexShrink: 0, marginTop: "2px" }} />
+                  <span className="font-inter text-sm group-hover:text-white transition-colors break-all" style={{ color: "rgba(255,255,255,0.55)", lineHeight: 1.6 }}>
                     gurusamyrasa@gmail.com
                   </span>
                 </a>
               </li>
               <li>
                 <div className="flex items-start gap-3">
-                  <MapPin size={15} className="mt-0.5 flex-shrink-0" style={{ color: "#D8B9A3" }} />
-                  <span className="font-inter text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.6)" }}>
-                    Rasa Office, Achankuttam – 627861, Tamil Nadu
+                  <MapPin size={14} style={{ color: "#D8B9A3", flexShrink: 0, marginTop: "2px" }} />
+                  <span className="font-inter text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
+                    Rasa Office,<br />Achankuttam – 627861,<br />Tamil Nadu
                   </span>
                 </div>
               </li>
             </ul>
 
-            {/* CTA */}
             <a
               href="https://wa.me/919842766379?text=Hello%20Rasa%20Construction%2C%20I'm%20interested%20in%20your%20services."
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 btn-primary inline-flex text-sm py-2.5 px-5"
-              style={{ background: "#25D366" }}
+              className="btn mt-6 inline-flex text-sm"
+              style={{
+                background: "#25D366",
+                color: "white",
+                padding: "0.6rem 1.25rem",
+                borderRadius: "6px",
+                fontFamily: "'Poppins', sans-serif",
+                fontWeight: 600,
+              }}
             >
               💬 WhatsApp Us
             </a>
@@ -193,16 +190,15 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div
-        className="border-t py-6"
-        style={{ borderColor: "rgba(255,255,255,0.06)" }}
+        className="border-t"
+        style={{ borderColor: "rgba(255,255,255,0.05)" }}
       >
-        <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center">
-          <p className="font-inter text-xs" style={{ color: "rgba(255,255,255,0.3)" }}>
-            © {new Date().getFullYear()} Rasa Construction. All rights reserved. | Owner: Gurusamy A
-          </p>
-          <p className="font-inter text-xs" style={{ color: "rgba(255,255,255,0.2)" }}>
-            Achankuttam, Tamil Nadu – 627861
-          </p>
+        <div
+          className="container py-5 flex flex-col sm:flex-row items-center justify-between gap-3"
+          style={{ fontSize: "var(--text-xs)", color: "rgba(255,255,255,0.25)", fontFamily: "'Inter', sans-serif" }}
+        >
+          <span>© {new Date().getFullYear()} Rasa Construction. All rights reserved. Owner: Gurusamy A</span>
+          <span>Achankuttam, Tamil Nadu – 627861</span>
         </div>
       </div>
     </footer>
