@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
@@ -10,94 +10,145 @@ import Container from "@/components/layout/Container";
 import { company } from "@/data/company";
 import { scrollTo } from "@/lib/utils";
 
-function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
-  const ref    = useRef<HTMLSpanElement>(null);
-  const val    = useMotionValue(0);
-  const spring = useSpring(val, { duration: 1800, bounce: 0 });
-  const inView = useInView(ref, { once: true });
-  useEffect(() => { if (inView) val.set(target); }, [inView, val, target]);
-  useEffect(() => spring.on("change", (v) => { if (ref.current) ref.current.textContent = Math.round(v) + suffix; }), [spring, suffix]);
-  return <span ref={ref}>0{suffix}</span>;
-}
-
 export default function About() {
-  const ref    = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const containerRef = useRef<HTMLElement>(null);
+  const triggerRef   = useRef<HTMLDivElement>(null);
+  const inView       = useInView(triggerRef, { once: true, margin: "-80px" });
+
+  const { scrollYProgress } = useScroll({
+    target:  containerRef,
+    offset:  ["start end", "end start"],
+  });
+
+  /* Emerging scroll transforms for the floating card */
+  const cardY       = useTransform(scrollYProgress, [0.08, 0.35], [140, 0]);
+  const cardOpacity = useTransform(scrollYProgress, [0.08, 0.32], [0, 1]);
+  const cardScale   = useTransform(scrollYProgress, [0.08, 0.35], [0.95, 1]);
 
   return (
     <section
       id="about"
-      ref={ref}
-      className="relative overflow-hidden"
+      ref={containerRef}
+      className="relative overflow-visible"
       style={{
-        background:  "white",
-        /* Slide under the hero's bottom fade — creates seamless merge */
-        marginTop:   "-5rem",
-        position:    "relative",
-        zIndex:      1,
+        background: "transparent",
       }}
     >
-      {/* Breathing entry space — compensates for negative margin + gives rhythm */}
-      <div style={{ height: "calc(5rem + var(--s16))" }} aria-hidden />
+      {/* ── 1. BACKGROUND CONTINUITY LAYER ── */}
+      {/* Seamless transition from the dark green Hero theme to the light details theme */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "linear-gradient(to bottom, rgba(3,15,16,0.85) 0%, rgba(3,15,16,0.98) 12rem, #ffffff 28rem, #ffffff 100%)",
+          zIndex: 1,
+        }}
+        aria-hidden
+      />
 
-      {/* ── Zone 1: Editorial header ── */}
-      <Container>
-        <div style={{ paddingBottom: "var(--s8)" }}>
+      {/* ── 2. GRAIN TEXTURE CONTINUITY ── */}
+      <div
+        className="absolute inset-0 grain pointer-events-none"
+        style={{
+          zIndex: 2,
+          maskImage: "linear-gradient(to bottom, black 0%, rgba(0,0,0,0.15) 25%, transparent 50%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 0%, rgba(0,0,0,0.15) 25%, transparent 50%)",
+        }}
+        aria-hidden
+      />
+
+      {/* ── 3. ARCHITECTURAL GRID CONTINUITY ── */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(216,185,163,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(216,185,163,0.04) 1px, transparent 1px)",
+          backgroundSize: "52px 52px",
+          zIndex: 2,
+          maskImage:
+            "linear-gradient(to bottom right, black 0%, rgba(0,0,0,0.2) 20%, transparent 45%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom right, black 0%, rgba(0,0,0,0.2) 20%, transparent 45%)",
+        }}
+        aria-hidden
+      />
+
+      {/* ── Zone 1: Floating Editorial Header (Emerges from Hero) ── */}
+      <Container className="relative z-10">
+        <motion.div
+          style={{
+            y:              cardY,
+            opacity:        cardOpacity,
+            scale:          cardScale,
+            background:     "rgba(5, 31, 33, 0.94)",
+            backdropFilter: "blur(18px)",
+            WebkitBackdropFilter: "blur(18px)",
+            border:         "1px solid rgba(216, 185, 163, 0.22)",
+            borderRadius:   "var(--r-xl)",
+            padding:        "var(--s8) var(--s8)",
+            boxShadow:      "0 40px 110px rgba(0, 0, 0, 0.55)",
+            position:       "relative",
+            zIndex:         10,
+            marginTop:      "-14rem", /* Overlap the bottom of Hero */
+          }}
+          className="p-6 md:p-12"
+        >
           <div
-            style={{ display: "grid", gridTemplateColumns: "1fr 1fr", alignItems: "end", gap: "var(--s8)" }}
-            className="grid-cols-1 lg:grid-cols-2"
+            style={{ display: "grid", gridTemplateColumns: "1.1fr 1.9fr", alignItems: "center", gap: "var(--s8)" }}
+            className="grid-cols-1 lg:grid-cols-[1.1fr_1.9fr]"
           >
-            {/* Left: oversized number anchor */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <div className="eyebrow t-label" style={{ color: "var(--clr-primary)", marginBottom: "var(--s3)" }}>Our Story</div>
+            {/* Left: stats / number */}
+            <div>
+              <div className="eyebrow t-label" style={{ color: "var(--clr-accent)", marginBottom: "var(--s3)" }}>Our Story</div>
               <div style={{ position: "relative", lineHeight: 0.85 }}>
-                <span className="font-m" style={{ fontSize: "clamp(7rem, 18vw, 14rem)", fontWeight: 900, color: "rgba(8,51,53,0.07)", letterSpacing: "-0.04em", userSelect: "none", display: "block" }}>
+                <span className="font-m" style={{ fontSize: "clamp(6rem, 15vw, 11rem)", fontWeight: 900, color: "rgba(216, 185, 163, 0.08)", letterSpacing: "-0.04em", userSelect: "none", display: "block" }}>
                   15
                 </span>
                 <div className="absolute" style={{ bottom: "0.5rem", left: "0.75rem" }}>
-                  <div className="font-m" style={{ fontSize: "var(--t-h2)", fontWeight: 700, color: "var(--clr-primary)", letterSpacing: "-0.01em" }}>
+                  <div className="font-m text-white" style={{ fontSize: "var(--t-h2)", fontWeight: 700, letterSpacing: "-0.01em" }}>
                     Years of
                   </div>
-                  <div className="t-label" style={{ color: "var(--clr-accent-dk)", letterSpacing: "0.2em" }}>
+                  <div className="t-label" style={{ color: "var(--clr-accent)", letterSpacing: "0.2em" }}>
                     Field Experience
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
-            {/* Right: headline + story opening */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <h2 className="t-h1" style={{ color: "var(--clr-primary)", lineHeight: 1.05, marginBottom: "var(--s4)" }}>
+            {/* Right: story intro text */}
+            <div>
+              <h2 className="t-h1 text-white" style={{ lineHeight: 1.08, marginBottom: "var(--s4)" }}>
                 {company.story.headline.split(".")[0]}.<br />
-                <em className="t-italic-dark">{company.story.headline.split(".")[1]?.trim()}</em>
+                <span style={{ color: "var(--clr-accent)" }}>{company.story.headline.split(".")[1]?.trim()}</span>
               </h2>
-              <p className="t-body" style={{ color: "var(--clr-text-md)", lineHeight: 1.75, maxWidth: "480px" }}>
+              <p className="t-body" style={{ color: "rgba(255, 255, 255, 0.72)", lineHeight: 1.75 }}>
                 {company.story.paragraphs[0]}
               </p>
-            </motion.div>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </Container>
 
-      {/* Architectural divider */}
-      <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(8,51,53,0.12) 20%, rgba(8,51,53,0.12) 80%, transparent)" }} />
+      {/* Spacing trigger for Zone 2 fade in */}
+      <div ref={triggerRef} style={{ height: "1px" }} />
 
-      {/* ── Zone 2: Content — 4/8 offset composition ── */}
-      <Container>
-        <div style={{ paddingTop: "var(--s12)", paddingBottom: "var(--s16)" }}>
+      {/* Architectural divider — inside the light/white area */}
+      <div
+        className="relative z-10"
+        style={{
+          height: "1px",
+          background: "linear-gradient(90deg, transparent, rgba(8,51,53,0.10) 20%, rgba(8,51,53,0.10) 80%, transparent)",
+          marginTop: "var(--s12)",
+        }}
+      />
+
+      {/* ── Zone 2: Content (Light background, details) ── */}
+      <Container className="relative z-10">
+        <div style={{ paddingTop: "var(--s10)", paddingBottom: "var(--s16)" }}>
           <div
             style={{ display: "grid", gridTemplateColumns: "4fr 8fr", gap: "var(--s8)", alignItems: "start" }}
             className="grid-cols-1 lg:grid-cols-[4fr_8fr]"
           >
-            {/* Left: stat strip + CTA */}
+            {/* Left Column: Core Stats */}
             <Reveal direction="left">
               <div style={{ display: "flex", flexDirection: "column", gap: "var(--s6)", paddingTop: "var(--s4)", borderLeft: "2px solid rgba(8,51,53,0.10)", paddingLeft: "var(--s4)" }}>
                 {[
@@ -119,11 +170,11 @@ export default function About() {
               </div>
             </Reveal>
 
-            {/* Right: image + body + differentiators */}
+            {/* Right Column: Founder Quote, Images, Differentiators */}
             <Reveal direction="right">
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s4)", alignItems: "start" }}>
 
-                {/* Main image — full width */}
+                {/* Team Image Banner */}
                 <div style={{ gridColumn: "1 / -1", position: "relative" }}>
                   <div style={{ position: "relative", aspectRatio: "16/9", borderRadius: "var(--r-lg)", overflow: "hidden", boxShadow: "var(--sh-xl)" }}>
                     <Image
@@ -134,7 +185,8 @@ export default function About() {
                       loading="eager"
                     />
                     <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(5,31,33,0.75) 0%, transparent 55%)" }} />
-                    {/* Overlapping caption */}
+                    
+                    {/* Overlapping Caption */}
                     <div className="absolute" style={{ top: "50%", left: "var(--s4)", transform: "translateY(-50%)", maxWidth: "260px" }}>
                       <div className="t-label" style={{ color: "var(--clr-accent)", marginBottom: "var(--s1)" }}>Founded by</div>
                       <div className="font-m text-white" style={{ fontSize: "var(--t-h2)", fontWeight: 800, lineHeight: 1.2 }}>
@@ -147,7 +199,7 @@ export default function About() {
                   </div>
                 </div>
 
-                {/* Founder quote */}
+                {/* Founder Quote Block */}
                 <div style={{ paddingTop: "var(--s4)", borderTop: "2px solid rgba(8,51,53,0.08)" }}>
                   <p className="font-m" style={{ fontSize: "var(--t-body)", fontStyle: "italic", fontWeight: 700, color: "var(--clr-primary)", lineHeight: 1.5, marginBottom: "var(--s3)" }}>
                     &ldquo;{company.story.ownerQuote}&rdquo;
@@ -155,7 +207,7 @@ export default function About() {
                   <div className="t-label" style={{ color: "var(--clr-text-lt)" }}>— {company.owner}, Founder</div>
                 </div>
 
-                {/* Differentiators — right col */}
+                {/* Differentiators Check List */}
                 <div style={{ paddingTop: "var(--s4)", borderTop: "2px solid rgba(8,51,53,0.08)" }}>
                   <ul style={{ display: "flex", flexDirection: "column", gap: "var(--s3)" }}>
                     {company.differentiators.slice(0, 4).map(({ title, description }) => (
@@ -170,7 +222,7 @@ export default function About() {
                   </ul>
                 </div>
 
-                {/* Second paragraph — full width */}
+                {/* Narrative Paragraph */}
                 <div style={{ gridColumn: "1 / -1", paddingTop: "var(--s4)", borderTop: "1px solid rgba(8,51,53,0.06)" }}>
                   <p className="t-body" style={{ color: "var(--clr-text-md)", lineHeight: 1.75 }}>
                     {company.story.paragraphs[1]}
@@ -178,6 +230,7 @@ export default function About() {
                 </div>
               </div>
             </Reveal>
+
           </div>
         </div>
       </Container>
