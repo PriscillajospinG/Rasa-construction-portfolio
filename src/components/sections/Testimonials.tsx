@@ -46,7 +46,7 @@ export default function Testimonials() {
                 {Array.from({ length: 5 }).map((_, i) => <Star key={i} size={16} fill="var(--clr-accent)" color="var(--clr-accent)" />)}
               </div>
               <div className="font-m text-white" style={{ fontWeight: 900, fontSize: "var(--t-h2)" }}>4.9 / 5.0</div>
-              <div className="t-sm" style={{ color: "rgba(255,255,255,0.38)", marginTop: "2px" }}>300+ client reviews</div>
+              <div className="t-sm" style={{ color: "rgba(255,255,255,0.38)", marginTop: "2px" }}>Across 300+ completed projects</div>
             </div>
           </div>
         </Reveal>
@@ -81,7 +81,15 @@ export default function Testimonials() {
                 {featured.initials}
               </div>
               <div className="font-p text-white" style={{ fontWeight: 700, fontSize: "var(--t-sm)" }}>{featured.name}</div>
-              <div className="t-sm" style={{ color: "rgba(255,255,255,0.45)", marginTop: "2px" }}>{featured.role}</div>
+              <div className="t-sm" style={{ color: "rgba(255,255,255,0.50)", marginTop: "2px" }}>{featured.role}</div>
+              {featured.location && (
+                <div className="t-label" style={{ color: "rgba(216,185,163,0.50)", marginTop: "4px", fontSize: "0.6rem" }}>{featured.location}</div>
+              )}
+              {featured.project && (
+                <div className="t-sm" style={{ color: "rgba(216,185,163,0.40)", marginTop: "var(--s2)", fontSize: "0.72rem", fontStyle: "italic", borderTop: "1px solid rgba(216,185,163,0.12)", paddingTop: "var(--s2)" }}>
+                  Project: {featured.project}
+                </div>
+              )}
             </div>
           </div>
         </motion.div>
@@ -89,21 +97,26 @@ export default function Testimonials() {
         {/* ── Tier 2: Prominent pair — 2-col, medium weight ── */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s3)", marginBottom: "var(--s4)" }}
           className="grid-cols-1 md:grid-cols-2">
-          {prominent.map(({ id, name, role, rating, text, initials }, i) => (
+          {prominent.map(({ id, name, role, location, project, rating, text, initials }, i) => (
             <motion.div key={id}
               initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
               className="card-dark"
               style={{ padding: "var(--s4)", borderLeft: "2px solid rgba(216,185,163,0.22)" }}>
               <Quote size={28} style={{ color: "rgba(216,185,163,0.10)", marginBottom: "var(--s3)" }} />
               <Stars count={rating} />
-              <p className="t-sm" style={{ color: "rgba(255,255,255,0.68)", lineHeight: 1.78, margin: "var(--s3) 0" }}>
+              <p className="t-sm" style={{ color: "rgba(255,255,255,0.72)", lineHeight: 1.78, margin: "var(--s3) 0" }}>
                 &ldquo;{text}&rdquo;
               </p>
+              {project && (
+                <div className="t-label" style={{ color: "rgba(216,185,163,0.40)", fontSize: "0.58rem", marginBottom: "var(--s3)", fontStyle: "italic" }}>
+                  {project}
+                </div>
+              )}
               <div style={{ display: "flex", alignItems: "center", gap: "var(--s2)" }}>
                 <div style={{ width: "36px", height: "36px", borderRadius: "50%", background: "linear-gradient(135deg, var(--clr-primary-mid), var(--clr-accent))", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "0.75rem", color: "white", flexShrink: 0 }}>{initials}</div>
                 <div>
                   <div className="font-p text-white" style={{ fontWeight: 600, fontSize: "var(--t-sm)" }}>{name}</div>
-                  <div className="t-sm" style={{ color: "rgba(255,255,255,0.38)" }}>{role}</div>
+                  <div className="t-sm" style={{ color: "rgba(255,255,255,0.38)" }}>{role}{location ? ` · ${location}` : ""}</div>
                 </div>
               </div>
             </motion.div>
@@ -114,20 +127,19 @@ export default function Testimonials() {
         <div style={{ borderTop: "1px solid rgba(216,185,163,0.10)", paddingTop: "var(--s4)" }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 0 }}
             className="grid-cols-1 md:grid-cols-3">
-            {compact.map(({ id, name, role, rating, text, initials }, i) => (
+            {compact.map(({ id, name, role, location, rating, text, initials }, i) => (
               <motion.div key={id}
                 initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5, delay: 0.45 + i * 0.08 }}
                 style={{ padding: "var(--s4)", borderRight: i < compact.length - 1 ? "1px solid rgba(216,185,163,0.08)" : "none" }}>
                 <Stars count={rating} />
-                {/* Just the quote — no box, minimal treatment */}
-                <p className="t-sm" style={{ color: "rgba(255,255,255,0.50)", lineHeight: 1.75, margin: "var(--s2) 0 var(--s3)" }}>
-                  &ldquo;{text.slice(0, 120)}{text.length > 120 ? "…" : ""}&rdquo;
+                <p className="t-sm" style={{ color: "rgba(255,255,255,0.55)", lineHeight: 1.75, margin: "var(--s2) 0 var(--s3)" }}>
+                  &ldquo;{text.slice(0, 160)}{text.length > 160 ? "…" : ""}&rdquo;
                 </p>
                 <div style={{ display: "flex", alignItems: "center", gap: "var(--s2)" }}>
                   <div style={{ width: "28px", height: "28px", borderRadius: "50%", background: "rgba(216,185,163,0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.65rem", fontFamily: "'Montserrat',sans-serif", fontWeight: 700, color: "var(--clr-accent)" }}>{initials}</div>
                   <div>
-                    <div className="font-p" style={{ fontWeight: 600, fontSize: "0.75rem", color: "rgba(255,255,255,0.65)" }}>{name}</div>
-                    <div style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.30)", fontFamily: "'Inter',sans-serif" }}>{role}</div>
+                    <div className="font-p" style={{ fontWeight: 600, fontSize: "0.75rem", color: "rgba(255,255,255,0.70)" }}>{name}</div>
+                    <div style={{ fontSize: "0.68rem", color: "rgba(255,255,255,0.32)", fontFamily: "'Inter',sans-serif" }}>{role}{location ? ` · ${location}` : ""}</div>
                   </div>
                 </div>
               </motion.div>

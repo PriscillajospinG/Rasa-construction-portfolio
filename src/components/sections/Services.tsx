@@ -84,7 +84,13 @@ export default function Services() {
                   </div>
                   <Badge variant="light" style={{ marginBottom: "var(--s3)" }}>✓ {primary.tag}</Badge>
                   <h3 className="font-m text-white" style={{ fontSize: "var(--t-h1)", fontWeight: 900, lineHeight: 1.1, marginBottom: "var(--s2)" }}>{primary.title}</h3>
-                  <p className="t-sm" style={{ color: "rgba(255,255,255,0.58)", lineHeight: 1.7, maxWidth: "400px" }}>{primary.description}</p>
+                  <p className="t-sm" style={{ color: "rgba(255,255,255,0.70)", lineHeight: 1.75, maxWidth: "420px", marginBottom: "var(--s3)" }}>{primary.description}</p>
+                  {primary.usedFor && (
+                    <div style={{ borderTop: "1px solid rgba(216,185,163,0.14)", paddingTop: "var(--s3)" }}>
+                      <div className="t-label" style={{ color: "rgba(216,185,163,0.55)", marginBottom: "6px", fontSize: "0.6rem" }}>USED FOR</div>
+                      <div className="t-sm" style={{ color: "rgba(255,255,255,0.50)", lineHeight: 1.6, fontSize: "0.78rem" }}>{primary.usedFor}</div>
+                    </div>
+                  )}
                 </div>
               </motion.div>
             );
@@ -92,7 +98,7 @@ export default function Services() {
 
           {/* Secondary pair: stacked, different heights */}
           <div style={{ display: "flex", flexDirection: "column", gap: "var(--s3)" }}>
-            {secondary.map(({ id, iconName, title, description, tag }, i) => {
+            {secondary.map(({ id, iconName, title, description, usedFor, tag }, i) => {
               const Icon = getIcon(iconName);
               return (
                 <motion.div key={id}
@@ -115,6 +121,11 @@ export default function Services() {
                     <div>
                       <h3 className="t-h2" style={{ color: "var(--clr-text)", marginBottom: "var(--s1)" }}>{title}</h3>
                       <p className="t-sm" style={{ color: "var(--clr-text-md)", lineHeight: 1.65, marginBottom: "var(--s2)" }}>{description}</p>
+                      {usedFor && (
+                        <p className="t-sm" style={{ color: "var(--clr-text-lt)", lineHeight: 1.5, fontSize: "0.78rem", marginBottom: "var(--s2)", fontStyle: "italic" }}>
+                          Used for: {usedFor}
+                        </p>
+                      )}
                       <Badge variant="dark">✓ {tag}</Badge>
                     </div>
                   </div>

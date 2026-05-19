@@ -72,14 +72,24 @@ export default function Projects() {
           <div className="absolute inset-0 transition-opacity duration-400"
             style={{ background: "linear-gradient(to right, rgba(5,31,33,0.92) 0%, rgba(5,31,33,0.45) 50%, rgba(5,31,33,0.15) 100%)", opacity: hovered === "hero" ? 1 : 0.8 }} />
           {/* Editorial content — left-anchored */}
-          <div className="absolute" style={{ top: "50%", left: "var(--s8)", transform: "translateY(-50%)", maxWidth: "440px" }}>
+          <div className="absolute" style={{ top: "50%", left: "var(--s8)", transform: "translateY(-50%)", maxWidth: "500px" }}>
             <Badge variant="light" style={{ marginBottom: "var(--s3)" }}>{heroProject.category}</Badge>
             <h3 className="font-m text-white" style={{ fontSize: "var(--t-h1)", fontWeight: 900, lineHeight: 1.1, marginBottom: "var(--s2)" }}>
               {heroProject.title}
             </h3>
-            <div style={{ display: "flex", alignItems: "center", gap: "var(--s1)" }}>
-              <MapPin size={13} color="rgba(255,255,255,0.50)" />
-              <span className="t-sm" style={{ color: "rgba(255,255,255,0.50)" }}>{heroProject.location}</span>
+            {heroProject.description && (
+              <p className="t-sm" style={{ color: "rgba(255,255,255,0.62)", lineHeight: 1.65, maxWidth: "380px", marginBottom: "var(--s3)" }}>
+                {heroProject.description}
+              </p>
+            )}
+            <div style={{ display: "flex", alignItems: "center", gap: "var(--s3)", flexWrap: "wrap" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+                <MapPin size={13} color="rgba(255,255,255,0.50)" />
+                <span className="t-sm" style={{ color: "rgba(255,255,255,0.50)" }}>{heroProject.location}</span>
+              </div>
+              {heroProject.duration && (
+                <span className="t-label" style={{ color: "rgba(216,185,163,0.60)", fontSize: "0.6rem" }}>{heroProject.duration}</span>
+              )}
             </div>
           </div>
           {/* Hover zoom icon */}
@@ -91,7 +101,7 @@ export default function Projects() {
 
         {/* ── Gallery grid — 3 col with mixed aspect ratios ── */}
         <div style={{ columns: "3", columnGap: "var(--s3)" }} className="columns-1 sm:columns-2 lg:columns-3">
-          {displayed.map(({ id, image, title, category, location, tall }, i) => (
+          {displayed.map(({ id, image, title, category, location, tall, duration }, i) => (
             <motion.div key={id + active}
               initial={{ opacity: 0, scale: 0.96 }} animate={inView ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.5, delay: i * 0.07 }}
               style={{ breakInside: "avoid", marginBottom: "var(--s3)" }}
@@ -103,16 +113,21 @@ export default function Projects() {
                   style={{ transform: hovered === id ? "scale(1.06)" : "scale(1)" }} />
                 <div className="absolute inset-0 transition-opacity duration-350"
                   style={{ background: "linear-gradient(to top, rgba(5,31,33,0.92) 0%, rgba(5,31,33,0.28) 55%, transparent 100%)", opacity: hovered === id ? 1 : 0.65 }} />
-                {/* Info */}
-                <div className="absolute transition-transform duration-350"
-                  style={{ bottom: "var(--s3)", left: "var(--s3)", right: "var(--s3)", transform: hovered === id ? "translateY(0)" : "translateY(4px)" }}>
-                  <Badge variant="light" style={{ marginBottom: "var(--s1)" }}>{category}</Badge>
-                  <h3 className="font-m text-white" style={{ fontSize: "var(--t-h2)", fontWeight: 700, lineHeight: 1.2, marginBottom: "3px" }}>{title}</h3>
-                  <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-                    <MapPin size={11} color="rgba(255,255,255,0.45)" />
-                    <span className="t-sm" style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.75rem" }}>{location}</span>
+                  {/* Info */}
+                  <div className="absolute transition-transform duration-350"
+                    style={{ bottom: "var(--s3)", left: "var(--s3)", right: "var(--s3)", transform: hovered === id ? "translateY(0)" : "translateY(4px)" }}>
+                    <Badge variant="light" style={{ marginBottom: "var(--s1)" }}>{category}</Badge>
+                    <h3 className="font-m text-white" style={{ fontSize: "var(--t-h2)", fontWeight: 700, lineHeight: 1.2, marginBottom: "3px" }}>{title}</h3>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--s2)" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+                        <MapPin size={11} color="rgba(255,255,255,0.45)" />
+                        <span className="t-sm" style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.72rem" }}>{location}</span>
+                      </div>
+                      {duration && (
+                        <span className="t-label" style={{ color: "rgba(216,185,163,0.60)", fontSize: "0.58rem" }}>{duration}</span>
+                      )}
+                    </div>
                   </div>
-                </div>
                 {/* Zoom badge */}
                 <div className="transition-all duration-300"
                   style={{ position: "absolute", top: "var(--s2)", right: "var(--s2)", width: "34px", height: "34px", borderRadius: "50%", background: "rgba(216,185,163,0.90)", display: "flex", alignItems: "center", justifyContent: "center", opacity: hovered === id ? 1 : 0, transform: hovered === id ? "scale(1)" : "scale(0.7)" }}>
