@@ -5,168 +5,86 @@ import { motion, useInView } from "framer-motion";
 import { Quote, Star } from "lucide-react";
 
 const testimonials = [
-  {
-    name: "Murugan K.",
-    role: "Civil Contractor, Tirunelveli",
-    rating: 5,
-    text: "Rasa Construction has been our go-to for scaffolding rental for the past 5 years. The equipment is always in excellent condition and delivery is never late. Gurusamy sir personally ensures every project gets the right setup.",
-    initials: "MK",
-    color: "#083335",
-  },
-  {
-    name: "Senthilkumar R.",
-    role: "Builder, Tamil Nadu",
-    rating: 5,
-    text: "We used their vertical hoist for a 6-storey residential project and it saved us tremendous labour time. The team was professional, the equipment was powerful, and the pricing was very fair. Highly recommended!",
-    initials: "SR",
-    color: "#0d4d50",
-  },
-  {
-    name: "Arumugam P.",
-    role: "Site Engineer, Kanyakumari",
-    rating: 5,
-    text: "The centring materials from Rasa Construction are top quality. Proper maintenance, good quantity availability, and their team helped us plan the setup efficiently. Our slab casting was flawless.",
-    initials: "AP",
-    color: "#083335",
-  },
-  {
-    name: "Vijayakumar T.",
-    role: "Real Estate Developer",
-    rating: 5,
-    text: "I've worked with many rental services but Rasa stands apart. Their safety standards are commendable. They don't cut corners. When you're sending workers to heights, you want equipment you can trust.",
-    initials: "VT",
-    color: "#0a3d40",
-  },
-  {
-    name: "Priya S.",
-    role: "Architect & Project Manager",
-    rating: 5,
-    text: "Coordinating with Rasa Construction is always smooth. They understand project timelines and adapt quickly. The concrete works team delivered exactly what was specified in the drawings. Exceptional quality.",
-    initials: "PS",
-    color: "#0d4d50",
-  },
-  {
-    name: "Rajasekar M.",
-    role: "Building Contractor, Tenkasi",
-    rating: 5,
-    text: "Three projects, three perfect experiences. Rasa is reliable, affordable, and truly safety-conscious. Owner is personally involved and ensures client satisfaction. I won't go anywhere else.",
-    initials: "RM",
-    color: "#083335",
-  },
+  { name: "Murugan K.",      role: "Civil Contractor, Tirunelveli", rating: 5, text: "Rasa Construction has been our go-to for scaffolding for 5 years. Equipment always in excellent condition, delivery never late. Gurusamy sir personally ensures every project gets the right setup.", init: "MK" },
+  { name: "Senthilkumar R.", role: "Builder, Tamil Nadu",          rating: 5, text: "Used their vertical hoist for a 6-storey residential project — saved us tremendous labour time. Professional team, powerful equipment, very fair pricing. Highly recommended!", init: "SR" },
+  { name: "Arumugam P.",     role: "Site Engineer, Kanyakumari",   rating: 5, text: "Top quality centring materials. Proper maintenance, good availability, and their team helped us plan the setup efficiently. Our slab casting was absolutely flawless.", init: "AP" },
+  { name: "Vijayakumar T.",  role: "Real Estate Developer",        rating: 5, text: "I've worked with many rental services but Rasa stands apart. Safety standards are commendable — no cutting corners. When workers are at height, you want equipment you can trust.", init: "VT" },
+  { name: "Priya S.",        role: "Architect & Project Manager",  rating: 5, text: "Coordinating with Rasa is always smooth. They understand timelines and adapt quickly. The concrete works team delivered exactly what was specified. Exceptional quality.", init: "PS" },
+  { name: "Rajasekar M.",    role: "Building Contractor, Tenkasi", rating: 5, text: "Three projects, three perfect experiences. Reliable, affordable, safety-conscious. Owner is personally involved and ensures satisfaction. Won't go anywhere else.", init: "RM" },
 ];
 
 export default function TestimonialsSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section
-      id="testimonials"
-      className="section-padding relative overflow-hidden"
-      style={{ background: "linear-gradient(160deg, #051f21 0%, #083335 60%, #051f21 100%)" }}
-    >
-      {/* Decorative */}
-      <div
-        className="absolute inset-0 opacity-[0.05]"
-        style={{
-          backgroundImage: `radial-gradient(ellipse at 50% 0%, rgba(216,185,163,1) 0%, transparent 60%)`,
-        }}
-      />
+    <section id="testimonials" className="relative overflow-hidden grain"
+      style={{ background: "linear-gradient(160deg, var(--clr-primary-dark) 0%, var(--clr-primary) 60%, var(--clr-primary-dark) 100%)" }}>
+      {/* Radial glow */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 50% -10%, rgba(216,185,163,0.05) 0%, transparent 60%)" }} />
 
-      <div className="max-w-7xl mx-auto px-6" ref={ref}>
+      <div className="c s" ref={ref}>
+
         {/* Header */}
-        <div className="text-center mb-14">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="badge mb-4 inline-flex"
-          >
+        <div style={{ marginBottom: "var(--s12)" }}>
+          <motion.div initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6 }}
+            className="eyebrow t-label" style={{ color: "var(--clr-accent)", marginBottom: "var(--s3)" }}>
             Client Testimonials
           </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-montserrat font-black text-4xl md:text-5xl text-white mb-4"
-          >
-            What Our Clients Say
+          <motion.h2 initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.1 }}
+            className="t-h1 text-white">
+            What our clients say
           </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="font-inter text-base max-w-xl mx-auto"
-            style={{ color: "rgba(255,255,255,0.55)" }}
-          >
-            Real words from real clients who've trusted us with their most important projects.
-          </motion.p>
         </div>
 
-        {/* Testimonial Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map(({ name, role, rating, text, initials, color }, i) => (
-            <motion.div
-              key={name}
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="group glass rounded-2xl p-7 hover-lift testimonial-card relative overflow-hidden"
-            >
-              {/* Quote Icon */}
-              <Quote
-                size={40}
-                className="absolute top-5 right-5 opacity-10 group-hover:opacity-20 transition-opacity"
-                style={{ color: "#D8B9A3" }}
-              />
+        {/* 3-col equal grid */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "var(--s3)" }}
+          className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {testimonials.map(({ name, role, rating, text, init }, i) => (
+            <motion.div key={name}
+              initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.55, delay: i * 0.08 }}
+              className="group card-dark relative overflow-hidden"
+              style={{ padding: "var(--s4)", borderLeft: "2px solid rgba(216,185,163,0.25)" }}>
+
+              {/* Quote mark */}
+              <Quote size={36} className="absolute" style={{ top: "var(--s3)", right: "var(--s3)", color: "rgba(216,185,163,0.08)" }} />
 
               {/* Stars */}
-              <div className="flex gap-1 mb-4">
+              <div style={{ display: "flex", gap: "3px", marginBottom: "var(--s3)" }}>
                 {Array.from({ length: rating }).map((_, si) => (
-                  <Star key={si} size={14} fill="#D8B9A3" color="#D8B9A3" />
+                  <Star key={si} size={13} fill="var(--clr-accent)" color="var(--clr-accent)" />
                 ))}
               </div>
 
-              {/* Text */}
-              <p className="font-inter text-sm leading-relaxed mb-6" style={{ color: "rgba(255,255,255,0.75)" }}>
+              <p className="t-sm" style={{ color: "rgba(255,255,255,0.72)", lineHeight: 1.78, marginBottom: "var(--s4)" }}>
                 &ldquo;{text}&rdquo;
               </p>
 
               {/* Author */}
-              <div className="flex items-center gap-3">
-                <div
-                  className="w-11 h-11 rounded-full flex items-center justify-center font-montserrat font-bold text-white text-sm flex-shrink-0"
-                  style={{ background: `linear-gradient(135deg, ${color}, #D8B9A3)` }}
-                >
-                  {initials}
-                </div>
+              <div style={{ display: "flex", alignItems: "center", gap: "var(--s2)" }}>
+                <div style={{
+                  width: "40px", height: "40px", borderRadius: "50%", flexShrink: 0,
+                  background: "linear-gradient(135deg, var(--clr-primary-mid), var(--clr-accent))",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: "0.8rem", color: "white",
+                }}>{init}</div>
                 <div>
-                  <div className="font-poppins font-semibold text-sm text-white">{name}</div>
-                  <div className="font-inter text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>{role}</div>
+                  <div className="font-p text-white" style={{ fontWeight: 600, fontSize: "var(--t-sm)" }}>{name}</div>
+                  <div className="t-sm" style={{ color: "rgba(255,255,255,0.42)", marginTop: "1px" }}>{role}</div>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Trust indicator */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.7 }}
-          className="text-center mt-12"
-        >
-          <div className="flex items-center justify-center gap-2 mb-2">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} size={20} fill="#D8B9A3" color="#D8B9A3" />
-            ))}
+        {/* Aggregate score */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.65 }}
+          style={{ marginTop: "var(--s12)", textAlign: "center" }}>
+          <div style={{ display: "flex", justifyContent: "center", gap: "4px", marginBottom: "var(--s1)" }}>
+            {Array.from({ length: 5 }).map((_, i) => <Star key={i} size={20} fill="var(--clr-accent)" color="var(--clr-accent)" />)}
           </div>
-          <p className="font-poppins font-semibold text-white text-lg">4.9 / 5.0</p>
-          <p className="font-inter text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>
-            Based on 300+ client reviews
-          </p>
+          <p className="font-p text-white" style={{ fontWeight: 700, fontSize: "var(--t-h2)" }}>4.9 / 5.0</p>
+          <p className="t-sm" style={{ color: "rgba(255,255,255,0.40)", marginTop: "var(--s1)" }}>Based on 300+ client reviews</p>
         </motion.div>
       </div>
     </section>
