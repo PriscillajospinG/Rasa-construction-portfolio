@@ -25,17 +25,24 @@ export default function About() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="about" className="relative overflow-hidden" style={{ background: "white" }} ref={ref}>
-      {/* Curve from hero — fill matches THIS section bg */}
-      <div className="curve">
-        <svg viewBox="0 0 1440 72" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0,72 C360,0 1080,0 1440,72 L1440,0 L0,0 Z" fill="white" />
-        </svg>
-      </div>
+    <section
+      id="about"
+      ref={ref}
+      className="relative overflow-hidden"
+      style={{
+        background:  "white",
+        /* Slide under the hero's bottom fade — creates seamless merge */
+        marginTop:   "-5rem",
+        position:    "relative",
+        zIndex:      1,
+      }}
+    >
+      {/* Breathing entry space — compensates for negative margin + gives rhythm */}
+      <div style={{ height: "calc(5rem + var(--s16))" }} aria-hidden />
 
       {/* ── Zone 1: Editorial header ── */}
       <Container>
-        <div style={{ paddingTop: "var(--s12)", paddingBottom: "var(--s8)" }}>
+        <div style={{ paddingBottom: "var(--s8)" }}>
           <div
             style={{ display: "grid", gridTemplateColumns: "1fr 1fr", alignItems: "end", gap: "var(--s8)" }}
             className="grid-cols-1 lg:grid-cols-2"

@@ -85,10 +85,25 @@ export default function Hero() {
         style={{ height: "10rem", background: "linear-gradient(to bottom, rgba(3,15,16,0.70) 0%, transparent 100%)" }}
         aria-hidden
       />
-      {/* Bottom fade — blends with next section */}
+      {/* Bottom dissolve — tall, fades into About section's white bg */}
+      {/* Must match About section background exactly to avoid seam */}
       <div
         className="absolute bottom-0 left-0 right-0"
-        style={{ height: "8rem", background: "linear-gradient(to top, #F7F5F2 0%, transparent 100%)" }}
+        style={{
+          height:     "22rem",
+          background: "linear-gradient(to top, white 0%, rgba(255,255,255,0.85) 18%, rgba(255,255,255,0.40) 40%, rgba(255,255,255,0.08) 65%, transparent 100%)",
+          pointerEvents: "none",
+        }}
+        aria-hidden
+      />
+      {/* Mid atmospheric layer — warm depth above the white dissolve */}
+      <div
+        className="absolute bottom-0 left-0 right-0"
+        style={{
+          height:     "32rem",
+          background: "linear-gradient(to top, transparent 0%, transparent 30%, rgba(3,12,13,0.0) 60%, transparent 100%)",
+          pointerEvents: "none",
+        }}
         aria-hidden
       />
 
