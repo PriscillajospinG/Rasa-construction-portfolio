@@ -5,224 +5,184 @@ import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
 
-function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: string }) {
+function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const motionVal = useMotionValue(0);
-  const spring = useSpring(motionVal, { duration: 1800, bounce: 0 });
-  const isInView = useInView(ref, { once: true });
-
-  useEffect(() => {
-    if (isInView) motionVal.set(target);
-  }, [isInView, motionVal, target]);
-
-  useEffect(() => {
-    return spring.on("change", (v) => {
-      if (ref.current) ref.current.textContent = Math.round(v) + suffix;
-    });
-  }, [spring, suffix]);
-
+  const val = useMotionValue(0);
+  const spring = useSpring(val, { duration: 1800, bounce: 0 });
+  const inView = useInView(ref, { once: true });
+  useEffect(() => { if (inView) val.set(target); }, [inView, val, target]);
+  useEffect(() => spring.on("change", (v) => { if (ref.current) ref.current.textContent = Math.round(v) + suffix; }), [spring, suffix]);
   return <span ref={ref}>0{suffix}</span>;
 }
 
-const highlights = [
-  "Reliable scaffolding & centring material supply across projects of all sizes",
-  "Safety-first operations — every scaffold is load-tested before use",
-  "Experienced workers with deep regional construction knowledge",
-  "Competitive daily & monthly rental rates with no hidden charges",
+const points = [
+  "Reliable scaffolding & centring materials for projects of any scale",
+  "Safety-first — all equipment load-tested before every deployment",
+  "Experienced workers with deep knowledge of regional construction",
+  "Competitive daily & monthly rental, zero hidden fees",
 ];
 
 export default function AboutSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="about" className="relative overflow-hidden" style={{ background: "white" }}>
-      {/* Curved top divider from hero */}
-      <div
-        className="absolute top-0 left-0 right-0"
-        style={{ lineHeight: 0 }}
-      >
-        <svg viewBox="0 0 1440 60" fill="white" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0,60 C480,0 960,0 1440,60 L1440,0 L0,0 Z" fill="#F7F5F2" />
+    <section
+      id="about"
+      className="relative overflow-hidden"
+      style={{ background: "white" }}
+    >
+      {/* Curved transition from hero */}
+      <div style={{ lineHeight: 0, marginTop: "-2px" }}>
+        <svg viewBox="0 0 1440 64" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", width: "100%" }}>
+          <path d="M0,64 C360,0 1080,0 1440,64 L1440,0 L0,0 Z" fill="#F7F5F2" />
         </svg>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 pt-24 pb-20" ref={ref}>
+      <div className="container py-20" ref={ref}>
 
-        {/* Section label — off to the side, not centered */}
+        {/* ── Top editorial label row ── */}
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          initial={{ opacity: 0, x: -24 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-16 flex items-center gap-4"
+          className="rule-line label-editorial mb-16"
+          style={{ color: "#083335" }}
         >
-          <span className="w-12 h-px" style={{ background: "#083335" }} />
-          <span
-            className="font-poppins text-xs tracking-[0.2em] uppercase font-semibold"
-            style={{ color: "#083335" }}
-          >
-            Our Story
-          </span>
+          Our Story
         </motion.div>
 
-        {/* Asymmetric two-column layout */}
-        <div className="grid lg:grid-cols-[1fr_1.1fr] gap-16 items-start">
-
-          {/* Left column — text */}
+        {/* ── Main content: asymmetric 5/7 grid ── */}
+        <div
+          className="grid items-start gap-16"
+          style={{ gridTemplateColumns: "repeat(12, 1fr)" }}
+        >
+          {/* Text column — 5 cols */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            style={{ gridColumn: "1 / span 5" }}
+            className="[grid-column:1/-1] lg:[grid-column:1/span_5]"
           >
             <h2
-              className="font-montserrat font-black leading-[1.05] mb-8"
+              className="heading-brutalist mb-8"
               style={{
-                fontSize: "clamp(2.2rem, 4vw, 3.5rem)",
-                color: "#083335",
-                letterSpacing: "-0.02em",
+                fontSize: "var(--text-5xl)",
+                color: "var(--primary)",
               }}
             >
-              A construction partner
+              A construction
               <br />
-              <span
-                style={{
-                  color: "#c4a088",
-                  fontStyle: "italic",
-                  fontWeight: 800,
-                }}
-              >
-                you can count on.
-              </span>
+              partner you can
+              <br />
+              <em className="accent-italic">count on.</em>
             </h2>
 
-            <p className="font-inter text-base leading-[1.8] mb-5" style={{ color: "#4a5568" }}>
-              Founded and led by <strong style={{ color: "#083335" }}>Gurusamy A</strong>, Rasa Construction
-              has been the trusted name for scaffolding, centring materials, and hoist rental across Tamil Nadu
-              for over 15 years. Based at Rasa Office, Achankuttam, we bring local expertise and genuine
-              care to every project we touch.
+            <p className="font-inter mb-5" style={{ fontSize: "var(--text-base)", lineHeight: 1.8, color: "var(--text-secondary)" }}>
+              Founded by <strong style={{ color: "var(--primary)" }}>Gurusamy A</strong>, Rasa Construction has been the trusted name for scaffolding, centring materials, concrete works, and hoist rental across Tamil Nadu for over 15 years. Based in Achankuttam, we bring genuine field experience to every project.
             </p>
 
-            <p className="font-inter text-base leading-[1.8] mb-10" style={{ color: "#6b7280" }}>
-              We don't just rent equipment — we partner with builders, contractors, and developers to ensure
-              each structure rises safely and on schedule. Every scaffold we set up, every hoist we install,
-              reflects our commitment to quality craftsmanship.
+            <p className="font-inter mb-10" style={{ fontSize: "var(--text-base)", lineHeight: 1.8, color: "var(--text-muted)" }}>
+              We don't just supply equipment — we partner with builders to ensure every structure rises safely and on schedule. Our work is marked by reliability, safety, and the quiet pride of a team that knows the trade inside out.
             </p>
 
-            {/* Highlights — natural list */}
-            <ul className="space-y-4 mb-12">
-              {highlights.map((item, i) => (
+            <ul className="space-y-3 mb-12">
+              {points.map((pt, i) => (
                 <motion.li
-                  key={item}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  key={pt}
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
                   className="flex items-start gap-3"
                 >
-                  <CheckCircle2
-                    size={18}
-                    className="flex-shrink-0 mt-0.5"
-                    style={{ color: "#083335" }}
-                  />
-                  <span className="font-inter text-sm leading-relaxed" style={{ color: "#374151" }}>
-                    {item}
-                  </span>
+                  <CheckCircle2 size={17} style={{ color: "var(--primary)", flexShrink: 0, marginTop: "2px" }} />
+                  <span className="font-inter" style={{ fontSize: "var(--text-sm)", lineHeight: 1.7, color: "var(--text-secondary)" }}>{pt}</span>
                 </motion.li>
               ))}
             </ul>
 
             <a
               href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="btn-primary inline-flex"
-              style={{ background: "linear-gradient(135deg, #083335, #0d4d50)" }}
+              onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}
+              className="btn btn-dark"
             >
               Talk to Gurusamy sir →
             </a>
           </motion.div>
 
-          {/* Right column — overlapping image composition */}
+          {/* Image column — 7 cols, offset composition */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, x: 40 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="relative"
+            style={{ gridColumn: "6 / -1" }}
+            className="relative [grid-column:1/-1] lg:[grid-column:6/-1]"
           >
-            {/* Main large image */}
+            {/* Main photo — portrait crop, realistic framing */}
             <div
               className="relative rounded-2xl overflow-hidden"
-              style={{
-                aspectRatio: "3/4",
-                boxShadow: "24px 32px 80px rgba(8,51,53,0.18)",
-              }}
+              style={{ aspectRatio: "4/5", boxShadow: "var(--shadow-xl)" }}
             >
               <Image
                 src="/images/about-team.png"
-                alt="Rasa Construction team at work on a building site"
+                alt="Rasa Construction team reviewing blueprints on site"
                 fill
-                sizes="(max-width: 1024px) 100vw, 52vw"
+                sizes="(max-width: 1024px) 100vw, 55vw"
                 className="object-cover"
               />
+              {/* Cinematic gradient */}
               <div
                 className="absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(to top, rgba(8,51,53,0.5) 0%, transparent 55%)",
-                }}
+                style={{ background: "linear-gradient(to top, rgba(5,31,33,0.65) 0%, transparent 55%)" }}
               />
-              {/* Image caption overlay */}
+              {/* Caption inside photo */}
               <div className="absolute bottom-6 left-6 right-6">
-                <p className="font-poppins text-xs uppercase tracking-widest mb-1" style={{ color: "#D8B9A3" }}>
-                  On the ground
-                </p>
-                <p className="font-montserrat font-bold text-white text-lg leading-tight">
+                <div className="label-editorial mb-1" style={{ color: "#D8B9A3" }}>On the ground</div>
+                <div
+                  className="font-montserrat font-bold text-white"
+                  style={{ fontSize: "var(--text-xl)", lineHeight: 1.3 }}
+                >
                   Planning with precision,<br />building with purpose.
-                </p>
+                </div>
               </div>
             </div>
 
-            {/* Floating stats — offset to the left, overlapping */}
+            {/* Floating stat chip — overlaps left edge */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: 0.6, duration: 0.6, type: "spring" }}
-              className="absolute -left-8 bottom-16 rounded-xl p-5 shadow-2xl"
-              style={{
-                background: "linear-gradient(135deg, #083335, #0d4d50)",
-                border: "1px solid rgba(216,185,163,0.15)",
-                minWidth: "140px",
-              }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={inView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ delay: 0.65, duration: 0.5, type: "spring" }}
+              className="absolute rounded-xl p-5 glass-dark shadow-2xl"
+              style={{ bottom: "5rem", left: "-2rem", minWidth: "140px" }}
             >
               <div
-                className="font-montserrat font-black text-4xl"
-                style={{ color: "#D8B9A3" }}
+                className="font-montserrat"
+                style={{ fontSize: "2.4rem", fontWeight: 900, color: "#D8B9A3", lineHeight: 1 }}
               >
-                <AnimatedCounter target={15} suffix="+" />
+                <Counter target={15} suffix="+" />
               </div>
-              <div className="font-poppins text-xs text-white mt-1 leading-tight opacity-80">
+              <div className="font-poppins text-white mt-1" style={{ fontSize: "0.75rem", opacity: 0.75, lineHeight: 1.4 }}>
                 Years of field<br />experience
               </div>
             </motion.div>
 
-            {/* Small secondary badge — top right */}
+            {/* Small badge — top right */}
             <motion.div
-              initial={{ opacity: 0, y: -15 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.8, duration: 0.5 }}
-              className="absolute -top-4 -right-4 rounded-xl px-4 py-3 shadow-xl"
+              initial={{ opacity: 0, y: -12 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.85, duration: 0.45 }}
+              className="absolute rounded-xl px-4 py-3 shadow-lg"
               style={{
-                background: "rgba(247,245,242,0.95)",
-                border: "1px solid rgba(8,51,53,0.1)",
+                top: "-1rem",
+                right: "-1rem",
+                background: "rgba(247,245,242,0.96)",
+                border: "1px solid rgba(8,51,53,0.08)",
               }}
             >
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span
-                  className="font-poppins text-xs font-semibold"
-                  style={{ color: "#083335" }}
-                >
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse flex-shrink-0" />
+                <span className="font-poppins text-xs font-semibold" style={{ color: "var(--primary)" }}>
                   500+ Projects Done
                 </span>
               </div>
