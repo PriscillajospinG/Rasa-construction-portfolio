@@ -2,58 +2,62 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import {
-  LayoutGrid,
-  Layers,
-  Blocks,
-  ArrowUpDown,
-  HardHat,
-  Wrench,
-  ArrowRight,
-} from "lucide-react";
+import { LayoutGrid, Layers, Blocks, ArrowUpDown, HardHat, Wrench } from "lucide-react";
 
 const services = [
   {
     icon: LayoutGrid,
     title: "Scaffolding Rental",
     description:
-      "Premium steel scaffolding systems for safe, efficient construction at heights. Our scaffolding is regularly inspected and meets all safety codes. Available in various configurations for any project type.",
-    highlight: "Certified Safe Equipment",
+      "Premium steel scaffolding systems — inspected, certified, and configured to your project's exact requirements. We handle setup, safety checks, and takedown.",
+    tag: "Most Popular",
+    large: true,
+    image: "/images/project-scaffolding.png",
   },
   {
     icon: Layers,
     title: "Centring Materials",
     description:
-      "High-quality centring materials for slab formwork and beam construction. We supply properly maintained steel plates, props, and beams that ensure perfect concrete casting results.",
-    highlight: "100+ Equipment Varieties",
+      "Steel props, plates, and beams for slab formwork and beam construction. Properly maintained, well-stocked, ready when you need them.",
+    tag: "100+ Varieties",
+    large: false,
+    image: null,
   },
   {
     icon: Blocks,
     title: "Concrete Works",
     description:
-      "Professional concrete pouring, finishing, and structural work. Our experienced team handles everything from column casting to slab construction with precision and quality.",
-    highlight: "Expert Execution",
+      "Skilled execution of column casting, slab work, and structural concrete. We bring precision to every pour.",
+    tag: "Expert Crew",
+    large: false,
+    image: null,
   },
   {
     icon: ArrowUpDown,
     title: "Vertical Hoist Rental",
     description:
-      "Industrial vertical material hoists for efficient vertical transport on construction sites. Save time and labour costs with our modern, well-maintained hoist equipment.",
-    highlight: "Daily & Monthly Rental",
+      "Industrial material hoists that cut vertical transport time dramatically. Daily and monthly rental options available.",
+    tag: "Daily Rental",
+    large: true,
+    image: "/images/project-hoist.png",
   },
   {
     icon: HardHat,
-    title: "Site Support Services",
+    title: "Site Support",
     description:
-      "Comprehensive on-site support including equipment setup, safety supervision, and technical guidance. Our team ensures smooth operations from project start to handover.",
-    highlight: "Full-Site Coverage",
+      "On-call site supervision, safety guidance, and equipment coordination — so you can focus on building.",
+    tag: "Full Coverage",
+    large: false,
+    image: null,
   },
   {
     icon: Wrench,
-    title: "Equipment Maintenance",
+    title: "Equipment Upkeep",
     description:
-      "Regular inspection and maintenance of all rented equipment ensures zero downtime. Our technicians are on call to resolve any issues, keeping your project timeline on track.",
-    highlight: "24/7 Support",
+      "All rented equipment is regularly serviced. Our technicians respond fast to keep your timeline intact.",
+    tag: "24/7 Response",
+    large: false,
+    image: null,
   },
 ];
 
@@ -64,140 +68,190 @@ export default function ServicesSection() {
   return (
     <section
       id="services"
-      className="section-padding relative overflow-hidden"
+      className="relative overflow-hidden"
       style={{ background: "#F7F5F2" }}
     >
-      {/* Background pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.4]"
-        style={{
-          backgroundImage: `radial-gradient(circle at 20% 50%, rgba(8,51,53,0.04) 0%, transparent 50%),
-                            radial-gradient(circle at 80% 20%, rgba(216,185,163,0.08) 0%, transparent 40%)`,
-        }}
-      />
+      {/* Curved top */}
+      <div style={{ lineHeight: 0 }}>
+        <svg viewBox="0 0 1440 70" fill="white" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,0 C480,70 960,70 1440,0 L1440,70 L0,70 Z" fill="white" />
+        </svg>
+      </div>
 
-      <div className="max-w-7xl mx-auto px-6" ref={ref}>
-        {/* Header */}
-        <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="badge mb-4 inline-flex"
-            style={{ background: "rgba(8,51,53,0.08)", borderColor: "rgba(8,51,53,0.2)", color: "#083335" }}
-          >
-            What We Offer
-          </motion.div>
+      <div className="max-w-7xl mx-auto px-6 py-16" ref={ref}>
+        {/* Header — left-aligned */}
+        <div className="grid lg:grid-cols-2 gap-8 mb-16 items-end">
+          <div>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.6 }}
+              className="flex items-center gap-3 mb-5"
+            >
+              <span className="w-8 h-px" style={{ background: "#083335" }} />
+              <span className="font-poppins text-xs tracking-[0.2em] uppercase font-semibold" style={{ color: "#083335" }}>
+                What We Offer
+              </span>
+            </motion.div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-montserrat font-black text-4xl md:text-5xl mb-4"
-            style={{ color: "#083335" }}
-          >
-            Our Core Services
-          </motion.h2>
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="font-montserrat font-black leading-tight"
+              style={{
+                fontSize: "clamp(2rem, 4vw, 3.2rem)",
+                color: "#083335",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              Services built
+              <br />
+              for real{" "}
+              <span style={{ color: "#D8B9A3", fontStyle: "italic" }}>field work.</span>
+            </motion.h2>
+          </div>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="font-inter text-base max-w-2xl mx-auto"
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="font-inter text-base leading-relaxed lg:text-right"
             style={{ color: "#6b7280" }}
           >
-            From scaffolding setup to concrete finishing, we provide end-to-end construction support
-            services with a focus on safety, quality, and timely delivery.
+            From a single-floor scaffold to full multi-storey hoist setups,
+            we cover the complete range of construction rental and support needs —
+            with a team that's been doing this for over 15 years.
           </motion.p>
-
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={isInView ? { scaleX: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="section-divider section-divider-center mt-4"
-          />
         </div>
 
-        {/* Service Cards Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map(({ icon: Icon, title, description, highlight }, i) => (
+        {/* Irregular service grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {services.map(({ icon: Icon, title, description, tag, large, image }, i) => (
             <motion.div
               key={title}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="group relative rounded-2xl p-8 overflow-hidden card-hover cursor-pointer"
+              transition={{ duration: 0.6, delay: i * 0.09 }}
+              className={`group relative rounded-2xl overflow-hidden ${
+                large ? "md:col-span-1 lg:col-span-1" : ""
+              }`}
               style={{
                 background: "white",
-                boxShadow: "0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04)",
+                boxShadow: "0 2px 20px rgba(0,0,0,0.06)",
+                border: "1px solid rgba(0,0,0,0.05)",
+                minHeight: large && image ? "340px" : "auto",
               }}
             >
-              {/* Hover glow background */}
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
-                style={{
-                  background: "linear-gradient(135deg, rgba(8,51,53,0.04), rgba(216,185,163,0.06))",
-                }}
-              />
+              {/* If it has an image, use as bg */}
+              {image && (
+                <>
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      backgroundImage: `url(${image})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      transition: "transform 0.6s ease",
+                    }}
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background:
+                        "linear-gradient(to top, rgba(5,31,33,0.97) 40%, rgba(5,31,33,0.5) 100%)",
+                    }}
+                  />
+                </>
+              )}
 
-              {/* Top accent line */}
+              {/* Top hover accent */}
               <div
-                className="absolute top-0 left-0 right-0 h-0.5 rounded-t-2xl transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"
+                className="absolute top-0 left-0 right-0 h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
                 style={{ background: "linear-gradient(90deg, #083335, #D8B9A3)" }}
               />
 
-              {/* Icon */}
               <div
-                className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110"
-                style={{ background: "linear-gradient(135deg, #083335, #0d4d50)" }}
+                className="relative z-10 p-8"
+                style={{
+                  paddingBottom: large && image ? "2rem" : "2rem",
+                  marginTop: large && image ? "auto" : undefined,
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%",
+                }}
               >
-                <Icon size={24} color="#D8B9A3" />
-              </div>
+                {large && image && <div style={{ flex: 1 }} />}
 
-              {/* Content */}
-              <h3
-                className="font-montserrat font-bold text-xl mb-3 group-hover:text-[#083335] transition-colors duration-300"
-                style={{ color: "#111827" }}
-              >
-                {title}
-              </h3>
-
-              <p className="font-inter text-sm leading-relaxed mb-6" style={{ color: "#6b7280" }}>
-                {description}
-              </p>
-
-              {/* Highlight badge */}
-              <div className="flex items-center justify-between">
-                <span
-                  className="text-xs font-poppins font-semibold px-3 py-1 rounded-full"
-                  style={{ background: "rgba(8,51,53,0.07)", color: "#083335" }}
+                <div
+                  className="w-11 h-11 rounded-lg flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110"
+                  style={{
+                    background: image
+                      ? "rgba(216,185,163,0.15)"
+                      : "linear-gradient(135deg, #083335, #0d4d50)",
+                    border: image ? "1px solid rgba(216,185,163,0.2)" : "none",
+                  }}
                 >
-                  ✓ {highlight}
+                  <Icon size={20} color={image ? "#D8B9A3" : "#D8B9A3"} />
+                </div>
+
+                <h3
+                  className="font-montserrat font-bold text-xl mb-3"
+                  style={{ color: image ? "white" : "#111827" }}
+                >
+                  {title}
+                </h3>
+
+                <p
+                  className="font-inter text-sm leading-relaxed mb-5"
+                  style={{ color: image ? "rgba(255,255,255,0.65)" : "#6b7280" }}
+                >
+                  {description}
+                </p>
+
+                <span
+                  className="self-start text-xs font-poppins font-semibold px-3 py-1 rounded-full"
+                  style={
+                    image
+                      ? {
+                          background: "rgba(216,185,163,0.15)",
+                          border: "1px solid rgba(216,185,163,0.25)",
+                          color: "#D8B9A3",
+                        }
+                      : {
+                          background: "rgba(8,51,53,0.07)",
+                          color: "#083335",
+                        }
+                  }
+                >
+                  ✓ {tag}
                 </span>
-                <ArrowRight
-                  size={18}
-                  className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300"
-                  style={{ color: "#D8B9A3" }}
-                />
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Bottom CTA */}
+        {/* Bottom CTA — casual, not corporate */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.7 }}
-          className="text-center mt-14"
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-14 flex flex-col sm:flex-row items-start sm:items-center gap-6"
         >
+          <div>
+            <p className="font-poppins font-semibold text-base" style={{ color: "#083335" }}>
+              Not sure what you need?
+            </p>
+            <p className="font-inter text-sm" style={{ color: "#9ca3af" }}>
+              Call Gurusamy sir — he'll tell you exactly what the project requires.
+            </p>
+          </div>
           <a
-            href="#contact"
-            onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}
-            className="btn-primary text-base px-10 py-4"
+            href="tel:+919842766379"
+            className="btn-primary flex-shrink-0"
             style={{ background: "linear-gradient(135deg, #083335, #0d4d50)" }}
           >
-            Request a Service Quote
+            📞 Call for Advice
           </a>
         </motion.div>
       </div>
