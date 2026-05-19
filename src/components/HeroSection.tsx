@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { ArrowDown, PhoneCall, MessageCircle } from "lucide-react";
+import { ArrowDown, PhoneCall } from "lucide-react";
 import Image from "next/image";
 
 export default function HeroSection() {
@@ -11,171 +11,176 @@ export default function HeroSection() {
   useEffect(() => {
     const handleScroll = () => {
       if (parallaxRef.current) {
-        const y = window.scrollY * 0.45;
-        parallaxRef.current.style.transform = `translateY(${y}px)`;
+        parallaxRef.current.style.transform = `translateY(${window.scrollY * 0.4}px)`;
       }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToAbout = () => {
-    document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
-    <section id="home" className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
-      {/* Background Image with Parallax */}
+    <section
+      id="home"
+      className="relative min-h-screen flex items-end overflow-hidden"
+    >
+      {/* Background with parallax */}
       <div ref={parallaxRef} className="absolute inset-0 scale-110">
         <Image
           src="/images/hero.png"
-          alt="Rasa Construction – Premium Scaffolding and Construction Services"
+          alt="Rasa Construction – scaffolding and construction site at golden hour"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center"
           quality={75}
+          className="object-cover object-center"
         />
       </div>
 
-      {/* Multi-layer overlay */}
+      {/* Layered overlays — asymmetric, heavier on the left */}
       <div
         className="absolute inset-0"
         style={{
-          background: "linear-gradient(160deg, rgba(5,31,33,0.85) 0%, rgba(8,51,53,0.6) 40%, rgba(5,31,33,0.95) 100%)",
+          background:
+            "linear-gradient(105deg, rgba(5,31,33,0.95) 0%, rgba(5,31,33,0.75) 45%, rgba(5,31,33,0.25) 100%)",
         }}
       />
-      {/* Bottom fade */}
+      {/* Bottom fade to page background */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-40"
+        className="absolute bottom-0 left-0 right-0 h-48"
         style={{ background: "linear-gradient(to top, #F7F5F2, transparent)" }}
       />
 
-      {/* Decorative grid */}
+      {/* Subtle architectural grid — only left side */}
       <div
-        className="absolute inset-0 opacity-5"
+        className="absolute left-0 top-0 bottom-0 w-1/2 opacity-[0.04]"
         style={{
-          backgroundImage: `linear-gradient(rgba(216,185,163,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(216,185,163,0.4) 1px, transparent 1px)`,
-          backgroundSize: "80px 80px",
+          backgroundImage: `linear-gradient(rgba(216,185,163,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(216,185,163,0.5) 1px, transparent 1px)`,
+          backgroundSize: "60px 60px",
         }}
       />
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
+      {/* Content — left-aligned, not centered */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pb-28 pt-40">
+        <div className="max-w-3xl">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="mb-7 flex items-center gap-3"
+          >
+            <span className="w-8 h-px" style={{ background: "#D8B9A3" }} />
+            <span
+              className="font-poppins text-xs tracking-[0.2em] uppercase"
+              style={{ color: "#D8B9A3" }}
+            >
+              Est. 2010 · Achankuttam, Tamil Nadu
+            </span>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            className="font-montserrat text-white leading-[1.0] mb-8"
+            style={{
+              fontSize: "clamp(3rem, 8vw, 6.5rem)",
+              fontWeight: 900,
+              letterSpacing: "-0.025em",
+            }}
+          >
+            Building
+            <br />
+            Strength.
+            <br />
+            <span className="gradient-text">Delivering</span>
+            <br />
+            <span className="gradient-text">Trust.</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.7 }}
+            className="font-inter text-lg leading-relaxed mb-10 max-w-lg"
+            style={{ color: "rgba(255,255,255,0.65)" }}
+          >
+            Scaffolding rental, centring materials, concrete works &amp;
+            vertical hoist services — built on 15 years of field expertise
+            across Tamil Nadu.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            className="flex flex-wrap gap-4"
+          >
+            <a
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="btn-primary text-base px-8 py-4"
+            >
+              Get a Free Quote
+            </a>
+            <a
+              href="tel:+919842766379"
+              className="btn-outline text-base px-8 py-4 flex items-center gap-2"
+            >
+              <PhoneCall size={17} />
+              +91 98427 66379
+            </a>
+          </motion.div>
+        </div>
+
+        {/* Stats — horizontally placed, naturally spaced */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-6"
-        >
-          <span className="badge">
-            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse inline-block" />
-            Trusted Since 2010 • Tamil Nadu
-          </span>
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="font-montserrat text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white leading-[1.05] mb-6"
-          style={{ letterSpacing: "-0.02em" }}
-        >
-          Building Strength.
-          <br />
-          <span className="gradient-text">Delivering Trust.</span>
-        </motion.h1>
-
-        <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.6 }}
-          className="font-inter text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
-          style={{ color: "rgba(255,255,255,0.75)" }}
-        >
-          Premium scaffolding rental, centring materials, concrete works &amp; vertical hoist services —
-          built on reliability, safety, and years of proven expertise.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-        >
-          <a
-            href="#contact"
-            onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}
-            className="btn-primary text-base px-8 py-4"
-          >
-            Get a Free Quote
-          </a>
-          <a
-            href="tel:+919842766379"
-            className="btn-outline text-base px-8 py-4 flex items-center gap-2"
-          >
-            <PhoneCall size={18} />
-            Call Now
-          </a>
-          <a
-            href="https://wa.me/919842766379?text=Hello%20Rasa%20Construction%2C%20I'm%20interested%20in%20your%20services."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 font-poppins font-semibold text-sm transition-all duration-300 hover:opacity-80"
-            style={{ color: "#25D366" }}
-          >
-            <MessageCircle size={18} />
-            WhatsApp
-          </a>
-        </motion.div>
-
-        {/* Stats bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 1.1 }}
-          className="mt-16 flex flex-wrap justify-center gap-8 md:gap-16"
+          transition={{ duration: 0.7, delay: 1.2 }}
+          className="mt-20 flex gap-10 md:gap-16"
         >
           {[
-            { value: "15+", label: "Years Experience" },
-            { value: "500+", label: "Projects Done" },
-            { value: "100+", label: "Equipment Units" },
-            { value: "300+", label: "Happy Clients" },
-          ].map((stat) => (
-            <div key={stat.label} className="text-center">
+            { value: "15+", label: "Years" },
+            { value: "500+", label: "Projects" },
+            { value: "100+", label: "Equipment" },
+            { value: "300+", label: "Clients" },
+          ].map((s) => (
+            <div key={s.label}>
               <div
                 className="font-montserrat font-black text-3xl md:text-4xl"
                 style={{ color: "#D8B9A3" }}
               >
-                {stat.value}
+                {s.value}
               </div>
               <div
-                className="font-inter text-xs mt-1 tracking-wider uppercase"
-                style={{ color: "rgba(255,255,255,0.5)" }}
+                className="font-poppins text-[11px] uppercase tracking-wider mt-1"
+                style={{ color: "rgba(255,255,255,0.45)" }}
               >
-                {stat.label}
+                {s.label}
               </div>
             </div>
           ))}
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll cue */}
       <motion.button
-        onClick={scrollToAbout}
+        onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer"
-        style={{ color: "rgba(255,255,255,0.5)" }}
+        transition={{ delay: 1.8 }}
+        className="absolute bottom-10 right-10 flex flex-col items-center gap-2"
+        style={{ color: "rgba(255,255,255,0.35)" }}
         aria-label="Scroll down"
       >
-        <span className="text-xs tracking-widest uppercase font-poppins">Scroll</span>
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
+          animate={{ y: [0, 6, 0] }}
+          transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
         >
-          <ArrowDown size={18} />
+          <ArrowDown size={20} />
         </motion.div>
       </motion.button>
     </section>
