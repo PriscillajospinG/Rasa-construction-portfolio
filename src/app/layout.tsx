@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import PageWrapper from "@/components/ui/PageWrapper";
 import { company } from "@/data/company";
 
 export const metadata: Metadata = {
@@ -20,9 +21,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body className="antialiased">
-        <Navbar />
-        {children}
-        <Footer />
+        <PageWrapper>
+          <Navbar />
+          {children}
+          <Footer />
+        </PageWrapper>
       </body>
     </html>
   );
