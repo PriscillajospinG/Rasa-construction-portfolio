@@ -416,36 +416,10 @@ input, textarea { cursor: text !important; }
 .curve { line-height: 0; }
 .curve svg { display: block; width: 100%; }
 
-/* ── HERO SPLIT GRID — responsive collapse ───────────────── */
-/*  Desktop: 50/50 two-column split                          */
-/*  Tablet:  single column, image becomes bg                 */
-/*  Mobile:  single column, image hidden                     */
-.hero-grid {
-  grid-template-columns: 1fr 1fr;
-}
-@media (max-width: 900px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-  }
-  /* On smaller screens, right panel becomes absolute bg */
-  .hero-grid > div:last-of-type {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    opacity: 0.25;  /* dim so left content stays readable */
-  }
-  /* Left panel must cover full width */
-  .hero-grid > div:first-of-type {
-    position: relative;
-    z-index: 1;
-    min-height: 100svh;
-    padding-inline: var(--container-px);
-    /* Heavier overlay on mobile for readability */
-    background: linear-gradient(165deg, rgba(3,12,13,0.98) 0%, rgba(5,31,33,0.95) 100%) !important;
-  }
-}
+/* ── HERO RESPONSIVE ─────────────────────────────────────
+   Full-bleed hero — responsive handled via clamp() in JSX.
+   Mobile: padding-inline collapses via --container-px.     */
 @media (max-width: 640px) {
-  /* Mobile: stats strip goes 2x2 grid */
   .hero-stats-grid {
     grid-template-columns: repeat(2, 1fr) !important;
   }
