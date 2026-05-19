@@ -2,259 +2,119 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import {
-  Phone,
-  Mail,
-  MapPin,
-  MessageCircle,
-  Send,
-  CheckCircle2,
-} from "lucide-react";
+import { Phone, MessageCircle, Mail, MapPin, Send, CheckCircle2 } from "lucide-react";
 
-const contactMethods = [
-  {
-    icon: Phone,
-    label: "Call Us",
-    value: "+91 98427 66379",
-    sub: "+91 63807 29431",
-    href: "tel:+919842766379",
-    color: "#083335",
-  },
-  {
-    icon: MessageCircle,
-    label: "WhatsApp",
-    value: "Chat with Us",
-    sub: "Quick response guaranteed",
-    href: "https://wa.me/919842766379?text=Hello%20Rasa%20Construction%2C%20I'm%20interested%20in%20your%20services.",
-    color: "#25D366",
-  },
-  {
-    icon: Mail,
-    label: "Email",
-    value: "gurusamyrasa@gmail.com",
-    sub: "We reply within 24 hours",
-    href: "mailto:gurusamyrasa@gmail.com",
-    color: "#D8B9A3",
-  },
-  {
-    icon: MapPin,
-    label: "Location",
-    value: "Rasa Office",
-    sub: "Achankuttam – 627861",
-    href: "#",
-    color: "#083335",
-  },
+const contactCards = [
+  { icon: Phone,         label: "Call Us",   val: "+91 98427 66379",      sub: "+91 63807 29431",       href: "tel:+919842766379",     accent: "var(--clr-primary)" },
+  { icon: MessageCircle, label: "WhatsApp",  val: "Chat with us",         sub: "Quick response",        href: "https://wa.me/919842766379", accent: "#25D366" },
+  { icon: Mail,          label: "Email",     val: "gurusamyrasa@gmail.com", sub: "Reply within 24 hrs",  href: "mailto:gurusamyrasa@gmail.com", accent: "var(--clr-accent-dk)" },
+  { icon: MapPin,        label: "Location",  val: "Rasa Office",          sub: "Achankuttam – 627861",  href: "#",                     accent: "var(--clr-primary)" },
 ];
 
 export default function ContactSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const [formState, setFormState] = useState({ name: "", phone: "", email: "", service: "", message: "" });
-  const [submitted, setSubmitted] = useState(false);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const [form, setForm] = useState({ name: "", phone: "", email: "", service: "", msg: "" });
+  const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Simulate form submission
     await new Promise((r) => setTimeout(r, 1500));
     setLoading(false);
-    setSubmitted(true);
+    setSent(true);
   };
 
   return (
-    <section
-      id="contact"
-      className="section-padding relative overflow-hidden"
-      style={{ background: "#F7F5F2" }}
-    >
-      {/* Background */}
-      <div
-        className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage: `radial-gradient(circle at 10% 50%, rgba(8,51,53,0.08) 0%, transparent 40%)`,
-        }}
-      />
+    <section id="contact" style={{ background: "var(--clr-bg)" }} className="relative overflow-hidden">
+      <div className="c s" ref={ref}>
 
-      <div className="max-w-7xl mx-auto px-6" ref={ref}>
         {/* Header */}
-        <div className="text-center mb-14">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="badge mb-4 inline-flex"
-            style={{ background: "rgba(8,51,53,0.08)", borderColor: "rgba(8,51,53,0.2)", color: "#083335" }}
-          >
+        <div style={{ marginBottom: "var(--s12)" }}>
+          <motion.div initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6 }}
+            className="eyebrow t-label" style={{ color: "var(--clr-primary)", marginBottom: "var(--s3)" }}>
             Get In Touch
           </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-montserrat font-black text-4xl md:text-5xl mb-4"
-            style={{ color: "#083335" }}
-          >
-            Let&apos;s Build Something
-            <br />
-            <span style={{ color: "#D8B9A3" }}>Great Together</span>
+          <motion.h2 initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.1 }}
+            className="t-h1" style={{ color: "var(--clr-primary)" }}>
+            Let&apos;s build something<br /><em className="t-italic">great together.</em>
           </motion.h2>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Left: Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}
-          >
-            <p className="font-inter text-base leading-relaxed mb-10" style={{ color: "#4a5568" }}>
-              Whether you need scaffolding for a single floor or complete equipment rental for a multi-storey
-              project, Rasa Construction is ready to serve you. Reach out for a free consultation and quote.
+        {/* 2-column: info + form */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.15fr", gap: "var(--s12)", alignItems: "start" }}
+          className="grid-cols-1 lg:grid-cols-[1fr_1.15fr]">
+
+          {/* Left — contact info */}
+          <motion.div initial={{ opacity: 0, x: -40 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.1 }}>
+            <p className="t-body" style={{ color: "var(--clr-text-md)", marginBottom: "var(--s6)", maxWidth: "400px" }}>
+              Whether you need scaffolding for a single floor or complete equipment rental for a multi-storey project, we're ready to help. Reach out for a free consultation and quote.
             </p>
 
-            <div className="grid sm:grid-cols-2 gap-4 mb-10">
-              {contactMethods.map(({ icon: Icon, label, value, sub, href, color }, i) => (
-                <motion.a
-                  key={label}
-                  href={href}
-                  target={href.startsWith("http") ? "_blank" : undefined}
-                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.2 + i * 0.1, duration: 0.5 }}
-                  className="group rounded-xl p-5 transition-all duration-300 hover-lift"
-                  style={{
-                    background: "white",
-                    boxShadow: "0 2px 12px rgba(0,0,0,0.05)",
-                    border: "1px solid rgba(0,0,0,0.06)",
-                  }}
-                >
-                  <div
-                    className="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform duration-300 group-hover:scale-110"
-                    style={{ background: color === "#25D366" ? "rgba(37,211,102,0.12)" : "rgba(8,51,53,0.08)" }}
-                  >
-                    <Icon size={18} style={{ color }} />
+            {/* Contact cards — 2x2 grid */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s2)", marginBottom: "var(--s6)" }}>
+              {contactCards.map(({ icon: Icon, label, val, sub, href, accent }, i) => (
+                <motion.a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.2 + i * 0.08 }}
+                  className="card group" style={{ padding: "var(--s3)", textDecoration: "none" }}>
+                  <div style={{ width: "36px", height: "36px", borderRadius: "var(--r-md)", display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(8,51,53,0.07)", marginBottom: "var(--s2)", transition: "transform 300ms var(--ease)" }} className="group-hover:scale-110">
+                    <Icon size={17} color={accent} />
                   </div>
-                  <div className="font-poppins font-semibold text-sm" style={{ color: "#111827" }}>{label}</div>
-                  <div className="font-inter text-sm mt-0.5" style={{ color: "#374151" }}>{value}</div>
-                  <div className="font-inter text-xs mt-0.5" style={{ color: "#9ca3af" }}>{sub}</div>
+                  <div className="font-p" style={{ fontWeight: 600, fontSize: "var(--t-sm)", color: "var(--clr-text)", marginBottom: "2px" }}>{label}</div>
+                  <div className="t-sm" style={{ color: "var(--clr-text-md)" }}>{val}</div>
+                  <div className="t-sm" style={{ color: "var(--clr-text-lt)", marginTop: "1px" }}>{sub}</div>
                 </motion.a>
               ))}
             </div>
 
             {/* Map placeholder */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="rounded-2xl overflow-hidden"
-              style={{ height: "220px" }}
-            >
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.55 }}
+              style={{ borderRadius: "var(--r-lg)", overflow: "hidden", height: "200px" }}>
               <iframe
-                title="Rasa Construction Location Map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31760.77345!2d77.3!3d8.75!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOCc0NS4wIk4gNzcnMDAuMCJF!5e0!3m2!1sen!2sin!4v1000000000000"
-                width="100%"
-                height="220"
-                style={{ border: 0, filter: "grayscale(20%) contrast(1.1)" }}
-                loading="lazy"
-                allowFullScreen
+                title="Rasa Construction map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31760.773!2d77.3!3d8.75!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMK0NS4wTiA3N8K0MDAuMEU!5e0!3m2!1sen!2sin!4v1000000000"
+                width="100%" height="200" style={{ border: 0, filter: "grayscale(20%) contrast(1.05)" }} loading="lazy" allowFullScreen
               />
             </motion.div>
           </motion.div>
 
-          {/* Right: Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="rounded-3xl p-8 md:p-10"
-            style={{ background: "linear-gradient(160deg, #051f21, #083335)" }}
-          >
-            {submitted ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="h-full flex flex-col items-center justify-center text-center py-12 gap-4"
-              >
-                <div
-                  className="w-20 h-20 rounded-full flex items-center justify-center"
-                  style={{ background: "rgba(216,185,163,0.15)" }}
-                >
-                  <CheckCircle2 size={40} style={{ color: "#D8B9A3" }} />
+          {/* Right — form panel */}
+          <motion.div initial={{ opacity: 0, x: 40 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.2 }}
+            style={{ borderRadius: "var(--r-xl)", padding: "var(--s8)", background: "linear-gradient(160deg, var(--clr-primary-dark), var(--clr-primary))" }}>
+            {sent ? (
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "var(--s12) 0", gap: "var(--s3)" }}>
+                <div style={{ width: "72px", height: "72px", borderRadius: "50%", background: "rgba(216,185,163,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <CheckCircle2 size={36} color="var(--clr-accent)" />
                 </div>
-                <h3 className="font-montserrat font-bold text-2xl text-white">Message Received!</h3>
-                <p className="font-inter text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
-                  Thank you for reaching out. Gurusamy sir will contact you within 24 hours.
-                </p>
-                <a href="tel:+919842766379" className="btn-primary mt-4">
-                  Or Call Us Now
-                </a>
-              </motion.div>
+                <h3 className="t-h2 text-white">Message Received!</h3>
+                <p className="t-sm" style={{ color: "rgba(255,255,255,0.55)" }}>Gurusamy sir will contact you within 24 hours.</p>
+                <a href="tel:+919842766379" className="btn btn-primary" style={{ marginTop: "var(--s2)" }}>Or Call Now</a>
+              </div>
             ) : (
               <>
-                <h3 className="font-montserrat font-bold text-2xl text-white mb-2">
-                  Request a Free Quote
-                </h3>
-                <p className="font-inter text-sm mb-8" style={{ color: "rgba(255,255,255,0.5)" }}>
-                  Fill out the form and we'll get back to you within one business day.
+                <h3 className="t-h2 text-white" style={{ marginBottom: "var(--s1)" }}>Request a Free Quote</h3>
+                <p className="t-sm" style={{ color: "rgba(255,255,255,0.45)", marginBottom: "var(--s6)" }}>
+                  We'll get back to you within one business day.
                 </p>
-
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid sm:grid-cols-2 gap-4">
+                <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: "var(--s3)" }}>
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s2)" }}>
                     <div>
-                      <label className="block font-poppins text-xs font-medium mb-2" style={{ color: "rgba(255,255,255,0.6)" }}>
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="Your name"
-                        className="input-field"
-                        value={formState.name}
-                        onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                      />
+                      <label className="t-label" style={{ display: "block", color: "rgba(255,255,255,0.50)", marginBottom: "var(--s1)" }}>Full Name *</label>
+                      <input type="text" required placeholder="Your name" className="inp" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
                     </div>
                     <div>
-                      <label className="block font-poppins text-xs font-medium mb-2" style={{ color: "rgba(255,255,255,0.6)" }}>
-                        Phone Number *
-                      </label>
-                      <input
-                        type="tel"
-                        required
-                        placeholder="+91 XXXXX XXXXX"
-                        className="input-field"
-                        value={formState.phone}
-                        onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
-                      />
+                      <label className="t-label" style={{ display: "block", color: "rgba(255,255,255,0.50)", marginBottom: "var(--s1)" }}>Phone *</label>
+                      <input type="tel" required placeholder="+91 XXXXX XXXXX" className="inp" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
                     </div>
                   </div>
-
                   <div>
-                    <label className="block font-poppins text-xs font-medium mb-2" style={{ color: "rgba(255,255,255,0.6)" }}>
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      placeholder="your@email.com"
-                      className="input-field"
-                      value={formState.email}
-                      onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                    />
+                    <label className="t-label" style={{ display: "block", color: "rgba(255,255,255,0.50)", marginBottom: "var(--s1)" }}>Email</label>
+                    <input type="email" placeholder="your@email.com" className="inp" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
                   </div>
-
                   <div>
-                    <label className="block font-poppins text-xs font-medium mb-2" style={{ color: "rgba(255,255,255,0.6)" }}>
-                      Service Required *
-                    </label>
-                    <select
-                      required
-                      className="input-field"
-                      value={formState.service}
-                      onChange={(e) => setFormState({ ...formState, service: e.target.value })}
-                      style={{ cursor: "pointer" }}
-                    >
+                    <label className="t-label" style={{ display: "block", color: "rgba(255,255,255,0.50)", marginBottom: "var(--s1)" }}>Service Required *</label>
+                    <select required className="inp" value={form.service} onChange={(e) => setForm({ ...form, service: e.target.value })}>
                       <option value="">Select a service...</option>
                       <option value="scaffolding">Scaffolding Rental</option>
                       <option value="centring">Centring Materials</option>
@@ -264,37 +124,19 @@ export default function ContactSection() {
                       <option value="other">Other</option>
                     </select>
                   </div>
-
                   <div>
-                    <label className="block font-poppins text-xs font-medium mb-2" style={{ color: "rgba(255,255,255,0.6)" }}>
-                      Project Details
-                    </label>
-                    <textarea
-                      rows={4}
-                      placeholder="Tell us about your project — location, duration, requirements..."
-                      className="input-field resize-none"
-                      value={formState.message}
-                      onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                    />
+                    <label className="t-label" style={{ display: "block", color: "rgba(255,255,255,0.50)", marginBottom: "var(--s1)" }}>Project Details</label>
+                    <textarea rows={4} placeholder="Location, duration, requirements..." className="inp" style={{ resize: "none" }} value={form.msg} onChange={(e) => setForm({ ...form, msg: e.target.value })} />
                   </div>
-
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="btn-primary w-full justify-center text-base py-4 mt-2"
-                    style={{ opacity: loading ? 0.8 : 1 }}
-                  >
+                  <button type="submit" disabled={loading} className="btn btn-primary" style={{ width: "100%", marginTop: "var(--s1)", opacity: loading ? 0.8 : 1 }}>
                     {loading ? (
-                      <span className="flex items-center gap-2">
-                        <span
-                          className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"
-                        />
-                        Sending...
+                      <span style={{ display: "flex", alignItems: "center", gap: "var(--s1)" }}>
+                        <span style={{ width: "16px", height: "16px", border: "2px solid currentColor", borderTopColor: "transparent", borderRadius: "50%" }} className="animate-spin" />
+                        Sending…
                       </span>
                     ) : (
-                      <span className="flex items-center gap-2">
-                        <Send size={16} />
-                        Send Message
+                      <span style={{ display: "flex", alignItems: "center", gap: "var(--s1)" }}>
+                        <Send size={15} /> Send Message
                       </span>
                     )}
                   </button>
