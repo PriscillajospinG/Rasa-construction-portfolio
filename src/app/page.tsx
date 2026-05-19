@@ -1,44 +1,35 @@
-"use client";
+// ─────────────────────────────────────────────────────────
+// app/page.tsx — Main page assembly
+// All sections imported from their canonical locations.
+// No logic lives here — purely compositional.
+// ─────────────────────────────────────────────────────────
+import Hero         from "@/components/sections/Hero";
+import About        from "@/components/sections/About";
+import Services     from "@/components/sections/Services";
+import Projects     from "@/components/sections/Projects";
+import Testimonials from "@/components/sections/Testimonials";
+import Contact      from "@/components/sections/Contact";
+import CTA          from "@/components/sections/CTA";
+import WhatsAppFloat from "@/components/ui/WhatsAppFloat";
+import { company }  from "@/data/company";
 
-import LoadingScreen from "@/components/LoadingScreen";
-import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/HeroSection";
-import AboutSection from "@/components/AboutSection";
-import ServicesSection from "@/components/ServicesSection";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import ProjectsSection from "@/components/ProjectsSection";
-import CTABanner from "@/components/CTABanner";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import ContactSection from "@/components/ContactSection";
-import Footer from "@/components/Footer";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
+export const metadata = {
+  title:       `${company.name} | Scaffolding, Concrete & Hoist Rental – Tamil Nadu`,
+  description: `${company.name} offers premium scaffolding rental, centring materials, concrete works, and vertical hoist rental across Tamil Nadu. Founded by ${company.owner}. Call ${company.contact.primary}.`,
+  keywords:    "scaffolding rental, centring materials, vertical hoist, concrete works, Tamil Nadu, Tirunelveli, construction equipment",
+};
 
 export default function Home() {
   return (
-    <>
-      {/* Loading screen */}
-      <LoadingScreen />
-
-      {/* Sticky navigation */}
-      <Navbar />
-
-      {/* Main content */}
-      <main>
-        <HeroSection />
-        <AboutSection />
-        <ServicesSection />
-        <WhyChooseUs />
-        <ProjectsSection />
-        <CTABanner />
-        <TestimonialsSection />
-        <ContactSection />
-      </main>
-
-      {/* Footer */}
-      <Footer />
-
-      {/* Floating WhatsApp CTA */}
+    <main>
+      <Hero />
+      <About />
+      <Services />
+      <Projects />
+      <CTA />
+      <Testimonials />
+      <Contact />
       <WhatsAppFloat />
-    </>
+    </main>
   );
 }
