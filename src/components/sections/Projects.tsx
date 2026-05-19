@@ -43,7 +43,7 @@ export default function Projects() {
             <Reveal>
               <div className="eyebrow t-label" style={{ color: "var(--clr-primary)", marginBottom: "var(--s3)" }}>Our Work</div>
               <h2 className="t-h1" style={{ color: "var(--clr-primary)", marginBottom: "var(--s4)" }}>
-                Projects that<br /><em className="t-italic">speak for themselves.</em>
+                Projects that<br /><em className="t-italic-dark">speak for themselves.</em>
               </h2>
             </Reveal>
             {/* Filter pills — aligned with heading, not centered */}

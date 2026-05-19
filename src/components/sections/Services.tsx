@@ -46,7 +46,7 @@ export default function Services() {
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="t-h1" style={{ color: "var(--clr-primary)" }}>
-              Services built for<br /><em className="t-italic">real field work.</em>
+              Services built for<br /><em className="t-italic-dark">real field work.</em>
             </h2>
           </Reveal>
         </div>
@@ -67,9 +67,12 @@ export default function Services() {
                 initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.1 }}
                 className="group relative overflow-hidden"
                 style={{ borderRadius: "var(--r-xl)", minHeight: "480px", display: "flex", flexDirection: "column", justifyContent: "flex-end", boxShadow: "var(--sh-xl)" }}>
-                {/* Background */}
-                <div className="absolute inset-0" style={{ backgroundImage: `url(${primary.image})`, backgroundSize: "cover", backgroundPosition: "center", transition: "transform 700ms var(--ease)" }} className="group-hover:scale-105 absolute inset-0" />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(5,31,33,0.98) 0%, rgba(5,31,33,0.60) 50%, rgba(5,31,33,0.20) 100%)" }} />
+                {/* Background — no duplicate className */}
+                <div
+                  className="absolute inset-0"
+                  style={{ backgroundImage: `url(${primary.image})`, backgroundSize: "cover", backgroundPosition: "center", transition: "transform 700ms var(--ease)" }}
+                />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(3,12,13,0.99) 0%, rgba(5,31,33,0.72) 48%, rgba(5,31,33,0.22) 100%)" }} />
 
                 {/* Large decorative service number */}
                 <div className="absolute" style={{ top: "var(--s4)", right: "var(--s4)", fontFamily: "'Montserrat',sans-serif", fontSize: "7rem", fontWeight: 900, color: "rgba(216,185,163,0.08)", lineHeight: 1, letterSpacing: "-0.04em", userSelect: "none" }}>01</div>
@@ -111,7 +114,7 @@ export default function Services() {
                     </div>
                     <div>
                       <h3 className="t-h2" style={{ color: "var(--clr-text)", marginBottom: "var(--s1)" }}>{title}</h3>
-                      <p className="t-sm" style={{ color: "var(--clr-text-lt)", lineHeight: 1.65, marginBottom: "var(--s2)" }}>{description}</p>
+                      <p className="t-sm" style={{ color: "var(--clr-text-md)", lineHeight: 1.65, marginBottom: "var(--s2)" }}>{description}</p>
                       <Badge variant="dark">✓ {tag}</Badge>
                     </div>
                   </div>
@@ -123,7 +126,7 @@ export default function Services() {
 
         {/* ── Row 2: Tertiary services — horizontal editorial list ── */}
         <div style={{ borderTop: "1px solid rgba(8,51,53,0.08)", paddingTop: "var(--s6)" }}>
-          <div className="t-label" style={{ color: "var(--clr-text-lt)", marginBottom: "var(--s4)" }}>Also available</div>
+          <div className="t-label" style={{ color: "var(--clr-text-md)", marginBottom: "var(--s4)", fontWeight: 600 }}>Also available</div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 0 }}
             className="grid-cols-1 md:grid-cols-3">
             {tertiary.map(({ id, iconName, title, description, tag }, i) => {
@@ -138,7 +141,8 @@ export default function Services() {
                     <h4 className="font-p" style={{ fontWeight: 600, fontSize: "var(--t-body)", color: "var(--clr-text)" }}>{title}</h4>
                   </div>
                   <p className="t-sm" style={{ color: "var(--clr-text-lt)", lineHeight: 1.65, marginBottom: "var(--s2)" }}>{description}</p>
-                  <div className="flex items-center gap-1 t-label" style={{ color: "var(--clr-primary)", opacity: 0 }} className="group-hover:opacity-100 transition-opacity duration-200 t-label" style={{ color: "var(--clr-primary)" }}>
+                  <div className="group-hover:opacity-100 transition-opacity duration-200 t-label"
+                    style={{ color: "var(--clr-primary)", opacity: 0, display: "flex", alignItems: "center", gap: "4px" }}>
                     <span>{tag}</span> <ArrowRight size={12} />
                   </div>
                 </motion.div>

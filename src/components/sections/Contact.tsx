@@ -128,41 +128,33 @@ export default function Contact() {
               </div>
             ) : (
               <div>
-                <h3 className="font-p" style={{ fontWeight: 700, fontSize: "var(--t-h2)", color: "var(--clr-primary)", marginBottom: "var(--s1)" }}>
+                <h3 className="font-m" style={{ fontWeight: 800, fontSize: "var(--t-h2)", color: "var(--clr-primary)", marginBottom: "var(--s1)" }}>
                   Request a Free Quote
                 </h3>
-                <p className="t-sm" style={{ color: "var(--clr-text-lt)", marginBottom: "var(--s6)" }}>
+                <p className="t-sm" style={{ color: "var(--clr-text-md)", marginBottom: "var(--s6)" }}>
                   We'll respond within one business day.
                 </p>
                 <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: "var(--s3)" }}>
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s2)" }}>
                     {[
-                      { k: "name" as const,  label: "Full Name *",         type: "text",  required: true,  placeholder: "Your name" },
-                      { k: "phone" as const, label: "Phone *",             type: "tel",   required: true,  placeholder: "+91 XXXXX XXXXX" },
+                      { k: "name" as const,  label: "Full Name",  type: "text", required: true,  placeholder: "Your name" },
+                      { k: "phone" as const, label: "Phone",      type: "tel",  required: true,  placeholder: "+91 XXXXX XXXXX" },
                     ].map(({ k, label, type, required, placeholder }) => (
                       <div key={k}>
-                        <label className="t-label" style={{ display: "block", color: "var(--clr-text-lt)", marginBottom: "var(--s1)" }}>{label}</label>
+                        <label className="t-label" style={{ display: "block", color: "var(--clr-text-md)", marginBottom: "6px", fontWeight: 600 }}>{label} {required && <span style={{ color: "var(--clr-primary)" }}>*</span>}</label>
                         <input type={type} required={required} placeholder={placeholder}
-                          style={{ width: "100%", padding: "var(--s2) var(--s3)", background: "rgba(8,51,53,0.04)", border: "1px solid rgba(8,51,53,0.12)", borderRadius: "var(--r-md)", fontFamily: "'Inter',sans-serif", fontSize: "var(--t-sm)", color: "var(--clr-text)", outline: "none" }}
-                          value={form[k]} onChange={update(k)}
-                          onFocus={(e) => { (e.target as HTMLElement).style.borderColor = "var(--clr-primary)"; }}
-                          onBlur={(e) => { (e.target as HTMLElement).style.borderColor = "rgba(8,51,53,0.12)"; }} />
+                          className="inp-light" value={form[k]} onChange={update(k)} />
                       </div>
                     ))}
                   </div>
                   <div>
-                    <label className="t-label" style={{ display: "block", color: "var(--clr-text-lt)", marginBottom: "var(--s1)" }}>Email</label>
+                    <label className="t-label" style={{ display: "block", color: "var(--clr-text-md)", marginBottom: "6px", fontWeight: 600 }}>Email</label>
                     <input type="email" placeholder="your@email.com"
-                      style={{ width: "100%", padding: "var(--s2) var(--s3)", background: "rgba(8,51,53,0.04)", border: "1px solid rgba(8,51,53,0.12)", borderRadius: "var(--r-md)", fontFamily: "'Inter',sans-serif", fontSize: "var(--t-sm)", color: "var(--clr-text)", outline: "none" }}
-                      value={form.email} onChange={update("email")}
-                      onFocus={(e) => { (e.target as HTMLElement).style.borderColor = "var(--clr-primary)"; }}
-                      onBlur={(e) => { (e.target as HTMLElement).style.borderColor = "rgba(8,51,53,0.12)"; }} />
+                      className="inp-light" value={form.email} onChange={update("email")} />
                   </div>
                   <div>
-                    <label className="t-label" style={{ display: "block", color: "var(--clr-text-lt)", marginBottom: "var(--s1)" }}>Service Required *</label>
-                    <select required
-                      style={{ width: "100%", padding: "var(--s2) var(--s3)", background: "rgba(8,51,53,0.04)", border: "1px solid rgba(8,51,53,0.12)", borderRadius: "var(--r-md)", fontFamily: "'Inter',sans-serif", fontSize: "var(--t-sm)", color: "var(--clr-text)", outline: "none" }}
-                      value={form.service} onChange={update("service")}>
+                    <label className="t-label" style={{ display: "block", color: "var(--clr-text-md)", marginBottom: "6px", fontWeight: 600 }}>Service Required <span style={{ color: "var(--clr-primary)" }}>*</span></label>
+                    <select required className="inp-light" value={form.service} onChange={update("service")}>
                       <option value="">Select a service...</option>
                       <option value="scaffolding">Scaffolding Rental</option>
                       <option value="centring">Centring Materials</option>
@@ -173,12 +165,10 @@ export default function Contact() {
                     </select>
                   </div>
                   <div>
-                    <label className="t-label" style={{ display: "block", color: "var(--clr-text-lt)", marginBottom: "var(--s1)" }}>Project Details</label>
+                    <label className="t-label" style={{ display: "block", color: "var(--clr-text-md)", marginBottom: "6px", fontWeight: 600 }}>Project Details</label>
                     <textarea rows={4} placeholder="Location, duration, scale, requirements..."
-                      style={{ width: "100%", padding: "var(--s2) var(--s3)", background: "rgba(8,51,53,0.04)", border: "1px solid rgba(8,51,53,0.12)", borderRadius: "var(--r-md)", fontFamily: "'Inter',sans-serif", fontSize: "var(--t-sm)", color: "var(--clr-text)", outline: "none", resize: "none" }}
-                      value={form.msg} onChange={update("msg")}
-                      onFocus={(e) => { (e.target as HTMLElement).style.borderColor = "var(--clr-primary)"; }}
-                      onBlur={(e) => { (e.target as HTMLElement).style.borderColor = "rgba(8,51,53,0.12)"; }} />
+                      className="inp-light" style={{ resize: "none" }}
+                      value={form.msg} onChange={update("msg")} />
                   </div>
                   <Button as="button" variant="dark" disabled={loading}
                     style={{ width: "100%", marginTop: "var(--s1)", justifyContent: "center" }}>
