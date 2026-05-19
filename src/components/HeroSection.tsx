@@ -7,156 +7,107 @@ import Image from "next/image";
 
 export default function HeroSection() {
   const bgRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
-    const onScroll = () => {
-      if (bgRef.current) bgRef.current.style.transform = `translateY(${window.scrollY * 0.38}px)`;
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const fn = () => { if (bgRef.current) bgRef.current.style.transform = `translateY(${window.scrollY * 0.38}px)`; };
+    window.addEventListener("scroll", fn, { passive: true });
+    return () => window.removeEventListener("scroll", fn);
   }, []);
 
   return (
     <section id="home" className="relative min-h-screen flex items-end overflow-hidden grain">
-      {/* Parallax background */}
+      {/* Parallax bg */}
       <div ref={bgRef} className="absolute inset-0 scale-110">
-        <Image
-          src="/images/hero.png"
-          alt="Rasa Construction – premium scaffolding and construction at golden hour"
-          fill priority sizes="100vw" quality={75}
-          className="object-cover object-center"
-        />
+        <Image src="/images/hero.png" alt="Rasa Construction site at golden hour"
+          fill priority sizes="100vw" quality={75} className="object-cover object-center" />
       </div>
 
-      {/* Cinematic overlays — left-heavy, editorial */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: "linear-gradient(108deg, rgba(5,31,33,0.96) 0%, rgba(5,31,33,0.72) 42%, rgba(5,31,33,0.20) 100%)",
-        }}
-      />
-      {/* Bottom page-bleed */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-52"
-        style={{ background: "linear-gradient(to top, #F7F5F2 0%, transparent 100%)" }}
-      />
-
+      {/* Layered cinematic overlay — left-heavy */}
+      <div className="absolute inset-0" style={{ background: "linear-gradient(108deg, rgba(5,31,33,0.96) 0%, rgba(5,31,33,0.70) 42%, rgba(5,31,33,0.18) 100%)" }} />
+      {/* Page bleed bottom */}
+      <div className="absolute bottom-0 left-0 right-0" style={{ height: "14rem", background: "linear-gradient(to top, #F7F5F2, transparent)" }} />
       {/* Architectural grid — left half only */}
-      <div
-        className="absolute left-0 top-0 bottom-0 w-2/3 pointer-events-none"
-        style={{
-          backgroundImage: "linear-gradient(rgba(216,185,163,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(216,185,163,0.06) 1px, transparent 1px)",
-          backgroundSize: "56px 56px",
-          maskImage: "linear-gradient(to right, black 30%, transparent 100%)",
-        }}
-      />
+      <div className="absolute left-0 top-0 bottom-0 pointer-events-none" style={{
+        width: "60%",
+        backgroundImage: "linear-gradient(rgba(216,185,163,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(216,185,163,0.06) 1px, transparent 1px)",
+        backgroundSize: "56px 56px",
+        maskImage: "linear-gradient(to right, black 30%, transparent 100%)",
+        WebkitMaskImage: "linear-gradient(to right, black 30%, transparent 100%)",
+      }} />
 
-      {/* ─── Content block ─── */}
-      <div className="container relative z-10 pb-32 pt-44">
-        <div style={{ maxWidth: "680px" }}>
+      {/* Content */}
+      <div className="c relative z-10" style={{ paddingBottom: "var(--s16)", paddingTop: "11rem" }}>
+        <div style={{ maxWidth: "660px" }}>
 
-          {/* Editorial section label */}
+          {/* Eyebrow */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="rule-line label-editorial mb-8"
-            style={{ color: "#D8B9A3" }}
+            className="eyebrow t-label"
+            style={{ color: "var(--clr-accent)", marginBottom: "var(--s4)" }}
           >
             Est. 2010 · Achankuttam, Tamil Nadu
           </motion.div>
 
-          {/* Brutalist headline */}
+          {/* Brutalist headline — 72px */}
           <motion.h1
             initial={{ opacity: 0, y: 56 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className="heading-brutalist text-white mb-8"
-            style={{ fontSize: "var(--text-hero)", lineHeight: "0.96" }}
+            className="t-hero text-white"
+            style={{ marginBottom: "var(--s4)" }}
           >
-            Building
-            <br />
-            Strength.
-            <br />
-            <em className="gradient-text not-italic">Delivering</em>
-            <br />
-            <em className="gradient-text not-italic">Trust.</em>
+            Building<br />Strength.<br />
+            <span className="gradient-text">Delivering</span><br />
+            <span className="gradient-text">Trust.</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.75 }}
-            className="font-inter mb-10"
-            style={{
-              fontSize: "var(--text-lg)",
-              lineHeight: 1.7,
-              color: "rgba(255,255,255,0.62)",
-              maxWidth: "480px",
-            }}
+            className="t-body"
+            style={{ color: "rgba(255,255,255,0.60)", maxWidth: "480px", marginBottom: "var(--s6)" }}
           >
-            Scaffolding rental, centring materials, concrete works &amp;
-            vertical hoist services — backed by 15 years of field expertise across Tamil Nadu.
+            Scaffolding rental, centring materials, concrete works &amp; vertical hoist services —
+            backed by 15 years of field expertise across Tamil Nadu.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.0 }}
-            className="flex flex-wrap gap-4 items-center"
+            style={{ display: "flex", flexWrap: "wrap", gap: "var(--s2)", alignItems: "center" }}
           >
-            <a
-              href="#contact"
-              onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}
-              className="btn btn-primary"
-            >
+            <a href="#contact" onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }} className="btn btn-primary">
               Get a Free Quote
             </a>
-            <a href="tel:+919842766379" className="btn btn-ghost flex items-center gap-2">
-              <PhoneCall size={16} />
-              +91 98427 66379
+            <a href="tel:+919842766379" className="btn btn-ghost" style={{ display: "flex", alignItems: "center", gap: "var(--s1)" }}>
+              <PhoneCall size={16} /> +91 98427 66379
             </a>
           </motion.div>
         </div>
 
-        {/* Stat strip — bottom of hero, horizontal */}
+        {/* Stat strip */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 1.3 }}
-          className="mt-20 flex gap-12 items-end flex-wrap"
+          style={{ marginTop: "var(--s12)", display: "flex", gap: "var(--s8)", flexWrap: "wrap" }}
         >
-          {[
-            { n: "15+",  l: "Years" },
-            { n: "500+", l: "Projects" },
-            { n: "100+", l: "Equipment" },
-            { n: "300+", l: "Clients" },
-          ].map(({ n, l }) => (
+          {[{ n: "15+", l: "Years" }, { n: "500+", l: "Projects" }, { n: "100+", l: "Equipment" }, { n: "300+", l: "Clients" }].map(({ n, l }) => (
             <div key={l}>
-              <div
-                className="font-montserrat"
-                style={{ fontSize: "2.2rem", fontWeight: 900, color: "#D8B9A3", lineHeight: 1 }}
-              >
-                {n}
-              </div>
-              <div className="label-editorial mt-1" style={{ color: "rgba(255,255,255,0.38)" }}>
-                {l}
-              </div>
+              <div className="font-m" style={{ fontSize: "2.25rem", fontWeight: 900, color: "var(--clr-accent)", lineHeight: 1 }}>{n}</div>
+              <div className="t-label" style={{ color: "rgba(255,255,255,0.36)", marginTop: "var(--s1)" }}>{l}</div>
             </div>
           ))}
         </motion.div>
       </div>
 
-      {/* Scroll indicator — right edge */}
-      <motion.button
-        onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-        aria-label="Scroll"
-        className="absolute bottom-10 right-8 flex flex-col items-center gap-2"
-        style={{ color: "rgba(255,255,255,0.30)" }}
-      >
+      {/* Scroll cue */}
+      <motion.button onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }}
+        aria-label="Scroll" className="absolute" style={{ bottom: "2.5rem", right: "var(--container-px)", color: "rgba(255,255,255,0.28)" }}>
         <motion.div animate={{ y: [0, 5, 0] }} transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}>
           <ArrowDown size={18} />
         </motion.div>
