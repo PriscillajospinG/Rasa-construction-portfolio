@@ -114,11 +114,11 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          {/* Headline — brutalist, left-anchored, NOT centered */}
+          {/* Headline — line-by-line reveal */}
           <div style={{ overflow: "hidden" }}>
             {[
-              { text: "Building",    delay: 0.35 },
-              { text: "Strength.",   delay: 0.47, accent: false },
+              { text: "Reliable Scaffolding,",  delay: 0.35 },
+              { text: "Centring & Concrete",     delay: 0.47 },
             ].map(({ text, delay }) => (
               <motion.div
                 key={text}
@@ -159,29 +159,10 @@ export default function Hero() {
                   lineHeight:    0.95,
                   letterSpacing: "-0.03em",
                   display:       "block",
-                }}
-              >
-                Delivering
-              </span>
-            </motion.div>
-            <motion.div
-              initial={{ y: "110%", opacity: 0 }}
-              animate={{ y: "0%",   opacity: 1 }}
-              transition={{ ...t(0.72), duration: 0.85 }}
-              style={{ overflow: "hidden" }}
-            >
-              <span
-                className="font-m gradient-text"
-                style={{
-                  fontSize:      "var(--t-hero)",
-                  fontWeight:    900,
-                  lineHeight:    0.95,
-                  letterSpacing: "-0.03em",
-                  display:       "block",
                   marginBottom:  "var(--s6)",
                 }}
               >
-                Trust.
+                Support for Stronger Construction.
               </span>
             </motion.div>
           </div>
@@ -200,7 +181,7 @@ export default function Hero() {
             }}
           />
 
-          {/* Sub-copy — max 2 lines, not a paragraph */}
+          {/* Sub-copy */}
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
@@ -208,15 +189,15 @@ export default function Hero() {
             style={{
               fontFamily:   "'Inter', sans-serif",
               fontSize:     "1rem",
-              color:        "rgba(255,255,255,0.65)",
-              lineHeight:   1.7,
-              maxWidth:     "380px",
+              color:        "rgba(255,255,255,0.72)",
+              lineHeight:   1.75,
+              maxWidth:     "420px",
               marginBottom: "var(--s8)",
             }}
           >
-            Scaffolding rental · Centring materials · Concrete works
-            <br />
-            Vertical hoist services — {yearsSince} years across Tamil Nadu.
+            Rasa Construction supports residential and commercial building works
+            with quality scaffolding, centring support, vertical hoist rental,
+            and concrete works across Tamil Nadu.
           </motion.p>
 
           {/* CTAs — asymmetric sizing */}

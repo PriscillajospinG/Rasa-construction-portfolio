@@ -76,6 +76,7 @@ export const company = {
     { label: "Home",         href: "#home" },
     { label: "About",        href: "#about" },
     { label: "Services",     href: "#services" },
+    { label: "Equipment",    href: "#equipment" },
     { label: "Projects",     href: "#projects" },
     { label: "Testimonials", href: "#testimonials" },
     { label: "Contact",      href: "#contact" },
