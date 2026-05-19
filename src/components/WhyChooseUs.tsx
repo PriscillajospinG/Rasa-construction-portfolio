@@ -2,172 +2,82 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import {
-  Users,
-  Clock,
-  ShieldCheck,
-  IndianRupee,
-  Truck,
-  Star,
-} from "lucide-react";
+import { Users, Clock, ShieldCheck, IndianRupee, Truck, Star } from "lucide-react";
 
 const features = [
-  {
-    icon: Users,
-    title: "Trusted Team",
-    description: "Experienced workers with years of hands-on construction expertise and professional training.",
-  },
-  {
-    icon: Clock,
-    title: "Timely Delivery",
-    description: "We respect your deadlines. Equipment delivered and set up on time, every time — guaranteed.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Safety Standards",
-    description: "All equipment and operations meet IS safety standards. Your team's safety is our top priority.",
-  },
-  {
-    icon: IndianRupee,
-    title: "Affordable Pricing",
-    description: "Competitive, transparent pricing with flexible rental terms. No hidden charges, ever.",
-  },
-  {
-    icon: Truck,
-    title: "Strong Equipment",
-    description: "Modern, well-maintained scaffolding, centring, and hoist equipment ready for any project scale.",
-  },
-  {
-    icon: Star,
-    title: "Proven Excellence",
-    description: "500+ completed projects and 300+ satisfied clients speak to our quality and reliability.",
-  },
+  { icon: Users,        title: "Trusted Team",      desc: "Experienced workers with years of hands-on construction expertise and professional safety training." },
+  { icon: Clock,        title: "Timely Delivery",   desc: "We respect your deadlines. Equipment is delivered and set up on time, every time — no excuses." },
+  { icon: ShieldCheck,  title: "Safety Standards",  desc: "All equipment and operations meet IS safety codes. Your team's safety is our top priority, always." },
+  { icon: IndianRupee,  title: "Affordable Pricing",desc: "Transparent pricing, flexible rental terms, competitive rates. No hidden charges, ever." },
+  { icon: Truck,        title: "Strong Equipment",  desc: "Modern, well-maintained scaffolding, centring, and hoist systems ready for any project scale." },
+  { icon: Star,         title: "Proven Excellence", desc: "500+ completed projects and 300+ satisfied clients speak to our consistent quality and reliability." },
 ];
 
 export default function WhyChooseUs() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section
-      className="section-padding relative overflow-hidden"
-      style={{ background: "linear-gradient(160deg, #051f21 0%, #083335 50%, #0a3d40 100%)" }}
-    >
-      {/* Decorative elements */}
-      <div
-        className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-10"
-        style={{
-          background: "radial-gradient(circle, #D8B9A3, transparent)",
-          transform: "translate(30%, -30%)",
-        }}
-      />
-      <div
-        className="absolute bottom-0 left-0 w-80 h-80 rounded-full opacity-5"
-        style={{
-          background: "radial-gradient(circle, #D8B9A3, transparent)",
-          transform: "translate(-30%, 30%)",
-        }}
-      />
+    <section className="relative overflow-hidden grain"
+      style={{ background: "linear-gradient(160deg, var(--clr-primary-dark) 0%, var(--clr-primary) 55%, #0a3d40 100%)" }}>
+      {/* Radial glow — subtle, not neon */}
+      <div className="absolute pointer-events-none" style={{
+        top: 0, right: 0, width: "500px", height: "500px", borderRadius: "50%",
+        background: "radial-gradient(circle, rgba(216,185,163,0.07) 0%, transparent 70%)",
+        transform: "translate(30%, -30%)",
+      }} />
 
-      {/* Grid pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage: `linear-gradient(rgba(216,185,163,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(216,185,163,0.6) 1px, transparent 1px)`,
-          backgroundSize: "60px 60px",
-        }}
-      />
+      <div className="c s" ref={ref}>
 
-      <div className="max-w-7xl mx-auto px-6 relative" ref={ref}>
         {/* Header */}
-        <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="badge mb-4 inline-flex"
-          >
+        <div style={{ marginBottom: "var(--s12)" }}>
+          <motion.div initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6 }}
+            className="eyebrow t-label" style={{ color: "var(--clr-accent)", marginBottom: "var(--s3)" }}>
             Why Choose Rasa
           </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-montserrat font-black text-4xl md:text-5xl text-white mb-4"
-          >
-            Built on Trust,{" "}
-            <span className="gradient-text">Driven by Excellence</span>
+          <motion.h2 initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.1 }}
+            className="t-h1 text-white" style={{ maxWidth: "560px" }}>
+            Built on Trust,{" "}<span className="gradient-text">Driven by Excellence</span>
           </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="font-inter text-base max-w-xl mx-auto"
-            style={{ color: "rgba(255,255,255,0.6)" }}
-          >
-            When you choose Rasa Construction, you choose reliability, safety, and a partner
-            who genuinely cares about the success of your project.
-          </motion.p>
         </div>
 
-        {/* Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map(({ icon: Icon, title, description }, i) => (
-            <motion.div
-              key={title}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="group glass rounded-2xl p-8 hover-lift hover-glow cursor-default"
-            >
-              <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110"
-                style={{ background: "rgba(216,185,163,0.15)", border: "1px solid rgba(216,185,163,0.25)" }}
-              >
-                <Icon size={22} style={{ color: "#D8B9A3" }} />
+        {/* Feature grid — 3 cols, equal cards */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "var(--s3)" }}
+          className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {features.map(({ icon: Icon, title, desc }, i) => (
+            <motion.div key={title}
+              initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.55, delay: i * 0.08 }}
+              className="group card-dark" style={{ padding: "var(--s4)" }}>
+
+              <div style={{
+                width: "44px", height: "44px", borderRadius: "var(--r-md)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                background: "rgba(216,185,163,0.10)",
+                border: "1px solid rgba(216,185,163,0.18)",
+                marginBottom: "var(--s3)",
+                transition: "transform 300ms var(--ease)",
+              }} className="group-hover:scale-110">
+                <Icon size={20} color="var(--clr-accent)" />
               </div>
 
-              <h3
-                className="font-montserrat font-bold text-lg text-white mb-3"
-              >
-                {title}
-              </h3>
+              <h3 className="t-h2 text-white" style={{ marginBottom: "var(--s2)" }}>{title}</h3>
+              <p className="t-sm" style={{ color: "rgba(255,255,255,0.56)", lineHeight: 1.75 }}>{desc}</p>
 
-              <p className="font-inter text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.6)" }}>
-                {description}
-              </p>
-
-              {/* Bottom accent */}
-              <div
-                className="mt-5 h-px w-0 group-hover:w-full transition-all duration-500"
-                style={{ background: "linear-gradient(90deg, #D8B9A3, transparent)" }}
-              />
+              {/* Bottom reveal line on hover */}
+              <div className="transition-all duration-500 group-hover:opacity-100 opacity-0"
+                style={{ marginTop: "var(--s3)", height: "1px", background: "linear-gradient(90deg, var(--clr-accent), transparent)" }} />
             </motion.div>
           ))}
         </div>
 
-        {/* Bottom trust badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.7 }}
-          className="mt-16 text-center"
-        >
-          <div
-            className="inline-flex items-center gap-4 rounded-2xl px-8 py-4"
-            style={{
-              background: "rgba(216,185,163,0.08)",
-              border: "1px solid rgba(216,185,163,0.2)",
-            }}
-          >
-            <ShieldCheck size={24} style={{ color: "#D8B9A3" }} />
-            <div className="text-left">
-              <div className="font-poppins font-semibold text-white text-sm">ISO Compliant &amp; Safety Certified</div>
-              <div className="font-inter text-xs" style={{ color: "rgba(255,255,255,0.5)" }}>
-                All operations follow Bureau of Indian Standards (BIS) guidelines
-              </div>
+        {/* Trust badge */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.65 }}
+          style={{ marginTop: "var(--s12)", display: "flex", justifyContent: "center" }}>
+          <div className="glass" style={{ display: "inline-flex", alignItems: "center", gap: "var(--s3)", borderRadius: "var(--r-lg)", padding: "var(--s3) var(--s6)" }}>
+            <ShieldCheck size={22} color="var(--clr-accent)" />
+            <div>
+              <div className="font-p text-white" style={{ fontWeight: 600, fontSize: "var(--t-sm)" }}>ISO Compliant &amp; Safety Certified</div>
+              <div className="t-sm" style={{ color: "rgba(255,255,255,0.45)", marginTop: "2px" }}>All operations follow Bureau of Indian Standards (BIS) guidelines</div>
             </div>
           </div>
         </motion.div>
