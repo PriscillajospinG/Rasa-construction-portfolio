@@ -1,29 +1,36 @@
 "use client";
 
-import { useState } from "react";
-import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import * as LucideIcons from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
-import SectionTitle from "@/components/ui/SectionTitle";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import Container from "@/components/layout/Container";
 import { services } from "@/data/services";
 import { company } from "@/data/company";
-import { stagger } from "@/lib/animations";
 
 function getIcon(name: string): LucideIcon {
   return (LucideIcons as unknown as Record<string, LucideIcon>)[name] ?? LucideIcons.HardHat;
 }
+
+// Primary service — full-bleed photo card
+const primary = services[0]; // Scaffolding
+
+// Secondary pair — stacked right column  
+const secondary = services.slice(1, 3); // Centring + Concrete
+
+// Tertiary — list treatment
+const tertiary = services.slice(3); // Hoist, Support, Maintenance
 
 export default function Services() {
   const ref    = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="services" style={{ background: "var(--clr-bg)" }} className="relative overflow-hidden">
+    <section id="services" className="relative overflow-hidden" style={{ background: "var(--clr-bg)" }}>
       <div className="curve">
         <svg viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg">
           <path d="M0,0 C480,56 960,56 1440,0 L1440,56 L0,56 Z" fill="white" />
@@ -31,61 +38,125 @@ export default function Services() {
       </div>
 
       <Container section ref={ref}>
-        {/* Split header */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s8)", alignItems: "end", marginBottom: "var(--s12)" }}
-          className="grid-cols-1 lg:grid-cols-2">
+        {/* ── Header: label left, headline right — editorial split ── */}
+        <div style={{ display: "grid", gridTemplateColumns: "3fr 9fr", gap: "var(--s8)", alignItems: "end", marginBottom: "var(--s12)" }}
+          className="grid-cols-1 lg:grid-cols-[3fr_9fr]">
           <Reveal>
-            <SectionTitle eyebrow="What We Offer"
-              heading={<>Services built for<br />real <em className="t-italic">field work.</em></>} />
+            <div className="eyebrow t-label" style={{ color: "var(--clr-primary)" }}>What We Offer</div>
           </Reveal>
-          <Reveal delay={0.1} direction="right">
-            <p className="t-body" style={{ color: "var(--clr-text-lt)" }}>
-              From a single-floor scaffold to full multi-storey hoist setups, we cover the complete range of construction rental and support needs — backed by {new Date().getFullYear() - company.founded} years of expertise.
-            </p>
+          <Reveal delay={0.1}>
+            <h2 className="t-h1" style={{ color: "var(--clr-primary)" }}>
+              Services built for<br /><em className="t-italic">real field work.</em>
+            </h2>
           </Reveal>
         </div>
 
-        {/* Card grid — 3 equal columns */}
-        <motion.div ref={ref} variants={stagger()} initial="hidden" animate={inView ? "visible" : "hidden"}
-          style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "var(--s3)" }}
-          className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {services.map(({ id, iconName, title, description, tag, image }) => {
-            const Icon = getIcon(iconName);
+        {/* ── Row 1: Architectural hero card + stacked pair ── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5 }}
+          style={{ display: "grid", gridTemplateColumns: "7fr 5fr", gap: "var(--s3)", marginBottom: "var(--s3)" }}
+          className="grid-cols-1 lg:grid-cols-[7fr_5fr]"
+        >
+          {/* Primary: large featured card — image background, tall */}
+          {(() => {
+            const Icon = getIcon(primary.iconName);
             return (
-              <motion.div key={id} variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.55 } } }}
-                className="group card relative overflow-hidden"
-                style={image ? { minHeight: "300px", border: "none" } : {}}>
-                {image && (
-                  <>
-                    <div className="absolute inset-0" style={{ backgroundImage: `url(${image})`, backgroundSize: "cover", backgroundPosition: "center" }} />
-                    <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(5,31,33,0.96) 45%, rgba(5,31,33,0.45) 100%)" }} />
-                  </>
-                )}
-                <div className="absolute top-0 left-0 right-0 transition-transform duration-500 origin-left scale-x-0 group-hover:scale-x-100"
-                  style={{ height: "2px", background: "linear-gradient(90deg, var(--clr-primary), var(--clr-accent))" }} />
+              <motion.div
+                initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.1 }}
+                className="group relative overflow-hidden"
+                style={{ borderRadius: "var(--r-xl)", minHeight: "480px", display: "flex", flexDirection: "column", justifyContent: "flex-end", boxShadow: "var(--sh-xl)" }}>
+                {/* Background */}
+                <div className="absolute inset-0" style={{ backgroundImage: `url(${primary.image})`, backgroundSize: "cover", backgroundPosition: "center", transition: "transform 700ms var(--ease)" }} className="group-hover:scale-105 absolute inset-0" />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(5,31,33,0.98) 0%, rgba(5,31,33,0.60) 50%, rgba(5,31,33,0.20) 100%)" }} />
 
-                <div className="relative z-10 flex flex-col h-full" style={{ padding: "var(--s4)" }}>
-                  {image && <div style={{ flex: 1 }} />}
-                  <div style={{ width: "44px", height: "44px", borderRadius: "var(--r-md)", display: "flex", alignItems: "center", justifyContent: "center", background: image ? "rgba(216,185,163,0.15)" : "linear-gradient(135deg, var(--clr-primary), var(--clr-primary-mid))", border: image ? "1px solid rgba(216,185,163,0.2)" : "none", marginBottom: "var(--s3)", transition: "transform 300ms var(--ease)" }} className="group-hover:scale-110">
-                    <Icon size={20} color="var(--clr-accent)" />
+                {/* Large decorative service number */}
+                <div className="absolute" style={{ top: "var(--s4)", right: "var(--s4)", fontFamily: "'Montserrat',sans-serif", fontSize: "7rem", fontWeight: 900, color: "rgba(216,185,163,0.08)", lineHeight: 1, letterSpacing: "-0.04em", userSelect: "none" }}>01</div>
+
+                {/* Content */}
+                <div className="relative" style={{ padding: "var(--s6)" }}>
+                  <div style={{ width: "48px", height: "48px", borderRadius: "var(--r-md)", display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(216,185,163,0.15)", border: "1px solid rgba(216,185,163,0.25)", marginBottom: "var(--s3)" }}>
+                    <Icon size={22} color="var(--clr-accent)" />
                   </div>
-                  <h3 className="t-h2" style={{ color: image ? "white" : "var(--clr-text)", marginBottom: "var(--s2)" }}>{title}</h3>
-                  <p className="t-sm" style={{ color: image ? "rgba(255,255,255,0.62)" : "var(--clr-text-lt)", lineHeight: 1.7, marginBottom: "var(--s3)", flex: 1 }}>{description}</p>
-                  <Badge variant={image ? "light" : "dark"}>✓ {tag}</Badge>
+                  <Badge variant="light" style={{ marginBottom: "var(--s3)" }}>✓ {primary.tag}</Badge>
+                  <h3 className="font-m text-white" style={{ fontSize: "var(--t-h1)", fontWeight: 900, lineHeight: 1.1, marginBottom: "var(--s2)" }}>{primary.title}</h3>
+                  <p className="t-sm" style={{ color: "rgba(255,255,255,0.58)", lineHeight: 1.7, maxWidth: "400px" }}>{primary.description}</p>
                 </div>
               </motion.div>
             );
-          })}
+          })()}
+
+          {/* Secondary pair: stacked, different heights */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "var(--s3)" }}>
+            {secondary.map(({ id, iconName, title, description, tag }, i) => {
+              const Icon = getIcon(iconName);
+              return (
+                <motion.div key={id}
+                  initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6, delay: 0.2 + i * 0.12 }}
+                  className="group card relative overflow-hidden"
+                  style={{ padding: "var(--s4)", flex: i === 0 ? "1.4" : "1" }}>
+                  {/* Top hover accent */}
+                  <div className="absolute top-0 left-0 right-0 transition-transform duration-500 origin-left scale-x-0 group-hover:scale-x-100"
+                    style={{ height: "2px", background: "linear-gradient(90deg, var(--clr-primary), var(--clr-accent))" }} />
+
+                  {/* Decorative number */}
+                  <div className="absolute" style={{ bottom: "var(--s2)", right: "var(--s3)", fontFamily: "'Montserrat',sans-serif", fontSize: "4rem", fontWeight: 900, color: "rgba(8,51,53,0.05)", lineHeight: 1 }}>
+                    0{i + 2}
+                  </div>
+
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: "var(--s3)", position: "relative", zIndex: 1 }}>
+                    <div style={{ width: "40px", height: "40px", borderRadius: "var(--r-md)", display: "flex", alignItems: "center", justifyContent: "center", background: "linear-gradient(135deg, var(--clr-primary), var(--clr-primary-mid))", flexShrink: 0, transition: "transform 300ms var(--ease)" }} className="group-hover:scale-110">
+                      <Icon size={18} color="var(--clr-accent)" />
+                    </div>
+                    <div>
+                      <h3 className="t-h2" style={{ color: "var(--clr-text)", marginBottom: "var(--s1)" }}>{title}</h3>
+                      <p className="t-sm" style={{ color: "var(--clr-text-lt)", lineHeight: 1.65, marginBottom: "var(--s2)" }}>{description}</p>
+                      <Badge variant="dark">✓ {tag}</Badge>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </motion.div>
 
-        {/* Editorial CTA row */}
+        {/* ── Row 2: Tertiary services — horizontal editorial list ── */}
+        <div style={{ borderTop: "1px solid rgba(8,51,53,0.08)", paddingTop: "var(--s6)" }}>
+          <div className="t-label" style={{ color: "var(--clr-text-lt)", marginBottom: "var(--s4)" }}>Also available</div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 0 }}
+            className="grid-cols-1 md:grid-cols-3">
+            {tertiary.map(({ id, iconName, title, description, tag }, i) => {
+              const Icon = getIcon(iconName);
+              return (
+                <motion.div key={id}
+                  initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.5 + i * 0.1 }}
+                  className="group"
+                  style={{ padding: "var(--s4)", borderRight: i < tertiary.length - 1 ? "1px solid rgba(8,51,53,0.07)" : "none", borderLeft: i === 0 ? "none" : undefined }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "var(--s2)", marginBottom: "var(--s2)" }}>
+                    <Icon size={18} color="var(--clr-primary)" />
+                    <h4 className="font-p" style={{ fontWeight: 600, fontSize: "var(--t-body)", color: "var(--clr-text)" }}>{title}</h4>
+                  </div>
+                  <p className="t-sm" style={{ color: "var(--clr-text-lt)", lineHeight: 1.65, marginBottom: "var(--s2)" }}>{description}</p>
+                  <div className="flex items-center gap-1 t-label" style={{ color: "var(--clr-primary)", opacity: 0 }} className="group-hover:opacity-100 transition-opacity duration-200 t-label" style={{ color: "var(--clr-primary)" }}>
+                    <span>{tag}</span> <ArrowRight size={12} />
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* ── Editorial footer row ── */}
         <Reveal>
-          <div style={{ marginTop: "var(--s12)", display: "flex", alignItems: "center", gap: "var(--s8)", flexWrap: "wrap", borderTop: "1px solid rgba(8,51,53,0.08)", paddingTop: "var(--s8)" }}>
+          <div style={{ marginTop: "var(--s12)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "var(--s4)", borderTop: "1px solid rgba(8,51,53,0.08)", paddingTop: "var(--s6)" }}>
             <div>
               <p className="font-p" style={{ fontWeight: 600, fontSize: "var(--t-body)", color: "var(--clr-primary)" }}>Not sure what you need?</p>
-              <p className="t-sm" style={{ color: "var(--clr-text-lt)", marginTop: "var(--s1)" }}>Call {company.owner} — he'll tell you exactly what the project requires.</p>
+              <p className="t-sm" style={{ color: "var(--clr-text-lt)", marginTop: "var(--s1)" }}>
+                Call {company.owner} — he'll tell you exactly what the project requires.
+              </p>
             </div>
-            <Button href={`tel:${company.contact.primary.replace(/\s/g,"")}`} variant="dark" style={{ flexShrink: 0 }}>
+            <Button href={`tel:${company.contact.primary.replace(/\s/g,"")}`} variant="dark">
               📞 Call for Advice
             </Button>
           </div>

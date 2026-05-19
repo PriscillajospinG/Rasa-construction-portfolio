@@ -27,10 +27,10 @@
   --clr-white:        #ffffff;
   --clr-dark:         #051f21;
 
-  /* Text */
-  --clr-text:         #111827;
-  --clr-text-md:      #4b5563;
-  --clr-text-lt:      #9ca3af;
+  /* Text — all values WCAG AA compliant on --clr-bg (#F7F5F2) */
+  --clr-text:         #0f1a1b;  /* near-black with brand tint */
+  --clr-text-md:      #374151;  /* gray-700 → 7.5:1 on white */
+  --clr-text-lt:      #6b7280;  /* gray-500 → 4.6:1 on white, AA pass */
 
   /* ── 8pt spacing scale ── */
   --s1:  0.5rem;   /*  8px */
@@ -70,11 +70,12 @@
   --r-xl:  28px;
 
   /* ── Shadows ── */
-  --sh-sm:  0 1px 4px rgba(0,0,0,0.07);
-  --sh-md:  0 4px 24px rgba(0,0,0,0.09);
-  --sh-lg:  0 12px 48px rgba(0,0,0,0.12);
-  --sh-xl:  0 24px 80px rgba(8,51,53,0.18);
-  --sh-acc: 0 8px 32px rgba(216,185,163,0.22);
+  --sh-sm:   0 1px 4px rgba(0,0,0,0.07);
+  --sh-md:   0 4px 24px rgba(0,0,0,0.09);
+  --sh-lg:   0 12px 48px rgba(0,0,0,0.12);
+  --sh-xl:   0 24px 80px rgba(8,51,53,0.18);
+  --sh-acc:  0 8px 32px rgba(216,185,163,0.22);
+  --sh-card: 0 2px 12px rgba(0,0,0,0.06), 0 8px 32px rgba(8,51,53,0.08);
 
   /* ── Easing ── */
   --ease:   cubic-bezier(0.16, 1, 0.3, 1);
@@ -179,12 +180,20 @@ input, textarea { cursor: text !important; }
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
-/* Italic accent */
+/* Italic accent — two variants: on dark bg and on light bg */
 .t-italic {
   font-family: 'Montserrat', sans-serif;
   font-style: italic;
   font-weight: 800;
-  color: var(--clr-accent-dk);
+  /* Default: used on dark backgrounds — beige accent */
+  color: var(--clr-accent);
+}
+/* On light sections: override to brand primary */
+.t-italic-dark {
+  font-family: 'Montserrat', sans-serif;
+  font-style: italic;
+  font-weight: 800;
+  color: var(--clr-primary);
 }
 
 /* ── EDITORIAL LABEL with rule ───────────────────────────── */
@@ -293,27 +302,29 @@ input, textarea { cursor: text !important; }
 .card {
   background: var(--clr-white);
   border-radius: var(--r-lg);
-  border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: var(--sh-md);
+  border: 1px solid rgba(8,51,53,0.07);
+  box-shadow: var(--sh-card);
   transition: transform 350ms var(--ease), box-shadow 350ms ease;
 }
 .card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-5px);
   box-shadow: var(--sh-xl);
+  border-color: rgba(8,51,53,0.12);
 }
+/* ─── card-dark: raised opacity for legible text on dark bg ─── */
 .card-dark {
-  background: rgba(8,51,53,0.45);
+  background: rgba(5,31,33,0.60);   /* was 0.45 — too translucent */
   border-radius: var(--r-lg);
-  border: 1px solid rgba(216,185,163,0.09);
+  border: 1px solid rgba(216,185,163,0.12);
   transition: all 350ms var(--ease);
 }
 .card-dark:hover {
-  background: rgba(8,51,53,0.65);
-  border-color: rgba(216,185,163,0.18);
+  background: rgba(5,31,33,0.78);
+  border-color: rgba(216,185,163,0.22);
   transform: translateY(-4px);
 }
 
-/* ── INPUTS ──────────────────────────────────────────────── */
+/* ── INPUTS — dark surface variant (loading, dark forms) ─── */
 .inp {
   width: 100%;
   padding: var(--s2) var(--s3);
@@ -326,10 +337,31 @@ input, textarea { cursor: text !important; }
   outline: none;
   transition: border-color 200ms ease, box-shadow 200ms ease;
 }
-.inp::placeholder { color: rgba(255,255,255,0.32); }
+.inp::placeholder { color: rgba(255,255,255,0.35); }
 .inp:focus {
   border-color: var(--clr-accent);
-  box-shadow: 0 0 0 3px rgba(216,185,163,0.10);
+  box-shadow: 0 0 0 3px rgba(216,185,163,0.12);
+}
+
+/* ── INPUTS — light surface variant (Contact form) ────────── */
+.inp-light {
+  width: 100%;
+  padding: var(--s2) var(--s3);
+  background: white;
+  border: 1.5px solid rgba(8,51,53,0.14);
+  border-radius: var(--r-md);
+  color: var(--clr-text);
+  font-family: 'Inter', sans-serif;
+  font-size: var(--t-sm);
+  outline: none;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.inp-light::placeholder { color: #9ca3af; }
+.inp-light:focus {
+  border-color: var(--clr-primary);
+  box-shadow: 0 0 0 3px rgba(8,51,53,0.07);
 }
 
 /* ── ANIMATIONS ───────────────────────────────────────────── */

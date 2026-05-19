@@ -1,20 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Phone, MessageCircle, Mail, MapPin, Send, CheckCircle2 } from "lucide-react";
+import { Phone, MessageCircle, Mail, MapPin, Send, CheckCircle2, ArrowUpRight } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
-import SectionTitle from "@/components/ui/SectionTitle";
 import Button from "@/components/ui/Button";
 import Container from "@/components/layout/Container";
 import { company } from "@/data/company";
 import { waLink } from "@/lib/utils";
-
-const contactItems = [
-  { Icon: Phone,         label: "Call Us",    val: company.contact.primary, sub: company.contact.secondary, href: `tel:${company.contact.primary.replace(/\s/g,"")}` },
-  { Icon: MessageCircle, label: "WhatsApp",   val: "Chat with us",          sub: "Quick response",           href: waLink(company.contact.whatsapp) },
-  { Icon: Mail,          label: "Email",      val: company.contact.email,   sub: "Reply within 24 hrs",      href: `mailto:${company.contact.email}` },
-  { Icon: MapPin,        label: "Location",   val: "Rasa Office",           sub: company.location.pincode,   href: "#" },
-];
 
 type FormData = { name: string; phone: string; email: string; service: string; msg: string };
 
@@ -23,13 +15,14 @@ export default function Contact() {
   const [sent,    setSent]    = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const update = (k: keyof FormData) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-    setForm((prev) => ({ ...prev, [k]: e.target.value }));
+  const update = (k: keyof FormData) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+      setForm((prev) => ({ ...prev, [k]: e.target.value }));
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1500)); // swap with EmailJS
+    await new Promise((r) => setTimeout(r, 1500));
     setLoading(false);
     setSent(true);
   };
@@ -37,96 +30,165 @@ export default function Contact() {
   return (
     <section id="contact" style={{ background: "var(--clr-bg)" }} className="relative overflow-hidden">
       <Container section>
-        <Reveal style={{ marginBottom: "var(--s12)" }}>
-          <SectionTitle eyebrow="Get In Touch"
-            heading={<>Let&apos;s build something<br /><em className="t-italic">great together.</em></>} />
+
+        {/* ── Full-bleed header band — dark, architectural ── */}
+        <Reveal>
+          <div style={{ borderRadius: "var(--r-xl)", padding: "var(--s6) var(--s8)", background: "linear-gradient(135deg, var(--clr-primary-dark), var(--clr-primary))", marginBottom: "var(--s8)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "var(--s4)", overflow: "hidden", position: "relative" }}>
+            {/* Grid texture */}
+            <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "linear-gradient(rgba(216,185,163,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(216,185,163,0.04) 1px, transparent 1px)", backgroundSize: "48px 48px" }} />
+            <div className="relative">
+              <div className="eyebrow t-label" style={{ color: "var(--clr-accent)", marginBottom: "var(--s2)" }}>Get In Touch</div>
+              <h2 className="t-h1 text-white" style={{ lineHeight: 1.05 }}>
+                Let&apos;s build something<br /><em style={{ fontFamily: "'Montserrat',sans-serif", fontStyle: "italic", fontWeight: 800, color: "var(--clr-accent)" }}>great together.</em>
+              </h2>
+            </div>
+            {/* Contact quick-access row */}
+            <div className="relative" style={{ display: "flex", flexDirection: "column", gap: "var(--s2)" }}>
+              <a href={`tel:${company.contact.primary.replace(/\s/g,"")}`}
+                style={{ display: "flex", alignItems: "center", gap: "var(--s2)", color: "rgba(255,255,255,0.75)", textDecoration: "none", transition: "color 200ms" }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--clr-accent)"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.75)"; }}>
+                <Phone size={14} /> <span className="t-sm">{company.contact.primary}</span>
+              </a>
+              <a href={`tel:${company.contact.secondary.replace(/\s/g,"")}`}
+                style={{ display: "flex", alignItems: "center", gap: "var(--s2)", color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>
+                <Phone size={14} /> <span className="t-sm">{company.contact.secondary}</span>
+              </a>
+              <a href={`mailto:${company.contact.email}`}
+                style={{ display: "flex", alignItems: "center", gap: "var(--s2)", color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>
+                <Mail size={14} /> <span className="t-sm">{company.contact.email}</span>
+              </a>
+            </div>
+          </div>
         </Reveal>
 
-        {/* 2-col grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.15fr", gap: "var(--s12)", alignItems: "start" }}
-          className="grid-cols-1 lg:grid-cols-[1fr_1.15fr]">
+        {/* ── Body: 3-column layout — info | divider | form ── */}
+        <div style={{ display: "grid", gridTemplateColumns: "2fr 1px 3fr", gap: "var(--s8)", alignItems: "start" }}
+          className="grid-cols-1 lg:grid-cols-[2fr_1px_3fr]">
 
-          {/* Left — info */}
+          {/* Left: Contact details as editorial list */}
           <Reveal direction="left">
-            <p className="t-body" style={{ color: "var(--clr-text-md)", marginBottom: "var(--s6)", maxWidth: "400px" }}>
-              Whether you need scaffolding for a single floor or complete equipment rental for a multi-storey project, we're ready to help. Reach out for a free consultation.
-            </p>
+            <h3 className="font-m" style={{ fontWeight: 700, fontSize: "var(--t-h2)", color: "var(--clr-primary)", marginBottom: "var(--s6)" }}>
+              Reach us directly
+            </h3>
 
-            {/* 2x2 contact cards */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s2)", marginBottom: "var(--s6)" }}>
-              {contactItems.map(({ Icon, label, val, sub, href }) => (
-                <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="card group" style={{ padding: "var(--s3)", textDecoration: "none" }}>
-                  <div style={{ width: "36px", height: "36px", borderRadius: "var(--r-md)", display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(8,51,53,0.07)", marginBottom: "var(--s2)", transition: "transform 300ms var(--ease)" }} className="group-hover:scale-110">
-                    <Icon size={17} color="var(--clr-primary)" />
+            {/* Contact items — list, not cards */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "var(--s4)" }}>
+              {[
+                { Icon: Phone,         label: "Primary",   val: company.contact.primary,    href: `tel:${company.contact.primary.replace(/\s/g,"")}` },
+                { Icon: Phone,         label: "Alternate", val: company.contact.secondary,  href: `tel:${company.contact.secondary.replace(/\s/g,"")}` },
+                { Icon: MessageCircle, label: "WhatsApp",  val: "Chat with us",             href: waLink(company.contact.whatsapp, "Hello Rasa Construction, I'd like a quote.") },
+                { Icon: Mail,          label: "Email",     val: company.contact.email,      href: `mailto:${company.contact.email}` },
+                { Icon: MapPin,        label: "Office",    val: company.location.full,      href: "#" },
+              ].map(({ Icon, label, val, href }) => (
+                <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined}
+                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="group" style={{ display: "flex", alignItems: "flex-start", gap: "var(--s3)", textDecoration: "none", padding: "var(--s2) 0", borderBottom: "1px solid rgba(8,51,53,0.06)" }}>
+                  <div style={{ width: "32px", height: "32px", borderRadius: "var(--r-md)", background: "rgba(8,51,53,0.06)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "background 200ms" }}
+                    className="group-hover:[background:var(--clr-primary)]">
+                    <Icon size={14} color="var(--clr-primary)" className="group-hover:!text-white" />
                   </div>
-                  <div className="font-p" style={{ fontWeight: 600, fontSize: "var(--t-sm)", color: "var(--clr-text)" }}>{label}</div>
-                  <div className="t-sm" style={{ color: "var(--clr-text-md)", marginTop: "1px" }}>{val}</div>
-                  <div className="t-sm" style={{ color: "var(--clr-text-lt)", marginTop: "1px" }}>{sub}</div>
+                  <div>
+                    <div className="t-label" style={{ color: "var(--clr-text-lt)", marginBottom: "2px" }}>{label}</div>
+                    <div className="t-sm" style={{ color: "var(--clr-text-md)", lineHeight: 1.5 }}>{val}</div>
+                  </div>
+                  <ArrowUpRight size={14} style={{ color: "var(--clr-text-lt)", marginLeft: "auto", opacity: 0, transition: "opacity 200ms" }} className="group-hover:opacity-100" />
                 </a>
               ))}
             </div>
 
-            {/* Map */}
-            <div style={{ borderRadius: "var(--r-lg)", overflow: "hidden", height: "200px" }}>
-              <iframe title="Rasa Construction location" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31760!2d77.3!3d8.75!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMK0NS4wTiA3N8K0MDAuMEU!5e0!3m2!1sen!2sin!4v1000000" width="100%" height="200" style={{ border: 0, filter: "grayscale(20%)" }} loading="lazy" allowFullScreen />
+            {/* WhatsApp CTA */}
+            <a href={waLink(company.contact.whatsapp, "Hello Rasa Construction, I'd like a free quote.")}
+              target="_blank" rel="noopener noreferrer"
+              style={{ display: "inline-flex", alignItems: "center", gap: "var(--s1)", marginTop: "var(--s6)", background: "#25D366", color: "white", padding: "0.75rem 1.5rem", borderRadius: "var(--r-md)", fontFamily: "'Poppins',sans-serif", fontWeight: 600, fontSize: "var(--t-sm)", textDecoration: "none" }}>
+              💬 WhatsApp Us
+            </a>
+
+            {/* Map — small, architectural */}
+            <div style={{ marginTop: "var(--s6)", borderRadius: "var(--r-lg)", overflow: "hidden", height: "160px" }}>
+              <iframe title="Rasa Construction location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31760!2d77.3!3d8.75!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMK0NS4wTiA3N8K0MDAuMEU!5e0!3m2!1sen!2sin!4v1000000"
+                width="100%" height="160" style={{ border: 0, filter: "grayscale(25%) contrast(1.05)" }} loading="lazy" allowFullScreen />
             </div>
           </Reveal>
 
-          {/* Right — form panel */}
+          {/* Vertical divider — desktop only */}
+          <div className="hidden lg:block" style={{ background: "rgba(8,51,53,0.08)", width: "1px", alignSelf: "stretch" }} />
+
+          {/* Right: Form panel */}
           <Reveal direction="right">
-            <div style={{ borderRadius: "var(--r-xl)", padding: "var(--s8)", background: "linear-gradient(160deg, var(--clr-primary-dark), var(--clr-primary))" }}>
-              {sent ? (
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "var(--s12) 0", gap: "var(--s3)" }}>
-                  <div style={{ width: "72px", height: "72px", borderRadius: "50%", background: "rgba(216,185,163,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <CheckCircle2 size={36} color="var(--clr-accent)" />
-                  </div>
-                  <h3 className="t-h2 text-white">Message Received!</h3>
-                  <p className="t-sm" style={{ color: "rgba(255,255,255,0.55)" }}>{company.owner} will contact you within 24 hours.</p>
-                  <Button href={`tel:${company.contact.primary.replace(/\s/g,"")}`} variant="primary" style={{ marginTop: "var(--s2)" }}>Or Call Now</Button>
+            {sent ? (
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "var(--s12) 0", gap: "var(--s3)" }}>
+                <div style={{ width: "72px", height: "72px", borderRadius: "50%", background: "rgba(8,51,53,0.06)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <CheckCircle2 size={36} color="var(--clr-primary)" />
                 </div>
-              ) : (
-                <>
-                  <h3 className="t-h2 text-white" style={{ marginBottom: "var(--s1)" }}>Request a Free Quote</h3>
-                  <p className="t-sm" style={{ color: "rgba(255,255,255,0.42)", marginBottom: "var(--s6)" }}>We'll get back to you within one business day.</p>
-                  <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: "var(--s3)" }}>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s2)" }}>
-                      <div>
-                        <label className="t-label" style={{ display: "block", color: "rgba(255,255,255,0.48)", marginBottom: "var(--s1)" }}>Full Name *</label>
-                        <input type="text" required placeholder="Your name" className="inp" value={form.name} onChange={update("name")} />
+                <h3 className="t-h2" style={{ color: "var(--clr-primary)" }}>Message Received</h3>
+                <p className="t-sm" style={{ color: "var(--clr-text-lt)" }}>{company.owner} will contact you within 24 hours.</p>
+                <Button href={`tel:${company.contact.primary.replace(/\s/g,"")}`} variant="primary" style={{ marginTop: "var(--s2)" }}>Or Call Now</Button>
+              </div>
+            ) : (
+              <div>
+                <h3 className="font-p" style={{ fontWeight: 700, fontSize: "var(--t-h2)", color: "var(--clr-primary)", marginBottom: "var(--s1)" }}>
+                  Request a Free Quote
+                </h3>
+                <p className="t-sm" style={{ color: "var(--clr-text-lt)", marginBottom: "var(--s6)" }}>
+                  We'll respond within one business day.
+                </p>
+                <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: "var(--s3)" }}>
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s2)" }}>
+                    {[
+                      { k: "name" as const,  label: "Full Name *",         type: "text",  required: true,  placeholder: "Your name" },
+                      { k: "phone" as const, label: "Phone *",             type: "tel",   required: true,  placeholder: "+91 XXXXX XXXXX" },
+                    ].map(({ k, label, type, required, placeholder }) => (
+                      <div key={k}>
+                        <label className="t-label" style={{ display: "block", color: "var(--clr-text-lt)", marginBottom: "var(--s1)" }}>{label}</label>
+                        <input type={type} required={required} placeholder={placeholder}
+                          style={{ width: "100%", padding: "var(--s2) var(--s3)", background: "rgba(8,51,53,0.04)", border: "1px solid rgba(8,51,53,0.12)", borderRadius: "var(--r-md)", fontFamily: "'Inter',sans-serif", fontSize: "var(--t-sm)", color: "var(--clr-text)", outline: "none" }}
+                          value={form[k]} onChange={update(k)}
+                          onFocus={(e) => { (e.target as HTMLElement).style.borderColor = "var(--clr-primary)"; }}
+                          onBlur={(e) => { (e.target as HTMLElement).style.borderColor = "rgba(8,51,53,0.12)"; }} />
                       </div>
-                      <div>
-                        <label className="t-label" style={{ display: "block", color: "rgba(255,255,255,0.48)", marginBottom: "var(--s1)" }}>Phone *</label>
-                        <input type="tel" required placeholder="+91 XXXXX XXXXX" className="inp" value={form.phone} onChange={update("phone")} />
-                      </div>
-                    </div>
-                    <div>
-                      <label className="t-label" style={{ display: "block", color: "rgba(255,255,255,0.48)", marginBottom: "var(--s1)" }}>Email</label>
-                      <input type="email" placeholder="your@email.com" className="inp" value={form.email} onChange={update("email")} />
-                    </div>
-                    <div>
-                      <label className="t-label" style={{ display: "block", color: "rgba(255,255,255,0.48)", marginBottom: "var(--s1)" }}>Service Required *</label>
-                      <select required className="inp" value={form.service} onChange={update("service")}>
-                        <option value="">Select a service...</option>
-                        <option value="scaffolding">Scaffolding Rental</option>
-                        <option value="centring">Centring Materials</option>
-                        <option value="concrete">Concrete Works</option>
-                        <option value="hoist">Vertical Hoist Rental</option>
-                        <option value="support">Site Support</option>
-                        <option value="other">Other</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="t-label" style={{ display: "block", color: "rgba(255,255,255,0.48)", marginBottom: "var(--s1)" }}>Project Details</label>
-                      <textarea rows={4} placeholder="Location, duration, requirements..." className="inp" style={{ resize: "none" }} value={form.msg} onChange={update("msg")} />
-                    </div>
-                    <Button as="button" variant="primary" disabled={loading} style={{ width: "100%", marginTop: "var(--s1)" }}>
-                      {loading ? "Sending…" : <><Send size={15} /> Send Message</>}
-                    </Button>
-                  </form>
-                </>
-              )}
-            </div>
+                    ))}
+                  </div>
+                  <div>
+                    <label className="t-label" style={{ display: "block", color: "var(--clr-text-lt)", marginBottom: "var(--s1)" }}>Email</label>
+                    <input type="email" placeholder="your@email.com"
+                      style={{ width: "100%", padding: "var(--s2) var(--s3)", background: "rgba(8,51,53,0.04)", border: "1px solid rgba(8,51,53,0.12)", borderRadius: "var(--r-md)", fontFamily: "'Inter',sans-serif", fontSize: "var(--t-sm)", color: "var(--clr-text)", outline: "none" }}
+                      value={form.email} onChange={update("email")}
+                      onFocus={(e) => { (e.target as HTMLElement).style.borderColor = "var(--clr-primary)"; }}
+                      onBlur={(e) => { (e.target as HTMLElement).style.borderColor = "rgba(8,51,53,0.12)"; }} />
+                  </div>
+                  <div>
+                    <label className="t-label" style={{ display: "block", color: "var(--clr-text-lt)", marginBottom: "var(--s1)" }}>Service Required *</label>
+                    <select required
+                      style={{ width: "100%", padding: "var(--s2) var(--s3)", background: "rgba(8,51,53,0.04)", border: "1px solid rgba(8,51,53,0.12)", borderRadius: "var(--r-md)", fontFamily: "'Inter',sans-serif", fontSize: "var(--t-sm)", color: "var(--clr-text)", outline: "none" }}
+                      value={form.service} onChange={update("service")}>
+                      <option value="">Select a service...</option>
+                      <option value="scaffolding">Scaffolding Rental</option>
+                      <option value="centring">Centring Materials</option>
+                      <option value="concrete">Concrete Works</option>
+                      <option value="hoist">Vertical Hoist Rental</option>
+                      <option value="support">Site Support</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="t-label" style={{ display: "block", color: "var(--clr-text-lt)", marginBottom: "var(--s1)" }}>Project Details</label>
+                    <textarea rows={4} placeholder="Location, duration, scale, requirements..."
+                      style={{ width: "100%", padding: "var(--s2) var(--s3)", background: "rgba(8,51,53,0.04)", border: "1px solid rgba(8,51,53,0.12)", borderRadius: "var(--r-md)", fontFamily: "'Inter',sans-serif", fontSize: "var(--t-sm)", color: "var(--clr-text)", outline: "none", resize: "none" }}
+                      value={form.msg} onChange={update("msg")}
+                      onFocus={(e) => { (e.target as HTMLElement).style.borderColor = "var(--clr-primary)"; }}
+                      onBlur={(e) => { (e.target as HTMLElement).style.borderColor = "rgba(8,51,53,0.12)"; }} />
+                  </div>
+                  <Button as="button" variant="dark" disabled={loading}
+                    style={{ width: "100%", marginTop: "var(--s1)", justifyContent: "center" }}>
+                    {loading
+                      ? "Sending…"
+                      : <><Send size={15} /> Send Message</>}
+                  </Button>
+                </form>
+              </div>
+            )}
           </Reveal>
         </div>
       </Container>
