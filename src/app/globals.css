@@ -820,50 +820,82 @@ input, textarea { cursor: text !important; }
 /* Mobile specific styling (< 640px) */
 @media (max-width: 640px) {
   .hero-section {
-    min-height: 100svh;
+    position: relative;
+    min-height: auto;
     height: auto;
-    overflow-x: hidden;
+    padding-top: calc(var(--nav-h-mobile) + 32px);
+    padding-bottom: 48px;
+    overflow: visible;
   }
+
+  .hero-sticky-bg {
+    position: absolute;
+    height: 100%;
+  }
+
   .hero-content-container {
-    padding-top: calc(var(--nav-h-mobile) + var(--s3));
-    padding-bottom: var(--s4);
-    gap: var(--s4);
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-height: auto;
+    height: auto;
+    /* Reset scroll-linked animations */
+    transform: none !important;
+    opacity: 1 !important;
   }
-  .hero-content-grid {
-    gap: var(--s4);
+
+  .hero-content-col {
+    gap: 24px;
   }
+
   .hero-title {
-    font-size: clamp(2.35rem, 12vw, 3.4rem);
-    line-height: 0.98;
-    letter-spacing: -0.04em;
+    font-size: clamp(2.1rem, 11vw, 3rem);
+    line-height: 1;
+    margin-bottom: 0 !important;
   }
+
   .hero-description {
-    font-size: 0.98rem;
+    font-size: 0.95rem;
     line-height: 1.6;
-    max-width: 100%;
+    margin-bottom: 0 !important;
   }
+
   .hero-separator, .hero-phone, .hero-scroll-cue {
     display: none;
   }
+
   .hero-meta {
-    margin-bottom: var(--s3) !important;
+    margin-bottom: 0 !important;
   }
+
   .hero-cta-wrapper {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--s2) !important;
+    gap: 12px !important;
     width: 100%;
+    margin-bottom: 0 !important;
   }
+
   .hero-cta-wrapper .btn {
     width: 100%;
     min-height: 48px;
     justify-content: center;
-    font-size: 0.95rem;
   }
+
   .hero-stats-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: var(--s3) !important;
-    margin-top: var(--s3);
+    gap: 12px !important;
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .hero-section + section {
+    margin-top: 0;
   }
 }
 
