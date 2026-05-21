@@ -147,8 +147,8 @@ export default function Hero() {
             style={{
               display:      "flex",
               alignItems:   "center",
-              gap:          "12px",
-              marginBottom: "var(--s5)",
+              gap:          "var(--s2)",
+              marginBottom: "var(--s4)",
             }}
           >
             <span
@@ -169,7 +169,7 @@ export default function Hero() {
           </motion.div>
 
           {/* ── Headline ── */}
-          <div style={{ marginBottom: "var(--s5)", overflow: "hidden" }}>
+          <div style={{ marginBottom: "var(--s4)", overflow: "hidden" }}>
             {[
               { text: "Scaffolding, Centring",          delay: 0.30 },
               { text: "& Concrete Support",              delay: 0.42 },
@@ -209,7 +209,7 @@ export default function Hero() {
               maxWidth:        "380px",
               background:      "linear-gradient(to right, rgba(216,185,163,0.40), transparent)",
               transformOrigin: "left",
-              marginBottom:    "var(--s5)",
+              marginBottom:    "var(--s4)",
             }}
             aria-hidden
           />
@@ -221,11 +221,11 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.88, ease }}
             style={{
               fontFamily:   "'Inter', sans-serif",
-              fontSize:     "0.975rem",
+              fontSize:     "var(--t-sm)",
               color:        "rgba(255,255,255,0.65)",
               lineHeight:   1.78,
               maxWidth:     "420px",
-              marginBottom: "var(--s7)",
+              marginBottom: "var(--s6)",
             }}
           >
             Rasa Construction provides dependable scaffolding materials, centring support,
@@ -241,8 +241,8 @@ export default function Hero() {
             style={{
               display:      "flex",
               alignItems:   "center",
-              gap:          "10px",
-              marginBottom: "var(--s7)",
+              gap:          "var(--s2)",
+              marginBottom: "var(--s4)",
             }}
           >
             <span
@@ -271,32 +271,32 @@ export default function Hero() {
               display:      "flex",
               flexWrap:     "wrap",
               gap:          "var(--s2)",
-              marginBottom: "var(--s10)",
+              marginBottom: "var(--s8)",
             }}
           >
-            {/* Primary Accent Button */}
+            {/* Primary Accent Button — uses shared .btn system */}
             <button
               onClick={() => scrollTo("#services")}
+              className="btn btn-primary"
               style={{
-                display:       "inline-flex",
-                alignItems:    "center",
-                gap:           "8px",
-                padding:       "0.875rem 1.75rem",
-                background:    "var(--clr-accent)",
-                color:         "var(--clr-primary-dark)",
-                borderRadius:  "var(--r-sm)",
-                fontFamily:    "'Poppins', sans-serif",
+                padding:       "var(--s2) var(--s4)",
+                fontSize:      "var(--t-sm)",
                 fontWeight:    700,
-                fontSize:      "0.875rem",
                 letterSpacing: "0.02em",
-                cursor:        "pointer",
-                border:        "none",
-                transition:    "background 220ms ease, transform 220ms ease",
               }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#e8c9af"; (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)"; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--clr-accent)"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
             >
               View Services
+            </button>
+            {/* Ghost secondary */}
+            <button
+              onClick={() => scrollTo("#contact")}
+              className="btn btn-ghost"
+              style={{
+                padding:   "var(--s2) var(--s4)",
+                fontSize:  "var(--t-sm)",
+              }}
+            >
+              Get a Quote
             </button>
           </motion.div>
 
@@ -317,21 +317,22 @@ export default function Hero() {
                 <a
                   key={num}
                   href={`tel:${num.replace(/\s/g, "")}`}
+                  className="link-underline"
                   style={{
                     display:        "flex",
                     alignItems:     "center",
-                    gap:            "7px",
+                    gap:            "var(--s1)",
                     fontFamily:     "'Poppins', sans-serif",
                     fontWeight:     600,
-                    fontSize:       "0.875rem",
+                    fontSize:       "var(--t-sm)",
                     color:          "rgba(255,255,255,0.70)",
                     textDecoration: "none",
-                    transition:     "color 200ms ease",
+                    transition:     "color 220ms ease",
                   }}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--clr-accent)"; }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.70)"; }}
                 >
-                  <PhoneCall size={13} style={{ color: "var(--clr-accent)" }} />
+                  <PhoneCall size={13} style={{ color: "var(--clr-accent)", flexShrink: 0 }} />
                   {num}
                 </a>
               ))}

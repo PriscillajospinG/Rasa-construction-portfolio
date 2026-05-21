@@ -26,7 +26,7 @@ export const services: Service[] = [
     description: "Expert execution of column casting, roof slabs, footings, and structural concrete — handled by our experienced in-house crew with strict mix-ratio adherence.",
     detail:      "Our concrete team has completed over 180 residential and commercial pours since 2012. We handle shuttering, reinforcement checks, mix design verification, pouring, and vibration compaction. We work with both site-mixed and ready-mix concrete. All work is supervised by Gurusamy sir personally for critical structural elements.",
     usedFor:     "Foundations, columns, roof slabs, retaining walls, commercial flooring",
-    tag:         "15 Years Experience",
+    tag:         "25+ Years Experience",
     iconName:    "Building",
   },
   {

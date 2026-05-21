@@ -101,11 +101,11 @@ export default function About() {
               <div className="eyebrow t-label" style={{ color: "var(--clr-accent)", marginBottom: "var(--s3)" }}>Our Story</div>
               <div style={{ position: "relative", lineHeight: 0.85 }}>
                 <span className="font-m" style={{ fontSize: "clamp(6rem, 15vw, 11rem)", fontWeight: 900, color: "rgba(216, 185, 163, 0.08)", letterSpacing: "-0.04em", userSelect: "none", display: "block" }}>
-                  15
+                  25
                 </span>
                 <div className="absolute" style={{ bottom: "0.5rem", left: "0.75rem" }}>
                   <div className="font-m text-white" style={{ fontSize: "var(--t-h2)", fontWeight: 700, letterSpacing: "-0.01em" }}>
-                    Years of
+                    25+ Years of
                   </div>
                   <div className="t-label" style={{ color: "var(--clr-accent)", letterSpacing: "0.2em" }}>
                     Field Experience
@@ -152,9 +152,10 @@ export default function About() {
             <Reveal direction="left">
               <div style={{ display: "flex", flexDirection: "column", gap: "var(--s6)", paddingTop: "var(--s4)", borderLeft: "2px solid rgba(8,51,53,0.10)", paddingLeft: "var(--s4)" }}>
                 {[
+                  { n: "25+",  l: "Years Field Experience" },
                   { n: "500+", l: "Completed Projects" },
-                  { n: "300+", l: "Satisfied Clients" },
                   { n: "100+", l: "Equipment Units" },
+                  { n: "300+", l: "Satisfied Clients" },
                 ].map(({ n, l }) => (
                   <div key={l}>
                     <div className="font-m" style={{ fontSize: "2rem", fontWeight: 900, color: "var(--clr-primary)", lineHeight: 1 }}>{n}</div>
