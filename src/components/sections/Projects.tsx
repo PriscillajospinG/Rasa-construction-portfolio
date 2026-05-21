@@ -179,7 +179,7 @@ export default function Projects() {
               </p>
             </div>
             <Button href="#contact" variant="dark" onClick={(e) => { e.preventDefault(); scrollTo("#contact"); }}>
-              Start Your Project
+              Request a Quote
             </Button>
           </div>
         </Reveal>

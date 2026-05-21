@@ -165,7 +165,7 @@ export default function About() {
                 <Button href="#contact" variant="dark" size="sm"
                   onClick={(e) => { e.preventDefault(); scrollTo("#contact"); }}
                   style={{ marginTop: "var(--s3)" }}>
-                  Talk to us →
+                  Request a Quote
                 </Button>
               </div>
             </Reveal>

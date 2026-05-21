@@ -134,7 +134,7 @@ export default function Contact() {
                   <h3 className="t-h2 text-gray-800">Enquiry Sent!</h3>
                   <p className="t-sm text-gray-600 mt-2">We will contact you within one business day.</p>
                   <Button href={`tel:${(company.contact.primary ?? "").replace(/\s/g, "")}`} variant="primary" className="mt-6">
-                    Or Call Now
+                    Call Now
                   </Button>
                 </div>
               ) : (
@@ -146,6 +146,7 @@ export default function Contact() {
                     We'll respond within one business day.
                   </p>
                   <form onSubmit={submit} className="flex flex-col gap-4">
+                    {/* ... form fields ... */}
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className="contact-field">
                         <label className="t-label">Full Name <span className="text-red-500">*</span></label>
@@ -181,16 +182,19 @@ export default function Contact() {
                         className="contact-input"
                         value={form.message} onChange={update("message")} />
                     </div>
-                    <Button as="button" variant="dark" disabled={status === "sending"}
+                    <Button as="button" type="submit" variant="dark" disabled={status === "sending"}
                       className="w-full justify-center mt-3">
-                      {status === "sending" ? "Sending..." : "Send Enquiry"}
+                      {status === "sending" && "Sending..."}
+                      {status === "idle" && "Send Enquiry"}
+                      {status === "error" && "Try Again"}
                     </Button>
                   </form>
                   {status === "error" && (
                     <div className="mt-4 text-center">
-                      <p className="t-sm text-red-600">Email could not be sent. Please send your enquiry on WhatsApp.</p>
-                      <Button href={waLink(company.contact.whatsapp, getWhatsAppMessage())} target="_blank" rel="noopener noreferrer" variant="dark" className="mt-2">
-                        <MessageCircle size={15} /> Send on WhatsApp
+                      <p className="t-sm text-red-600">Email could not be sent. Please try again or send your enquiry on WhatsApp.</p>
+                      <Button href={waLink(company.contact.whatsapp, getWhatsAppMessage())} target="_blank" rel="noopener noreferrer" variant="dark" className="mt-2 inline-flex items-center gap-2">
+                        <MessageCircle size={15} />
+                        <span>Send on WhatsApp</span>
                       </Button>
                     </div>
                   )}

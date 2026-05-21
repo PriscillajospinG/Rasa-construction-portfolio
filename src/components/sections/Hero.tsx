@@ -243,28 +243,32 @@ export default function Hero() {
                   marginBottom: "var(--hero-cta-mb, var(--s2))",
                 }}
               >
-                <button
-                  onClick={() => scrollTo("#services")}
-                  className="btn btn-primary"
+                <Button
+                  href="#contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollTo("#contact");
+                  }}
+                  variant="primary"
                   style={{
-                    padding:       "var(--s2) var(--s4)",
-                    fontSize:      "var(--t-sm)",
-                    fontWeight:    700,
+                    padding: "var(--s2) var(--s4)",
+                    fontSize: "var(--t-sm)",
+                    fontWeight: 700,
                     letterSpacing: "0.02em",
                   }}
                 >
-                  View Services
-                </button>
-                <button
-                  onClick={() => scrollTo("#contact")}
-                  className="btn btn-ghost"
+                  Get Free Quote
+                </Button>
+                <Button
+                  href={`tel:${company.contact.primary.replace(/\s/g, "")}`}
+                  variant="ghost"
                   style={{
-                    padding:   "var(--s2) var(--s4)",
-                    fontSize:  "var(--t-sm)",
+                    padding: "var(--s2) var(--s4)",
+                    fontSize: "var(--t-sm)",
                   }}
                 >
-                  Get a Quote
-                </button>
+                  Call Now
+                </Button>
               </motion.div>
 
               {/* ── Contact Phone Numbers ── */}

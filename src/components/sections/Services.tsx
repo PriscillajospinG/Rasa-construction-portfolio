@@ -142,7 +142,7 @@ export default function Services() {
               </p>
             </div>
             <Button href={`tel:${company.contact.primary.replace(/\s/g, "")}`} variant="dark">
-              📞 Call for Advice
+              Call for Advice
             </Button>
           </div>
         </Reveal>

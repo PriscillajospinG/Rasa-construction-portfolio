@@ -55,25 +55,29 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-gray-300 mb-4">Contact</h4>
             <ul className="space-y-3">
-              <li>
-                <a href={`tel:${cleanPhone(primaryPhone)}`} className="flex items-start gap-3 group">
-                  <Phone size={16} className="text-gray-400 group-hover:text-white mt-1 transition-colors" />
-                  <div className="text-sm text-gray-400">
-                    {primaryPhone}<br />
-                    {secondaryPhone}
-                  </div>
-                </a>
+              <li className="flex items-start gap-3">
+                <Phone size={16} className="text-gray-400 mt-1 flex-shrink-0" />
+                <div className="flex flex-col">
+                  <a href={`tel:${cleanPhone(primaryPhone)}`} className="text-sm text-gray-400 hover:text-white transition-colors">
+                    Call: {primaryPhone}
+                  </a>
+                  {secondaryPhone && (
+                    <a href={`tel:${cleanPhone(secondaryPhone)}`} className="text-sm text-gray-400 hover:text-white transition-colors">
+                      Call: {secondaryPhone}
+                    </a>
+                  )}
+                </div>
               </li>
               <li>
                 <a href={`mailto:${company.contact.email}`} className="flex items-start gap-3 group">
-                  <Mail size={16} className="text-gray-400 group-hover:text-white mt-1 transition-colors" />
-                  <span className="text-sm text-gray-400 break-all">{company.contact.email}</span>
+                  <Mail size={16} className="text-gray-400 group-hover:text-white mt-1 transition-colors flex-shrink-0" />
+                  <span className="text-sm text-gray-400 break-all group-hover:text-white transition-colors">Email Us</span>
                 </a>
               </li>
               <li>
                 <a href={company.contact.mapLinkUrl} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 group">
-                  <MapPin size={16} className="text-gray-400 group-hover:text-white mt-1 transition-colors" />
-                  <span className="text-sm text-gray-400">{company.contact.address}</span>
+                  <MapPin size={16} className="text-gray-400 group-hover:text-white mt-1 transition-colors flex-shrink-0" />
+                  <span className="text-sm text-gray-400 group-hover:text-white transition-colors">{company.contact.address}</span>
                 </a>
               </li>
             </ul>
