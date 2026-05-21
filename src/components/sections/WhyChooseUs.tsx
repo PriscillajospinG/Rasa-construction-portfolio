@@ -7,6 +7,7 @@ import type { LucideIcon } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
 import Container from "@/components/layout/Container";
 import { whyChooseUs } from "@/data/whyChooseUs";
+import { cardGridStagger, itemReveal, EASE_CINEMATIC } from "@/lib/animations";
 
 function getIcon(name: string): LucideIcon {
   return (LucideIcons as unknown as Record<string, LucideIcon>)[name] ?? LucideIcons.CheckCircle2;
@@ -36,7 +37,7 @@ export default function WhyChooseUs() {
 
       <Container section>
         {/* ── Header ── */}
-        <Reveal>
+        <Reveal threshold="-80px">
           <div style={{ maxWidth: "560px", marginBottom: "var(--s12)" }}>
             <div className="eyebrow t-label" style={{ color: "var(--clr-primary)", marginBottom: "var(--s3)" }}>
               Why Contractors Choose Rasa
@@ -52,54 +53,54 @@ export default function WhyChooseUs() {
           </div>
         </Reveal>
 
-        {/* ── 3×2 card grid ── */}
-        <div
+        {/* ── 3×2 card grid — stagger container ── */}
+        <motion.div
           style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "var(--s4)" }}
           className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+          variants={cardGridStagger}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
         >
-          {whyChooseUs.map(({ id, title, description, stat, iconName }, i) => {
+          {whyChooseUs.map(({ id, title, description, stat, iconName }) => {
             const Icon = getIcon(iconName);
             return (
               <motion.div
                 key={id}
-                initial={{ opacity: 0, y: 24 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.55, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="group"
+                variants={itemReveal}
+                className="group card-hover"
                 style={{
                   padding:      "var(--s5)",
                   borderRadius: "var(--r-lg)",
                   background:   "white",
                   border:       "1px solid rgba(8,51,53,0.07)",
                   boxShadow:    "var(--sh-card)",
-                  transition:   "box-shadow 300ms ease, transform 300ms ease",
                   cursor:       "default",
                 }}
-                whileHover={{ y: -4, transition: { duration: 0.25 } }}
               >
                 {/* Icon + stat row */}
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "var(--s4)" }}>
-                  <div
+                  <motion.div
                     style={{
                       width: "44px", height: "44px",
                       borderRadius: "var(--r-md)",
                       display: "flex", alignItems: "center", justifyContent: "center",
                       background: "linear-gradient(135deg, var(--clr-primary), var(--clr-primary-mid))",
                     }}
+                    whileHover={{ scale: 1.08, transition: { duration: 0.25, ease: EASE_CINEMATIC } }}
                   >
                     <Icon size={20} color="var(--clr-accent)" />
-                  </div>
+                  </motion.div>
                   {stat && (
                     <span
                       className="t-label"
                       style={{
-                        color:           "var(--clr-primary)",
-                        background:      "rgba(8,51,53,0.06)",
-                        padding:         "4px 10px",
-                        borderRadius:    "100px",
-                        fontSize:        "0.62rem",
-                        fontWeight:      700,
-                        letterSpacing:   "0.05em",
+                        color:         "var(--clr-primary)",
+                        background:    "rgba(8,51,53,0.06)",
+                        padding:       "4px 10px",
+                        borderRadius:  "100px",
+                        fontSize:      "0.62rem",
+                        fontWeight:    700,
+                        letterSpacing: "0.05em",
                       }}
                     >
                       {stat}
@@ -121,22 +122,23 @@ export default function WhyChooseUs() {
                   {description}
                 </p>
 
-                {/* Bottom accent line — appears on hover */}
+                {/* Bottom accent line — slides in on hover */}
                 <div
-                  className="group-hover:opacity-100 transition-opacity duration-300"
+                  className="group-hover:opacity-100 group-hover:[transform:scaleX(1)] transition-all duration-500"
                   style={{
-                    height: "2px",
-                    marginTop: "var(--s4)",
-                    background: "linear-gradient(90deg, var(--clr-primary), var(--clr-accent))",
-                    borderRadius: "1px",
-                    opacity: 0,
+                    height:          "2px",
+                    marginTop:       "var(--s4)",
+                    background:      "linear-gradient(90deg, var(--clr-primary), var(--clr-accent))",
+                    borderRadius:    "1px",
+                    opacity:         0,
+                    transform:       "scaleX(0)",
                     transformOrigin: "left",
                   }}
                 />
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </Container>
     </section>
   );

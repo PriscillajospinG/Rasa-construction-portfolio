@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ZoomIn, MapPin } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
@@ -10,6 +10,7 @@ import Button from "@/components/ui/Button";
 import Container from "@/components/layout/Container";
 import { projects, projectCategories } from "@/data/projects";
 import { scrollTo } from "@/lib/utils";
+import { scaleIn, cardGridStagger, itemReveal, EASE_CINEMATIC } from "@/lib/animations";
 
 // Hero project — always the first, spans 2 columns wide
 const heroProject = projects[0];
@@ -46,15 +47,29 @@ export default function Projects() {
                 Projects that<br /><em className="t-italic-dark">speak for themselves.</em>
               </h2>
             </Reveal>
-            {/* Filter pills — aligned with heading, not centered */}
+            {/* Filter pills — smooth active transition */}
             <Reveal delay={0.1}>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--s1)" }}>
                 {projectCategories.map((cat) => (
-                  <button key={cat} onClick={() => setActive(cat)}
-                    className="t-label font-p transition-all duration-200"
-                    style={{ padding: "6px 18px", borderRadius: "100px", fontWeight: active === cat ? 600 : 400, background: active === cat ? "var(--clr-primary)" : "rgba(8,51,53,0.06)", color: active === cat ? "white" : "var(--clr-text-md)", border: "none" }}>
+                  <motion.button
+                    key={cat}
+                    onClick={() => setActive(cat)}
+                    className="t-label font-p"
+                    style={{
+                      padding:      "6px 18px",
+                      borderRadius: "100px",
+                      fontWeight:   active === cat ? 600 : 400,
+                      border:       "none",
+                      cursor:       "pointer",
+                    }}
+                    animate={{
+                      background: active === cat ? "var(--clr-primary)" : "rgba(8,51,53,0.06)",
+                      color:      active === cat ? "#ffffff" : "var(--clr-text-md)",
+                    }}
+                    transition={{ duration: 0.25, ease: EASE_CINEMATIC }}
+                  >
                     {cat}
-                  </button>
+                  </motion.button>
                 ))}
               </div>
             </Reveal>
@@ -63,7 +78,9 @@ export default function Projects() {
 
         {/* ── Hero project — full-width cinematic banner ── */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }}
+          variants={scaleIn}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
           style={{ marginBottom: "var(--s3)", borderRadius: "var(--r-xl)", overflow: "hidden", position: "relative", aspectRatio: "21/9", boxShadow: "var(--sh-xl)" }}
           onMouseEnter={() => setHovered("hero")} onMouseLeave={() => setHovered(null)}>
           <Image src={heroProject.image} alt={heroProject.title}
@@ -99,46 +116,59 @@ export default function Projects() {
           </div>
         </motion.div>
 
-        {/* ── Gallery grid — 3 col with mixed aspect ratios ── */}
-        <div style={{ columns: "3", columnGap: "var(--s3)" }} className="columns-1 sm:columns-2 lg:columns-3">
-          {displayed.map(({ id, image, title, category, location, tall, duration }, i) => (
-            <motion.div key={id + active}
-              initial={{ opacity: 0, scale: 0.96 }} animate={inView ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.5, delay: i * 0.07 }}
-              style={{ breakInside: "avoid", marginBottom: "var(--s3)" }}
-              onMouseEnter={() => setHovered(id)} onMouseLeave={() => setHovered(null)}>
-              <div style={{ position: "relative", width: "100%", aspectRatio: tall ? "3/4" : "4/3", borderRadius: "var(--r-lg)", overflow: "hidden", boxShadow: hovered === id ? "var(--sh-xl)" : "var(--sh-md)", transition: "box-shadow 350ms ease" }}>
-                <Image src={image} alt={title} fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-700"
-                  style={{ transform: hovered === id ? "scale(1.06)" : "scale(1)" }} />
-                <div className="absolute inset-0 transition-opacity duration-350"
-                  style={{ background: "linear-gradient(to top, rgba(5,31,33,0.92) 0%, rgba(5,31,33,0.28) 55%, transparent 100%)", opacity: hovered === id ? 1 : 0.65 }} />
-                  {/* Info */}
-                  <div className="absolute transition-transform duration-350"
-                    style={{ bottom: "var(--s3)", left: "var(--s3)", right: "var(--s3)", transform: hovered === id ? "translateY(0)" : "translateY(4px)" }}>
-                    <Badge variant="light" style={{ marginBottom: "var(--s1)" }}>{category}</Badge>
-                    <h3 className="font-m text-white" style={{ fontSize: "var(--t-h2)", fontWeight: 700, lineHeight: 1.2, marginBottom: "3px" }}>{title}</h3>
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--s2)" }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-                        <MapPin size={11} color="rgba(255,255,255,0.45)" />
-                        <span className="t-sm" style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.72rem" }}>{location}</span>
+        {/* ── Gallery grid — AnimatePresence for filter transitions ── */}
+        <AnimatePresence mode="popLayout">
+          <motion.div
+            key={active} /* Re-mounts stagger on filter change */
+            style={{ columns: "3", columnGap: "var(--s3)" }}
+            className="columns-1 sm:columns-2 lg:columns-3"
+            variants={cardGridStagger}
+            initial="hidden"
+            animate="visible"
+            exit={{ opacity: 0, transition: { duration: 0.2 } }}
+          >
+            {displayed.map(({ id, image, title, category, location, tall, duration }) => (
+              <motion.div
+                key={id}
+                variants={itemReveal}
+                layout
+                style={{ breakInside: "avoid", marginBottom: "var(--s3)" }}
+                onMouseEnter={() => setHovered(id)} onMouseLeave={() => setHovered(null)}
+              >
+                <div style={{ position: "relative", width: "100%", aspectRatio: tall ? "3/4" : "4/3", borderRadius: "var(--r-lg)", overflow: "hidden", boxShadow: hovered === id ? "var(--sh-xl)" : "var(--sh-md)", transition: "box-shadow 350ms ease" }}>
+                  <Image src={image} alt={title} fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700"
+                    style={{ transform: hovered === id ? "scale(1.06)" : "scale(1)" }} />
+                  <div className="absolute inset-0 transition-opacity duration-350"
+                    style={{ background: "linear-gradient(to top, rgba(5,31,33,0.92) 0%, rgba(5,31,33,0.28) 55%, transparent 100%)", opacity: hovered === id ? 1 : 0.65 }} />
+                    {/* Info — slides up on hover */}
+                    <div className="absolute transition-transform duration-350"
+                      style={{ bottom: "var(--s3)", left: "var(--s3)", right: "var(--s3)", transform: hovered === id ? "translateY(0)" : "translateY(4px)" }}>
+                      <Badge variant="light" style={{ marginBottom: "var(--s1)" }}>{category}</Badge>
+                      <h3 className="font-m text-white" style={{ fontSize: "var(--t-h2)", fontWeight: 700, lineHeight: 1.2, marginBottom: "3px" }}>{title}</h3>
+                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--s2)" }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+                          <MapPin size={11} color="rgba(255,255,255,0.45)" />
+                          <span className="t-sm" style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.72rem" }}>{location}</span>
+                        </div>
+                        {duration && (
+                          <span className="t-label" style={{ color: "rgba(216,185,163,0.60)", fontSize: "0.58rem" }}>{duration}</span>
+                        )}
                       </div>
-                      {duration && (
-                        <span className="t-label" style={{ color: "rgba(216,185,163,0.60)", fontSize: "0.58rem" }}>{duration}</span>
-                      )}
                     </div>
+                  {/* Zoom badge */}
+                  <div className="transition-all duration-300"
+                    style={{ position: "absolute", top: "var(--s2)", right: "var(--s2)", width: "34px", height: "34px", borderRadius: "50%", background: "rgba(216,185,163,0.90)", display: "flex", alignItems: "center", justifyContent: "center", opacity: hovered === id ? 1 : 0, transform: hovered === id ? "scale(1)" : "scale(0.7)" }}>
+                    <ZoomIn size={14} color="var(--clr-primary-dark)" />
                   </div>
-                {/* Zoom badge */}
-                <div className="transition-all duration-300"
-                  style={{ position: "absolute", top: "var(--s2)", right: "var(--s2)", width: "34px", height: "34px", borderRadius: "50%", background: "rgba(216,185,163,0.90)", display: "flex", alignItems: "center", justifyContent: "center", opacity: hovered === id ? 1 : 0, transform: hovered === id ? "scale(1)" : "scale(0.7)" }}>
-                  <ZoomIn size={14} color="var(--clr-primary-dark)" />
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
 
-        {/* ── CTA — editorial, left-aligned (not centered) ── */}
+        {/* ── CTA — editorial, left-aligned ── */}
         <Reveal>
           <div style={{ marginTop: "var(--s12)", display: "grid", gridTemplateColumns: "1fr auto", alignItems: "center", gap: "var(--s4)", flexWrap: "wrap", borderTop: "1px solid rgba(8,51,53,0.08)", paddingTop: "var(--s6)" }}>
             <div>

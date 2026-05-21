@@ -1,12 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Phone, MessageCircle, Mail, MapPin, Send, CheckCircle2, ArrowUpRight } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
 import Button from "@/components/ui/Button";
 import Container from "@/components/layout/Container";
 import { company } from "@/data/company";
 import { waLink } from "@/lib/utils";
+import { listStagger, itemLeft, EASE_CINEMATIC } from "@/lib/animations";
+
 
 type FormData = { name: string; phone: string; email: string; service: string; msg: string };
 
@@ -72,8 +75,14 @@ export default function Contact() {
               Reach us directly
             </h3>
 
-            {/* Contact items — list, not cards */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "var(--s4)" }}>
+            {/* Contact items — stagger list reveal */}
+            <motion.div
+              style={{ display: "flex", flexDirection: "column", gap: "var(--s4)" }}
+              variants={listStagger}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+            >
               {[
                 { Icon: Phone,         label: "Primary",   val: company.contact.primary,    href: `tel:${company.contact.primary.replace(/\s/g,"")}` },
                 { Icon: Phone,         label: "Alternate", val: company.contact.secondary,  href: `tel:${company.contact.secondary.replace(/\s/g,"")}` },
@@ -81,8 +90,9 @@ export default function Contact() {
                 { Icon: Mail,          label: "Email",     val: company.contact.email,      href: `mailto:${company.contact.email}` },
                 { Icon: MapPin,        label: "Office",    val: company.location.full,      href: "#" },
               ].map(({ Icon, label, val, href }) => (
-                <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined}
+                <motion.a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined}
                   rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  variants={itemLeft}
                   className="group" style={{ display: "flex", alignItems: "flex-start", gap: "var(--s3)", textDecoration: "none", padding: "var(--s2) 0", borderBottom: "1px solid rgba(8,51,53,0.06)" }}>
                   <div style={{ width: "32px", height: "32px", borderRadius: "var(--r-md)", background: "rgba(8,51,53,0.06)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "background 200ms" }}
                     className="group-hover:[background:var(--clr-primary)]">
@@ -93,9 +103,9 @@ export default function Contact() {
                     <div className="t-sm" style={{ color: "var(--clr-text-md)", lineHeight: 1.5 }}>{val}</div>
                   </div>
                   <ArrowUpRight size={14} style={{ color: "var(--clr-text-lt)", marginLeft: "auto", opacity: 0, transition: "opacity 200ms" }} className="group-hover:opacity-100" />
-                </a>
+                </motion.a>
               ))}
-            </div>
+            </motion.div>
 
             {/* WhatsApp CTA */}
             <a href={waLink(company.contact.whatsapp, "Hello Rasa Construction, I'd like a free quote.")}
@@ -104,12 +114,18 @@ export default function Contact() {
               💬 WhatsApp Us
             </a>
 
-            {/* Map — small, architectural */}
-            <div style={{ marginTop: "var(--s6)", borderRadius: "var(--r-lg)", overflow: "hidden", height: "160px" }}>
+            {/* Map — fade in with slight delay */}
+            <motion.div
+              style={{ marginTop: "var(--s6)", borderRadius: "var(--r-lg)", overflow: "hidden", height: "160px" }}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.35, ease: EASE_CINEMATIC }}
+            >
               <iframe title="Rasa Construction location"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31760!2d77.3!3d8.75!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMK0NS4wTiA3N8K0MDAuMEU!5e0!3m2!1sen!2sin!4v1000000"
                 width="100%" height="160" style={{ border: 0, filter: "grayscale(25%) contrast(1.05)" }} loading="lazy" allowFullScreen />
-            </div>
+            </motion.div>
           </Reveal>
 
           {/* Vertical divider — desktop only */}

@@ -10,6 +10,7 @@ import Button from "@/components/ui/Button";
 import { equipment } from "@/data/equipment";
 import { company } from "@/data/company";
 import { scrollTo } from "@/lib/utils";
+import { cardGridStagger, itemReveal, EASE_CINEMATIC } from "@/lib/animations";
 
 function getIcon(name: string): LucideIcon {
   return (LucideIcons as unknown as Record<string, LucideIcon>)[name] ?? LucideIcons.Package;
@@ -68,32 +69,34 @@ export default function Equipment() {
           </div>
         </Reveal>
 
-        {/* ── Equipment grid — 4 col on desktop ── */}
-        <div
+        {/* ── Equipment grid — stagger container ── */}
+        <motion.div
           style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "var(--s3)" }}
           className="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+          variants={cardGridStagger}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
         >
-          {equipment.map(({ id, name, description, variants, iconName }, i) => {
+          {equipment.map(({ id, name, description, variants, iconName }) => {
             const Icon = getIcon(iconName);
             return (
               <motion.div
                 key={id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.45, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+                variants={itemReveal}
+                className="group card-hover"
                 style={{
-                  padding:      "var(--s4)",
-                  borderRadius: "var(--r-lg)",
-                  background:   "var(--clr-bg)",
-                  border:       "1px solid rgba(8,51,53,0.07)",
-                  boxShadow:    "var(--sh-card)",
-                  display:      "flex",
+                  padding:       "var(--s4)",
+                  borderRadius:  "var(--r-lg)",
+                  background:    "var(--clr-bg)",
+                  border:        "1px solid rgba(8,51,53,0.07)",
+                  boxShadow:     "var(--sh-card)",
+                  display:       "flex",
                   flexDirection: "column",
-                  gap:          "var(--s2)",
+                  gap:           "var(--s2)",
                 }}
               >
-                {/* Icon */}
-                <div
+                {/* Icon — scale on reveal */}
+                <motion.div
                   style={{
                     width: "38px", height: "38px",
                     borderRadius: "var(--r-md)",
@@ -101,10 +104,12 @@ export default function Equipment() {
                     display: "flex", alignItems: "center", justifyContent: "center",
                     marginBottom: "var(--s1)",
                     flexShrink: 0,
+                    transition: "transform 300ms ease",
                   }}
+                  whileHover={{ scale: 1.1, transition: { duration: 0.25, ease: EASE_CINEMATIC } }}
                 >
                   <Icon size={17} color="var(--clr-accent)" />
-                </div>
+                </motion.div>
 
                 {/* Name */}
                 <h3
@@ -143,10 +148,10 @@ export default function Equipment() {
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* ── Note strip ── */}
-        <Reveal>
+        <Reveal delay={0.15}>
           <div
             style={{
               marginTop:    "var(--s10)",

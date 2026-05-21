@@ -6,12 +6,20 @@ import { Star, Quote } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
 import Container from "@/components/layout/Container";
 import { testimonials } from "@/data/testimonials";
+import { cardGridStagger, itemReveal, quoteFade, heroReveal, EASE_CINEMATIC } from "@/lib/animations";
 
 function Stars({ count }: { count: number }) {
   return (
     <div style={{ display: "flex", gap: "3px" }}>
       {Array.from({ length: count }).map((_, i) => (
-        <Star key={i} size={12} fill="var(--clr-accent)" color="var(--clr-accent)" />
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, scale: 0.6 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3, delay: i * 0.06, ease: EASE_CINEMATIC }}
+        >
+          <Star size={12} fill="var(--clr-accent)" color="var(--clr-accent)" />
+        </motion.div>
       ))}
     </div>
   );
@@ -41,30 +49,55 @@ export default function Testimonials() {
               <h2 className="t-h1 text-white">What our clients say</h2>
             </div>
             {/* Aggregate score — top right */}
-            <div style={{ textAlign: "right" }}>
+            <motion.div
+              style={{ textAlign: "right" }}
+              initial={{ opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.2, ease: EASE_CINEMATIC }}
+            >
               <div style={{ display: "flex", justifyContent: "flex-end", gap: "3px", marginBottom: "var(--s1)" }}>
-                {Array.from({ length: 5 }).map((_, i) => <Star key={i} size={16} fill="var(--clr-accent)" color="var(--clr-accent)" />)}
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={inView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ duration: 0.3, delay: 0.35 + i * 0.07, ease: EASE_CINEMATIC }}
+                  >
+                    <Star size={16} fill="var(--clr-accent)" color="var(--clr-accent)" />
+                  </motion.div>
+                ))}
               </div>
               <div className="font-m text-white" style={{ fontWeight: 900, fontSize: "var(--t-h2)" }}>4.9 / 5.0</div>
               <div className="t-sm" style={{ color: "rgba(255,255,255,0.38)", marginTop: "2px" }}>Across 300+ completed projects</div>
-            </div>
+            </motion.div>
           </div>
         </Reveal>
 
         {/* ── Tier 1: Featured testimonial — full width, cinematic ── */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }}
+          variants={heroReveal}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
           style={{
-            position: "relative",
+            position:     "relative",
             borderRadius: "var(--r-xl)",
-            padding: "var(--s8)",
-            background: "rgba(216,185,163,0.06)",
-            border: "1px solid rgba(216,185,163,0.15)",
+            padding:      "var(--s8)",
+            background:   "rgba(216,185,163,0.06)",
+            border:       "1px solid rgba(216,185,163,0.15)",
             marginBottom: "var(--s4)",
-            overflow: "hidden",
-          }}>
-          {/* Giant background quote mark */}
-          <div className="absolute" style={{ top: "-1rem", right: "var(--s4)", fontSize: "18rem", fontFamily: "'Montserrat',sans-serif", fontWeight: 900, color: "rgba(216,185,163,0.04)", lineHeight: 1, userSelect: "none", pointerEvents: "none" }}>"</div>
+            overflow:     "hidden",
+          }}
+        >
+          {/* Giant background quote mark — fades in after card */}
+          <motion.div
+            className="absolute"
+            style={{ top: "-1rem", right: "var(--s4)", fontSize: "18rem", fontFamily: "'Montserrat',sans-serif", fontWeight: 900, color: "rgba(216,185,163,0.04)", lineHeight: 1, userSelect: "none", pointerEvents: "none" }}
+            variants={quoteFade}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+          >
+            &ldquo;
+          </motion.div>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: "var(--s8)", alignItems: "end" }}
             className="grid-cols-1 lg:grid-cols-[1fr_auto]">
@@ -77,9 +110,14 @@ export default function Testimonials() {
             </div>
             {/* Author — pulled to bottom-right */}
             <div style={{ flexShrink: 0, borderLeft: "1px solid rgba(216,185,163,0.20)", paddingLeft: "var(--s6)", minWidth: "200px" }}>
-              <div style={{ width: "48px", height: "48px", borderRadius: "50%", background: "linear-gradient(135deg, var(--clr-primary-mid), var(--clr-accent))", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Montserrat',sans-serif", fontWeight: 700, color: "white", marginBottom: "var(--s2)" }}>
+              <motion.div
+                style={{ width: "48px", height: "48px", borderRadius: "50%", background: "linear-gradient(135deg, var(--clr-primary-mid), var(--clr-accent))", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Montserrat',sans-serif", fontWeight: 700, color: "white", marginBottom: "var(--s2)" }}
+                initial={{ opacity: 0, scale: 0.7 }}
+                animate={inView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.55, delay: 0.4, ease: EASE_CINEMATIC }}
+              >
                 {featured.initials}
-              </div>
+              </motion.div>
               <div className="font-p text-white" style={{ fontWeight: 700, fontSize: "var(--t-sm)" }}>{featured.name}</div>
               <div className="t-sm" style={{ color: "rgba(255,255,255,0.50)", marginTop: "2px" }}>{featured.role}</div>
               {featured.location && (
@@ -94,13 +132,18 @@ export default function Testimonials() {
           </div>
         </motion.div>
 
-        {/* ── Tier 2: Prominent pair — 2-col, medium weight ── */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s3)", marginBottom: "var(--s4)" }}
-          className="grid-cols-1 md:grid-cols-2">
-          {prominent.map(({ id, name, role, location, project, rating, text, initials }, i) => (
+        {/* ── Tier 2: Prominent pair — stagger ── */}
+        <motion.div
+          style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s3)", marginBottom: "var(--s4)" }}
+          className="grid-cols-1 md:grid-cols-2"
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } } }}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+        >
+          {prominent.map(({ id, name, role, location, project, rating, text, initials }) => (
             <motion.div key={id}
-              initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
-              className="card-dark"
+              variants={itemReveal}
+              className="card-dark group"
               style={{ padding: "var(--s4)", borderLeft: "2px solid rgba(216,185,163,0.22)" }}>
               <Quote size={28} style={{ color: "rgba(216,185,163,0.10)", marginBottom: "var(--s3)" }} />
               <Stars count={rating} />
@@ -121,16 +164,22 @@ export default function Testimonials() {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* ── Tier 3: Compact — minimal list, separated by thin rules ── */}
+        {/* ── Tier 3: Compact — stagger fade ── */}
         <div style={{ borderTop: "1px solid rgba(216,185,163,0.10)", paddingTop: "var(--s4)" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 0 }}
-            className="grid-cols-1 md:grid-cols-3">
-            {compact.map(({ id, name, role, location, rating, text, initials }, i) => (
+          <motion.div
+            style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 0 }}
+            className="grid-cols-1 md:grid-cols-3"
+            variants={cardGridStagger}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+          >
+            {compact.map(({ id, name, role, location, rating, text, initials }) => (
               <motion.div key={id}
-                initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5, delay: 0.45 + i * 0.08 }}
-                style={{ padding: "var(--s4)", borderRight: i < compact.length - 1 ? "1px solid rgba(216,185,163,0.08)" : "none" }}>
+                variants={itemReveal}
+                style={{ padding: "var(--s4)", borderRight: "1px solid rgba(216,185,163,0.08)" }}
+              >
                 <Stars count={rating} />
                 <p className="t-sm" style={{ color: "rgba(255,255,255,0.55)", lineHeight: 1.75, margin: "var(--s2) 0 var(--s3)" }}>
                   &ldquo;{text.slice(0, 160)}{text.length > 160 ? "…" : ""}&rdquo;
@@ -144,7 +193,7 @@ export default function Testimonials() {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </Container>
     </section>

@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import Reveal from "@/components/animations/Reveal";
 import Container from "@/components/layout/Container";
 import { processSteps } from "@/data/process";
+import { lineGrowVertical, itemLeft, listStagger, EASE_CINEMATIC } from "@/lib/animations";
 
 export default function Process() {
   const ref    = useRef(null);
@@ -60,29 +61,37 @@ export default function Process() {
 
         {/* ── Step timeline ── */}
         <div style={{ position: "relative" }}>
-          {/* Connecting line */}
-          <div
+          {/* Animated connector line — draws from top as steps reveal */}
+          <motion.div
             className="absolute"
             style={{
-              top: "28px",
-              left: "calc(var(--s4) + 14px)",
-              bottom: "28px",
-              width: "1px",
-              background: "linear-gradient(to bottom, rgba(216,185,163,0.18), rgba(216,185,163,0.04) 90%)",
+              top:        "28px",
+              left:       "calc(var(--s4) + 14px)",
+              bottom:     "28px",
+              width:      "1px",
+              background: "linear-gradient(to bottom, rgba(216,185,163,0.25), rgba(216,185,163,0.04) 90%)",
+              transformOrigin: "top",
             }}
+            variants={lineGrowVertical}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
           />
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "var(--s6)" }}>
+          {/* Steps — stagger container */}
+          <motion.div
+            style={{ display: "flex", flexDirection: "column", gap: "var(--s6)" }}
+            variants={listStagger}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+          >
             {processSteps.map(({ step, label, desc }, i) => (
               <motion.div
                 key={step}
-                initial={{ opacity: 0, x: -20 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                variants={itemLeft}
                 style={{ display: "grid", gridTemplateColumns: "var(--s8) 1fr", gap: "var(--s6)", alignItems: "start" }}
               >
-                {/* Step circle */}
-                <div
+                {/* Step circle — scale in */}
+                <motion.div
                   style={{
                     width: "28px", height: "28px",
                     borderRadius: "50%",
@@ -95,6 +104,9 @@ export default function Process() {
                     zIndex: 1,
                     position: "relative",
                   }}
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={inView ? { scale: 1, opacity: 1 } : {}}
+                  transition={{ duration: 0.45, delay: 0.15 + i * 0.12, ease: EASE_CINEMATIC }}
                 >
                   <span
                     className="font-m"
@@ -106,7 +118,7 @@ export default function Process() {
                   >
                     {step}
                   </span>
-                </div>
+                </motion.div>
 
                 {/* Step content */}
                 <div style={{ paddingTop: "2px" }}>
@@ -131,7 +143,7 @@ export default function Process() {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </Container>
     </section>

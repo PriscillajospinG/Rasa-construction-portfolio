@@ -2,6 +2,7 @@
 
 import { Phone, Mail, MapPin, Share2, Globe, Link2, Send } from "lucide-react";
 import RasaLogo from "@/components/ui/Logo";
+import Reveal from "@/components/animations/Reveal";
 import { company } from "@/data/company";
 import { services } from "@/data/services";
 import { scrollTo, waLink } from "@/lib/utils";
@@ -18,6 +19,7 @@ export default function Footer() {
     <footer className="relative overflow-hidden" style={{ background: "linear-gradient(160deg, #030f10 0%, #051f21 100%)" }}>
       <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(216,185,163,0.4), transparent)" }} />
 
+      <Reveal direction="up" distance={24} duration={0.9} threshold="-40px">
       <div className="c" style={{ paddingBlock: "var(--s16)" }}>
         {/* 4-column grid */}
         <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1.5fr", gap: "var(--s8)" }}
@@ -54,7 +56,7 @@ export default function Footer() {
             <ul style={{ display: "flex", flexDirection: "column", gap: "var(--s2)" }}>
               {company.navLinks.map((l) => (
                 <li key={l.label}>
-                  <button onClick={() => scrollTo(l.href)} className="t-sm transition-colors duration-200"
+                  <button onClick={() => scrollTo(l.href)} className="t-sm link-underline transition-colors duration-200"
                     style={{ color: "rgba(255,255,255,0.38)" }}
                     onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--clr-accent)"; }}
                     onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.38)"; }}>
@@ -109,6 +111,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      </Reveal>
 
       {/* Bottom bar */}
       <div style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}>

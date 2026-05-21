@@ -11,6 +11,7 @@ import Button from "@/components/ui/Button";
 import Container from "@/components/layout/Container";
 import { services } from "@/data/services";
 import { company } from "@/data/company";
+import { cardGridStagger, itemReveal, scaleIn, EASE_CINEMATIC } from "@/lib/animations";
 
 function getIcon(name: string): LucideIcon {
   return (LucideIcons as unknown as Record<string, LucideIcon>)[name] ?? LucideIcons.HardHat;
@@ -19,7 +20,7 @@ function getIcon(name: string): LucideIcon {
 // Primary service — full-bleed photo card
 const primary = services[0]; // Scaffolding
 
-// Secondary pair — stacked right column  
+// Secondary pair — stacked right column
 const secondary = services.slice(1, 3); // Centring + Concrete
 
 // Tertiary — list treatment
@@ -52,25 +53,30 @@ export default function Services() {
         </div>
 
         {/* ── Row 1: Architectural hero card + stacked pair ── */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5 }}
+        <div
           style={{ display: "grid", gridTemplateColumns: "7fr 5fr", gap: "var(--s3)", marginBottom: "var(--s3)" }}
           className="grid-cols-1 lg:grid-cols-[7fr_5fr]"
         >
-          {/* Primary: large featured card — image background, tall */}
+          {/* Primary: large featured card — scale-in entrance */}
           {(() => {
             const Icon = getIcon(primary.iconName);
             return (
               <motion.div
-                initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.1 }}
+                variants={scaleIn}
+                initial="hidden"
+                animate={inView ? "visible" : "hidden"}
                 className="group relative overflow-hidden"
-                style={{ borderRadius: "var(--r-xl)", minHeight: "480px", display: "flex", flexDirection: "column", justifyContent: "flex-end", boxShadow: "var(--sh-xl)" }}>
-                {/* Background — no duplicate className */}
+                style={{ borderRadius: "var(--r-xl)", minHeight: "480px", display: "flex", flexDirection: "column", justifyContent: "flex-end", boxShadow: "var(--sh-xl)" }}
+              >
+                {/* Background */}
                 <div
                   className="absolute inset-0"
                   style={{ backgroundImage: `url(${primary.image})`, backgroundSize: "cover", backgroundPosition: "center", transition: "transform 700ms var(--ease)" }}
+                />
+                {/* Hover image zoom */}
+                <div
+                  className="absolute inset-0 group-hover:[transform:scale(1.04)] transition-transform duration-700"
+                  style={{ backgroundImage: `url(${primary.image})`, backgroundSize: "cover", backgroundPosition: "center" }}
                 />
                 <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(3,12,13,0.99) 0%, rgba(5,31,33,0.72) 48%, rgba(5,31,33,0.22) 100%)" }} />
 
@@ -96,15 +102,21 @@ export default function Services() {
             );
           })()}
 
-          {/* Secondary pair: stacked, different heights */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "var(--s3)" }}>
+          {/* Secondary pair — stagger from right */}
+          <motion.div
+            style={{ display: "flex", flexDirection: "column", gap: "var(--s3)" }}
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12, delayChildren: 0.15 } } }}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+          >
             {secondary.map(({ id, iconName, title, description, usedFor, tag }, i) => {
               const Icon = getIcon(iconName);
               return (
                 <motion.div key={id}
-                  initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6, delay: 0.2 + i * 0.12 }}
-                  className="group card relative overflow-hidden"
-                  style={{ padding: "var(--s4)", flex: i === 0 ? "1.4" : "1" }}>
+                  variants={itemReveal}
+                  className="group card relative overflow-hidden card-hover"
+                  style={{ padding: "var(--s4)", flex: i === 0 ? "1.4" : "1" }}
+                >
                   {/* Top hover accent */}
                   <div className="absolute top-0 left-0 right-0 transition-transform duration-500 origin-left scale-x-0 group-hover:scale-x-100"
                     style={{ height: "2px", background: "linear-gradient(90deg, var(--clr-primary), var(--clr-accent))" }} />
@@ -132,21 +144,27 @@ export default function Services() {
                 </motion.div>
               );
             })}
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
 
         {/* ── Row 2: Tertiary services — horizontal editorial list ── */}
         <div style={{ borderTop: "1px solid rgba(8,51,53,0.08)", paddingTop: "var(--s6)" }}>
           <div className="t-label" style={{ color: "var(--clr-text-md)", marginBottom: "var(--s4)", fontWeight: 600 }}>Also available</div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 0 }}
-            className="grid-cols-1 md:grid-cols-3">
+          <motion.div
+            style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 0 }}
+            className="grid-cols-1 md:grid-cols-3"
+            variants={cardGridStagger}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+          >
             {tertiary.map(({ id, iconName, title, description, tag }, i) => {
               const Icon = getIcon(iconName);
               return (
                 <motion.div key={id}
-                  initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.5 + i * 0.1 }}
+                  variants={itemReveal}
                   className="group"
-                  style={{ padding: "var(--s4)", borderRight: i < tertiary.length - 1 ? "1px solid rgba(8,51,53,0.07)" : "none", borderLeft: i === 0 ? "none" : undefined }}>
+                  style={{ padding: "var(--s4)", borderRight: i < tertiary.length - 1 ? "1px solid rgba(8,51,53,0.07)" : "none" }}
+                >
                   <div style={{ display: "flex", alignItems: "center", gap: "var(--s2)", marginBottom: "var(--s2)" }}>
                     <Icon size={18} color="var(--clr-primary)" />
                     <h4 className="font-p" style={{ fontWeight: 600, fontSize: "var(--t-body)", color: "var(--clr-text)" }}>{title}</h4>
@@ -159,11 +177,11 @@ export default function Services() {
                 </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
 
         {/* ── Editorial footer row ── */}
-        <Reveal>
+        <Reveal delay={0.1}>
           <div style={{ marginTop: "var(--s12)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "var(--s4)", borderTop: "1px solid rgba(8,51,53,0.08)", paddingTop: "var(--s6)" }}>
             <div>
               <p className="font-p" style={{ fontWeight: 600, fontSize: "var(--t-body)", color: "var(--clr-primary)" }}>Not sure what you need?</p>
@@ -171,7 +189,7 @@ export default function Services() {
                 Call {company.owner} — he'll tell you exactly what the project requires.
               </p>
             </div>
-            <Button href={`tel:${company.contact.primary.replace(/\s/g,"")}`} variant="dark">
+            <Button href={`tel:${company.contact.primary.replace(/\s/g, "")}`} variant="dark">
               📞 Call for Advice
             </Button>
           </div>
