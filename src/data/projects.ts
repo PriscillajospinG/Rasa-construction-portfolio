@@ -9,7 +9,7 @@ export const projects: Project[] = [
     description: "Complete scaffolding erection for a 6-storey residential tower. We handled setup, mid-project reconfiguration for the stairwell access, and full disassembly.",
     duration:    "4 Months",
     services:    ["Scaffolding Rental", "On-Site Support"],
-    image:       "/hero/hero.png",
+    image:       "/projects/tirunelveli-highrise.jpg",
     tall:        true,
   },
   {
@@ -20,7 +20,7 @@ export const projects: Project[] = [
     description: "RCC slab casting and column work for a twin-unit residential development. Centring supplied and erected by our crew; concrete poured and compacted by our team.",
     duration:    "2.5 Months",
     services:    ["Centring Materials", "Concrete Works"],
-    image:       "/projects/concrete.png",
+    image:       "/projects/achankuttam-slab.jpg",
     tall:        false,
   },
   {
@@ -31,7 +31,7 @@ export const projects: Project[] = [
     description: "Facade scaffolding for a 3-storey commercial building. Ring-lock system used for clean external access. Erected and managed on a fast-track 6-week schedule.",
     duration:    "6 Weeks",
     services:    ["Scaffolding Rental"],
-    image:       "/projects/scaffolding.png",
+    image:       "/projects/commercial-facade-scaffold.jpg",
     tall:        false,
   },
   {
@@ -42,7 +42,7 @@ export const projects: Project[] = [
     description: "Material hoist deployment for a 4-storey hospital wing expansion. Reduced vertical transport labour by over 40%. Operated for 5 months with zero downtime.",
     duration:    "5 Months",
     services:    ["Vertical Hoist Rental"],
-    image:       "/projects/hoist.png",
+    image:       "/projects/hospital-hoist.jpg",
     tall:        true,
   },
   {
@@ -53,7 +53,7 @@ export const projects: Project[] = [
     description: "Combined package: scaffolding, centring materials, and on-site coordination for a 4-storey residential block. Single-point rental made scheduling seamless.",
     duration:    "3 Months",
     services:    ["Scaffolding Rental", "Centring Materials", "On-Site Support"],
-    image:       "/team/about-team.png",
+    image:       "/projects/tenkasi-residential.jpg",
     tall:        false,
   },
   {
@@ -64,7 +64,7 @@ export const projects: Project[] = [
     description: "Footing, plinth beam, and column casting for a 3,000 sq ft industrial shed. Our crew completed all structural concrete work to engineer specifications.",
     duration:    "6 Weeks",
     services:    ["Concrete Works"],
-    image:       "/projects/concrete.png",
+    image:       "/projects/industrial-shed-concrete.jpg",
     tall:        false,
   },
   {
@@ -75,7 +75,7 @@ export const projects: Project[] = [
     description: "High-elevation scaffolding for a historic church façade restoration. Precision setup to protect the original structure while enabling full access to the 14m height.",
     duration:    "8 Weeks",
     services:    ["Scaffolding Rental", "On-Site Support"],
-    image:       "/hero/hero.png",
+    image:       "/projects/church-renovation.jpg",
     tall:        true,
   },
 ];

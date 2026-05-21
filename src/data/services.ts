@@ -9,7 +9,7 @@ export const services: Service[] = [
     usedFor:     "Multi-storey residential, commercial facades, industrial sheds, bridge work, repair & renovation",
     tag:         "Most Requested",
     iconName:    "LayoutGrid",
-    image:       "/projects/scaffolding.png",
+    image:       "/services/scaffolding-work-01.jpg",
   },
   {
     id:          "centring",
@@ -19,6 +19,7 @@ export const services: Service[] = [
     usedFor:     "Slab casting, beam formwork, staircase shuttering, RCC column centring",
     tag:         "100+ Equipment Types",
     iconName:    "Layers",
+    image:       "/services/centring-materials-01.jpg",
   },
   {
     id:          "concrete",
@@ -28,6 +29,7 @@ export const services: Service[] = [
     usedFor:     "Foundations, columns, roof slabs, retaining walls, commercial flooring",
     tag:         "25+ Years Experience",
     iconName:    "Building",
+    image:       "/services/concrete-work-01.jpg",
   },
   {
     id:          "hoist",
@@ -37,7 +39,7 @@ export const services: Service[] = [
     usedFor:     "Multi-storey residential, hospitals, commercial towers, material transit during construction",
     tag:         "Daily Rental Available",
     iconName:    "ArrowUpDown",
-    image:       "/projects/hoist.png",
+    image:       "/services/vertical-hoist-01.jpg",
   },
   {
     id:          "support",
@@ -47,6 +49,7 @@ export const services: Service[] = [
     usedFor:     "Large multi-phase projects, out-of-district clients, government contract work",
     tag:         "Available Across TN",
     iconName:    "HardHat",
+    image:       "/services/site-support-01.jpg",
   },
   {
     id:          "maintenance",

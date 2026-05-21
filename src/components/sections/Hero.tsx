@@ -66,7 +66,7 @@ export default function Hero() {
           aria-hidden
         >
           <Image
-            src="/hero/hero.png"
+            src="/hero/hero-site.jpg"
             alt="Rasa Construction active worksite in Tamil Nadu"
             fill
             priority

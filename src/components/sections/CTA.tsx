@@ -16,7 +16,7 @@ export default function CTA() {
   return (
     <section ref={ref} className="relative overflow-hidden" style={{ height: "480px", display: "flex", alignItems: "center" }}>
       <Parallax speed={0.22} className="absolute inset-0 scale-110">
-        <div className="absolute inset-0" style={{ backgroundImage: "url('/projects/hoist.png')", backgroundSize: "cover", backgroundPosition: "center" }} />
+        <div className="absolute inset-0" style={{ backgroundImage: "url('/backgrounds/cta-bg.jpg')", backgroundSize: "cover", backgroundPosition: "center" }} />
       </Parallax>
       <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(5,31,33,0.94) 0%, rgba(8,51,53,0.78) 50%, rgba(5,31,33,0.94) 100%)" }} />
       <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "linear-gradient(rgba(216,185,163,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(216,185,163,0.04) 1px, transparent 1px)", backgroundSize: "64px 64px" }} />

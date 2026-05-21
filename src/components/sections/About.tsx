@@ -179,8 +179,8 @@ export default function About() {
                 <div style={{ gridColumn: "1 / -1", position: "relative" }}>
                   <div style={{ position: "relative", aspectRatio: "16/9", borderRadius: "var(--r-lg)", overflow: "hidden", boxShadow: "var(--sh-xl)" }}>
                     <Image
-                      src="/team/about-team.png"
-                      alt="Rasa Construction team reviewing site plans"
+                      src="/about/about-owner-site.jpg"
+                      alt="Rasa Construction site photo showing the team and Rasa Name Board"
                       fill sizes="(max-width: 1024px) 100vw, 60vw"
                       className="object-cover"
                       loading="eager"
