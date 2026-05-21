@@ -5,7 +5,9 @@ interface ContainerProps {
   /** Adds section vertical padding via `.s` class */
   section?:   boolean;
   className?: string;
+  style?:     React.CSSProperties;
   id?:        string;
+  ref?:       React.Ref<HTMLDivElement>;
   as?:        keyof JSX.IntrinsicElements;
 }
 
@@ -13,16 +15,27 @@ interface ContainerProps {
  * The ONE container component used by every section.
  * Enforces: max-width 1280px, 80/48/20px horizontal padding (via CSS --container-px).
  */
-export default function Container({
-  children,
-  section = false,
-  className = "",
-  id,
-  as: Tag = "div",
-}: ContainerProps) {
+const Container = React.forwardRef<HTMLDivElement, ContainerProps>(function Container(
+  {
+    children,
+    section = false,
+    className = "",
+    style,
+    id,
+    as: Tag = "div",
+  },
+  ref
+) {
   return (
-    <Tag id={id} className={`c${section ? " s" : ""}${className ? ` ${className}` : ""}`}>
+    <Tag
+      id={id}
+      ref={ref as React.Ref<HTMLDivElement>}
+      style={style}
+      className={`c${section ? " s" : ""}${className ? ` ${className}` : ""}`}
+    >
       {children}
     </Tag>
   );
-}
+});
+
+export default Container;

@@ -4,14 +4,24 @@ import { cx } from "@/lib/utils";
 type Variant = "primary" | "dark" | "ghost";
 type Size    = "sm" | "md" | "lg";
 
-interface ButtonProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+interface ButtonBaseProps {
   variant?:  Variant;
   size?:     Size;
-  /** Renders as <button> instead of <a> */
-  as?:       "button";
   disabled?: boolean;
   children:  React.ReactNode;
+  className?: string;
+  style?:    React.CSSProperties;
 }
+
+interface ButtonAsAnchor extends ButtonBaseProps, React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  as?: never;
+}
+
+interface ButtonAsButton extends ButtonBaseProps, React.ButtonHTMLAttributes<HTMLButtonElement> {
+  as: "button";
+}
+
+type ButtonProps = ButtonAsAnchor | ButtonAsButton;
 
 const variantClass: Record<Variant, string> = {
   primary: "btn-primary",
@@ -20,11 +30,16 @@ const variantClass: Record<Variant, string> = {
 };
 
 const sizeStyle: Record<Size, React.CSSProperties> = {
-  sm:  { padding: "0.5rem 1.25rem",  fontSize: "0.8rem" },
+  sm:  { padding: "0.5rem 1.5rem",   fontSize: "0.8rem" },
   md:  { padding: "0.875rem 2rem",   fontSize: "0.875rem" },
   lg:  { padding: "1.1rem 2.5rem",   fontSize: "1rem" },
 };
 
+/**
+ * Unified button/link component.
+ * Renders as <a> by default, or <button> when as="button".
+ * All variants inherit shared .btn hover/active transitions from globals.css.
+ */
 export default function Button({
   variant  = "primary",
   size     = "md",
@@ -32,17 +47,22 @@ export default function Button({
   disabled,
   children,
   className,
+  style,
   ...props
 }: ButtonProps) {
-  const classes = cx("btn", variantClass[variant], className);
+  const classes  = cx("btn", variantClass[variant], className);
+  const combined = { ...sizeStyle[size], opacity: disabled ? 0.75 : 1, ...style };
 
   if (as === "button") {
+    const { onClick, type, form, name, value, ...rest } = props as React.ButtonHTMLAttributes<HTMLButtonElement>;
     return (
       <button
         type="submit"
         disabled={disabled}
         className={classes}
-        style={{ ...sizeStyle[size], opacity: disabled ? 0.75 : 1 }}
+        style={combined}
+        onClick={onClick}
+        {...rest}
       >
         {children}
       </button>
@@ -50,7 +70,12 @@ export default function Button({
   }
 
   return (
-    <a className={classes} style={sizeStyle[size]} {...props}>
+    <a
+      className={classes}
+      style={combined}
+      aria-disabled={disabled}
+      {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
+    >
       {children}
     </a>
   );

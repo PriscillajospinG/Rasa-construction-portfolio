@@ -266,15 +266,23 @@ input, textarea { cursor: text !important; }
   border: none;
   text-decoration: none;
   white-space: nowrap;
-  transition: transform 300ms var(--ease), box-shadow 300ms ease, background 250ms ease;
+  /* Unified transition — covers all button states */
+  transition: transform 280ms var(--ease),
+              box-shadow 280ms ease,
+              background 240ms ease,
+              color 240ms ease,
+              border-color 240ms ease;
+  will-change: transform;
 }
+.btn:hover  { transform: translateY(-2px); }
+.btn:active { transform: translateY(0px) scale(0.98); }
+
 .btn-primary {
   background: var(--clr-accent);
   color: var(--clr-primary-dark);
 }
 .btn-primary:hover {
   background: var(--clr-accent-lt);
-  transform: translateY(-2px);
   box-shadow: var(--sh-acc);
 }
 .btn-dark {
@@ -283,7 +291,6 @@ input, textarea { cursor: text !important; }
 }
 .btn-dark:hover {
   background: var(--clr-primary-mid);
-  transform: translateY(-2px);
   box-shadow: var(--sh-xl);
 }
 .btn-ghost {
@@ -295,7 +302,6 @@ input, textarea { cursor: text !important; }
   border-color: var(--clr-accent);
   color: var(--clr-accent);
   background: rgba(216,185,163,0.07);
-  transform: translateY(-2px);
 }
 
 /* ── CARD ─────────────────────────────────────────────────── */
@@ -304,19 +310,22 @@ input, textarea { cursor: text !important; }
   border-radius: var(--r-lg);
   border: 1px solid rgba(8,51,53,0.07);
   box-shadow: var(--sh-card);
-  transition: transform 350ms var(--ease), box-shadow 350ms ease;
+  transition: transform 350ms var(--ease), box-shadow 350ms ease, border-color 350ms ease;
 }
 .card:hover {
   transform: translateY(-5px);
   box-shadow: var(--sh-xl);
   border-color: rgba(8,51,53,0.12);
 }
-/* ─── card-dark: raised opacity for legible text on dark bg ─── */
+
+/* card-dark: raised opacity for legible text on dark bg */
 .card-dark {
-  background: rgba(5,31,33,0.60);   /* was 0.45 — too translucent */
+  background: rgba(5,31,33,0.60);
   border-radius: var(--r-lg);
   border: 1px solid rgba(216,185,163,0.12);
-  transition: all 350ms var(--ease);
+  transition: background 350ms var(--ease),
+              border-color 350ms ease,
+              transform 350ms var(--ease);
 }
 .card-dark:hover {
   background: rgba(5,31,33,0.78);
@@ -324,7 +333,37 @@ input, textarea { cursor: text !important; }
   transform: translateY(-4px);
 }
 
-/* ── INPUTS — dark surface variant (loading, dark forms) ─── */
+/* ── CARD HOVER LIFT (for Framer Motion cards) ───────────── */
+/*
+ * Use on non-.card divs that still need hover lift.
+ * Only transform + box-shadow — no layout shift.
+ */
+.card-hover {
+  transition: transform 320ms var(--ease), box-shadow 320ms ease;
+  will-change: transform;
+}
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--sh-xl);
+}
+
+/* ── IMAGE ZOOM CONTAINER ────────────────────────────────── */
+/*
+ * Wrap any overflow:hidden container with .img-zoom,
+ * then place <img> or <Image> inside. Hover on parent zooms img.
+ */
+.img-zoom { overflow: hidden; }
+.img-zoom img,
+.img-zoom [data-img] {
+  transition: transform 700ms var(--ease);
+  transform: scale(1);
+}
+.img-zoom:hover img,
+.img-zoom:hover [data-img] {
+  transform: scale(1.05);
+}
+
+/* ── INPUTS — dark surface variant ──────────────────────── */
 .inp {
   width: 100%;
   padding: var(--s2) var(--s3);
@@ -335,15 +374,16 @@ input, textarea { cursor: text !important; }
   font-family: 'Inter', sans-serif;
   font-size: var(--t-sm);
   outline: none;
-  transition: border-color 200ms ease, box-shadow 200ms ease;
+  transition: border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
 }
 .inp::placeholder { color: rgba(255,255,255,0.35); }
 .inp:focus {
   border-color: var(--clr-accent);
   box-shadow: 0 0 0 3px rgba(216,185,163,0.12);
+  background: rgba(255,255,255,0.08);
 }
 
-/* ── INPUTS — light surface variant (Contact form) ────────── */
+/* ── INPUTS — light surface variant (Contact form) ─────── */
 .inp-light {
   width: 100%;
   padding: var(--s2) var(--s3);
@@ -354,7 +394,7 @@ input, textarea { cursor: text !important; }
   font-family: 'Inter', sans-serif;
   font-size: var(--t-sm);
   outline: none;
-  transition: border-color 200ms ease, box-shadow 200ms ease;
+  transition: border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
   appearance: none;
   -webkit-appearance: none;
 }
@@ -362,7 +402,30 @@ input, textarea { cursor: text !important; }
 .inp-light:focus {
   border-color: var(--clr-primary);
   box-shadow: 0 0 0 3px rgba(8,51,53,0.07);
+  background: #fefefe;
 }
+
+/* ── LINK UNDERLINE SLIDE ────────────────────────────────── */
+/*
+ * Smooth underline slide-in animation.
+ * Add .link-underline to any text link.
+ */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--clr-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 280ms var(--ease);
+}
+.link-underline:hover::after { transform: scaleX(1); }
 
 /* ── ANIMATIONS ───────────────────────────────────────────── */
 @keyframes float {
@@ -374,8 +437,17 @@ input, textarea { cursor: text !important; }
   100% { transform: scale(1.7); opacity: 0; }
 }
 @keyframes spin-slow { to { transform: rotate(360deg); } }
+@keyframes shimmer-bar {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+@keyframes accent-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.55; }
+}
 
-.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-float        { animation: float 3s ease-in-out infinite; }
+.animate-accent-pulse { animation: accent-pulse 2.4s ease-in-out infinite; }
 
 /* ── LOADING SCREEN ─────────────────────────────────────── */
 .loading-screen {
@@ -425,8 +497,7 @@ input, textarea { cursor: text !important; }
   }
 }
 
-/* ── LOADING SCREEN ──────────────────────────────────────── */
-/* Proper cinematic variant — replaces simple loading-screen */
+/* ── LOADING OVERLAY — cinematic premium variant ─────────── */
 .loading-overlay {
   position: fixed;
   inset: 0;
@@ -485,11 +556,6 @@ input, textarea { cursor: text !important; }
 }
 
 /* ── REDUCED MOTION SUPPORT ──────────────────────────────── */
-/*
- * When the user has requested minimal motion in their OS settings,
- * all CSS transitions and animations are collapsed to near-instant.
- * Framer Motion's useReducedMotion() hook handles JS animations separately.
- */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -501,59 +567,57 @@ input, textarea { cursor: text !important; }
   }
 }
 
-/* ── HOVER ANIMATION SYSTEM ──────────────────────────────── */
-
+/* ── SECTION ACCENT LINE ─────────────────────────────────── */
 /*
- * Smooth underline slide-in for footer nav links.
- * Applied on elements using class .link-underline
+ * Horizontal accent line used at the start of card content.
+ * Grows from left on card hover via .group-hover trigger.
  */
-.link-underline {
+.accent-line {
+  height: 2px;
+  background: linear-gradient(90deg, var(--clr-primary), var(--clr-accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 450ms var(--ease);
+  border-radius: 1px;
+}
+.group:hover .accent-line { transform: scaleX(1); }
+
+/* ── NAV ACTIVE INDICATOR ────────────────────────────────── */
+.nav-link {
+  position: relative;
+  transition: color 200ms ease;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--clr-accent);
+  transform: translateX(-50%);
+  transition: width 280ms var(--ease);
+}
+.nav-link:hover::after  { width: 100%; }
+.nav-link.active::after { width: 100%; }
+
+/* ── CONTACT FORM LABEL FLOAT ────────────────────────────── */
+.form-field {
   position: relative;
 }
-.link-underline::after {
-  content:          '';
-  position:         absolute;
-  bottom:           -2px;
-  left:             0;
-  width:            100%;
-  height:           1px;
-  background:       var(--clr-accent);
-  transform:        scaleX(0);
-  transform-origin: left;
-  transition:       transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-.link-underline:hover::after {
-  transform: scaleX(1);
+/* Subtle input container visual */
+.form-field .inp-light:focus + .form-label,
+.form-field .inp-light:not(:placeholder-shown) + .form-label {
+  color: var(--clr-primary);
 }
 
-/*
- * Card hover lift system — used on all interactive cards.
- * Applied with CSS transition only (no Framer Motion on hover).
- */
-.card-hover {
-  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 300ms ease;
-  will-change: transform;
+/* ── SOCIAL ICON HOVER ───────────────────────────────────── */
+.social-icon {
+  transition: transform 250ms var(--ease),
+              background 250ms ease,
+              border-color 250ms ease,
+              color 250ms ease;
 }
-.card-hover:hover {
-  transform:  translateY(-5px);
-  box-shadow: var(--sh-xl);
-}
-
-/*
- * Button press micro-animation.
- * Applied on all <Button> elements automatically via the btn class.
- */
-.btn {
-  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 200ms ease,
-              background 220ms ease,
-              color 220ms ease !important;
-  will-change: transform;
-}
-.btn:hover {
-  transform: translateY(-2px);
-}
-.btn:active {
-  transform: translateY(0px);
+.social-icon:hover {
+  transform: translateY(-2px) scale(1.05);
 }
