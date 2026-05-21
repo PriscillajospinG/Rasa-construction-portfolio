@@ -35,7 +35,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="t-sm" style={{ color: "rgba(255,255,255,0.38)", lineHeight: 1.8, marginBottom: "var(--s4)" }}>
-              Building strength and delivering trust through premium scaffolding, concrete works, and equipment rental across Tamil Nadu.
+              Founded in 2000, Rasa Construction has delivered 25+ years of reliable scaffolding, centring materials, vertical hoist rental, and concrete works across Tamil Nadu.
             </p>
             <div style={{ display: "flex", gap: "var(--s1)" }}>
               {socials.map(({ Icon, href, label }) => (
