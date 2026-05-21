@@ -78,6 +78,28 @@ export const projects: Project[] = [
     image:       "/projects/church-renovation.jpg",
     tall:        true,
   },
+  {
+    id:          "nagercoil-residential",
+    title:       "Residential Villa — Slab Casting",
+    category:    "Concrete",
+    location:    "Nagercoil, Tamil Nadu",
+    description: "Centring materials supply and concrete casting for a premium G+1 residential villa. Smooth completion within the target timeline.",
+    duration:    "2 Months",
+    services:    ["Centring Materials", "Concrete Works"],
+    image:       "/gallery/gallery-01.jpg",
+    tall:        false,
+  },
+  {
+    id:          "tirunelveli-commercial",
+    title:       "Multi-Storey Complex — Scaffolding Access",
+    category:    "Scaffolding",
+    location:    "Tirunelveli, Tamil Nadu",
+    description: "Complete scaffolding erection for external painting and cladding works on a new commercial plaza. Safe and stable access provided.",
+    duration:    "3 Weeks",
+    services:    ["Scaffolding Rental"],
+    image:       "/gallery/gallery-02.jpg",
+    tall:        true,
+  },
 ];
 
 export const projectCategories = [

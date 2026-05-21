@@ -1025,8 +1025,7 @@ input, textarea { cursor: text !important; }
   transition: transform 350ms var(--ease), box-shadow 350ms ease, border-color 350ms ease;
   display: flex;
   flex-direction: column;
-  padding: var(--s4);
-  gap: var(--s3);
+  overflow: hidden;
 }
 
 .service-card:hover {
@@ -1077,7 +1076,7 @@ input, textarea { cursor: text !important; }
     gap: var(--s3);
   }
   .service-card {
-    padding: var(--s3);
+    padding: 0;
   }
 }
 
@@ -1087,6 +1086,6 @@ input, textarea { cursor: text !important; }
     gap: var(--s3);
   }
   .service-card {
-    padding: var(--s3);
+    padding: 0;
   }
 }

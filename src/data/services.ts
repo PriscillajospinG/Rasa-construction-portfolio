@@ -59,5 +59,6 @@ export const services: Service[] = [
     usedFor:     "Ongoing maintenance contracts, emergency replacement, equipment upgrades",
     tag:         "Fast Response",
     iconName:    "Wrench",
+    image:       "/gallery/gallery-03.jpg",
   },
 ];

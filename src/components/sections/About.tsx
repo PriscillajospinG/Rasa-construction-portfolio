@@ -174,8 +174,9 @@ export default function About() {
             <Reveal direction="right">
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s4)", alignItems: "start" }}>
 
-                {/* Team Image Banner */}
-                <div style={{ gridColumn: "1 / -1", position: "relative" }}>
+                {/* Team Image Banner with Editorial Overlap */}
+                <div style={{ gridColumn: "1 / -1", position: "relative", marginBottom: "var(--s8)" }}>
+                  {/* Main Large Image */}
                   <div style={{ position: "relative", aspectRatio: "16/9", borderRadius: "var(--r-lg)", overflow: "hidden", boxShadow: "var(--sh-xl)" }}>
                     <Image
                       src="/about/about-owner-site.jpg"
@@ -194,6 +195,31 @@ export default function About() {
                       </div>
                       <div className="t-sm" style={{ color: "rgba(255,255,255,0.65)", marginTop: "var(--s1)" }}>
                         {company.location.label}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Smaller Overlapping Detail Image */}
+                  <div 
+                    className="absolute -bottom-6 -right-2 md:-right-6 w-[35%] min-w-[130px] max-w-[220px] aspect-[4/3] rounded-lg overflow-hidden shadow-2xl border-2 border-white z-20 group"
+                    style={{ background: "var(--clr-primary-dark)" }}
+                  >
+                    <div className="relative w-full h-full">
+                      <Image
+                        src="/about/about-team.png"
+                        alt="Rasa Construction crew on site"
+                        fill
+                        sizes="(max-width: 768px) 30vw, 20vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      {/* Dark green / beige caption overlay */}
+                      <div 
+                        className="absolute bottom-0 left-0 right-0 p-1.5 text-center" 
+                        style={{ background: "rgba(5, 31, 33, 0.90)", borderTop: "1px solid var(--clr-accent)" }}
+                      >
+                        <span className="block font-p text-[9px] font-semibold text-[var(--clr-accent)] tracking-wider uppercase">
+                          Our Active Crew
+                        </span>
                       </div>
                     </div>
                   </div>
