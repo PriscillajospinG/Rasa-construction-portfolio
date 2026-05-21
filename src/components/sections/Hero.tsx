@@ -281,10 +281,10 @@ export default function Hero() {
                   marginBottom: "var(--hero-phone-mb, var(--s2))",
                 }}
               >
-                {[company.contact.primary, company.contact.secondary].map((num) => (
+                {[company.contact.primary, company.contact.secondary].filter(Boolean).map((num) => (
                   <a
                     key={num}
-                    href={`tel:${num.replace(/\s/g, "")}`}
+                    href={`tel:${String(num).replace(/\s/g, "")}`}
                     className="link-underline"
                     style={{
                       display:        "flex",

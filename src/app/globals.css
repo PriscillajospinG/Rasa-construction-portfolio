@@ -351,13 +351,17 @@ input, textarea { cursor: text !important; }
   box-shadow: var(--sh-acc);
 }
 .btn-dark {
-  background: var(--clr-primary);
-  color: white;
+  background: var(--clr-dark);
+  color: var(--clr-light);
+  border: 1px solid var(--clr-dark);
 }
-.btn-dark:hover {
-  background: var(--clr-primary-mid);
-  box-shadow: var(--sh-xl);
+
+.btn-outline {
+  background: transparent;
+  color: var(--clr-text);
+  border: 1px solid var(--clr-primary-lt);
 }
+
 .btn-ghost {
   background: transparent;
   color: white;

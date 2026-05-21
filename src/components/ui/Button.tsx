@@ -1,7 +1,7 @@
 import React from "react";
 import { cx } from "@/lib/utils";
 
-type Variant = "primary" | "dark" | "ghost";
+type Variant = "primary" | "dark" | "ghost" | "outline";
 type Size    = "sm" | "md" | "lg";
 
 interface ButtonBaseProps {
@@ -22,6 +22,7 @@ const variantClass: Record<Variant, string> = {
   primary: "btn-primary",
   dark:    "btn-dark",
   ghost:   "btn-ghost",
+  outline: "btn-outline",
 };
 
 const sizeStyle: Record<Size, React.CSSProperties> = {

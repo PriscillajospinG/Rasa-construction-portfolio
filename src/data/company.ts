@@ -11,10 +11,19 @@ export const company = {
     full:    "Rasa Office, Achankuttam – 627861, Tamil Nadu",
   },
   contact: {
-    primary:   "+91 98427 66379",
+    primary: "+91 98427 66379",
     secondary: "+91 63807 29431",
-    email:     "gurusamyrasa@gmail.com",
-    whatsapp:  "919842766379",
+    email: "gurusamyrasa@gmail.com",
+    whatsapp: "+919842766379",
+    address: "Rasa Office, Achankuttam – 627861, Tamil Nadu, India",
+    mapQuery: "Rasa+Office+Achankuttam+627861+Tamil+Nadu+India",
+    mapEmbedUrl: "https://www.google.com/maps?q=Rasa%20Office%20Achankuttam%20627861%20Tamil%20Nadu%20India&output=embed",
+    mapLinkUrl: "https://www.google.com/maps/search/?api=1&query=Rasa%20Office%20Achankuttam%20627861%20Tamil%20Nadu%20India",
+  },
+  social: {
+    facebook: "https://www.facebook.com/rasaconstruction",
+    twitter:  "https://twitter.com/rasaconstruction",
+    linkedin: "https://www.linkedin.com/company/rasa-construction",
   },
   stats: [
     { value: "25+",  label: "Years Field Experience" },
