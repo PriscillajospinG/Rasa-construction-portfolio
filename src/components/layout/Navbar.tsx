@@ -71,21 +71,26 @@ export default function Navbar() {
       >
         <div className="container h-full flex items-center justify-between">
           
-          {/* Logo - dynamically scales on scroll */}
+          {/* Logo - static size per viewport (no scroll scaling to prevent layout shifts) */}
           <button
             onClick={() => go("#home")}
             aria-label="Rasa Construction – Home"
             className="relative flex items-center h-full focus:outline-none"
           >
             <RasaLogo
-              size={isScrolled ? "sm" : "md"}
+              size="md"
               variant="light"
-              className="transition-all duration-300"
+              className="hidden lg:flex"
+            />
+            <RasaLogo
+              size="sm"
+              variant="light"
+              className="flex lg:hidden"
             />
           </button>
 
           {/* Desktop Nav Links */}
-          <ul className="hidden lg:flex items-center gap-2">
+          <ul className="hidden lg:flex items-center gap-[var(--s3)]">
             {company.navLinks.map(({ label, href }) => {
               const active = activeSection === href.slice(1);
               return (
@@ -142,7 +147,7 @@ export default function Navbar() {
           {/* Mobile hamburger menu toggle */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className={`lg:hidden p-2 text-white/80 hover:text-white transition-colors relative focus:outline-none ${menuOpen ? "z-[1105]" : "z-[101]"}`}
+            className={`lg:hidden p-2 -mr-2 text-white/80 hover:text-white transition-colors relative focus:outline-none ${menuOpen ? "z-[1105]" : "z-[101]"}`}
             aria-label="Toggle menu"
           >
             <motion.div

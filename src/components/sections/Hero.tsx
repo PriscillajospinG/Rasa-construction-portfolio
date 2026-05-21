@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { PhoneCall, ChevronDown } from "lucide-react";
 import Image from "next/image";
+import Button from "@/components/ui/Button";
 import { company } from "@/data/company";
 import { scrollTo } from "@/lib/utils";
 
@@ -102,7 +103,7 @@ export default function Hero() {
 
         {/* ══ CONTENT (Inside Sticky Wrapper) ══════════════ */}
         <motion.div
-          className="container hero-content-container"
+          className="container hero-content-container hero-inner"
           style={{
             y:        contentY,
             opacity:  contentOpacity,
@@ -121,7 +122,7 @@ export default function Hero() {
                   display:      "flex",
                   alignItems:   "center",
                   gap:          "var(--s2)",
-                  marginBottom: "var(--s2)",
+                  marginBottom: "var(--hero-eyebrow-mb, var(--s2))",
                 }}
               >
                 <span
@@ -146,15 +147,15 @@ export default function Hero() {
                 initial={{ y: 24, opacity: 0 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.3, ease }}
-                className="font-m"
+                className="font-m hero-title"
                 style={{
-                  fontSize:      "var(--t-hero)",
+                  fontSize:      "var(--hero-title-size, var(--t-hero))",
                   fontWeight:    900,
-                  lineHeight:    1.05,
+                  lineHeight:    "var(--hero-title-lh, 1.05)",
                   letterSpacing: "-0.03em",
                   color:         "white",
                   textShadow:    "0 2px 20px rgba(0,0,0,0.30)",
-                  marginBottom:  "var(--s2)",
+                  marginBottom:  "var(--hero-title-mb, var(--s2))",
                 }}
               >
                 Scaffolding, Centring <br className="hidden sm:inline" />
@@ -167,13 +168,14 @@ export default function Hero() {
                 initial={{ scaleX: 0, opacity: 0 }}
                 animate={{ scaleX: 1, opacity: 1 }}
                 transition={{ duration: 0.7, delay: 0.5, ease }}
+                className="hero-separator"
                 style={{
                   height:          "1px",
                   width:           "60%",
                   maxWidth:        "380px",
                   background:      "linear-gradient(to right, rgba(216,185,163,0.40), transparent)",
                   transformOrigin: "left",
-                  marginBottom:    "var(--s2)",
+                  marginBottom:    "var(--hero-sep-mb, var(--s2))",
                 }}
                 aria-hidden
               />
@@ -183,13 +185,14 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.6, ease }}
+                className="hero-description"
                 style={{
                   fontFamily:   "'Inter', sans-serif",
-                  fontSize:     "var(--t-sm)",
+                  fontSize:     "var(--hero-desc-size, var(--t-sm))",
                   color:        "rgba(255,255,255,0.65)",
                   lineHeight:   1.78,
-                  maxWidth:     "420px",
-                  marginBottom: "var(--s2)",
+                  maxWidth:     "var(--hero-desc-max-w, 420px)",
+                  marginBottom: "var(--hero-desc-mb, var(--s2))",
                 }}
               >
                 Rasa Construction provides dependable scaffolding materials, centring support,
@@ -202,11 +205,12 @@ export default function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.7 }}
+                className="hero-meta hero-trust"
                 style={{
                   display:      "flex",
                   alignItems:   "center",
                   gap:          "var(--s2)",
-                  marginBottom: "var(--s2)",
+                  marginBottom: "var(--hero-meta-mb, var(--s2))",
                 }}
               >
                 <span
@@ -231,12 +235,12 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.8, ease }}
-                className="hero-cta-wrapper"
+                className="hero-cta-wrapper hero-cta"
                 style={{
                   display:      "flex",
                   flexWrap:     "wrap",
                   gap:          "var(--s2)",
-                  marginBottom: "var(--s2)",
+                  marginBottom: "var(--hero-cta-mb, var(--s2))",
                 }}
               >
                 <button
@@ -268,12 +272,13 @@ export default function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.9 }}
+                className="hero-phone"
                 style={{
                   display:      "flex",
                   flexWrap:     "wrap",
                   alignItems:   "center",
                   gap:          "var(--s4)",
-                  marginBottom: "var(--s2)",
+                  marginBottom: "var(--hero-phone-mb, var(--s2))",
                 }}
               >
                 {[company.contact.primary, company.contact.secondary].map((num) => (
@@ -306,13 +311,13 @@ export default function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 1.0 }}
-                className="hero-stats-grid"
+                className="hero-stats-grid hero-stats"
                 style={{
                   display: "grid",
                   gridTemplateColumns: "repeat(4, 1fr)",
                   gap: "var(--s4)",
                   borderTop: "1px solid rgba(216,185,163,0.13)",
-                  paddingTop: "var(--s4)",
+                  paddingTop: "var(--hero-stats-pt, var(--s4))",
                   width: "100%",
                 }}
               >
@@ -341,6 +346,7 @@ export default function Hero() {
           {/* ══ SCROLL CUE ════════════════════════════════════ */}
           <motion.button
             onClick={() => scrollTo("#about")}
+            className="hero-scroll-cue"
             style={{
               opacity:       cueOpacity,
               position:      "absolute",

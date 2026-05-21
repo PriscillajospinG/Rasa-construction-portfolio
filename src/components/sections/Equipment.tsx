@@ -152,23 +152,11 @@ export default function Equipment() {
 
         {/* ── Note strip ── */}
         <Reveal delay={0.15}>
-          <div
-            style={{
-              marginTop:    "var(--s10)",
-              padding:      "var(--s5)",
-              borderRadius: "var(--r-lg)",
-              background:   "linear-gradient(135deg, var(--clr-primary), var(--clr-primary-mid))",
-              display:      "grid",
-              gridTemplateColumns: "1fr auto",
-              alignItems:   "center",
-              gap:          "var(--s6)",
-            }}
-            className="grid-cols-1 md:grid-cols-[1fr_auto]"
-          >
+          <div className="package-strip">
             <div>
               <div
                 className="font-m text-white"
-                style={{ fontWeight: 800, fontSize: "var(--t-body)", marginBottom: "6px" }}
+                style={{ fontWeight: 800, fontSize: "var(--t-body)", marginBottom: "var(--s1)" }}
               >
                 Need a custom equipment package?
               </div>
@@ -184,7 +172,7 @@ export default function Equipment() {
               href="#contact"
               variant="primary"
               onClick={(e) => { e.preventDefault(); scrollTo("#contact"); }}
-              style={{ whiteSpace: "nowrap", background: "var(--clr-accent)", color: "var(--clr-primary-dark)", fontWeight: 700 }}
+              style={{ fontWeight: 700 }}
             >
               Get a Package Quote
             </Button>
