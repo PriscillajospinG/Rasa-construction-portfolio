@@ -131,10 +131,7 @@ export default function Contact() {
                 </div>
                 <Button as="button" variant="dark" disabled={status === "sending"}
                   style={{ width: "100%", marginTop: "var(--s1)", justifyContent: "center" }}>
-                  {status === "sending" && "Sending..."}
-                  {status === "idle" && <><Send size={15} /> Send Enquiry</>}
-                  {status === "success" && "Enquiry Sent"}
-                  {status === "error" && "Try Again"}
+                  {status === "sending" ? "Sending..." : "Send Enquiry"}
                 </Button>
               </form>
               {status === "error" && (

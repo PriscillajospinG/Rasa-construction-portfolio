@@ -12,4 +12,6 @@ export interface Service {
   iconName:    string;
   /** Optional background image path */
   image?:      string;
+  /** Alt text for the service image */
+  alt?:        string;
 }
