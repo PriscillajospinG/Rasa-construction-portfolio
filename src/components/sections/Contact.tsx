@@ -31,6 +31,7 @@ export default function Contact() {
     contactPref: "phone",
   });
   const [status, setStatus] = useState<Status>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const update = (k: keyof FormData) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -39,19 +40,16 @@ export default function Contact() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
-
-    console.log("EmailJS config:", {
-      service: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-      template: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-      publicKeyExists: Boolean(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY),
-    });
+    setErrorMessage("");
 
     const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
     const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
     const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
     if (!serviceId || !templateId || !publicKey) {
-      console.error("EmailJS environment variables are missing");
+      const errorMsg = "EmailJS environment variables are missing";
+      console.error(errorMsg);
+      setErrorMessage(errorMsg + ". Please contact support.");
       setStatus("error");
       return;
     }
@@ -74,12 +72,22 @@ export default function Contact() {
       );
       setStatus("success");
     } catch (error: any) {
-      console.error("EmailJS sending failed:", {
-        error,
-        text: error?.text,
-        status: error?.status,
-        message: error?.message,
-      });
+      const errorDetails = {
+        text: error?.text || error?.response?.text || "",
+        status: error?.status || error?.response?.status || "",
+        message: error?.message || "",
+        name: error?.name || "",
+        raw: JSON.stringify(error, Object.getOwnPropertyNames(error)),
+      };
+
+      console.error("EmailJS sending failed:", errorDetails);
+
+      setErrorMessage(
+        errorDetails.text ||
+        errorDetails.message ||
+        "Email could not be sent. Please try WhatsApp or call us directly."
+      );
+
       setStatus("error");
     }
   };
@@ -210,9 +218,11 @@ export default function Contact() {
                     </Button>
                   </form>
                   {status === "error" && (
-                    <div className="mt-4 text-center">
-                      <p className="t-sm text-red-600">Email could not be sent. Please try again or send your enquiry on WhatsApp.</p>
-                      <Button href={waLink(company.contact.whatsapp, getWhatsAppMessage())} target="_blank" rel="noopener noreferrer" variant="dark" className="mt-2 inline-flex items-center gap-2">
+                    <div className="mt-4 text-center p-3 rounded-md bg-red-50 border border-red-200">
+                      <p className="t-sm text-red-700 font-semibold">
+                        {errorMessage}
+                      </p>
+                      <Button href={waLink(company.contact.whatsapp, getWhatsAppMessage())} target="_blank" rel="noopener noreferrer" variant="dark" className="mt-3 inline-flex items-center gap-2">
                         <MessageCircle size={15} />
                         <span>Send on WhatsApp</span>
                       </Button>
