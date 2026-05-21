@@ -98,9 +98,9 @@ export default function Contact() {
                 <div className="flex items-center space-x-4">
                   <Phone size={20} className="text-[var(--clr-primary)]" />
                   <div>
-                    <a href={`tel:${company.contact.phone1}`} className="hover:text-[var(--clr-primary)] transition-colors">{company.contact.phone1}</a>
+                    <a href={`tel:${company.contact.primary}`} className="hover:text-[var(--clr-primary)] transition-colors">{company.contact.primary}</a>
                     <span className="mx-2">/</span>
-                    <a href={`tel:${company.contact.phone2}`} className="hover:text-[var(--clr-primary)] transition-colors">{company.contact.phone2}</a>
+                    <a href={`tel:${company.contact.secondary}`} className="hover:text-[var(--clr-primary)] transition-colors">{company.contact.secondary}</a>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4">
@@ -132,7 +132,7 @@ export default function Contact() {
                 </div>
                 <h3 className="t-h2 text-[var(--clr-primary)]">Enquiry Sent!</h3>
                 <p className="t-sm text-gray-600">We will contact you within one business day.</p>
-                <Button href={`tel:${company.contact.phone1.replace(/\s/g, "")}`} variant="primary" className="mt-6">
+                <Button href={`tel:${(company.contact.primary ?? "").replace(/\s/g, "")}`} variant="primary" className="mt-6">
                   Or Call Now
                 </Button>
               </div>

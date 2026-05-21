@@ -80,34 +80,45 @@ export default function Footer() {
             <h4 className="t-label" style={{ color: "rgba(255,255,255,0.45)", marginBottom: "var(--s4)" }}>Contact</h4>
             <ul style={{ display: "flex", flexDirection: "column", gap: "var(--s3)" }}>
               <li>
-                <a href={`tel:${company.contact.primary.replace(/\s/g, "")}`} className="flex items-start gap-3 group">
+                <a href={`tel:${(company.contact.primary ?? "").replace(/\s/g, "")}`} className="flex items-start gap-3 group">
                   <Phone size={14} style={{ color: "var(--clr-accent)", flexShrink: 0, marginTop: "2px" }} />
-                  <div className="t-sm group-hover:text-white transition-colors" style={{ color: "rgba(255,255,255,0.55)", lineHeight: 1.7 }}>
-                    {company.contact.primary}<br />{company.contact.secondary}
+                  <div className="t-sm">
+                    {company.contact.primary}<br />
+                    {company.contact.secondary}
                   </div>
                 </a>
               </li>
               <li>
                 <a href={`mailto:${company.contact.email}`} className="flex items-start gap-3 group">
-                  <Mail size={14} style={{ color: "var(--clr-accent)", flexShrink: 0, marginTop: "2px" }} />
-                  <span className="t-sm group-hover:text-white transition-colors break-all" style={{ color: "rgba(255,255,255,0.55)" }}>{company.contact.email}</span>
+                  <Mail size={18} className="text-white/60 group-hover:text-white mt-1 transition-colors" />
+                  <span className="t-sm">{company.contact.email}</span>
                 </a>
               </li>
               <li>
-                <div className="flex items-start gap-3">
-                  <MapPin size={14} style={{ color: "var(--clr-accent)", flexShrink: 0, marginTop: "2px" }} />
-                  <span className="t-sm" style={{ color: "rgba(255,255,255,0.55)", lineHeight: 1.7 }}>{company.location.full}</span>
-                </div>
+                <a href={company.contact.mapLinkUrl} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 group">
+                  <MapPin size={18} className="text-white/60 group-hover:text-white mt-1 transition-colors" />
+                  <span className="t-sm">{company.contact.address}</span>
+                </a>
               </li>
             </ul>
-            <a href={waLink(company.contact.whatsapp)} target="_blank" rel="noopener noreferrer"
-              className="btn" style={{ marginTop: "var(--s4)", background: "#25D366", color: "white", padding: "0.6rem 1.25rem", borderRadius: "var(--r-sm)", fontFamily: "'Poppins',sans-serif", fontWeight: 600, fontSize: "var(--t-sm)", display: "inline-flex" }}>
-              💬 WhatsApp Us
-            </a>
           </div>
+        </div>
+
+        <div className="h-px bg-white/10 my-12"></div>
+
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-6 text-sm">
+          <p className="text-white/50">
+            &copy; {new Date().getFullYear()} {company.name}. All rights reserved.
+          </p>
+          <p className="text-white/50">
+            Designed & Developed by <a href="https://www.priscilla.co.in" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white underline">Priscilla J</a>
+          </p>
         </div>
       </div>
       </Reveal>
+    </footer>
+  );
+}
 
       {/* Bottom bar */}
       <div style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}>
