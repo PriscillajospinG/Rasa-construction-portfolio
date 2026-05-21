@@ -362,6 +362,12 @@ input, textarea { cursor: text !important; }
   border: 1px solid var(--clr-primary-lt);
 }
 
+.btn-outline:hover {
+  background: var(--clr-primary-lt);
+  border-color: var(--clr-primary-lt);
+  color: var(--clr-dark);
+}
+
 .btn-ghost {
   background: transparent;
   color: white;
@@ -1124,5 +1130,49 @@ input, textarea { cursor: text !important; }
   }
   .package-strip .btn {
     justify-self: start;
+  }
+}
+
+.btn-outline:hover {
+  background: var(--clr-primary-lt);
+  border-color: var(--clr-primary-lt);
+  color: var(--clr-dark);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: var(--s6);
+  align-items: stretch;
+}
+
+.contact-map-card {
+  min-height: 460px;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(8, 51, 53, 0.16);
+  background: #083335;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-map-frame-wrapper {
+  flex-grow: 1;
+  min-height: 360px;
+}
+
+.contact-map-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+@media (max-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-map-card {
+    min-height: 320px;
   }
 }

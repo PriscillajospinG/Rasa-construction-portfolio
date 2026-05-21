@@ -69,46 +69,46 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" style={{ background: "var(--clr-bg)" }} className="section relative overflow-hidden">
+    <section id="contact" className="section contact-section">
       <div className="container">
-        <div className="grid lg:grid-cols-2 lg:gap-12 gap-8 items-start">
+        <div className="contact-grid">
           {/* Left: Map and details */}
           <Reveal direction="left">
-            <div className="bg-white p-6 sm:p-8 rounded-lg shadow-lg border border-[var(--clr-primary-lt)] h-full flex flex-col">
-              <h3 className="font-m font-extrabold text-2xl text-[var(--clr-primary)] mb-4">
-                Visit / Locate Us
-              </h3>
-              <div className="aspect-w-16 aspect-h-9 rounded-md overflow-hidden mb-6">
+            <div className="contact-map-card">
+              <div className="p-6 sm:p-8">
+                <h3 className="font-m font-extrabold text-2xl text-white mb-4">
+                  Visit / Locate Us
+                </h3>
+                <div className="space-y-4 text-gray-300">
+                  <div>
+                    <h4 className="font-semibold text-lg text-gray-100">Rasa Construction</h4>
+                    <p className="text-gray-400">{company.contact.address}</p>
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <Phone size={20} className="text-[var(--clr-primary)]" />
+                    <div>
+                      <a href={`tel:${company.contact.primary}`} className="hover:text-white transition-colors">{company.contact.primary}</a>
+                      <span className="mx-2">/</span>
+                      <a href={`tel:${company.contact.secondary}`} className="hover:text-white transition-colors">{company.contact.secondary}</a>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <Mail size={20} className="text-[var(--clr-primary)]" />
+                    <a href={`mailto:${company.contact.email}`} className="hover:text-white transition-colors">{company.contact.email}</a>
+                  </div>
+                </div>
+              </div>
+              <div className="contact-map-frame-wrapper">
                 <iframe
+                  title="Rasa Construction location map"
                   src={company.contact.mapEmbedUrl}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
+                  className="contact-map-frame"
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  className="w-full h-full absolute inset-0"
                 ></iframe>
               </div>
-              <div className="space-y-4 text-gray-700">
-                <div>
-                  <h4 className="font-semibold text-lg text-gray-800">Rasa Construction</h4>
-                  <p className="text-gray-600">{company.contact.address}</p>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <Phone size={20} className="text-[var(--clr-primary)]" />
-                  <div>
-                    <a href={`tel:${company.contact.primary}`} className="hover:text-[var(--clr-primary)] transition-colors">{company.contact.primary}</a>
-                    <span className="mx-2">/</span>
-                    <a href={`tel:${company.contact.secondary}`} className="hover:text-[var(--clr-primary)] transition-colors">{company.contact.secondary}</a>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <Mail size={20} className="text-[var(--clr-primary)]" />
-                  <a href={`mailto:${company.contact.email}`} className="hover:text-[var(--clr-primary)] transition-colors">{company.contact.email}</a>
-                </div>
-              </div>
-              <div className="mt-auto pt-6">
+              <div className="p-6 sm:p-8 mt-auto">
                 <Button
                   href={company.contact.mapLinkUrl}
                   target="_blank"
@@ -126,19 +126,19 @@ export default function Contact() {
           {/* Right: Form panel */}
           <Reveal direction="right">
             {status === "success" ? (
-              <div className="bg-white p-8 rounded-lg shadow-lg border border-[var(--clr-primary-lt)] flex flex-col items-center text-center h-full justify-center">
+              <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-200 flex flex-col items-center text-center h-full justify-center">
                 <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
                   <CheckCircle2 size={36} className="text-green-600" />
                 </div>
-                <h3 className="t-h2 text-[var(--clr-primary)]">Enquiry Sent!</h3>
+                <h3 className="t-h2 text-gray-800">Enquiry Sent!</h3>
                 <p className="t-sm text-gray-600">We will contact you within one business day.</p>
                 <Button href={`tel:${(company.contact.primary ?? "").replace(/\s/g, "")}`} variant="primary" className="mt-6">
                   Or Call Now
                 </Button>
               </div>
             ) : (
-              <div className="bg-white p-6 sm:p-8 rounded-lg shadow-lg border border-[var(--clr-primary-lt)]">
-                <h3 className="font-m font-extrabold text-2xl text-[var(--clr-primary)] mb-1">
+              <div className="bg-white p-6 sm:p-8 rounded-lg shadow-lg border border-gray-200">
+                <h3 className="font-m font-extrabold text-2xl text-gray-800 mb-1">
                   Request a Free Quote
                 </h3>
                 <p className="t-sm text-gray-500 mb-6">
