@@ -109,45 +109,13 @@ export default function PageWrapper({ children }: Props) {
                 gap:           "var(--s4)",
               }}
             >
-              {/* Logo mark */}
+              {/* Logo */}
               <motion.div
                 initial={{ opacity: 0, y: 20, scale: 0.88 }}
                 animate={{ opacity: 1, y: 0,  scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
+                transition={{ duration: 0.8, delay: 0.2, ease: EASE }}
               >
-                <RasaLogo size={52} color="#D8B9A3" />
-              </motion.div>
-
-              {/* Wordmark */}
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.35, ease: EASE }}
-                style={{ textAlign: "center" }}
-              >
-                <div
-                  className="font-m"
-                  style={{
-                    fontWeight:    900,
-                    fontSize:      "1.35rem",
-                    color:         "white",
-                    letterSpacing: "-0.02em",
-                    lineHeight:    1,
-                  }}
-                >
-                  {company.name.toUpperCase()}
-                </div>
-                <div
-                  className="t-label"
-                  style={{
-                    color:         "rgba(216,185,163,0.55)",
-                    letterSpacing: "0.28em",
-                    fontSize:      "0.58rem",
-                    marginTop:     "6px",
-                  }}
-                >
-                  CONSTRUCTION
-                </div>
+                <RasaLogo size="xl" variant="light" className="loading-logo" />
               </motion.div>
 
               {/* Thin separator */}

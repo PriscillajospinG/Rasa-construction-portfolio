@@ -1,29 +1,53 @@
+import Image from "next/image";
+
 interface RasaLogoProps {
-  size?:      number;
-  color?:     string;
+  size?: number | "sm" | "md" | "lg" | "xl";
+  variant?: "light" | "dark";
   className?: string;
+  color?: string; // Kept for backward compatibility
 }
 
 /**
- * Rasa Construction architectural building mark.
- * Inline SVG — scales perfectly, recolorable via `color` prop.
+ * Rasa Construction brand logo.
+ * Uses Next.js Image component to load the cropped transparent logo assets.
  */
-export default function RasaLogo({ size = 48, color = "#D8B9A3", className = "" }: RasaLogoProps) {
+export default function RasaLogo({
+  size = "md",
+  variant = "light",
+  className = "",
+}: RasaLogoProps) {
+  let width = 94;
+  let height = 54;
+
+  if (typeof size === "number") {
+    // Treat numeric size as height and calculate width using the 1.74 aspect ratio
+    height = size;
+    width = Math.round(size * 1.74);
+  } else {
+    const sizes = {
+      sm: { width: 70, height: 40 },
+      md: { width: 94, height: 54 },
+      lg: { width: 129, height: 74 },
+      xl: { width: 278, height: 160 },
+    };
+    const current = sizes[size] || sizes.md;
+    width = current.width;
+    height = current.height;
+  }
+
+  const logoSrc = variant === "light" ? "/logos/rasa-logo-flat-light.png" : "/logos/rasa-logo-flat-dark.png";
+
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 72 80"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      aria-label="Rasa Construction logo"
-    >
-      <rect x="2"  y="4"  width="11" height="72" rx="1.5" stroke={color} strokeWidth="2.5" />
-      <rect x="16" y="22" width="9"  height="54" rx="1.5" stroke={color} strokeWidth="2.5" />
-      <rect x="47" y="22" width="9"  height="54" rx="1.5" stroke={color} strokeWidth="2.5" />
-      <rect x="59" y="4"  width="11" height="72" rx="1.5" stroke={color} strokeWidth="2.5" />
-      <path d="M25 58 C25 36 47 36 47 58" stroke={color} strokeWidth="2.5" strokeLinecap="round" fill="none" />
-    </svg>
+    <div className={`relative flex items-center ${className}`} style={{ height: `${height}px` }}>
+      <Image
+        src={logoSrc}
+        alt="Rasa Construction Logo"
+        width={width}
+        height={height}
+        priority
+        className="object-contain"
+        style={{ width: "auto", height: `${height}px` }}
+      />
+    </div>
   );
 }

@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Reveal from "@/components/animations/Reveal";
-import Container from "@/components/layout/Container";
 import { processSteps } from "@/data/process";
 import { lineGrowVertical, itemLeft, listStagger, EASE_CINEMATIC } from "@/lib/animations";
 
@@ -16,7 +15,7 @@ export default function Process() {
       id="process"
       ref={ref}
       style={{ background: "var(--clr-primary-dark)", position: "relative", overflow: "hidden" }}
-      className="grain"
+      className="section grain"
     >
       {/* Architectural grid */}
       <div
@@ -38,7 +37,7 @@ export default function Process() {
         }}
       />
 
-      <Container section>
+      <div className="container">
         {/* ── Header ── */}
         <Reveal>
           <div
@@ -145,7 +144,7 @@ export default function Process() {
             ))}
           </motion.div>
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

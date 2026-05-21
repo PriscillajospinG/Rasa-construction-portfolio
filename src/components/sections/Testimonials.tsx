@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
-import Container from "@/components/layout/Container";
 import { testimonials } from "@/data/testimonials";
 import { cardGridStagger, itemReveal, quoteFade, heroReveal, EASE_CINEMATIC } from "@/lib/animations";
 
@@ -35,12 +34,12 @@ export default function Testimonials() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="testimonials" className="relative overflow-hidden grain"
+    <section id="testimonials" className="section relative overflow-hidden grain"
       style={{ background: "linear-gradient(160deg, var(--clr-primary-dark) 0%, var(--clr-primary) 60%, var(--clr-primary-dark) 100%)" }}>
       <div className="absolute inset-0 pointer-events-none"
         style={{ background: "radial-gradient(ellipse at 50% -10%, rgba(216,185,163,0.06) 0%, transparent 60%)" }} />
 
-      <Container section ref={ref}>
+      <div className="container" ref={ref}>
         {/* ── Header ── */}
         <Reveal style={{ marginBottom: "var(--s12)" }}>
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "var(--s4)" }}>
@@ -195,7 +194,7 @@ export default function Testimonials() {
             ))}
           </motion.div>
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

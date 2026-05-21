@@ -8,7 +8,6 @@ import { ArrowRight } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
-import Container from "@/components/layout/Container";
 import { services } from "@/data/services";
 import { company } from "@/data/company";
 import { cardGridStagger, itemReveal, scaleIn, EASE_CINEMATIC } from "@/lib/animations";
@@ -38,7 +37,8 @@ export default function Services() {
         </svg>
       </div>
 
-      <Container section ref={ref}>
+      <div className="section" ref={ref}>
+        <div className="container">
         {/* ── Header: label left, headline right — editorial split ── */}
         <div style={{ display: "grid", gridTemplateColumns: "3fr 9fr", gap: "var(--s8)", alignItems: "end", marginBottom: "var(--s12)" }}
           className="grid-cols-1 lg:grid-cols-[3fr_9fr]">
@@ -194,7 +194,8 @@ export default function Services() {
             </Button>
           </div>
         </Reveal>
-      </Container>
+        </div>
+      </div>
     </section>
   );
 }

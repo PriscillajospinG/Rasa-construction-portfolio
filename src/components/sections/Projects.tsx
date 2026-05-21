@@ -7,7 +7,6 @@ import { ZoomIn, MapPin } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
-import Container from "@/components/layout/Container";
 import { projects, projectCategories } from "@/data/projects";
 import { scrollTo } from "@/lib/utils";
 import { scaleIn, cardGridStagger, itemReveal, EASE_CINEMATIC } from "@/lib/animations";
@@ -28,8 +27,8 @@ export default function Projects() {
     : galleryProjects.filter((p) => p.category === active);
 
   return (
-    <section id="projects" style={{ background: "var(--clr-bg)" }} className="relative overflow-hidden">
-      <Container section ref={ref}>
+    <section id="projects" style={{ background: "var(--clr-bg)" }} className="section relative overflow-hidden">
+      <div className="container" ref={ref}>
 
         {/* ── Header: asymmetric — number left, content right ── */}
         <div style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "var(--s8)", alignItems: "start", marginBottom: "var(--s12)" }}
@@ -184,7 +183,7 @@ export default function Projects() {
             </Button>
           </div>
         </Reveal>
-      </Container>
+      </div>
     </section>
   );
 }

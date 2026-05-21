@@ -20,7 +20,7 @@ export default function Footer() {
       <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(216,185,163,0.4), transparent)" }} />
 
       <Reveal direction="up" distance={24} duration={0.9} threshold="-40px">
-      <div className="c" style={{ paddingBlock: "var(--s16)" }}>
+      <div className="container" style={{ paddingBlock: "var(--s16)" }}>
         {/* 4-column grid */}
         <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1.5fr", gap: "var(--s8)" }}
           className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
@@ -28,11 +28,7 @@ export default function Footer() {
           {/* Brand column */}
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: "var(--s2)", marginBottom: "var(--s3)" }}>
-              <RasaLogo size={44} color="#D8B9A3" />
-              <div>
-                <div className="font-m text-white" style={{ fontWeight: 900, fontSize: "1.1rem", letterSpacing: "-0.01em" }}>RASA</div>
-                <div className="t-label" style={{ color: "var(--clr-accent)", fontSize: "0.58rem", letterSpacing: "0.25em" }}>Construction</div>
-              </div>
+              <RasaLogo size="md" variant="light" />
             </div>
             <p className="t-sm" style={{ color: "rgba(255,255,255,0.38)", lineHeight: 1.8, marginBottom: "var(--s4)" }}>
               Founded in 2000, Rasa Construction has delivered 25+ years of reliable scaffolding, centring materials, vertical hoist rental, and concrete works across Tamil Nadu.
@@ -115,7 +111,7 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-        <div className="c" style={{ paddingBlock: "var(--s3)", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "var(--s2)" }}>
+        <div className="container" style={{ paddingBlock: "var(--s3)", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "var(--s2)" }}>
           <span className="t-sm" style={{ color: "rgba(255,255,255,0.22)" }}>
             © {new Date().getFullYear()} {company.name}. All rights reserved. Owner: {company.owner}
           </span>

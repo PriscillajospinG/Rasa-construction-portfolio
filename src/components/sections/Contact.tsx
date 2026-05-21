@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { Phone, MessageCircle, Mail, MapPin, Send, CheckCircle2, ArrowUpRight } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
 import Button from "@/components/ui/Button";
-import Container from "@/components/layout/Container";
 import { company } from "@/data/company";
 import { waLink } from "@/lib/utils";
 import { listStagger, itemLeft, EASE_CINEMATIC } from "@/lib/animations";
@@ -31,8 +30,8 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" style={{ background: "var(--clr-bg)" }} className="relative overflow-hidden">
-      <Container section>
+    <section id="contact" style={{ background: "var(--clr-bg)" }} className="section relative overflow-hidden">
+      <div className="container">
 
         {/* ── Full-bleed header band — dark, architectural ── */}
         <Reveal>
@@ -197,7 +196,7 @@ export default function Contact() {
             )}
           </Reveal>
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

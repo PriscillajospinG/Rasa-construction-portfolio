@@ -5,7 +5,6 @@ import { motion, useInView } from "framer-motion";
 import * as LucideIcons from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
-import Container from "@/components/layout/Container";
 import Button from "@/components/ui/Button";
 import { equipment } from "@/data/equipment";
 import { company } from "@/data/company";
@@ -24,6 +23,7 @@ export default function Equipment() {
     <section
       id="equipment"
       ref={ref}
+      className="section"
       style={{ background: "white", position: "relative", overflow: "hidden" }}
     >
       {/* Faint diagonal texture */}
@@ -35,7 +35,7 @@ export default function Equipment() {
         }}
       />
 
-      <Container section>
+      <div className="container">
         {/* ── Header ── */}
         <Reveal>
           <div
@@ -190,7 +190,7 @@ export default function Equipment() {
             </Button>
           </div>
         </Reveal>
-      </Container>
+      </div>
     </section>
   );
 }

@@ -34,27 +34,10 @@ export default function Hero() {
       id="home"
       ref={sectionRef}
       aria-label="Hero — Rasa Construction"
-      style={{
-        position:        "relative",
-        height:          "130vh",     /* Taller parent to allow sticky background overlap */
-        display:         "flex",
-        flexDirection:   "column",
-        justifyContent:  "flex-start",
-        background:      "#030f10",
-      }}
+      className="hero-section"
     >
       {/* ══ STICKY BACKGROUND LAYER ══════════════════════ */}
-      <div
-        style={{
-          position: "sticky",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100vh",
-          overflow: "hidden",
-          zIndex: 1,
-        }}
-      >
+      <div className="hero-sticky-bg">
         {/* Background photo */}
         <motion.div
           style={{
@@ -78,20 +61,12 @@ export default function Hero() {
         </motion.div>
 
         {/* Overlays */}
-        {/* Primary — strong left darkness where text lives */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(100deg, rgba(3,15,16,0.97) 0%, rgba(3,15,16,0.92) 28%, rgba(5,25,26,0.72) 52%, rgba(5,31,33,0.28) 75%, rgba(5,31,33,0.04) 100%)",
-          }}
-          aria-hidden
-        />
+        <div className="hero-overlay" aria-hidden />
 
         {/* Top vignette — navbar legibility */}
         <div
           className="absolute top-0 left-0 right-0"
-          style={{ height: "10rem", background: "linear-gradient(to bottom, rgba(3,15,16,0.70) 0%, transparent 100%)" }}
+          style={{ height: "10rem", background: "linear-gradient(to bottom, rgba(3,15,16,0.70) 0%, transparent 100%)", zIndex: 1 }}
           aria-hidden
         />
 
@@ -101,12 +76,13 @@ export default function Hero() {
           style={{
             height: "18rem",
             background: "linear-gradient(to top, rgba(3,15,16,1) 0%, rgba(3,15,16,0.6) 45%, transparent 100%)",
+            zIndex: 1,
           }}
           aria-hidden
         />
 
         {/* Grain */}
-        <div className="absolute inset-0 grain pointer-events-none" aria-hidden />
+        <div className="absolute inset-0 grain pointer-events-none" style={{ zIndex: 1 }} aria-hidden />
 
         {/* Architectural grid — left third only */}
         <div
@@ -119,260 +95,283 @@ export default function Hero() {
               "linear-gradient(to right, black 0%, rgba(0,0,0,0.5) 28%, transparent 55%)",
             WebkitMaskImage:
               "linear-gradient(to right, black 0%, rgba(0,0,0,0.5) 28%, transparent 55%)",
+            zIndex: 1,
           }}
           aria-hidden
         />
 
         {/* ══ CONTENT (Inside Sticky Wrapper) ══════════════ */}
         <motion.div
+          className="container hero-content-container"
           style={{
             y:        contentY,
             opacity:  contentOpacity,
-            position: "absolute",
-            bottom:   0,
-            left:     0,
-            right:    0,
-            zIndex:   10,
-            maxWidth: "var(--container-max)",
-            width:    "100%",
-            margin:   "0 auto",
-            padding:  "0 var(--container-px) var(--s12)",
           }}
         >
-          {/* ── Eyebrow ── */}
-          <motion.div
-            initial={{ opacity: 0, x: -16 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease }}
-            style={{
-              display:      "flex",
-              alignItems:   "center",
-              gap:          "var(--s2)",
-              marginBottom: "var(--s4)",
-            }}
-          >
-            <span
-              style={{
-                display:    "block",
-                width:      "2.5rem",
-                height:     "1px",
-                background: "var(--clr-accent)",
-                flexShrink: 0,
-              }}
-            />
-            <span
-              className="t-label"
-              style={{ color: "var(--clr-accent)", letterSpacing: "0.22em", fontSize: "0.62rem" }}
-            >
-              RASA CONSTRUCTION&nbsp;&nbsp;·&nbsp;&nbsp;ACHANKUTTAM
-            </span>
-          </motion.div>
-
-          {/* ── Headline ── */}
-          <div style={{ marginBottom: "var(--s4)", overflow: "hidden" }}>
-            {[
-              { text: "Scaffolding, Centring",          delay: 0.30 },
-              { text: "& Concrete Support",              delay: 0.42 },
-              { text: "Built for Real",                  delay: 0.54 },
-              { text: "Site\u00a0Work.",                 delay: 0.66, warm: true },
-            ].map(({ text, delay, warm }) => (
-              <div key={text} style={{ overflow: "hidden" }}>
-                <motion.h1
-                  initial={{ y: "105%", opacity: 0 }}
-                  animate={{ y: "0%",   opacity: 1 }}
-                  transition={{ duration: 0.9, delay, ease }}
-                  className="font-m"
+          {/* 12-Column Grid */}
+          <div className="hero-content-grid">
+            <div className="hero-content-col">
+              
+              {/* ── Eyebrow ── */}
+              <motion.div
+                initial={{ opacity: 0, x: -16 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2, ease }}
+                style={{
+                  display:      "flex",
+                  alignItems:   "center",
+                  gap:          "var(--s2)",
+                  marginBottom: "var(--s2)",
+                }}
+              >
+                <span
+                  className="t-label"
+                  style={{ color: "var(--clr-accent)", letterSpacing: "0.22em", fontSize: "0.62rem" }}
+                >
+                  RASA CONSTRUCTION&nbsp;&nbsp;·&nbsp;&nbsp;ACHANKUTTAM
+                </span>
+                <span
                   style={{
-                    fontSize:      "var(--t-hero)",
-                    fontWeight:    900,
-                    lineHeight:    0.96,
-                    letterSpacing: "-0.03em",
-                    color:         warm ? "var(--clr-accent)" : "white",
-                    display:       "block",
-                    textShadow:    "0 2px 20px rgba(0,0,0,0.30)",
+                    display:    "block",
+                    width:      "2.5rem",
+                    height:     "1px",
+                    background: "var(--clr-accent)",
+                    flexShrink: 0,
+                  }}
+                />
+              </motion.div>
+
+              {/* ── Headline ── */}
+              <motion.h1
+                initial={{ y: 24, opacity: 0 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.3, ease }}
+                className="font-m"
+                style={{
+                  fontSize:      "var(--t-hero)",
+                  fontWeight:    900,
+                  lineHeight:    1.05,
+                  letterSpacing: "-0.03em",
+                  color:         "white",
+                  textShadow:    "0 2px 20px rgba(0,0,0,0.30)",
+                  marginBottom:  "var(--s2)",
+                }}
+              >
+                Scaffolding, Centring <br className="hidden sm:inline" />
+                &amp; Concrete Support <br className="hidden sm:inline" />
+                Built for Real <span className="t-italic">Site Work.</span>
+              </motion.h1>
+
+              {/* ── Thin architectural separator ── */}
+              <motion.div
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                transition={{ duration: 0.7, delay: 0.5, ease }}
+                style={{
+                  height:          "1px",
+                  width:           "60%",
+                  maxWidth:        "380px",
+                  background:      "linear-gradient(to right, rgba(216,185,163,0.40), transparent)",
+                  transformOrigin: "left",
+                  marginBottom:    "var(--s2)",
+                }}
+                aria-hidden
+              />
+
+              {/* ── Subtext ── */}
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.6, ease }}
+                style={{
+                  fontFamily:   "'Inter', sans-serif",
+                  fontSize:     "var(--t-sm)",
+                  color:        "rgba(255,255,255,0.65)",
+                  lineHeight:   1.78,
+                  maxWidth:     "420px",
+                  marginBottom: "var(--s2)",
+                }}
+              >
+                Rasa Construction provides dependable scaffolding materials, centring support,
+                vertical hoist rental, and concrete work services for residential and commercial
+                building sites across Tamil Nadu.
+              </motion.p>
+
+              {/* ── Trust line ── */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.7 }}
+                style={{
+                  display:      "flex",
+                  alignItems:   "center",
+                  gap:          "var(--s2)",
+                  marginBottom: "var(--s2)",
+                }}
+              >
+                <span
+                  className="t-label"
+                  style={{ color: "rgba(255,255,255,0.38)", fontSize: "0.62rem", letterSpacing: "0.12em" }}
+                >
+                  Led by {company.owner}&nbsp;&nbsp;·&nbsp;&nbsp;Direct site support&nbsp;&nbsp;·&nbsp;&nbsp;Tamil Nadu
+                </span>
+                <span
+                  style={{
+                    display:    "block",
+                    width:      "1.25rem",
+                    height:     "1px",
+                    background: "rgba(216,185,163,0.40)",
+                  }}
+                  aria-hidden
+                />
+              </motion.div>
+
+              {/* ── CTAs ── */}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.8, ease }}
+                className="hero-cta-wrapper"
+                style={{
+                  display:      "flex",
+                  flexWrap:     "wrap",
+                  gap:          "var(--s2)",
+                  marginBottom: "var(--s2)",
+                }}
+              >
+                <button
+                  onClick={() => scrollTo("#services")}
+                  className="btn btn-primary"
+                  style={{
+                    padding:       "var(--s2) var(--s4)",
+                    fontSize:      "var(--t-sm)",
+                    fontWeight:    700,
+                    letterSpacing: "0.02em",
                   }}
                 >
-                  {text}
-                </motion.h1>
-              </div>
-            ))}
-          </div>
-
-          {/* ── Thin architectural separator ── */}
-          <motion.div
-            initial={{ scaleX: 0, opacity: 0 }}
-            animate={{ scaleX: 1, opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.80, ease }}
-            style={{
-              height:          "1px",
-              width:           "60%",
-              maxWidth:        "380px",
-              background:      "linear-gradient(to right, rgba(216,185,163,0.40), transparent)",
-              transformOrigin: "left",
-              marginBottom:    "var(--s4)",
-            }}
-            aria-hidden
-          />
-
-          {/* ── Subtext ── */}
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.88, ease }}
-            style={{
-              fontFamily:   "'Inter', sans-serif",
-              fontSize:     "var(--t-sm)",
-              color:        "rgba(255,255,255,0.65)",
-              lineHeight:   1.78,
-              maxWidth:     "420px",
-              marginBottom: "var(--s6)",
-            }}
-          >
-            Rasa Construction provides dependable scaffolding materials, centring support,
-            vertical hoist rental, and concrete work services for residential and commercial
-            building sites across Tamil Nadu.
-          </motion.p>
-
-          {/* ── Trust line ── */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1.0 }}
-            style={{
-              display:      "flex",
-              alignItems:   "center",
-              gap:          "var(--s2)",
-              marginBottom: "var(--s4)",
-            }}
-          >
-            <span
-              style={{
-                display:    "block",
-                width:      "1.25rem",
-                height:     "1px",
-                background: "rgba(216,185,163,0.40)",
-              }}
-              aria-hidden
-            />
-            <span
-              className="t-label"
-              style={{ color: "rgba(255,255,255,0.38)", fontSize: "0.62rem", letterSpacing: "0.12em" }}
-            >
-              Led by {company.owner}&nbsp;&nbsp;·&nbsp;&nbsp;Direct site support&nbsp;&nbsp;·&nbsp;&nbsp;Tamil Nadu
-            </span>
-          </motion.div>
-
-          {/* ── CTAs ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.08, ease }}
-            style={{
-              display:      "flex",
-              flexWrap:     "wrap",
-              gap:          "var(--s2)",
-              marginBottom: "var(--s8)",
-            }}
-          >
-            {/* Primary Accent Button — uses shared .btn system */}
-            <button
-              onClick={() => scrollTo("#services")}
-              className="btn btn-primary"
-              style={{
-                padding:       "var(--s2) var(--s4)",
-                fontSize:      "var(--t-sm)",
-                fontWeight:    700,
-                letterSpacing: "0.02em",
-              }}
-            >
-              View Services
-            </button>
-            {/* Ghost secondary */}
-            <button
-              onClick={() => scrollTo("#contact")}
-              className="btn btn-ghost"
-              style={{
-                padding:   "var(--s2) var(--s4)",
-                fontSize:  "var(--t-sm)",
-              }}
-            >
-              Get a Quote
-            </button>
-          </motion.div>
-
-          {/* ══ BOTTOM STRIP — contact numbers ════════ */}
-          <div
-            style={{
-              borderTop:  "1px solid rgba(216,185,163,0.13)",
-              paddingTop: "var(--s4)",
-              display:    "flex",
-              flexWrap:   "wrap",
-              alignItems: "center",
-              gap:        "var(--s4)",
-            }}
-          >
-            {/* Phone numbers */}
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--s4)" }}>
-              {[company.contact.primary, company.contact.secondary].map((num) => (
-                <a
-                  key={num}
-                  href={`tel:${num.replace(/\s/g, "")}`}
-                  className="link-underline"
+                  View Services
+                </button>
+                <button
+                  onClick={() => scrollTo("#contact")}
+                  className="btn btn-ghost"
                   style={{
-                    display:        "flex",
-                    alignItems:     "center",
-                    gap:            "var(--s1)",
-                    fontFamily:     "'Poppins', sans-serif",
-                    fontWeight:     600,
-                    fontSize:       "var(--t-sm)",
-                    color:          "rgba(255,255,255,0.70)",
-                    textDecoration: "none",
-                    transition:     "color 220ms ease",
+                    padding:   "var(--s2) var(--s4)",
+                    fontSize:  "var(--t-sm)",
                   }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--clr-accent)"; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.70)"; }}
                 >
-                  <PhoneCall size={13} style={{ color: "var(--clr-accent)", flexShrink: 0 }} />
-                  {num}
-                </a>
-              ))}
+                  Get a Quote
+                </button>
+              </motion.div>
+
+              {/* ── Contact Phone Numbers ── */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.9 }}
+                style={{
+                  display:      "flex",
+                  flexWrap:     "wrap",
+                  alignItems:   "center",
+                  gap:          "var(--s4)",
+                  marginBottom: "var(--s2)",
+                }}
+              >
+                {[company.contact.primary, company.contact.secondary].map((num) => (
+                  <a
+                    key={num}
+                    href={`tel:${num.replace(/\s/g, "")}`}
+                    className="link-underline"
+                    style={{
+                      display:        "flex",
+                      alignItems:     "center",
+                      gap:            "var(--s1)",
+                      fontFamily:     "'Poppins', sans-serif",
+                      fontWeight:     600,
+                      fontSize:       "var(--t-sm)",
+                      color:          "rgba(255,255,255,0.70)",
+                      textDecoration: "none",
+                      transition:     "color 220ms ease",
+                    }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--clr-accent)"; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.70)"; }}
+                  >
+                    <PhoneCall size={13} style={{ color: "var(--clr-accent)", flexShrink: 0 }} />
+                    {num}
+                  </a>
+                ))}
+              </motion.div>
+
+              {/* ── Stats / Service Highlights Strip ── */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 1.0 }}
+                className="hero-stats-grid"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(4, 1fr)",
+                  gap: "var(--s4)",
+                  borderTop: "1px solid rgba(216,185,163,0.13)",
+                  paddingTop: "var(--s4)",
+                  width: "100%",
+                }}
+              >
+                {[
+                  { num: "25+ Years", title: "Field Experience" },
+                  { num: "Scaffolding", title: "& Centring Materials" },
+                  { num: "Concrete", title: "Works & Support" },
+                  { num: "Vertical", title: "Hoist Rental" },
+                ].map(({ num, title }, i) => (
+                  <div key={i} style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                    <span className="font-m" style={{ color: "var(--clr-accent)", fontWeight: 900, fontSize: "1.05rem", lineHeight: 1.1 }}>
+                      {num}
+                    </span>
+                    <span className="t-label" style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.55rem", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                      {title}
+                    </span>
+                  </div>
+                ))}
+              </motion.div>
+
             </div>
+            
+            <div className="hidden lg:block" />
           </div>
-        </motion.div>
 
-        {/* ══ SCROLL CUE ════════════════════════════════════ */}
-        <motion.button
-          onClick={() => scrollTo("#about")}
-          style={{
-            opacity:       cueOpacity,
-            position:      "absolute",
-            bottom:        "var(--s8)",
-            right:         "var(--container-px)",
-            zIndex:        10,
-            background:    "none",
-            border:        "none",
-            cursor:        "pointer",
-            display:       "flex",
-            flexDirection: "column",
-            alignItems:    "center",
-            gap:           "4px",
-            color:         "rgba(255,255,255,0.30)",
-          }}
-          aria-label="Scroll down to About"
-        >
-          <span
-            className="t-label"
-            style={{ fontSize: "0.55rem", letterSpacing: "0.20em", writingMode: "vertical-rl" }}
+          {/* ══ SCROLL CUE ════════════════════════════════════ */}
+          <motion.button
+            onClick={() => scrollTo("#about")}
+            style={{
+              opacity:       cueOpacity,
+              position:      "absolute",
+              bottom:        "var(--s8)",
+              right:         0,
+              zIndex:        10,
+              background:    "none",
+              border:        "none",
+              cursor:        "pointer",
+              display:       "flex",
+              flexDirection: "column",
+              alignItems:    "center",
+              gap:           "4px",
+              color:         "rgba(255,255,255,0.30)",
+            }}
+            aria-label="Scroll down to About"
           >
-            SCROLL
-          </span>
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ repeat: Infinity, duration: 2.4, ease: "easeInOut" }}
-          >
-            <ChevronDown size={16} />
-          </motion.div>
-        </motion.button>
+            <span
+              className="t-label"
+              style={{ fontSize: "0.55rem", letterSpacing: "0.20em", writingMode: "vertical-rl" }}
+            >
+              SCROLL
+            </span>
+            <motion.div
+              animate={{ y: [0, 6, 0] }}
+              transition={{ repeat: Infinity, duration: 2.4, ease: "easeInOut" }}
+            >
+              <ChevronDown size={16} />
+            </motion.div>
+          </motion.button>
+        </motion.div>
       </div>
     </section>
   );

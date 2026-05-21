@@ -6,7 +6,6 @@ import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
 import Button from "@/components/ui/Button";
-import Container from "@/components/layout/Container";
 import { company } from "@/data/company";
 import { scrollTo } from "@/lib/utils";
 
@@ -73,7 +72,7 @@ export default function About() {
       />
 
       {/* ── Zone 1: Floating Editorial Header (Emerges from Hero) ── */}
-      <Container className="relative z-10">
+      <div className="container relative z-10">
         <motion.div
           style={{
             y:              cardY,
@@ -126,7 +125,7 @@ export default function About() {
             </div>
           </div>
         </motion.div>
-      </Container>
+      </div>
 
       {/* Spacing trigger for Zone 2 fade in */}
       <div ref={triggerRef} style={{ height: "1px" }} />
@@ -142,7 +141,7 @@ export default function About() {
       />
 
       {/* ── Zone 2: Content (Light background, details) ── */}
-      <Container className="relative z-10">
+      <div className="container relative z-10">
         <div style={{ paddingTop: "var(--s10)", paddingBottom: "var(--s16)" }}>
           <div
             style={{ display: "grid", gridTemplateColumns: "4fr 8fr", gap: "var(--s8)", alignItems: "start" }}
@@ -234,7 +233,7 @@ export default function About() {
 
           </div>
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

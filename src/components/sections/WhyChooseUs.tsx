@@ -2,16 +2,9 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import * as LucideIcons from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
-import Container from "@/components/layout/Container";
 import { whyChooseUs } from "@/data/whyChooseUs";
-import { cardGridStagger, itemReveal, EASE_CINEMATIC } from "@/lib/animations";
-
-function getIcon(name: string): LucideIcon {
-  return (LucideIcons as unknown as Record<string, LucideIcon>)[name] ?? LucideIcons.CheckCircle2;
-}
+import { cardGridStagger, itemReveal } from "@/lib/animations";
 
 export default function WhyChooseUs() {
   const ref    = useRef(null);
@@ -22,7 +15,7 @@ export default function WhyChooseUs() {
       id="why-us"
       ref={ref}
       style={{ background: "var(--clr-bg)", borderTop: "1px solid rgba(8,51,53,0.06)" }}
-      className="relative overflow-hidden"
+      className="section relative overflow-hidden"
     >
       {/* Faint radial glow — top left */}
       <div
@@ -35,7 +28,7 @@ export default function WhyChooseUs() {
         }}
       />
 
-      <Container section>
+      <div className="container">
         {/* ── Header ── */}
         <Reveal threshold="-80px">
           <div style={{ maxWidth: "560px", marginBottom: "var(--s12)" }}>
@@ -55,79 +48,65 @@ export default function WhyChooseUs() {
 
         {/* ── 3×2 card grid — stagger container ── */}
         <motion.div
-          style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "var(--s4)" }}
-          className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+          className="why-us-grid"
           variants={cardGridStagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          {whyChooseUs.map(({ id, title, description, stat, iconName }) => {
-            const Icon = getIcon(iconName);
+          {whyChooseUs.map(({ id, title, description, stat }) => {
             return (
               <motion.div
                 key={id}
                 variants={itemReveal}
-                className="group card-hover"
-                style={{
-                  padding:      "var(--s5)",
-                  borderRadius: "var(--r-lg)",
-                  background:   "white",
-                  border:       "1px solid rgba(8,51,53,0.07)",
-                  boxShadow:    "var(--sh-card)",
-                  cursor:       "default",
-                }}
+                className="group why-us-card card-hover"
               >
-                {/* Icon + stat row */}
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "var(--s4)" }}>
-                  <motion.div
+                {/* 1. Metric / small label */}
+                {stat && (
+                  <span
+                    className="t-label"
                     style={{
-                      width: "44px", height: "44px",
-                      borderRadius: "var(--r-md)",
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                      background: "linear-gradient(135deg, var(--clr-primary), var(--clr-primary-mid))",
+                      color:         "var(--clr-accent-dk)",
+                      display:       "block",
+                      marginBottom:  "var(--s2)",
                     }}
-                    whileHover={{ scale: 1.08, transition: { duration: 0.25, ease: EASE_CINEMATIC } }}
                   >
-                    <Icon size={20} color="var(--clr-accent)" />
-                  </motion.div>
-                  {stat && (
-                    <span
-                      className="t-label"
-                      style={{
-                        color:         "var(--clr-primary)",
-                        background:    "rgba(8,51,53,0.06)",
-                        padding:       "4px 10px",
-                        borderRadius:  "100px",
-                        fontSize:      "0.62rem",
-                        fontWeight:    700,
-                        letterSpacing: "0.05em",
-                      }}
-                    >
-                      {stat}
-                    </span>
-                  )}
-                </div>
+                    {stat}
+                  </span>
+                )}
 
-                {/* Content */}
+                {/* 2. Main title */}
                 <h3
                   className="font-p"
-                  style={{ fontWeight: 700, fontSize: "var(--t-body)", color: "var(--clr-text)", marginBottom: "var(--s2)", lineHeight: 1.35 }}
+                  style={{
+                    fontWeight:    700,
+                    fontSize:      "var(--t-body)",
+                    color:         "var(--clr-text)",
+                    marginBottom:  "var(--s2)",
+                    lineHeight:    1.35,
+                  }}
                 >
                   {title}
                 </h3>
+
+                {/* 3. Description */}
                 <p
                   className="t-sm"
-                  style={{ color: "var(--clr-text-md)", lineHeight: 1.7 }}
+                  style={{
+                    color:         "var(--clr-text-md)",
+                    lineHeight:    1.7,
+                  }}
                 >
                   {description}
                 </p>
+
+                {/* Spacer that pushes the accent line to the bottom */}
+                <div style={{ flexGrow: 1, minHeight: "var(--s4)" }} />
 
                 {/* Bottom accent line — slides in on hover */}
                 <div
                   className="group-hover:opacity-100 group-hover:[transform:scaleX(1)] transition-all duration-500"
                   style={{
                     height:          "2px",
-                    marginTop:       "var(--s4)",
                     background:      "linear-gradient(90deg, var(--clr-primary), var(--clr-accent))",
                     borderRadius:    "1px",
                     opacity:         0,
@@ -139,7 +118,7 @@ export default function WhyChooseUs() {
             );
           })}
         </motion.div>
-      </Container>
+      </div>
     </section>
   );
 }
