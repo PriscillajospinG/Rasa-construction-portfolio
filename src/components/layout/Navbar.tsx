@@ -102,16 +102,16 @@ export default function Navbar() {
                       color: active ? "var(--clr-accent)" : "rgba(255, 255, 255, 0.75)",
                     }}
                   >
-                    {label}
+                    <span className="relative z-10">{label}</span>
                     {/* Editorial hover line */}
                     {!active && (
-                      <span className="absolute bottom-1 left-4 right-4 h-[1px] bg-[var(--clr-accent)] opacity-40 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                      <span className="absolute -bottom-2 left-4 right-4 h-[1px] bg-[var(--clr-accent)] opacity-40 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left pointer-events-none z-0" />
                     )}
                     {/* Architectural active indicator */}
                     {active && (
                       <motion.span
                         layoutId="navbar-active-indicator"
-                        className="absolute bottom-1 left-1/2 -translate-x-1/2 w-4 h-[2px] bg-[var(--clr-accent)] rounded-full"
+                        className="absolute left-4 right-4 -bottom-2 h-[2px] bg-[var(--clr-accent)] rounded-full pointer-events-none z-0"
                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
                     )}
