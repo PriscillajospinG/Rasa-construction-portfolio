@@ -8,7 +8,7 @@ interface ContainerProps {
   style?:     React.CSSProperties;
   id?:        string;
   ref?:       React.Ref<HTMLDivElement>;
-  as?:        keyof JSX.IntrinsicElements;
+  as?:        keyof React.JSX.IntrinsicElements;
 }
 
 /**
@@ -26,15 +26,16 @@ const Container = React.forwardRef<HTMLDivElement, ContainerProps>(function Cont
   },
   ref
 ) {
+  const TagElement = Tag as any;
   return (
-    <Tag
+    <TagElement
       id={id}
-      ref={ref as React.Ref<HTMLDivElement>}
+      ref={ref}
       style={style}
       className={`c${section ? " s" : ""}${className ? ` ${className}` : ""}`}
     >
       {children}
-    </Tag>
+    </TagElement>
   );
 });
 

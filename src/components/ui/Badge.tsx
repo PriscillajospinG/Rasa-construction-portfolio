@@ -5,6 +5,7 @@ interface BadgeProps {
   children: React.ReactNode;
   variant?: "light" | "dark" | "green";
   className?: string;
+  style?:     React.CSSProperties;
 }
 
 const styles: Record<string, React.CSSProperties> = {
@@ -13,7 +14,7 @@ const styles: Record<string, React.CSSProperties> = {
   green: { background: "rgba(37,211,102,0.12)",  border: "1px solid rgba(37,211,102,0.25)",  color: "#16a34a" },
 };
 
-export default function Badge({ children, variant = "dark", className }: BadgeProps) {
+export default function Badge({ children, variant = "dark", className, style }: BadgeProps) {
   return (
     <span
       className={cx("t-label", className)}
@@ -22,6 +23,7 @@ export default function Badge({ children, variant = "dark", className }: BadgePr
         padding: "4px 12px",
         borderRadius: "100px",
         ...styles[variant],
+        ...style,
       }}
     >
       {children}

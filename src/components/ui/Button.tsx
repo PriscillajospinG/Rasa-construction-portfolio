@@ -13,15 +13,10 @@ interface ButtonBaseProps {
   style?:    React.CSSProperties;
 }
 
-interface ButtonAsAnchor extends ButtonBaseProps, React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  as?: never;
-}
-
-interface ButtonAsButton extends ButtonBaseProps, React.ButtonHTMLAttributes<HTMLButtonElement> {
-  as: "button";
-}
-
-type ButtonProps = ButtonAsAnchor | ButtonAsButton;
+type ButtonProps = (
+  | (React.AnchorHTMLAttributes<HTMLAnchorElement> & { as?: never })
+  | (React.ButtonHTMLAttributes<HTMLButtonElement> & { as: "button" })
+) & ButtonBaseProps;
 
 const variantClass: Record<Variant, string> = {
   primary: "btn-primary",
