@@ -79,22 +79,22 @@ export default function Contact() {
                 <h3 className="font-m font-extrabold text-2xl text-white mb-4">
                   Visit / Locate Us
                 </h3>
-                <div className="space-y-4 text-gray-300">
+                <div className="space-y-3">
                   <div>
                     <h4 className="font-semibold text-lg text-gray-100">Rasa Construction</h4>
-                    <p className="text-gray-400">{company.contact.address}</p>
+                    <p className="text-gray-400 text-sm">{company.contact.address}</p>
                   </div>
-                  <div className="flex items-center space-x-4">
-                    <Phone size={20} className="text-[var(--clr-primary)]" />
-                    <div>
-                      <a href={`tel:${company.contact.primary}`} className="hover:text-white transition-colors">{company.contact.primary}</a>
-                      <span className="mx-2">/</span>
-                      <a href={`tel:${company.contact.secondary}`} className="hover:text-white transition-colors">{company.contact.secondary}</a>
+                  <div className="flex items-center space-x-3">
+                    <Phone size={18} className="text-[var(--clr-primary)]" />
+                    <div className="text-sm">
+                      <a href={`tel:${company.contact.primary}`} className="text-gray-300 hover:text-white transition-colors">{company.contact.primary}</a>
+                      <span className="mx-2 text-gray-500">/</span>
+                      <a href={`tel:${company.contact.secondary}`} className="text-gray-300 hover:text-white transition-colors">{company.contact.secondary}</a>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-4">
-                    <Mail size={20} className="text-[var(--clr-primary)]" />
-                    <a href={`mailto:${company.contact.email}`} className="hover:text-white transition-colors">{company.contact.email}</a>
+                  <div className="flex items-center space-x-3">
+                    <Mail size={18} className="text-[var(--clr-primary)]" />
+                    <a href={`mailto:${company.contact.email}`} className="text-sm text-gray-300 hover:text-white transition-colors">{company.contact.email}</a>
                   </div>
                 </div>
               </div>
@@ -125,76 +125,78 @@ export default function Contact() {
 
           {/* Right: Form panel */}
           <Reveal direction="right">
-            {status === "success" ? (
-              <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-200 flex flex-col items-center text-center h-full justify-center">
-                <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
-                  <CheckCircle2 size={36} className="text-green-600" />
-                </div>
-                <h3 className="t-h2 text-gray-800">Enquiry Sent!</h3>
-                <p className="t-sm text-gray-600">We will contact you within one business day.</p>
-                <Button href={`tel:${(company.contact.primary ?? "").replace(/\s/g, "")}`} variant="primary" className="mt-6">
-                  Or Call Now
-                </Button>
-              </div>
-            ) : (
-              <div className="bg-white p-6 sm:p-8 rounded-lg shadow-lg border border-gray-200">
-                <h3 className="font-m font-extrabold text-2xl text-gray-800 mb-1">
-                  Request a Free Quote
-                </h3>
-                <p className="t-sm text-gray-500 mb-6">
-                  We'll respond within one business day.
-                </p>
-                <form onSubmit={submit} className="flex flex-col gap-4">
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="t-label block text-gray-600 mb-1.5 font-semibold">Full Name <span className="text-red-500">*</span></label>
-                      <input type="text" required placeholder="Your name"
-                        className="inp-light w-full" value={form.name} onChange={update("name")} />
-                    </div>
-                    <div>
-                      <label className="t-label block text-gray-600 mb-1.5 font-semibold">Phone <span className="text-red-500">*</span></label>
-                      <input type="tel" required placeholder="+91 XXXXX XXXXX"
-                        className="inp-light w-full" value={form.phone} onChange={update("phone")} />
-                    </div>
+            <div className="contact-form-card">
+              {status === "success" ? (
+                <div className="flex flex-col items-center text-center h-full justify-center">
+                  <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
+                    <CheckCircle2 size={36} className="text-green-600" />
                   </div>
-                  <div>
-                    <label className="t-label block text-gray-600 mb-1.5 font-semibold">Email</label>
-                    <input type="email" placeholder="your@email.com"
-                      className="inp-light w-full" value={form.email} onChange={update("email")} />
-                  </div>
-                  <div>
-                    <label className="t-label block text-gray-600 mb-1.5 font-semibold">Service Required <span className="text-red-500">*</span></label>
-                    <select required className="inp-light w-full" value={form.service} onChange={update("service")}>
-                      <option value="">Select a service...</option>
-                      <option value="scaffolding">Scaffolding Rental</option>
-                      <option value="centring">Centring Materials</option>
-                      <option value="concrete">Concrete Works</option>
-                      <option value="hoist">Vertical Hoist Rental</option>
-                      <option value="support">Site Support</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="t-label block text-gray-600 mb-1.5 font-semibold">Project Details</label>
-                    <textarea rows={4} placeholder="Location, duration, scale, requirements..."
-                      className="inp-light w-full resize-none"
-                      value={form.message} onChange={update("message")} />
-                  </div>
-                  <Button as="button" variant="dark" disabled={status === "sending"}
-                    className="w-full justify-center mt-2">
-                    {status === "sending" ? "Sending..." : "Send Enquiry"}
+                  <h3 className="t-h2 text-gray-800">Enquiry Sent!</h3>
+                  <p className="t-sm text-gray-600 mt-2">We will contact you within one business day.</p>
+                  <Button href={`tel:${(company.contact.primary ?? "").replace(/\s/g, "")}`} variant="primary" className="mt-6">
+                    Or Call Now
                   </Button>
-                </form>
-                {status === "error" && (
-                  <div className="mt-4 text-center">
-                    <p className="t-sm text-red-600">Email could not be sent. Please send your enquiry on WhatsApp.</p>
-                    <Button href={waLink(company.contact.whatsapp, getWhatsAppMessage())} target="_blank" rel="noopener noreferrer" variant="dark" className="mt-2">
-                      <MessageCircle size={15} /> Send on WhatsApp
+                </div>
+              ) : (
+                <>
+                  <h3 className="font-m font-extrabold text-2xl text-gray-800 mb-2">
+                    Request a Free Quote
+                  </h3>
+                  <p className="t-sm text-gray-500 mb-6">
+                    We'll respond within one business day.
+                  </p>
+                  <form onSubmit={submit} className="flex flex-col gap-4">
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div className="contact-field">
+                        <label className="t-label">Full Name <span className="text-red-500">*</span></label>
+                        <input type="text" required placeholder="Your name"
+                          className="contact-input" value={form.name} onChange={update("name")} />
+                      </div>
+                      <div className="contact-field">
+                        <label className="t-label">Phone <span className="text-red-500">*</span></label>
+                        <input type="tel" required placeholder="+91 XXXXX XXXXX"
+                          className="contact-input" value={form.phone} onChange={update("phone")} />
+                      </div>
+                    </div>
+                    <div className="contact-field">
+                      <label className="t-label">Email</label>
+                      <input type="email" placeholder="your@email.com"
+                        className="contact-input" value={form.email} onChange={update("email")} />
+                    </div>
+                    <div className="contact-field">
+                      <label className="t-label">Service Required <span className="text-red-500">*</span></label>
+                      <select required className="contact-input" value={form.service} onChange={update("service")}>
+                        <option value="">Select a service...</option>
+                        <option value="scaffolding">Scaffolding Rental</option>
+                        <option value="centring">Centring Materials</option>
+                        <option value="concrete">Concrete Works</option>
+                        <option value="hoist">Vertical Hoist Rental</option>
+                        <option value="support">Site Support</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+                    <div className="contact-field">
+                      <label className="t-label">Project Details</label>
+                      <textarea rows={5} placeholder="Location, duration, scale, requirements..."
+                        className="contact-input"
+                        value={form.message} onChange={update("message")} />
+                    </div>
+                    <Button as="button" variant="dark" disabled={status === "sending"}
+                      className="w-full justify-center mt-3">
+                      {status === "sending" ? "Sending..." : "Send Enquiry"}
                     </Button>
-                  </div>
-                )}
-              </div>
-            )}
+                  </form>
+                  {status === "error" && (
+                    <div className="mt-4 text-center">
+                      <p className="t-sm text-red-600">Email could not be sent. Please send your enquiry on WhatsApp.</p>
+                      <Button href={waLink(company.contact.whatsapp, getWhatsAppMessage())} target="_blank" rel="noopener noreferrer" variant="dark" className="mt-2">
+                        <MessageCircle size={15} /> Send on WhatsApp
+                      </Button>
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
           </Reveal>
         </div>
       </div>
