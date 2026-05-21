@@ -40,26 +40,46 @@ export default function Contact() {
     e.preventDefault();
     setStatus("sending");
 
+    console.log("EmailJS config:", {
+      service: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+      template: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+      publicKeyExists: Boolean(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY),
+    });
+
     const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
     const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
     const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
     if (!serviceId || !templateId || !publicKey) {
-      console.error("EmailJS environment variables are not set.");
+      console.error("EmailJS environment variables are missing");
       setStatus("error");
       return;
     }
 
-    const templateParams = {
-      ...form,
-      timestamp: new Date().toLocaleString(),
-    };
-
     try {
-      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          name: form.name,
+          phone: form.phone,
+          email: form.email || "Not provided",
+          service: form.service,
+          message: form.message,
+          time: new Date().toLocaleString("en-IN", {
+            timeZone: "Asia/Kolkata",
+          }),
+        },
+        publicKey
+      );
       setStatus("success");
-    } catch (error) {
-      console.error("EmailJS sending failed:", error);
+    } catch (error: any) {
+      console.error("EmailJS sending failed:", {
+        error,
+        text: error?.text,
+        status: error?.status,
+        message: error?.message,
+      });
       setStatus("error");
     }
   };
