@@ -318,6 +318,7 @@ input, textarea { cursor: text !important; }
 
 /* ── BUTTONS ─────────────────────────────────────────────── */
 .btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -328,9 +329,11 @@ input, textarea { cursor: text !important; }
   letter-spacing: 0.02em;
   padding: var(--s2) var(--s4);
   border-radius: var(--r-sm);
-  border: none;
+  border: 1px solid transparent;
   text-decoration: none;
   white-space: nowrap;
+  overflow: hidden;
+  isolation: isolate;
   /* Unified transition — covers all button states */
   transition: transform 280ms var(--ease),
               box-shadow 280ms ease,
@@ -339,39 +342,64 @@ input, textarea { cursor: text !important; }
               border-color 240ms ease;
   will-change: transform;
 }
+
+.btn-label {
+  position: relative;
+  z-index: 2;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: var(--s1);
+}
+
+.btn::before,
+.btn::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+
 .btn:hover  { transform: translateY(-2px); }
 .btn:active { transform: translateY(0px) scale(0.98); }
 
 .btn-primary {
   background: var(--clr-accent);
   color: var(--clr-primary-dark);
+  border-color: var(--clr-accent);
 }
 .btn-primary:hover {
-  background: var(--clr-accent-lt);
+  background: var(--clr-white);
+  color: var(--clr-primary-dark);
+  border-color: var(--clr-white);
   box-shadow: var(--sh-acc);
 }
 .btn-dark {
-  background: var(--clr-dark);
-  color: var(--clr-light);
-  border: 1px solid var(--clr-dark);
+  background: var(--clr-primary-dark);
+  color: var(--clr-white);
+  border-color: var(--clr-primary-dark);
+}
+.btn-dark:hover {
+  background: var(--clr-primary);
+  border-color: var(--clr-primary);
 }
 
 .btn-outline {
   background: transparent;
-  color: var(--clr-text);
-  border: 1px solid var(--clr-primary-lt);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.45);
 }
 
 .btn-outline:hover {
-  background: var(--clr-primary-lt);
-  border-color: var(--clr-primary-lt);
-  color: var(--clr-dark);
+  background: rgba(255,255,255,0.12);
+  border-color: var(--clr-accent);
+  color: white;
 }
 
 .btn-ghost {
   background: transparent;
   color: white;
-  border: 1.5px solid rgba(255,255,255,0.32);
+  border-color: rgba(255,255,255,0.32);
 }
 .btn-ghost:hover {
   border-color: var(--clr-accent);

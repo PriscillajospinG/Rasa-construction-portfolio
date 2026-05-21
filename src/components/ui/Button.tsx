@@ -60,7 +60,7 @@ export default function Button({
         onClick={onClick}
         {...rest}
       >
-        {children}
+        <span className="btn-label">{children}</span>
       </button>
     );
   }
@@ -72,7 +72,7 @@ export default function Button({
       aria-disabled={disabled}
       {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
     >
-      {children}
+      <span className="btn-label">{children}</span>
     </a>
   );
 }
