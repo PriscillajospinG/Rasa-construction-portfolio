@@ -785,13 +785,11 @@ input, textarea { cursor: text !important; }
 @media (max-width: 1024px) {
   .hero-section {
     height: auto;
-    min-height: 100vh;
     min-height: 100svh;
   }
   .hero-sticky-bg {
     position: relative;
     height: auto;
-    min-height: 100vh;
     min-height: 100svh;
     display: flex;
     flex-direction: column;
@@ -821,22 +819,60 @@ input, textarea { cursor: text !important; }
 
 /* Mobile specific styling (< 640px) */
 @media (max-width: 640px) {
+  .hero-section {
+    min-height: 100svh;
+    height: auto;
+    overflow-x: hidden;
+  }
   .hero-content-container {
-    padding-top: calc(var(--nav-h-mobile) + var(--s4));
-    padding-bottom: var(--s6);
+    padding-top: calc(var(--nav-h-mobile) + var(--s3));
+    padding-bottom: var(--s4);
+    gap: var(--s4);
+  }
+  .hero-content-grid {
+    gap: var(--s4);
+  }
+  .hero-title {
+    font-size: clamp(2.35rem, 12vw, 3.4rem);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+  }
+  .hero-description {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    max-width: 100%;
+  }
+  .hero-separator, .hero-phone, .hero-scroll-cue {
+    display: none;
+  }
+  .hero-meta {
+    margin-bottom: var(--s3) !important;
   }
   .hero-cta-wrapper {
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: var(--s2) !important;
+    width: 100%;
   }
   .hero-cta-wrapper .btn {
     width: 100%;
+    min-height: 48px;
+    justify-content: center;
+    font-size: 0.95rem;
   }
   .hero-stats-grid {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: var(--s3) !important;
+    margin-top: var(--s3);
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-title {
+    font-size: clamp(2.1rem, 11vw, 2.9rem);
+  }
+  .hero-stats-grid {
+    grid-template-columns: 1fr !important;
   }
 }
 
