@@ -1175,39 +1175,29 @@ input, textarea { cursor: text !important; }
 }
 
 .contact-map-card {
-  min-height: 520px;
+  display: flex;
+  flex-direction: column;
   border-radius: 28px;
   overflow: hidden;
-  border: 1px solid rgba(8, 51, 53, 0.16);
   background: #083335;
-  display: flex;
-  flex-direction: column;
+  border: 1px solid rgba(8, 51, 53, 0.16);
+  height: 100%;
 }
 
-.contact-location-info {
-  display: flex;
-  flex-direction: column;
+.contact-map-frame {
+  height: 260px;
+  width: 100%;
+}
+
+.contact-location-content {
   padding: var(--s4);
+  display: grid;
+  gap: var(--s3);
 }
 
 .contact-location-links {
   display: grid;
   gap: var(--s2);
-}
-
-.contact-map-frame-wrapper {
-  position: relative;
-  width: 100%;
-  height: 300px; /* Default height for mobile */
-  order: -1; /* Show map on top on mobile */
-}
-
-.contact-map-frame {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
 }
 
 .contact-form-card {
@@ -1245,34 +1235,13 @@ input, textarea { cursor: text !important; }
 
 /* Tablet and Desktop overrides */
 @media (min-width: 768px) {
-  .contact-map-card {
-    grid-template-columns: 400px 1fr;
-    grid-template-rows: auto;
-  }
-  .contact-location-info {
-    order: 0;
-    padding: var(--s4);
-  }
-  .contact-map-frame-wrapper {
-    order: 1;
-    height: auto; /* Full height on desktop */
-  }
-}
-
-@media (min-width: 641px) and (max-width: 1024px) {
-  .contact-location-info {
-    padding: var(--s3);
+  .contact-map-frame {
+    height: 320px;
   }
 }
 
 @media (max-width: 767px) {
   .contact-grid {
-    grid-template-columns: 1fr;
-  }
-  .contact-location-info {
-    padding: var(--s3);
-  }
-  .contact-map-card {
     grid-template-columns: 1fr;
   }
   .contact-form-card {

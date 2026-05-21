@@ -103,15 +103,31 @@ export default function Contact() {
           {/* Left: Map and details */}
           <Reveal direction="left">
             <div className="contact-map-card">
+              {/* Map Iframe */}
+              <div className="contact-map-frame">
+                <iframe
+                  title="Rasa Construction location map"
+                  src="https://www.google.com/maps?q=Rasa%20Office%20Achankuttam%20627861%20Tamil%20Nadu%20India&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+
               {/* Location Info */}
-              <div className="contact-location-info">
-                <p className="t-label text-[var(--clr-accent)] mb-[var(--s2)]">Visit / Locate Us</p>
-                <h3 className="t-h2 text-white mb-[var(--s3)]">Rasa Construction</h3>
-                <p className="text-gray-300 mb-[var(--s3)]" style={{ lineHeight: 1.65 }}>
+              <div className="contact-location-content">
+                <div>
+                  <p className="t-label text-[var(--clr-accent)]">Visit / Locate Us</p>
+                  <h3 className="t-h2 text-white">Rasa Construction</h3>
+                </div>
+                <p className="text-gray-300" style={{ lineHeight: 1.65 }}>
                   {company.contact.address}
                 </p>
 
-                <div className="contact-location-links mb-[var(--s4)]">
+                <div className="contact-location-links">
                   <a href={`tel:${company.contact.primary}`} className="flex items-center gap-3 text-gray-200 hover:text-white transition-colors">
                     <Phone size={16} className="text-[var(--clr-accent)] flex-shrink-0" />
                     <span>{company.contact.primary} &nbsp;/&nbsp; {company.contact.secondary}</span>
@@ -127,23 +143,11 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   variant="outline"
-                  className="w-full justify-center mt-auto"
+                  className="w-full justify-center"
                 >
                   <MapPin size={16} className="mr-2" />
                   Open in Google Maps
                 </Button>
-              </div>
-
-              {/* Map Iframe */}
-              <div className="contact-map-frame-wrapper">
-                <iframe
-                  title="Rasa Construction location map"
-                  src={company.contact.mapEmbedUrl}
-                  className="contact-map-frame"
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
               </div>
             </div>
           </Reveal>
