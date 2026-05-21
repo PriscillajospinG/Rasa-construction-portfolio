@@ -9,7 +9,8 @@ export const services: Service[] = [
     usedFor:     "Multi-storey residential, commercial facades, industrial sheds, bridge work, repair & renovation",
     tag:         "Most Requested",
     iconName:    "LayoutGrid",
-    image:       "/services/scaffolding-work-01.jpg",
+    image:       "/services/scaffolding-rental.jpg",
+    alt:         "Steel scaffolding rental setup at construction site",
   },
   {
     id:          "centring",
@@ -19,7 +20,8 @@ export const services: Service[] = [
     usedFor:     "Slab casting, beam formwork, staircase shuttering, RCC column centring",
     tag:         "100+ Equipment Types",
     iconName:    "Layers",
-    image:       "/services/centring-materials-01.jpg",
+    image:       "/services/centring-materials.jpg",
+    alt:         "Centring materials and steel props used for slab formwork",
   },
   {
     id:          "concrete",
@@ -29,7 +31,8 @@ export const services: Service[] = [
     usedFor:     "Foundations, columns, roof slabs, retaining walls, commercial flooring",
     tag:         "25+ Years Experience",
     iconName:    "Building",
-    image:       "/services/concrete-work-01.jpg",
+    image:       "/services/concrete-works.jpg",
+    alt:         "Concrete work execution at building construction site",
   },
   {
     id:          "hoist",

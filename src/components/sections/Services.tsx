@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import * as LucideIcons from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -10,27 +11,21 @@ import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import { services } from "@/data/services";
 import { company } from "@/data/company";
-import { cardGridStagger, itemReveal, scaleIn, EASE_CINEMATIC } from "@/lib/animations";
+import { cardGridStagger, itemReveal } from "@/lib/animations";
 
 function getIcon(name: string): LucideIcon {
   return (LucideIcons as unknown as Record<string, LucideIcon>)[name] ?? LucideIcons.HardHat;
 }
 
-// Primary service — full-bleed photo card
-const primary = services[0]; // Scaffolding
-
-// Secondary pair — stacked right column
-const secondary = services.slice(1, 3); // Centring + Concrete
-
 // Tertiary — list treatment
-const tertiary = services.slice(3); // Hoist, Support, Maintenance
+const tertiary = services.slice(3);
 
 export default function Services() {
   const ref    = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="services" className="relative overflow-hidden" style={{ background: "var(--clr-bg)" }}>
+    <section id="services" className="relative overflow-hidden bg-[var(--clr-bg)]">
       <div className="curve">
         <svg viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg">
           <path d="M0,0 C480,56 960,56 1440,0 L1440,56 L0,56 Z" fill="white" />
@@ -40,14 +35,14 @@ export default function Services() {
       <div className="section" ref={ref}>
         <div className="container">
         {/* ── Section Header ── */}
-        <div className="flex flex-col" style={{ marginBottom: "var(--s8)" }}>
+        <div className="mb-[var(--s8)] flex flex-col">
           <Reveal>
-            <div className="eyebrow t-label" style={{ color: "var(--clr-primary)", marginBottom: "var(--s2)" }}>
+            <div className="eyebrow t-label mb-[var(--s2)] text-[var(--clr-primary)]">
               What We Offer
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <h2 className="t-h1" style={{ color: "var(--clr-primary)" }}>
+            <h2 className="t-h1 text-[var(--clr-primary)]">
               Services built for<br /><em className="t-italic-dark">real field work.</em>
             </h2>
           </Reveal>
@@ -67,7 +62,7 @@ export default function Services() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          {services.slice(0, 3).map(({ id, title, description, usedFor, tag }, i) => {
+          {services.slice(0, 3).map(({ id, title, description, usedFor, tag, image, alt }, i) => {
             const num = `0${i + 1}`;
             return (
               <motion.div
@@ -75,20 +70,30 @@ export default function Services() {
                 variants={itemReveal}
                 className="service-card group"
               >
-                {/* Top hover accent */}
-                <div className="absolute top-0 left-0 right-0 transition-transform duration-500 origin-left scale-x-0 group-hover:scale-x-100"
-                  style={{ height: "2px", background: "linear-gradient(90deg, var(--clr-primary), var(--clr-accent))" }} />
-
-                <span className="service-number">{num}</span>
-                <h3>{title}</h3>
-                <p className="service-description">{description}</p>
-                {usedFor && (
-                  <p className="used-for">
-                    <strong>Used for:</strong>{" "}{usedFor}
-                  </p>
+                {image && alt && (
+                  <div className="service-image">
+                    <Image
+                      src={image}
+                      alt={alt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                    <div className="service-image-overlay" />
+                  </div>
                 )}
-                <div className="service-badge">
-                  <Badge variant="dark">✓ {tag}</Badge>
+                <div className="service-card-content">
+                  <span className="service-number">{num}</span>
+                  <h3>{title}</h3>
+                  <p className="service-description">{description}</p>
+                  {usedFor && (
+                    <p className="used-for">
+                      <strong>Used for:</strong>{" "}{usedFor}
+                    </p>
+                  )}
+                  <div className="service-badge">
+                    <Badge variant="dark">✓ {tag}</Badge>
+                  </div>
                 </div>
               </motion.div>
             );
