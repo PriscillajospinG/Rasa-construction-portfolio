@@ -33,7 +33,8 @@
   --clr-text-lt:      #6b7280;  /* gray-500 → 4.6:1 on white, AA pass */
 
   /* ── Spacing Tokens ── */
-  --nav-h-desktop: 84px;
+  --nav-h: 80px;
+  --nav-h-desktop: 80px;
   --nav-h-tablet: 76px;
   --nav-h-mobile: 68px;
 
@@ -627,11 +628,14 @@ input, textarea { cursor: text !important; }
 }
 
 /* ── HERO RESPONSIVE & LAYOUT SYSTEM ────────────────────────── */
+.hero,
 .hero-section {
   position: relative;
   min-height: 100svh;
-  height: 130vh;
+  height: 100svh;
+  overflow: hidden;
   background: #030f10;
+  box-sizing: border-box;
 }
 
 .hero-sticky-bg {
@@ -710,16 +714,18 @@ input, textarea { cursor: text !important; }
 
 /* Laptop height optimization pass */
 @media (max-height: 820px) and (min-width: 1024px) {
+  .hero,
   .hero-section {
     min-height: 100svh;
-    height: auto;
+    height: 100svh !important;
+    overflow: hidden !important;
   }
 
   .hero-sticky-bg {
     position: relative;
-    height: auto;
+    height: 100svh !important;
     min-height: 100svh;
-    overflow: visible;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -817,85 +823,105 @@ input, textarea { cursor: text !important; }
   }
 }
 
-/* Mobile specific styling (< 640px) */
-@media (max-width: 640px) {
+/* Mobile specific styling (< 768px) */
+@media (max-width: 768px) {
+  .hero,
   .hero-section {
-    position: relative;
-    min-height: auto;
-    height: auto;
-    padding-top: calc(var(--nav-h-mobile) + 32px);
-    padding-bottom: 48px;
-    overflow: visible;
+    height: auto !important;
+    min-height: 100svh;
+    overflow: visible !important;
+    padding-top: calc(var(--nav-h-mobile) + 24px) !important;
+    padding-bottom: 48px !important;
   }
 
   .hero-sticky-bg {
-    position: absolute;
-    height: 100%;
+    position: absolute !important;
+    height: 100% !important;
+    min-height: auto !important;
   }
 
+  .hero-inner,
   .hero-content-container {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    min-height: auto;
-    height: auto;
-    /* Reset scroll-linked animations */
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+    height: auto !important;
+    min-height: auto !important;
     transform: none !important;
     opacity: 1 !important;
   }
 
   .hero-content-col {
-    gap: 24px;
+    gap: 24px !important;
+    width: 100% !important;
   }
 
   .hero-title {
-    font-size: clamp(2.1rem, 11vw, 3rem);
-    line-height: 1;
+    font-size: clamp(2.2rem, 11vw, 3.4rem) !important;
+    line-height: 1 !important;
     margin-bottom: 0 !important;
   }
 
   .hero-description {
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.95rem !important;
+    line-height: 1.55 !important;
+    max-width: 100% !important;
     margin-bottom: 0 !important;
   }
 
   .hero-separator, .hero-phone, .hero-scroll-cue {
-    display: none;
+    display: none !important;
   }
 
   .hero-meta {
     margin-bottom: 0 !important;
   }
 
-  .hero-cta-wrapper {
-    display: grid;
-    grid-template-columns: 1fr;
+  .hero-actions,
+  .hero-cta-wrapper,
+  .hero-cta {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
     gap: 12px !important;
-    width: 100%;
+    width: 100% !important;
     margin-bottom: 0 !important;
   }
 
+  .hero-actions a,
+  .hero-actions button,
   .hero-cta-wrapper .btn {
-    width: 100%;
-    min-height: 48px;
-    justify-content: center;
+    width: 100% !important;
+    min-height: 48px !important;
+    justify-content: center !important;
   }
 
   .hero-stats-grid {
     position: relative;
     z-index: 2;
-    display: grid;
+    display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 12px !important;
-    width: 100%;
-    margin-top: 0;
+    width: 100% !important;
+    margin-top: 0 !important;
   }
 
   .hero-section + section {
-    margin-top: 0;
+    margin-top: 0 !important;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* MOBILE SECTION RULES */
+  section:not(.hero-section):not(.hero) {
+    padding-block: 56px !important;
+  }
+
+  .section-grid,
+  .services-grid,
+  .projects-grid,
+  .equipment-grid,
+  .contact-grid {
+    grid-template-columns: 1fr !important;
   }
 }
 
@@ -1087,11 +1113,12 @@ input, textarea { cursor: text !important; }
 /* ── SERVICES GRID & CARDS ── */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: var(--s4);
 }
 
 .service-card {
+  grid-column: span 2;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -1101,6 +1128,13 @@ input, textarea { cursor: text !important; }
   box-shadow: var(--sh-card);
   transition: transform 350ms var(--ease), box-shadow 350ms ease, border-color 350ms ease;
   overflow: hidden;
+}
+
+@media (min-width: 1025px) {
+  .service-card:nth-child(4),
+  .service-card:nth-child(5) {
+    grid-column: span 3;
+  }
 }
 
 .service-card:hover {
@@ -1179,20 +1213,28 @@ input, textarea { cursor: text !important; }
     gap: var(--s3);
   }
   .service-card {
+    grid-column: span 1 !important;
     padding: 0;
+  }
+  .service-card:nth-child(5) {
+    grid-column: span 2 !important;
   }
   .service-card-content {
     padding: var(--s3);
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .services-grid {
     grid-template-columns: 1fr;
     gap: var(--s3);
   }
   .service-card {
+    grid-column: span 1 !important;
     padding: 0;
+  }
+  .service-card:nth-child(5) {
+    grid-column: span 1 !important;
   }
   .service-card-content {
     padding: var(--s3);
@@ -1317,5 +1359,33 @@ input, textarea { cursor: text !important; }
   }
   .btn.w-full-mobile {
     width: 100%;
+  }
+}
+
+/* ── GLOBAL RESPONSIVE SAFETY ── */
+html,
+body {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img,
+video,
+iframe {
+  max-width: 100% !important;
+}
+
+.container {
+  width: min(100% - 32px, 1200px) !important;
+  margin-inline: auto !important;
+}
+
+@media (max-width: 640px) {
+  .container {
+    width: min(100% - 24px, 100%) !important;
   }
 }

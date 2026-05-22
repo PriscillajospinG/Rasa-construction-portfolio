@@ -30,15 +30,14 @@ export default function About() {
       ref={containerRef}
       className="relative overflow-visible"
       style={{
-        background: "transparent",
+        background: "#ffffff",
       }}
     >
-      {/* ── 1. BACKGROUND CONTINUITY LAYER ── */}
-      {/* Seamless transition from the dark green Hero theme to the light details theme */}
+      {/* ── 1. BACKGROUND LAYER ── */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "linear-gradient(to bottom, rgba(3,15,16,0.85) 0%, rgba(3,15,16,0.98) 12rem, #ffffff 28rem, #ffffff 100%)",
+          background: "#ffffff",
           zIndex: 1,
         }}
         aria-hidden
@@ -71,8 +70,8 @@ export default function About() {
         aria-hidden
       />
 
-      {/* ── Zone 1: Floating Editorial Header (Emerges from Hero) ── */}
-      <div className="container relative z-10">
+      {/* ── Zone 1: Editorial Header ── */}
+      <div className="container relative z-10 py-[var(--s6)]">
         <motion.div
           style={{
             y:              cardY,
@@ -87,7 +86,7 @@ export default function About() {
             boxShadow:      "0 40px 110px rgba(0, 0, 0, 0.55)",
             position:       "relative",
             zIndex:         10,
-            marginTop:      "-14rem", /* Overlap the bottom of Hero */
+            marginTop:      "0rem",
           }}
           className="p-6 md:p-12"
         >

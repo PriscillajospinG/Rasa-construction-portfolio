@@ -4,13 +4,10 @@
 // No logic lives here — purely compositional.
 // ─────────────────────────────────────────────────────────
 import Hero          from "@/components/sections/Hero";
-import About         from "@/components/sections/About";
-import WhyChooseUs   from "@/components/sections/WhyChooseUs";
 import Services      from "@/components/sections/Services";
-import Equipment     from "@/components/sections/Equipment";
-import Process       from "@/components/sections/Process";
 import Projects      from "@/components/sections/Projects";
-import CTA           from "@/components/sections/CTA";
+import Equipment     from "@/components/sections/Equipment";
+import About         from "@/components/sections/About";
 import Testimonials  from "@/components/sections/Testimonials";
 import Contact       from "@/components/sections/Contact";
 import WhatsAppFloat from "@/components/ui/WhatsAppFloat";
@@ -28,31 +25,22 @@ export default function Home() {
       {/* 1. Hero — cinematic opening, identity + CTA */}
       <Hero />
 
-      {/* 2. About — company story, founder, differentiators */}
-      <About />
-
-      {/* 3. Why Choose Us — 6 operational differentiators */}
-      <WhyChooseUs />
-
-      {/* 4. Services — 3-tier layout with feature card */}
+      {/* 2. Services — 5-card layout under services we offer */}
       <Services />
 
-      {/* 5. Equipment — rental inventory grid */}
-      <Equipment />
-
-      {/* 6. Process — how we work timeline */}
-      <Process />
-
-      {/* 7. Projects — masonry gallery with filter */}
+      {/* 3. Projects — masonry gallery with filter */}
       <Projects />
 
-      {/* 8. CTA — parallax mid-page call to action */}
-      <CTA />
+      {/* 4. Equipment — rental inventory grid */}
+      <Equipment />
 
-      {/* 9. Testimonials — 3-tier client reviews */}
+      {/* 5. About — company story, founder, differentiators */}
+      <About />
+
+      {/* 6. Testimonials — 3-tier client reviews */}
       <Testimonials />
 
-      {/* 10. Contact — form + contact list + map */}
+      {/* 7. Contact — form + contact list + map */}
       <Contact />
 
       {/* Floating WhatsApp button */}
