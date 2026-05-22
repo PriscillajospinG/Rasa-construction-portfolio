@@ -956,6 +956,13 @@ button,
     display: flex !important;
   }
 
+  /* Hide top navbar on mobile when drawer is open — drawer covers the screen */
+  .navbar.navbar-menu-open {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transition: opacity 0.2s ease !important;
+  }
+
   .hero {
     padding-top: 68px;
     height: 100svh;

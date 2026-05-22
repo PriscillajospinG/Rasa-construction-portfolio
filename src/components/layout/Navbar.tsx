@@ -47,6 +47,18 @@ export default function Navbar() {
     };
   }, []);
 
+  // Body scroll lock when mobile drawer is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
   const go = (href: string) => {
     scrollTo(href);
     setActiveSection(href.slice(1));
@@ -66,7 +78,7 @@ export default function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`navbar ${isScrolled ? "navbar-scrolled" : ""}`}
+        className={`navbar ${isScrolled ? "navbar-scrolled" : ""} ${menuOpen ? "navbar-menu-open" : ""}`}
       >
         <div className="container navbar-inner">
           
@@ -144,7 +156,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="mobile-drawer fixed inset-0 z-[1100]"
+            className="mobile-drawer fixed inset-0 z-[2000]"
           >
             {/* Backdrop blur */}
             <div
