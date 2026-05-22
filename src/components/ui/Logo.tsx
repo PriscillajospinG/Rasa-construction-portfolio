@@ -35,7 +35,7 @@ export default function RasaLogo({
     height = current.height;
   }
 
-  const logoSrc = variant === "light" ? "/logos/rasa-logo-flat-light.png" : "/logos/rasa-logo-flat-dark.png";
+  const logoSrc = "/logos/rasa-logo.png";
 
   return (
     <div className={`relative flex items-center ${className}`} style={{ height: `${height}px` }}>
