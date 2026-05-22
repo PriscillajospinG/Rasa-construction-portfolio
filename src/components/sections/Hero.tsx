@@ -109,9 +109,7 @@ export default function Hero() {
             opacity:  contentOpacity,
           }}
         >
-          {/* 12-Column Grid */}
-          <div className="hero-content-grid">
-            <div className="hero-content-col">
+          <div className="hero-content">
               
               {/* ── Eyebrow ── */}
               <motion.div
@@ -339,10 +337,9 @@ export default function Hero() {
                 ))}
               </motion.div>
 
-            </div>
-            
-            <div className="hidden lg:block" />
           </div>
+            
+          <div className="hidden lg:block" />
 
           {/* ══ SCROLL CUE ════════════════════════════════════ */}
           <motion.button

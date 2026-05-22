@@ -69,60 +69,28 @@ export default function Navbar() {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className={`navbar ${isScrolled ? "navbar-scrolled" : ""}`}
       >
-        <div className="container h-full flex items-center justify-between">
+        <div className="container navbar-inner">
           
           {/* Logo - static size per viewport (no scroll scaling to prevent layout shifts) */}
           <button
             onClick={() => go("#home")}
             aria-label="Rasa Construction – Home"
-            className="relative flex items-center h-full focus:outline-none"
+            className="logo-wrap relative flex items-center h-full focus:outline-none"
           >
             <RasaLogo
               size="md"
               variant="light"
-              className="hidden lg:flex"
+              className="hidden md:flex"
             />
             <RasaLogo
               size="sm"
               variant="light"
-              className="flex lg:hidden"
+              className="flex md:hidden"
             />
           </button>
 
-          {/* Desktop Nav Links */}
-          <ul className="hidden lg:flex items-center gap-[var(--s3)]">
-            {company.navLinks.map(({ label, href }) => {
-              const active = activeSection === href.slice(1);
-              return (
-                <li key={href} className="relative">
-                  <button
-                    onClick={() => go(href)}
-                    className="relative px-4 py-2 font-p text-xs font-medium tracking-[0.1em] uppercase transition-colors duration-300 focus:outline-none group"
-                    style={{
-                      color: active ? "var(--clr-accent)" : "rgba(255, 255, 255, 0.75)",
-                    }}
-                  >
-                    <span className="relative z-10">{label}</span>
-                    {/* Editorial hover line */}
-                    {!active && (
-                      <span className="absolute -bottom-2 left-4 right-4 h-[1px] bg-[var(--clr-accent)] opacity-40 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left pointer-events-none z-0" />
-                    )}
-                    {/* Architectural active indicator */}
-                    {active && (
-                      <motion.span
-                        layoutId="navbar-active-indicator"
-                        className="absolute left-4 right-4 -bottom-2 h-[2px] bg-[var(--clr-accent)] rounded-full pointer-events-none z-0"
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      />
-                    )}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-
           {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center">
+          <div className="nav-cta-wrap">
             <Button
               href="#contact"
               onClick={(e) => {
@@ -130,24 +98,33 @@ export default function Navbar() {
                 go("#contact");
               }}
               variant="primary"
-              size="sm"
-              style={{
-                borderRadius: "var(--r-sm)",
-                fontWeight: 600,
-                letterSpacing: "0.04em",
-                textTransform: "uppercase",
-                fontSize: "0.72rem",
-                boxShadow: "var(--sh-sm)",
-              }}
+              className="nav-cta"
             >
               Get Quote
             </Button>
           </div>
 
+          {/* Desktop Nav Links */}
+          <ul className="nav-links">
+            {company.navLinks.map(({ label, href }) => {
+              const active = activeSection === href.slice(1);
+              return (
+                <li key={href} className="relative">
+                  <button
+                    onClick={() => go(href)}
+                    className={`nav-link font-p text-xs font-medium tracking-[0.1em] uppercase transition-colors duration-300 focus:outline-none ${active ? "active" : ""}`}
+                  >
+                    <span className="relative z-10">{label}</span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+
           {/* Mobile hamburger menu toggle */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className={`lg:hidden p-2 -mr-2 text-white/80 hover:text-white transition-colors relative focus:outline-none ${menuOpen ? "z-[1105]" : "z-[101]"}`}
+            className={`mobile-menu-button p-2 -mr-2 text-white/80 hover:text-white transition-colors relative focus:outline-none ${menuOpen ? "z-[1105]" : "z-[101]"}`}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
           >
             <motion.div
@@ -168,7 +145,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[1100] flex lg:hidden"
+            className="mobile-drawer fixed inset-0 z-[1100]"
           >
             {/* Backdrop blur */}
             <div
