@@ -45,9 +45,8 @@ export default function Contact() {
     const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
     if (!serviceId || !templateId || !publicKey) {
-      const errorMsg = "EmailJS environment variables are missing";
-      console.error(errorMsg);
-      setErrorMessage(errorMsg + ". Please contact support.");
+      console.error("EmailJS environment variables are missing");
+      setErrorMessage("Please contact us directly on WhatsApp or call us.");
       setStatus("error");
       return;
     }
@@ -62,6 +61,7 @@ export default function Contact() {
           email: form.email || "Not provided",
           service: form.service,
           message: form.message,
+          contact_pref: form.contactPref === "phone" ? "Phone / WhatsApp" : "Email",
           time: new Date().toLocaleString("en-IN", {
             timeZone: "Asia/Kolkata",
           }),
@@ -81,18 +81,29 @@ export default function Contact() {
 
       console.error("EmailJS sending failed:", errorDetails);
 
-      setErrorMessage(
-        errorDetails.text ||
-        errorDetails.message ||
-        "Email could not be sent. Please try WhatsApp or call us directly."
-      );
-
+      setErrorMessage("Email could not be sent. Please send your enquiry on WhatsApp.");
       setStatus("error");
     }
   };
 
   const getWhatsAppMessage = () => {
-    return `Hello Rasa Construction, I need site support.\n\nName: ${form.name}\nPhone: ${form.phone}\nService: ${form.service}\nMessage: ${form.message}`;
+    const serviceLabel = {
+      scaffolding: "Scaffolding Rental",
+      centring: "Centring Materials",
+      concrete: "Concrete Works",
+      hoist: "Vertical Hoist Rental",
+      support: "Site Support",
+      other: "Other",
+    }[form.service] || form.service || "Not selected";
+
+    return `Hello Rasa Construction, I need site support.
+
+Name: ${form.name}
+Phone: ${form.phone}
+Email: ${form.email || "Not provided"}
+Service: ${serviceLabel}
+Preferred Contact Method: ${form.contactPref === "phone" ? "Phone / WhatsApp" : "Email"}
+Message: ${form.message}`;
   };
 
   return (
@@ -193,6 +204,33 @@ export default function Contact() {
                         className="contact-input" value={form.email} onChange={update("email")} />
                     </div>
                     <div className="contact-field">
+                      <label className="t-label">Preferred Contact Method</label>
+                      <div className="flex gap-6 mt-1">
+                        <label className="flex items-center gap-2 t-sm text-gray-700 cursor-pointer">
+                          <input
+                            type="radio"
+                            name="contactPref"
+                            value="phone"
+                            checked={form.contactPref === "phone"}
+                            onChange={update("contactPref")}
+                            className="w-4 h-4 accent-[var(--clr-primary)] cursor-pointer"
+                          />
+                          <span>Phone / WhatsApp</span>
+                        </label>
+                        <label className="flex items-center gap-2 t-sm text-gray-700 cursor-pointer">
+                          <input
+                            type="radio"
+                            name="contactPref"
+                            value="email"
+                            checked={form.contactPref === "email"}
+                            onChange={update("contactPref")}
+                            className="w-4 h-4 accent-[var(--clr-primary)] cursor-pointer"
+                          />
+                          <span>Email</span>
+                        </label>
+                      </div>
+                    </div>
+                    <div className="contact-field">
                       <label className="t-label">Service Required <span className="text-red-500">*</span></label>
                       <select required className="contact-input" value={form.service} onChange={update("service")}>
                         <option value="">Select a service...</option>
@@ -214,7 +252,7 @@ export default function Contact() {
                       className="w-full justify-center mt-3">
                       {status === "sending" && "Sending..."}
                       {status === "idle" && "Send Enquiry"}
-                      {status === "error" && "Try Again"}
+                      {status === "error" && "Try Again / Send on WhatsApp"}
                     </Button>
                   </form>
                   {status === "error" && (

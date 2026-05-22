@@ -19,7 +19,7 @@ export default function Services() {
       <div className="section" ref={ref}>
         <div className="container">
           {/* ── Section Header ── */}
-          <div className="mb-[var(--s8)] flex flex-col gap-[var(--s2)]">
+          <div style={{ display: "flex", flexDirection: "column", gap: "var(--s2)", marginBottom: "var(--s8)" }}>
             <Reveal>
               <h2 className="t-h1 text-[var(--clr-primary)]">
                 Services We Offer

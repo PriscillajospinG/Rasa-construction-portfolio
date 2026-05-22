@@ -98,8 +98,8 @@ export default function Testimonials() {
             &ldquo;
           </motion.div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: "var(--s8)", alignItems: "end" }}
-            className="grid-cols-1 lg:grid-cols-[1fr_auto]">
+          <div style={{ gap: "var(--s8)", alignItems: "end" }}
+            className="grid grid-cols-1 lg:grid-cols-[1fr_auto]">
             <div>
               <Stars count={featured.rating} />
               <p className="font-m text-white"
@@ -133,8 +133,8 @@ export default function Testimonials() {
 
         {/* ── Tier 2: Prominent pair — stagger ── */}
         <motion.div
-          style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s3)", marginBottom: "var(--s4)" }}
-          className="grid-cols-1 md:grid-cols-2"
+          style={{ gap: "var(--s3)", marginBottom: "var(--s4)" }}
+          className="grid grid-cols-1 md:grid-cols-2"
           variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } } }}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
@@ -168,8 +168,8 @@ export default function Testimonials() {
         {/* ── Tier 3: Compact — stagger fade ── */}
         <div style={{ borderTop: "1px solid rgba(216,185,163,0.10)", paddingTop: "var(--s4)" }}>
           <motion.div
-            style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 0 }}
-            className="grid-cols-1 md:grid-cols-3"
+            style={{ gap: 0 }}
+            className="grid grid-cols-1 md:grid-cols-3"
             variants={cardGridStagger}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}

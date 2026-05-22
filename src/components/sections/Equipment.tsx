@@ -39,8 +39,8 @@ export default function Equipment() {
         {/* ── Header ── */}
         <Reveal>
           <div
-            style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s8)", alignItems: "end", marginBottom: "var(--s12)" }}
-            className="grid-cols-1 lg:grid-cols-2"
+            style={{ gap: "var(--s8)", alignItems: "end", marginBottom: "var(--s12)" }}
+            className="grid grid-cols-1 lg:grid-cols-2"
           >
             <div>
               <div className="eyebrow t-label" style={{ color: "var(--clr-primary)", marginBottom: "var(--s3)" }}>
@@ -71,8 +71,8 @@ export default function Equipment() {
 
         {/* ── Equipment grid — stagger container ── */}
         <motion.div
-          style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "var(--s3)" }}
-          className="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+          style={{ gap: "var(--s3)" }}
+          className="equipment-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
           variants={cardGridStagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}

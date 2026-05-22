@@ -638,6 +638,12 @@ input, textarea { cursor: text !important; }
   box-sizing: border-box;
 }
 
+.hero-section + section {
+  margin-top: 0 !important;
+  position: relative;
+  z-index: 1;
+}
+
 .hero-sticky-bg {
   position: sticky;
   top: 0;
@@ -1148,7 +1154,6 @@ input, textarea { cursor: text !important; }
   font-weight: 900;
   font-size: var(--t-sm);
   color: var(--clr-accent-dk);
-  margin-bottom: var(--s2);
 }
 
 .service-card h3 {
@@ -1157,21 +1162,19 @@ input, textarea { cursor: text !important; }
   font-weight: 700;
   line-height: var(--lh-snug);
   color: var(--clr-primary);
-  margin-bottom: var(--s3);
+  margin-top: calc(var(--s2) - var(--s3));
 }
 
 .service-card .service-description {
   font-size: var(--t-sm);
   line-height: 1.65;
   color: var(--clr-text-md);
-  margin-bottom: var(--s3);
 }
 
 .service-card .used-for {
   font-size: var(--t-sm);
   line-height: 1.65;
   color: var(--clr-text-md);
-  margin-bottom: var(--s3);
 }
 
 .service-card .service-badge {
@@ -1205,6 +1208,7 @@ input, textarea { cursor: text !important; }
   flex-direction: column;
   flex-grow: 1;
   padding: var(--s4);
+  gap: var(--s3);
 }
 
 @media (max-width: 1024px) {

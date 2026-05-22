@@ -31,8 +31,8 @@ export default function Projects() {
       <div className="container" ref={ref}>
 
         {/* ── Header: asymmetric — number left, content right ── */}
-        <div style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "var(--s8)", alignItems: "start", marginBottom: "var(--s12)" }}
-          className="grid-cols-1 lg:grid-cols-[auto_1fr]">
+        <div style={{ gap: "var(--s8)", alignItems: "start", marginBottom: "var(--s12)" }}
+          className="grid grid-cols-1 lg:grid-cols-[auto_1fr]">
           {/* Decorative section number */}
           <Reveal direction="left">
             <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "0.7rem", letterSpacing: "0.25em", color: "rgba(8,51,53,0.25)", userSelect: "none", textTransform: "uppercase" }}>
@@ -119,7 +119,7 @@ export default function Projects() {
         <AnimatePresence mode="popLayout">
           <motion.div
             key={active} /* Re-mounts stagger on filter change */
-            style={{ columns: "3", columnGap: "var(--s3)" }}
+            style={{ columnGap: "var(--s3)" }}
             className="columns-1 sm:columns-2 lg:columns-3"
             variants={cardGridStagger}
             initial="hidden"
