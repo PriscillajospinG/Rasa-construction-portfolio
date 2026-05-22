@@ -35,7 +35,12 @@ export default function RasaLogo({
     height = current.height;
   }
 
-  const logoSrc = "/logos/rasa-logo.png";
+  // light variant = white text → use on dark backgrounds (navbar, loading screen)
+  // dark variant  = dark text  → use on light backgrounds (footer)
+  const logoSrc =
+    variant === "light"
+      ? "/logos/rasa-logo-light.png"
+      : "/logos/rasa-logo-dark.png";
 
   return (
     <div className={`relative flex items-center ${className}`} style={{ height: `${height}px` }}>
