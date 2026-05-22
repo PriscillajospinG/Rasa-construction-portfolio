@@ -16,19 +16,19 @@ export default function RasaLogo({
   variant = "light",
   className = "",
 }: RasaLogoProps) {
-  let width = 94;
+  let width = 86;
   let height = 54;
 
   if (typeof size === "number") {
-    // Treat numeric size as height and calculate width using the 1.74 aspect ratio
+    // Treat numeric size as height and calculate width using the 1.60 aspect ratio
     height = size;
-    width = Math.round(size * 1.74);
+    width = Math.round(size * 1.60);
   } else {
     const sizes = {
-      sm: { width: 70, height: 40 },
-      md: { width: 94, height: 54 },
-      lg: { width: 129, height: 74 },
-      xl: { width: 278, height: 160 },
+      sm: { width: 64, height: 40 },
+      md: { width: 86, height: 54 },
+      lg: { width: 118, height: 74 },
+      xl: { width: 256, height: 160 },
     };
     const current = sizes[size] || sizes.md;
     width = current.width;
