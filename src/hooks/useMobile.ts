@@ -12,11 +12,17 @@ export function useMobile(breakpoint: keyof typeof BREAKPOINTS = "lg"): boolean 
 
   useEffect(() => {
     const query = window.matchMedia(`(max-width: ${BREAKPOINTS[breakpoint] - 1}px)`);
-    setIsMobile(query.matches);
+    
+    const timer = setTimeout(() => {
+      setIsMobile(query.matches);
+    }, 0);
 
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     query.addEventListener("change", handler);
-    return () => query.removeEventListener("change", handler);
+    return () => {
+      clearTimeout(timer);
+      query.removeEventListener("change", handler);
+    };
   }, [breakpoint]);
 
   return isMobile;

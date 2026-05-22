@@ -50,7 +50,7 @@ export default function Button({
   const combined = { ...sizeStyle[size], opacity: disabled ? 0.75 : 1, ...style };
 
   if (as === "button") {
-    const { onClick, type, form, name, value, ...rest } = props as React.ButtonHTMLAttributes<HTMLButtonElement>;
+    const { onClick, ...rest } = props as React.ButtonHTMLAttributes<HTMLButtonElement>;
     return (
       <button
         type="submit"

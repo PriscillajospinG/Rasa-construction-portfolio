@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
@@ -12,7 +12,6 @@ import { scrollTo } from "@/lib/utils";
 export default function About() {
   const containerRef = useRef<HTMLElement>(null);
   const triggerRef   = useRef<HTMLDivElement>(null);
-  const inView       = useInView(triggerRef, { once: true, margin: "-80px" });
 
   const { scrollYProgress } = useScroll({
     target:  containerRef,

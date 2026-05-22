@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import RasaLogo from "@/components/ui/Logo";
 import { company } from "@/data/company";
@@ -15,7 +15,6 @@ interface Props {
 export default function PageWrapper({ children }: Props) {
   const [loaded,    setLoaded]    = useState(false);
   const [minPassed, setMinPassed] = useState(false);
-  const startRef = useRef(Date.now());
 
   // Progress value 0 → 1 over MIN_DURATION
   const rawProgress = useMotionValue(0);

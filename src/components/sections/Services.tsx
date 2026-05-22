@@ -90,7 +90,7 @@ export default function Services() {
               <div>
                 <p className="font-p" style={{ fontWeight: 600, fontSize: "var(--t-body)", color: "var(--clr-primary)" }}>Not sure what you need?</p>
                 <p className="t-sm" style={{ color: "var(--clr-text-lt)", marginTop: "var(--s1)" }}>
-                  Call {company.owner} — he'll tell you exactly what the project requires.
+                  Call {company.owner} — he&apos;ll tell you exactly what the project requires.
                 </p>
               </div>
               <Button href={`tel:${company.contact.primary.replace(/\s/g, "")}`} variant="dark">

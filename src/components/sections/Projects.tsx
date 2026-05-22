@@ -175,7 +175,7 @@ export default function Projects() {
                 Ready to see your project here?
               </p>
               <p className="t-sm" style={{ color: "var(--clr-text-lt)", marginTop: "var(--s1)" }}>
-                Let's talk about what your site needs.
+                Let&apos;s talk about what your site needs.
               </p>
             </div>
             <Button href="#contact" variant="dark" onClick={(e) => { e.preventDefault(); scrollTo("#contact"); }}>

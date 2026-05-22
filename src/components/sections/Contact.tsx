@@ -1,14 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
-import { Phone, MessageCircle, Mail, MapPin, Send, CheckCircle2, ArrowUpRight, AlertTriangle } from "lucide-react";
+import { Phone, MessageCircle, Mail, MapPin, CheckCircle2 } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
 import Button from "@/components/ui/Button";
 import { company } from "@/data/company";
 import { waLink } from "@/lib/utils";
-import { listStagger, itemLeft, EASE_CINEMATIC } from "@/lib/animations";
 
 type FormData = {
   name: string;
@@ -71,13 +69,14 @@ export default function Contact() {
         publicKey
       );
       setStatus("success");
-    } catch (error: any) {
+    } catch (error) {
+      const err = error as { text?: string; status?: number; response?: { text?: string; status?: number }; message?: string; name?: string };
       const errorDetails = {
-        text: error?.text || error?.response?.text || "",
-        status: error?.status || error?.response?.status || "",
-        message: error?.message || "",
-        name: error?.name || "",
-        raw: JSON.stringify(error, Object.getOwnPropertyNames(error)),
+        text: err?.text || err?.response?.text || "",
+        status: err?.status || err?.response?.status || "",
+        message: err?.message || "",
+        name: err?.name || "",
+        raw: JSON.stringify(err, Object.getOwnPropertyNames(err)),
       };
 
       console.error("EmailJS sending failed:", errorDetails);
@@ -172,7 +171,7 @@ export default function Contact() {
                     Request a Free Quote
                   </h3>
                   <p className="t-sm text-gray-500 mb-6">
-                    We'll respond within one business day.
+                    We&apos;ll respond within one business day.
                   </p>
                   <form onSubmit={submit} className="flex flex-col gap-4">
                     {/* ... form fields ... */}

@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
-import { fadeUp, slideLeft, slideRight, EASE_OUT } from "@/lib/animations";
+import { EASE_OUT } from "@/lib/animations";
 import type { Variants } from "framer-motion";
 
 interface RevealProps {
