@@ -13,7 +13,7 @@ export default function CTA() {
   const inView = useInView(ref, { once: true });
 
   return (
-    <section ref={ref} className="relative overflow-hidden" style={{ height: "480px", display: "flex", alignItems: "center" }}>
+    <section ref={ref} className="relative overflow-hidden cta-section" style={{ display: "flex", alignItems: "center" }}>
       <Parallax speed={0.22} className="absolute inset-0 scale-110">
         <div className="absolute inset-0" style={{ backgroundImage: "url('/backgrounds/cta-bg.jpg')", backgroundSize: "cover", backgroundPosition: "center" }} />
       </Parallax>

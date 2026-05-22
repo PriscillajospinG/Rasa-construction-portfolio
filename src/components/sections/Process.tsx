@@ -42,7 +42,7 @@ export default function Process() {
         <Reveal>
           <div
             style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s8)", alignItems: "end", marginBottom: "var(--s12)" }}
-            className="grid-cols-1 lg:grid-cols-2"
+            className="grid-cols-1 lg:grid-cols-2 process-header-grid"
           >
             <div>
               <div className="eyebrow t-label" style={{ color: "var(--clr-accent)", marginBottom: "var(--s3)" }}>How We Work</div>
@@ -62,7 +62,7 @@ export default function Process() {
         <div style={{ position: "relative" }}>
           {/* Animated connector line — draws from top as steps reveal */}
           <motion.div
-            className="absolute"
+            className="absolute process-line"
             style={{
               top:        "28px",
               left:       "calc(var(--s4) + 14px)",
@@ -88,6 +88,7 @@ export default function Process() {
                 key={step}
                 variants={itemLeft}
                 style={{ display: "grid", gridTemplateColumns: "var(--s8) 1fr", gap: "var(--s6)", alignItems: "start" }}
+                className="process-step-row"
               >
                 {/* Step circle — scale in */}
                 <motion.div

@@ -32,7 +32,7 @@ export default function Projects() {
 
         {/* ── Header: asymmetric — number left, content right ── */}
         <div style={{ gap: "var(--s8)", alignItems: "start", marginBottom: "var(--s12)" }}
-          className="grid grid-cols-1 lg:grid-cols-[auto_1fr]">
+          className="grid grid-cols-1 lg:grid-cols-[auto_1fr] projects-header-grid">
           {/* Decorative section number */}
           <Reveal direction="left">
             <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontWeight: 900, fontSize: "0.7rem", letterSpacing: "0.25em", color: "rgba(8,51,53,0.25)", userSelect: "none", textTransform: "uppercase" }}>
@@ -80,6 +80,7 @@ export default function Projects() {
           variants={scaleIn}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
+          className="project-hero-card"
           style={{ marginBottom: "var(--s3)", borderRadius: "var(--r-xl)", overflow: "hidden", position: "relative", aspectRatio: "21/9", boxShadow: "var(--sh-xl)" }}
           onMouseEnter={() => setHovered("hero")} onMouseLeave={() => setHovered(null)}>
           <Image src={heroProject.image} alt={heroProject.title}
@@ -172,7 +173,7 @@ export default function Projects() {
 
         {/* ── CTA — editorial, left-aligned ── */}
         <Reveal>
-          <div style={{ marginTop: "var(--s12)", display: "grid", gridTemplateColumns: "1fr auto", alignItems: "center", gap: "var(--s4)", flexWrap: "wrap", borderTop: "1px solid rgba(8,51,53,0.08)", paddingTop: "var(--s6)" }}>
+          <div style={{ marginTop: "var(--s12)", display: "grid", gridTemplateColumns: "1fr auto", alignItems: "center", gap: "var(--s4)", flexWrap: "wrap", borderTop: "1px solid rgba(8,51,53,0.08)", paddingTop: "var(--s6)" }} className="projects-footer-row">
             <div>
               <p className="font-m" style={{ fontSize: "var(--t-h2)", color: "var(--clr-primary)", lineHeight: 1.2 }}>
                 Ready to see your project here?

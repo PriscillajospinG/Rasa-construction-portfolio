@@ -40,7 +40,7 @@ export default function Equipment() {
         <Reveal>
           <div
             style={{ gap: "var(--s8)", alignItems: "end", marginBottom: "var(--s12)" }}
-            className="grid grid-cols-1 lg:grid-cols-2"
+            className="grid grid-cols-1 lg:grid-cols-2 equipment-header-grid"
           >
             <div>
               <div className="eyebrow t-label" style={{ color: "var(--clr-primary)", marginBottom: "var(--s3)" }}>

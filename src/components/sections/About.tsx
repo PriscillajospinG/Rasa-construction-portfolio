@@ -87,11 +87,11 @@ export default function About() {
             zIndex:         10,
             marginTop:      "0rem",
           }}
-          className="p-6 md:p-12"
+          className="about-story-card p-6 md:p-12"
         >
           <div
             style={{ display: "grid", gridTemplateColumns: "1.1fr 1.9fr", alignItems: "center", gap: "var(--s8)" }}
-            className="grid-cols-1 lg:grid-cols-[1.1fr_1.9fr]"
+            className="grid-cols-1 lg:grid-cols-[1.1fr_1.9fr] about-hero-grid"
           >
             {/* Left: stats / number */}
             <div>
@@ -143,7 +143,7 @@ export default function About() {
         <div style={{ paddingTop: "var(--s10)", paddingBottom: "var(--s16)" }}>
           <div
             style={{ display: "grid", gridTemplateColumns: "4fr 8fr", gap: "var(--s8)", alignItems: "start" }}
-            className="grid-cols-1 lg:grid-cols-[4fr_8fr]"
+            className="grid-cols-1 lg:grid-cols-[4fr_8fr] about-info-grid"
           >
             {/* Left Column: Core Stats */}
             <Reveal direction="left">
@@ -170,12 +170,12 @@ export default function About() {
 
             {/* Right Column: Founder Quote, Images, Differentiators */}
             <Reveal direction="right">
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s4)", alignItems: "start" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s4)", alignItems: "start" }} className="about-details-grid">
 
                 {/* Team Image Banner with Editorial Overlap */}
                 <div style={{ gridColumn: "1 / -1", position: "relative", marginBottom: "var(--s8)" }}>
                   {/* Main Large Image */}
-                  <div style={{ position: "relative", aspectRatio: "16/9", borderRadius: "var(--r-lg)", overflow: "hidden", boxShadow: "var(--sh-xl)" }}>
+                  <div className="about-owner-image-wrapper" style={{ position: "relative", aspectRatio: "16/9", borderRadius: "var(--r-lg)", overflow: "hidden", boxShadow: "var(--sh-xl)" }}>
                     <Image
                       src="/about/about-owner-site.jpg"
                       alt="Rasa Construction site photo showing the team and Rasa Name Board"
@@ -186,7 +186,7 @@ export default function About() {
                     <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(5,31,33,0.75) 0%, transparent 55%)" }} />
                     
                     {/* Overlapping Caption */}
-                    <div className="absolute" style={{ top: "50%", left: "var(--s4)", transform: "translateY(-50%)", maxWidth: "260px" }}>
+                    <div className="absolute about-owner-caption" style={{ top: "50%", left: "var(--s4)", transform: "translateY(-50%)", maxWidth: "260px" }}>
                       <div className="t-label" style={{ color: "var(--clr-accent)", marginBottom: "var(--s1)" }}>Founded by</div>
                       <div className="font-m text-white" style={{ fontSize: "var(--t-h2)", fontWeight: 800, lineHeight: 1.2 }}>
                         {company.owner}
@@ -208,7 +208,7 @@ export default function About() {
 
                 {/* Differentiators Check List */}
                 <div style={{ gridColumn: "1 / -1", paddingTop: "var(--s4)", borderTop: "2px solid rgba(8,51,53,0.08)" }}>
-                  <ul style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s3)" }}>
+                  <ul style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s3)" }} className="about-checklist-grid">
                     {company.differentiators.slice(0, 4).map(({ title, description }) => (
                       <li key={title} style={{ display: "flex", alignItems: "flex-start", gap: "var(--s2)" }}>
                         <CheckCircle2 size={15} style={{ color: "var(--clr-primary)", flexShrink: 0, marginTop: "3px" }} />
