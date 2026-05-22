@@ -311,14 +311,6 @@ export default function Hero() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 1.0 }}
                 className="hero-stats-grid hero-stats"
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(4, 1fr)",
-                  gap: "var(--s4)",
-                  borderTop: "1px solid rgba(216,185,163,0.13)",
-                  paddingTop: "var(--hero-stats-pt, var(--s4))",
-                  width: "100%",
-                }}
               >
                 {[
                   { num: "25+ Years", title: "Field Experience" },
