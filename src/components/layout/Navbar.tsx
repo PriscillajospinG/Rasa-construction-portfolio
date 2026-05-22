@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, PhoneCall } from "lucide-react";
 import RasaLogo from "@/components/ui/Logo";
-import Button from "@/components/ui/Button";
 import { useScroll } from "@/hooks/useScroll";
 import { company } from "@/data/company";
 import { scrollTo, waLink } from "@/lib/utils";
@@ -71,7 +70,7 @@ export default function Navbar() {
       >
         <div className="container navbar-inner">
           
-          {/* Logo - static size per viewport (no scroll scaling to prevent layout shifts) */}
+          {/* Logo - static size per viewport */}
           <button
             onClick={() => go("#home")}
             aria-label="Rasa Construction – Home"
@@ -89,51 +88,51 @@ export default function Navbar() {
             />
           </button>
 
-          {/* Desktop CTA */}
-          <div className="nav-cta-wrap">
-            <Button
+          {/* RIGHT area: Nav links, CTA, and mobile hamburger */}
+          <div className="nav-right">
+            {/* Desktop Nav Links */}
+            <ul className="nav-links">
+              {company.navLinks.map(({ label, href }) => {
+                const active = activeSection === href.slice(1);
+                return (
+                  <li key={href}>
+                    <button
+                      onClick={() => go(href)}
+                      className={`nav-link focus:outline-none ${active ? "active" : ""}`}
+                    >
+                      {label}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+
+            {/* Get a Quote CTA */}
+            <a
               href="#contact"
               onClick={(e) => {
                 e.preventDefault();
                 go("#contact");
               }}
-              variant="primary"
               className="nav-cta"
             >
-              Get Quote
-            </Button>
-          </div>
+              Get a Quote
+            </a>
 
-          {/* Desktop Nav Links */}
-          <ul className="nav-links">
-            {company.navLinks.map(({ label, href }) => {
-              const active = activeSection === href.slice(1);
-              return (
-                <li key={href} className="relative">
-                  <button
-                    onClick={() => go(href)}
-                    className={`nav-link font-p text-xs font-medium tracking-[0.1em] uppercase transition-colors duration-300 focus:outline-none ${active ? "active" : ""}`}
-                  >
-                    <span className="relative z-10">{label}</span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-
-          {/* Mobile hamburger menu toggle */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className={`mobile-menu-button p-2 -mr-2 text-white/80 hover:text-white transition-colors relative focus:outline-none ${menuOpen ? "z-[1105]" : "z-[101]"}`}
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-          >
-            <motion.div
-              animate={{ rotate: menuOpen ? 90 : 0 }}
-              transition={{ duration: 0.2 }}
+            {/* Mobile hamburger menu toggle */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className={`mobile-menu-button p-2 -mr-2 text-white/80 hover:text-white transition-colors relative focus:outline-none ${menuOpen ? "z-[1105]" : "z-[101]"}`}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
             >
-              {menuOpen ? <X size={22} /> : <Menu size={22} />}
-            </motion.div>
-          </button>
+              <motion.div
+                animate={{ rotate: menuOpen ? 90 : 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                {menuOpen ? <X size={22} /> : <Menu size={22} />}
+              </motion.div>
+            </button>
+          </div>
         </div>
       </motion.nav>
 

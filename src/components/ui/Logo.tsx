@@ -46,7 +46,7 @@ export default function RasaLogo({
         height={height}
         priority
         className="object-contain"
-        style={{ width: `${width}px`, height: `${height}px` }}
+        style={{ width: "auto", height: "auto" }}
       />
     </div>
   );
