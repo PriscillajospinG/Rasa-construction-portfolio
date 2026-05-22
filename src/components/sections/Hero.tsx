@@ -150,7 +150,6 @@ export default function Hero() {
                 className="font-m hero-title"
                 style={{
                   fontSize:      "var(--hero-title-size, var(--t-hero))",
-                  fontWeight:    900,
                   lineHeight:    "var(--hero-title-lh, 1.05)",
                   letterSpacing: "-0.03em",
                   color:         "white",
@@ -187,7 +186,6 @@ export default function Hero() {
                 transition={{ duration: 0.7, delay: 0.6, ease }}
                 className="hero-description"
                 style={{
-                  fontFamily:   "'Inter', sans-serif",
                   fontSize:     "var(--hero-desc-size, var(--t-sm))",
                   color:        "rgba(255,255,255,0.65)",
                   lineHeight:   1.78,
@@ -294,7 +292,6 @@ export default function Hero() {
                       display:        "flex",
                       alignItems:     "center",
                       gap:            "var(--s1)",
-                      fontFamily:     "'Poppins', sans-serif",
                       fontWeight:     600,
                       fontSize:       "var(--t-sm)",
                       color:          "rgba(255,255,255,0.70)",
@@ -332,7 +329,7 @@ export default function Hero() {
                   { num: "Vertical", title: "Hoist Rental" },
                 ].map(({ num, title }, i) => (
                   <div key={i} style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-                    <span className="font-m" style={{ color: "var(--clr-accent)", fontWeight: 900, fontSize: "1.05rem", lineHeight: 1.1 }}>
+                    <span className="font-m" style={{ color: "var(--clr-accent)", fontSize: "1.05rem", lineHeight: 1.1 }}>
                       {num}
                     </span>
                     <span className="t-label" style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.55rem", letterSpacing: "0.08em", textTransform: "uppercase" }}>

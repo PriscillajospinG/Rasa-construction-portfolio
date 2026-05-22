@@ -35,7 +35,7 @@ export default function Projects() {
           className="grid grid-cols-1 lg:grid-cols-[auto_1fr]">
           {/* Decorative section number */}
           <Reveal direction="left">
-            <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "0.7rem", letterSpacing: "0.25em", color: "rgba(8,51,53,0.25)", userSelect: "none", textTransform: "uppercase" }}>
+            <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontWeight: 900, fontSize: "0.7rem", letterSpacing: "0.25em", color: "rgba(8,51,53,0.25)", userSelect: "none", textTransform: "uppercase" }}>
               Portfolio
             </div>
           </Reveal>
@@ -90,7 +90,7 @@ export default function Projects() {
           {/* Editorial content — left-anchored */}
           <div className="absolute" style={{ top: "50%", left: "var(--s8)", transform: "translateY(-50%)", maxWidth: "500px" }}>
             <Badge variant="light" style={{ marginBottom: "var(--s3)" }}>{heroProject.category}</Badge>
-            <h3 className="font-m text-white" style={{ fontSize: "var(--t-h1)", fontWeight: 900, lineHeight: 1.1, marginBottom: "var(--s2)" }}>
+            <h3 className="font-m text-white" style={{ fontSize: "var(--t-h1)", lineHeight: 1.1, marginBottom: "var(--s2)" }}>
               {heroProject.title}
             </h3>
             {heroProject.description && (
@@ -145,7 +145,7 @@ export default function Projects() {
                     <div className="absolute transition-transform duration-350"
                       style={{ bottom: "var(--s3)", left: "var(--s3)", right: "var(--s3)", transform: hovered === id ? "translateY(0)" : "translateY(4px)" }}>
                       <Badge variant="light" style={{ marginBottom: "var(--s1)" }}>{category}</Badge>
-                      <h3 className="font-m text-white" style={{ fontSize: "var(--t-h2)", fontWeight: 700, lineHeight: 1.2, marginBottom: "3px" }}>{title}</h3>
+                      <h3 className="font-m text-white" style={{ fontSize: "var(--t-h2)", lineHeight: 1.2, marginBottom: "3px" }}>{title}</h3>
                       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--s2)" }}>
                         <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
                           <MapPin size={11} color="rgba(255,255,255,0.45)" />
@@ -171,7 +171,7 @@ export default function Projects() {
         <Reveal>
           <div style={{ marginTop: "var(--s12)", display: "grid", gridTemplateColumns: "1fr auto", alignItems: "center", gap: "var(--s4)", flexWrap: "wrap", borderTop: "1px solid rgba(8,51,53,0.08)", paddingTop: "var(--s6)" }}>
             <div>
-              <p className="font-m" style={{ fontWeight: 700, fontSize: "var(--t-h2)", color: "var(--clr-primary)", lineHeight: 1.2 }}>
+              <p className="font-m" style={{ fontSize: "var(--t-h2)", color: "var(--clr-primary)", lineHeight: 1.2 }}>
                 Ready to see your project here?
               </p>
               <p className="t-sm" style={{ color: "var(--clr-text-lt)", marginTop: "var(--s1)" }}>

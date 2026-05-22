@@ -66,7 +66,7 @@ export default function Testimonials() {
                   </motion.div>
                 ))}
               </div>
-              <div className="font-m text-white" style={{ fontWeight: 900, fontSize: "var(--t-h2)" }}>4.9 / 5.0</div>
+              <div className="font-m text-white" style={{ fontSize: "var(--t-h2)" }}>4.9 / 5.0</div>
               <div className="t-sm" style={{ color: "rgba(255,255,255,0.38)", marginTop: "2px" }}>Across 300+ completed projects</div>
             </motion.div>
           </div>
@@ -90,7 +90,7 @@ export default function Testimonials() {
           {/* Giant background quote mark — fades in after card */}
           <motion.div
             className="absolute"
-            style={{ top: "-1rem", right: "var(--s4)", fontSize: "18rem", fontFamily: "'Montserrat',sans-serif", fontWeight: 900, color: "rgba(216,185,163,0.04)", lineHeight: 1, userSelect: "none", pointerEvents: "none" }}
+            style={{ top: "-1rem", right: "var(--s4)", fontSize: "18rem", fontFamily: "var(--font-heading), serif", color: "rgba(216,185,163,0.04)", lineHeight: 1, userSelect: "none", pointerEvents: "none" }}
             variants={quoteFade}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
@@ -103,14 +103,14 @@ export default function Testimonials() {
             <div>
               <Stars count={featured.rating} />
               <p className="font-m text-white"
-                style={{ fontSize: "clamp(1.15rem, 2.2vw, 1.55rem)", fontWeight: 600, lineHeight: 1.6, marginTop: "var(--s4)", marginBottom: "var(--s6)", fontStyle: "italic" }}>
+                style={{ fontSize: "clamp(1.15rem, 2.2vw, 1.55rem)", lineHeight: 1.6, marginTop: "var(--s4)", marginBottom: "var(--s6)", fontStyle: "italic" }}>
                 &ldquo;{featured.text}&rdquo;
               </p>
             </div>
             {/* Author — pulled to bottom-right */}
             <div style={{ flexShrink: 0, borderLeft: "1px solid rgba(216,185,163,0.20)", paddingLeft: "var(--s6)", minWidth: "200px" }}>
               <motion.div
-                style={{ width: "48px", height: "48px", borderRadius: "50%", background: "linear-gradient(135deg, var(--clr-primary-mid), var(--clr-accent))", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Montserrat',sans-serif", fontWeight: 700, color: "white", marginBottom: "var(--s2)" }}
+                style={{ width: "48px", height: "48px", borderRadius: "50%", background: "linear-gradient(135deg, var(--clr-primary-mid), var(--clr-accent))", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, color: "white", marginBottom: "var(--s2)" }}
                 initial={{ opacity: 0, scale: 0.7 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.55, delay: 0.4, ease: EASE_CINEMATIC }}
@@ -155,7 +155,7 @@ export default function Testimonials() {
                 </div>
               )}
               <div style={{ display: "flex", alignItems: "center", gap: "var(--s2)" }}>
-                <div style={{ width: "36px", height: "36px", borderRadius: "50%", background: "linear-gradient(135deg, var(--clr-primary-mid), var(--clr-accent))", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "0.75rem", color: "white", flexShrink: 0 }}>{initials}</div>
+                <div style={{ width: "36px", height: "36px", borderRadius: "50%", background: "linear-gradient(135deg, var(--clr-primary-mid), var(--clr-accent))", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: "0.75rem", color: "white", flexShrink: 0 }}>{initials}</div>
                 <div>
                   <div className="font-p text-white" style={{ fontWeight: 600, fontSize: "var(--t-sm)" }}>{name}</div>
                   <div className="t-sm" style={{ color: "rgba(255,255,255,0.38)" }}>{role}{location ? ` · ${location}` : ""}</div>
@@ -184,10 +184,10 @@ export default function Testimonials() {
                   &ldquo;{text.slice(0, 160)}{text.length > 160 ? "…" : ""}&rdquo;
                 </p>
                 <div style={{ display: "flex", alignItems: "center", gap: "var(--s2)" }}>
-                  <div style={{ width: "28px", height: "28px", borderRadius: "50%", background: "rgba(216,185,163,0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.65rem", fontFamily: "'Montserrat',sans-serif", fontWeight: 700, color: "var(--clr-accent)" }}>{initials}</div>
+                  <div style={{ width: "28px", height: "28px", borderRadius: "50%", background: "rgba(216,185,163,0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.65rem", fontWeight: 700, color: "var(--clr-accent)" }}>{initials}</div>
                   <div>
                     <div className="font-p" style={{ fontWeight: 600, fontSize: "0.75rem", color: "rgba(255,255,255,0.70)" }}>{name}</div>
-                    <div style={{ fontSize: "0.68rem", color: "rgba(255,255,255,0.32)", fontFamily: "'Inter',sans-serif" }}>{role}{location ? ` · ${location}` : ""}</div>
+                    <div style={{ fontSize: "0.68rem", color: "rgba(255,255,255,0.32)" }}>{role}{location ? ` · ${location}` : ""}</div>
                   </div>
                 </div>
               </motion.div>

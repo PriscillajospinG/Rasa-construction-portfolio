@@ -9,8 +9,8 @@
    TYPE:      72 / 48 / 24 / 18 / 14px — no random sizes
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,800;0,900;1,700;1,800&family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
 @import "tailwindcss";
+
 
 /* ── TOKENS ─────────────────────────────────────────────── */
 :root {
@@ -61,6 +61,9 @@
   --section-y: var(--section-y-desktop);
 
   /* ── Typography ── */
+  --font-heading: var(--font-heading, "DM Serif Display", serif);
+  --font-body: var(--font-body, "Manrope", sans-serif);
+
   --t-hero:  clamp(2.1rem,  7vw, 4.5rem); /* ≈72px max */
   --t-h1:    clamp(2rem,    5vw, 3rem);   /* ≈48px max */
   --t-h2:    1.5rem;                       /* 24px */
@@ -179,7 +182,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; overflow-x: hidden; -webkit-text-size-adjust: 100%; }
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-body), "Manrope", sans-serif;
   font-size: var(--t-body);
   line-height: var(--lh-normal);
   color: var(--clr-text);
@@ -199,67 +202,110 @@ input, textarea { cursor: text !important; }
 ::-webkit-scrollbar-thumb { background: var(--clr-accent-dk); border-radius: 2px; }
 
 /* ── TYPOGRAPHY ─────────────────────────────────────────── */
-.font-m { font-family: 'Montserrat', sans-serif; }
-.font-p { font-family: 'Poppins', sans-serif; }
-.font-i { font-family: 'Inter', sans-serif; }
+.font-m { font-family: var(--font-heading), "DM Serif Display", serif; }
+.font-p { font-family: var(--font-body), "Manrope", sans-serif; }
+.font-i { font-family: var(--font-body), "Manrope", sans-serif; }
 
-/* Brutalist display heading */
-.t-hero {
-  font-family: 'Montserrat', sans-serif;
-  font-size: var(--t-hero);
-  font-weight: 900;
-  line-height: var(--lh-tight);
-  letter-spacing: -0.025em;
+/* Elegant Display Heading */
+.t-hero,
+.hero-title {
+  font-family: var(--font-heading), "DM Serif Display", serif !important;
+  font-size: clamp(3.8rem, 6.5vw, 6.4rem) !important;
+  line-height: 0.95 !important;
+  letter-spacing: -0.045em !important;
+  font-weight: 400 !important;
 }
+
 /* Section heading */
-.t-h1 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: var(--t-h1);
-  font-weight: 900;
-  line-height: var(--lh-snug);
-  letter-spacing: -0.02em;
+.t-h1,
+.section-title {
+  font-family: var(--font-heading), "DM Serif Display", serif !important;
+  font-size: clamp(2.3rem, 4vw, 4.2rem) !important;
+  line-height: 1 !important;
+  letter-spacing: -0.035em !important;
+  font-weight: 400 !important;
 }
+
 /* Subtitle / card title */
-.t-h2 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: var(--t-h2);
-  font-weight: 700;
-  line-height: var(--lh-snug);
+.t-h2,
+.card-title,
+.service-title,
+.project-title,
+.equipment-title {
+  font-family: var(--font-body), "Manrope", sans-serif !important;
+  font-size: clamp(1.15rem, 1.4vw, 1.35rem) !important;
+  line-height: 1.25 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
 }
-/* Body */
-.t-body {
-  font-family: 'Inter', sans-serif;
-  font-size: var(--t-body);
-  line-height: var(--lh-loose);
+
+/* Body Paragraphs */
+.t-body,
+p,
+.card-description,
+.service-description {
+  font-family: var(--font-body), "Manrope", sans-serif !important;
+  font-size: 1rem !important;
+  line-height: 1.7 !important;
+  letter-spacing: -0.005em !important;
 }
+
 /* Small */
-.t-sm {
-  font-family: 'Inter', sans-serif;
-  font-size: var(--t-sm);
-  line-height: var(--lh-normal);
+.t-sm,
+.hero-description {
+  font-family: var(--font-body), "Manrope", sans-serif !important;
+  font-size: clamp(1rem, 1.15vw, 1.18rem) !important;
+  line-height: 1.65 !important;
+  letter-spacing: -0.01em !important;
+  max-width: 620px !important;
 }
+
 /* Label / eyebrow */
-.t-label {
-  font-family: 'Poppins', sans-serif;
-  font-size: var(--t-xs);
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+.t-label,
+.eyebrow,
+.section-eyebrow {
+  font-family: var(--font-body), "Manrope", sans-serif !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
 }
-/* Italic accent — two variants: on dark bg and on light bg */
+
+/* Italic accent — elegant serif italic */
 .t-italic {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading), "DM Serif Display", serif;
   font-style: italic;
-  font-weight: 800;
-  /* Default: used on dark backgrounds — beige accent */
+  font-weight: 400;
   color: var(--clr-accent);
 }
-/* On light sections: override to brand primary */
 .t-italic-dark {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading), "DM Serif Display", serif;
   font-style: italic;
-  font-weight: 800;
+  font-weight: 400;
   color: var(--clr-primary);
+}
+
+/* Navbar Links */
+.nav-link {
+  font-family: var(--font-body), "Manrope", sans-serif !important;
+  font-size: 0.92rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+}
+.nav-cta {
+  font-family: var(--font-body), "Manrope", sans-serif !important;
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+}
+
+/* Buttons */
+button,
+.btn,
+.cta-button {
+  font-family: var(--font-body), "Manrope", sans-serif !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
 }
 
 /* ── EDITORIAL LABEL with rule ───────────────────────────── */
@@ -738,8 +784,8 @@ input, textarea { cursor: text !important; }
 /* Laptop Specific Fix */
 @media (min-width: 769px) and (max-height: 820px) {
   .hero-title {
-    --hero-title-size: clamp(2.8rem, 5vw, 4.6rem);
-    font-size: clamp(2.8rem, 5vw, 4.6rem) !important;
+    --hero-title-size: clamp(3.2rem, 5.4vw, 5.2rem);
+    font-size: clamp(3.2rem, 5.4vw, 5.2rem) !important;
   }
 
   .hero-description {
@@ -813,18 +859,25 @@ input, textarea { cursor: text !important; }
   }
 
   .hero-title {
-    --hero-title-size: clamp(2rem, 10vw, 3rem);
-    font-size: clamp(2rem, 10vw, 3rem) !important;
+    --hero-title-size: clamp(2.45rem, 12vw, 3.5rem);
+    font-size: clamp(2.45rem, 12vw, 3.5rem) !important;
     line-height: 1 !important;
     margin-bottom: 0 !important;
   }
 
   .hero-description {
-    --hero-desc-size: 0.92rem;
-    font-size: 0.92rem !important;
-    line-height: 1.45 !important;
+    --hero-desc-size: 0.98rem;
+    font-size: 0.98rem !important;
+    line-height: 1.58 !important;
     max-width: 100% !important;
     margin-bottom: 0 !important;
+  }
+
+  p,
+  .card-description,
+  .service-description {
+    font-size: 0.95rem !important;
+    line-height: 1.62 !important;
   }
 
   .hero-actions,
@@ -895,7 +948,7 @@ input, textarea { cursor: text !important; }
 
 @media (max-width: 380px) {
   .hero-title {
-    font-size: clamp(2.1rem, 11vw, 2.9rem);
+    font-size: clamp(2.15rem, 11vw, 3rem) !important;
   }
   .hero-stats-grid {
     grid-template-columns: 1fr !important;
