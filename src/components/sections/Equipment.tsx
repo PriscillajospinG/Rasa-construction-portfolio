@@ -83,7 +83,7 @@ export default function Equipment() {
               <motion.div
                 key={id}
                 variants={itemReveal}
-                className="group card-hover"
+                className="group card-hover equipment-card"
                 style={{
                   padding:       "var(--s4)",
                   borderRadius:  "var(--r-lg)",

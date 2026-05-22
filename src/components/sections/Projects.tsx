@@ -134,7 +134,10 @@ export default function Projects() {
                 style={{ breakInside: "avoid", marginBottom: "var(--s3)" }}
                 onMouseEnter={() => setHovered(id)} onMouseLeave={() => setHovered(null)}
               >
-                <div style={{ position: "relative", width: "100%", aspectRatio: tall ? "3/4" : "4/3", borderRadius: "var(--r-lg)", overflow: "hidden", boxShadow: hovered === id ? "var(--sh-xl)" : "var(--sh-md)", transition: "box-shadow 350ms ease" }}>
+                <div
+                  className="project-card img-zoom"
+                  style={{ position: "relative", width: "100%", aspectRatio: tall ? "3/4" : "4/3", borderRadius: "var(--r-lg)", overflow: "hidden", boxShadow: hovered === id ? "var(--sh-xl)" : "var(--sh-md)" }}
+                >
                   <Image src={image} alt={title} fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover transition-transform duration-700"

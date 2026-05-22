@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
-import { DM_Serif_Display, Manrope } from "next/font/google";
+import { Fraunces, Manrope } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PageWrapper from "@/components/ui/PageWrapper";
 import { company } from "@/data/company";
 
-const headingFont = DM_Serif_Display({
+const headingFont = Fraunces({
   subsets: ["latin"],
-  weight: "400",
+  weight: ["500", "600", "700"],
   variable: "--font-heading",
 });
 
 const bodyFont = Manrope({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-body",
 });
 
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${headingFont.variable} ${bodyFont.variable}`}>
-      <body className="antialiased">
+    <html lang="en">
+      <body className={`antialiased ${headingFont.variable} ${bodyFont.variable}`}>
         <PageWrapper>
           <Navbar />
           {children}

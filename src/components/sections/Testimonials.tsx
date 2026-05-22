@@ -77,6 +77,7 @@ export default function Testimonials() {
           variants={heroReveal}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
+          className="testimonial-card featured-testimonial-card"
           style={{
             position:     "relative",
             borderRadius: "var(--r-xl)",
@@ -142,7 +143,7 @@ export default function Testimonials() {
           {prominent.map(({ id, name, role, location, project, rating, text, initials }) => (
             <motion.div key={id}
               variants={itemReveal}
-              className="card-dark group"
+              className="card-dark group testimonial-card"
               style={{ padding: "var(--s4)", borderLeft: "2px solid rgba(216,185,163,0.22)" }}>
               <Quote size={28} style={{ color: "rgba(216,185,163,0.10)", marginBottom: "var(--s3)" }} />
               <Stars count={rating} />
@@ -177,6 +178,7 @@ export default function Testimonials() {
             {compact.map(({ id, name, role, location, rating, text, initials }) => (
               <motion.div key={id}
                 variants={itemReveal}
+                className="testimonial-card compact-testimonial-card"
                 style={{ padding: "var(--s4)", borderRight: "1px solid rgba(216,185,163,0.08)" }}
               >
                 <Stars count={rating} />

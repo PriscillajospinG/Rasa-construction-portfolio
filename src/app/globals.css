@@ -61,8 +61,8 @@
   --section-y: var(--section-y-desktop);
 
   /* ── Typography ── */
-  --font-heading: var(--font-heading, "DM Serif Display", serif);
-  --font-body: var(--font-body, "Manrope", sans-serif);
+  --font-heading: "Fraunces", serif;
+  --font-body: "Manrope", sans-serif;
 
   --t-hero:  clamp(2.1rem,  7vw, 4.5rem); /* ≈72px max */
   --t-h1:    clamp(2rem,    5vw, 3rem);   /* ≈48px max */
@@ -94,6 +94,9 @@
   /* ── Easing ── */
   --ease:   cubic-bezier(0.16, 1, 0.3, 1);
   --ease-s: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-fast: 180ms var(--ease-premium);
+  --transition-medium: 280ms var(--ease-premium);
 }
 
 /* ── CONTAINER & SECTION SYSTEM ─────────────────────────── */
@@ -189,7 +192,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; overflow-x: hidden; -webkit-text-size-adjust: 100%; }
 body {
-  font-family: var(--font-body), "Manrope", sans-serif;
+  font-family: var(--font-body);
   font-size: var(--t-body);
   line-height: var(--lh-normal);
   color: var(--clr-text);
@@ -209,14 +212,27 @@ input, textarea { cursor: text !important; }
 ::-webkit-scrollbar-thumb { background: var(--clr-accent-dk); border-radius: 2px; }
 
 /* ── TYPOGRAPHY ─────────────────────────────────────────── */
-.font-m { font-family: var(--font-heading), "DM Serif Display", serif; }
-.font-p { font-family: var(--font-body), "Manrope", sans-serif; }
-.font-i { font-family: var(--font-body), "Manrope", sans-serif; }
+body {
+  font-family: var(--font-body);
+}
+
+h1, h2, h3,
+.hero-title,
+.section-title {
+  font-family: var(--font-heading);
+}
+
+p, a, button, input, textarea, label {
+  font-family: var(--font-body);
+}
+
+.font-m { font-family: var(--font-heading), serif; }
+.font-p { font-family: var(--font-body), sans-serif; }
+.font-i { font-family: var(--font-body), sans-serif; }
 
 /* Elegant Display Heading */
-.t-hero,
-.hero-title {
-  font-family: var(--font-heading), "DM Serif Display", serif !important;
+.t-hero {
+  font-family: var(--font-heading), serif !important;
   font-size: clamp(3.8rem, 6.5vw, 6.4rem) !important;
   line-height: 0.95 !important;
   letter-spacing: -0.045em !important;
@@ -224,13 +240,20 @@ input, textarea { cursor: text !important; }
 }
 
 /* Section heading */
-.t-h1,
-.section-title {
-  font-family: var(--font-heading), "DM Serif Display", serif !important;
+.t-h1 {
+  font-family: var(--font-heading), serif !important;
   font-size: clamp(2.3rem, 4vw, 4.2rem) !important;
   line-height: 1 !important;
   letter-spacing: -0.035em !important;
   font-weight: 400 !important;
+}
+
+.section-title {
+  font-family: var(--font-heading) !important;
+  font-weight: 600 !important;
+  font-size: clamp(2.4rem, 4vw, 4.2rem) !important;
+  line-height: 1 !important;
+  letter-spacing: -0.035em !important;
 }
 
 /* Subtitle / card title */
@@ -239,7 +262,7 @@ input, textarea { cursor: text !important; }
 .service-title,
 .project-title,
 .equipment-title {
-  font-family: var(--font-body), "Manrope", sans-serif !important;
+  font-family: var(--font-body), sans-serif !important;
   font-size: clamp(1.15rem, 1.4vw, 1.35rem) !important;
   line-height: 1.25 !important;
   font-weight: 700 !important;
@@ -251,16 +274,15 @@ input, textarea { cursor: text !important; }
 p,
 .card-description,
 .service-description {
-  font-family: var(--font-body), "Manrope", sans-serif !important;
+  font-family: var(--font-body), sans-serif !important;
   font-size: 1rem !important;
   line-height: 1.7 !important;
   letter-spacing: -0.005em !important;
 }
 
 /* Small */
-.t-sm,
-.hero-description {
-  font-family: var(--font-body), "Manrope", sans-serif !important;
+.t-sm {
+  font-family: var(--font-body), sans-serif !important;
   font-size: clamp(1rem, 1.15vw, 1.18rem) !important;
   line-height: 1.65 !important;
   letter-spacing: -0.01em !important;
@@ -271,7 +293,7 @@ p,
 .t-label,
 .eyebrow,
 .section-eyebrow {
-  font-family: var(--font-body), "Manrope", sans-serif !important;
+  font-family: var(--font-body), sans-serif !important;
   font-size: 0.78rem !important;
   font-weight: 700 !important;
   letter-spacing: 0.16em !important;
@@ -280,13 +302,13 @@ p,
 
 /* Italic accent — elegant serif italic */
 .t-italic {
-  font-family: var(--font-heading), "DM Serif Display", serif;
+  font-family: var(--font-heading), serif;
   font-style: italic;
   font-weight: 400;
   color: var(--clr-accent);
 }
 .t-italic-dark {
-  font-family: var(--font-heading), "DM Serif Display", serif;
+  font-family: var(--font-heading), serif;
   font-style: italic;
   font-weight: 400;
   color: var(--clr-primary);
@@ -294,24 +316,26 @@ p,
 
 /* Navbar Links */
 .nav-link {
-  font-family: var(--font-body), "Manrope", sans-serif !important;
+  font-family: var(--font-body), sans-serif !important;
   font-size: 0.92rem !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
   letter-spacing: -0.01em !important;
 }
 .nav-cta {
-  font-family: var(--font-body), "Manrope", sans-serif !important;
+  font-family: var(--font-body), sans-serif !important;
   font-size: 0.9rem !important;
-  font-weight: 700 !important;
+  font-weight: 800 !important;
 }
 
 /* Buttons */
 button,
 .btn,
+.btn-primary,
+.btn-secondary,
 .cta-button {
-  font-family: var(--font-body), "Manrope", sans-serif !important;
+  font-family: var(--font-body), sans-serif !important;
   font-size: 0.95rem !important;
-  font-weight: 700 !important;
+  font-weight: 800 !important;
   letter-spacing: -0.01em !important;
 }
 
@@ -377,8 +401,8 @@ button,
   align-items: center;
   justify-content: center;
   gap: var(--s1);
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-weight: 800;
   font-size: var(--t-sm);
   letter-spacing: 0.02em;
   padding: var(--s2) var(--s4);
@@ -389,11 +413,11 @@ button,
   overflow: hidden;
   isolation: isolate;
   /* Unified transition — covers all button states */
-  transition: transform 280ms var(--ease),
-              box-shadow 280ms ease,
-              background 240ms ease,
-              color 240ms ease,
-              border-color 240ms ease;
+  transition: transform var(--transition-medium),
+              box-shadow var(--transition-medium),
+              background var(--transition-medium),
+              color var(--transition-medium),
+              border-color var(--transition-medium);
   will-change: transform;
 }
 
@@ -467,10 +491,10 @@ button,
   border-radius: var(--r-lg);
   border: 1px solid rgba(8,51,53,0.07);
   box-shadow: var(--sh-card);
-  transition: transform 350ms var(--ease), box-shadow 350ms ease, border-color 350ms ease;
+  transition: transform var(--transition-medium), box-shadow var(--transition-medium), border-color var(--transition-medium);
 }
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
   box-shadow: var(--sh-xl);
   border-color: rgba(8,51,53,0.12);
 }
@@ -480,14 +504,14 @@ button,
   background: rgba(5,31,33,0.60);
   border-radius: var(--r-lg);
   border: 1px solid rgba(216,185,163,0.12);
-  transition: background 350ms var(--ease),
-              border-color 350ms ease,
-              transform 350ms var(--ease);
+  transition: background var(--transition-medium),
+              border-color var(--transition-medium),
+              transform var(--transition-medium);
 }
 .card-dark:hover {
   background: rgba(5,31,33,0.78);
   border-color: rgba(216,185,163,0.22);
-  transform: translateY(-4px);
+  transform: translateY(-6px);
 }
 
 /* ── CARD HOVER LIFT (for Framer Motion cards) ───────────── */
@@ -496,11 +520,11 @@ button,
  * Only transform + box-shadow — no layout shift.
  */
 .card-hover {
-  transition: transform 320ms var(--ease), box-shadow 320ms ease;
+  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
   will-change: transform;
 }
 .card-hover:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
   box-shadow: var(--sh-xl);
 }
 
@@ -512,12 +536,12 @@ button,
 .img-zoom { overflow: hidden; }
 .img-zoom img,
 .img-zoom [data-img] {
-  transition: transform 700ms var(--ease);
+  transition: transform 700ms var(--ease-premium);
   transform: scale(1);
 }
 .img-zoom:hover img,
 .img-zoom:hover [data-img] {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 /* ── INPUTS — dark surface variant ──────────────────────── */
@@ -528,10 +552,10 @@ button,
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: var(--r-md);
   color: white;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   font-size: var(--t-sm);
   outline: none;
-  transition: border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
 }
 .inp::placeholder { color: rgba(255,255,255,0.35); }
 .inp:focus {
@@ -548,10 +572,10 @@ button,
   border: 1.5px solid rgba(8,51,53,0.14);
   border-radius: var(--r-md);
   color: var(--clr-text);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   font-size: var(--t-sm);
   outline: none;
-  transition: border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
   appearance: none;
   -webkit-appearance: none;
 }
@@ -580,7 +604,7 @@ button,
   background: var(--clr-accent);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 280ms var(--ease);
+  transition: transform var(--transition-medium);
 }
 .link-underline:hover::after { transform: scaleX(1); }
 
@@ -701,7 +725,7 @@ button,
   color: rgba(255,255,255,0.82) !important;
   text-decoration: none !important;
   font-size: 0.92rem;
-  font-weight: 600;
+  font-weight: 700;
   transition: color 0.25s ease;
   background: none;
   border: none;
@@ -722,7 +746,7 @@ button,
   font-weight: 800 !important;
   text-decoration: none !important;
   white-space: nowrap !important;
-  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease !important;
+  transition: transform var(--transition-medium), background var(--transition-medium), color var(--transition-medium), border-color var(--transition-medium) !important;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -764,14 +788,19 @@ button,
   background-image: url("/hero/hero-site.jpg");
   background-size: cover;
   background-position: center;
-  opacity: 0.45;
+  opacity: 0.58;
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(8,51,53,0.96) 0%, rgba(8,51,53,0.82) 45%, rgba(8,51,53,0.45) 100%);
+    linear-gradient(
+      90deg,
+      rgba(8, 51, 53, 0.78) 0%,
+      rgba(8, 51, 53, 0.52) 45%,
+      rgba(8, 51, 53, 0.18) 100%
+    );
 }
 
 .hero-container {
@@ -802,18 +831,20 @@ button,
   margin: 0;
   color: #ffffff;
   font-family: var(--font-heading);
-  font-size: clamp(3.2rem, 5.8vw, 5.8rem);
-  line-height: 0.95;
+  font-weight: 600;
+  font-size: clamp(3.2rem, 5.8vw, 5.7rem);
+  line-height: 0.96;
   letter-spacing: -0.045em;
-  font-weight: 400;
 }
 
 .hero-description {
   margin-top: 24px;
   max-width: 620px;
   color: rgba(255,255,255,0.78);
+  font-family: var(--font-body);
   font-size: clamp(1rem, 1.15vw, 1.15rem);
   line-height: 1.65;
+  letter-spacing: -0.01em;
 }
 
 .hero-actions {
@@ -829,10 +860,10 @@ button,
   justify-content: center;
   padding: 14px 28px;
   border-radius: 999px;
-  font-weight: 700;
+  font-weight: 800;
   text-decoration: none;
   font-size: 0.95rem;
-  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  transition: transform var(--transition-medium), background var(--transition-medium), color var(--transition-medium), border-color var(--transition-medium);
 }
 
 .hero-actions .btn-primary {
@@ -879,6 +910,16 @@ button,
 
 /* Mobile specific styling (< 900px) */
 @media (max-width: 900px) {
+  .hero-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(8, 51, 53, 0.78) 0%,
+        rgba(8, 51, 53, 0.58) 55%,
+        rgba(8, 51, 53, 0.36) 100%
+      );
+  }
+
   .navbar {
     height: 68px;
   }
@@ -1062,10 +1103,10 @@ button,
 
 /* ── SOCIAL ICON HOVER ───────────────────────────────────── */
 .social-icon {
-  transition: transform 250ms var(--ease),
-              background 250ms ease,
-              border-color 250ms ease,
-              color 250ms ease;
+  transition: transform var(--transition-medium),
+              background var(--transition-medium),
+              border-color var(--transition-medium),
+              color var(--transition-medium);
 }
 .social-icon:hover {
   transform: translateY(-2px) scale(1.05);
@@ -1133,7 +1174,7 @@ button,
   border-radius: var(--r-lg);
   border: 1px solid rgba(8,51,53,0.07);
   box-shadow: var(--sh-card);
-  transition: transform 350ms var(--ease), box-shadow 350ms ease, border-color 350ms ease;
+  transition: transform var(--transition-medium), box-shadow var(--transition-medium), border-color var(--transition-medium);
   overflow: hidden;
 }
 
@@ -1145,20 +1186,20 @@ button,
 }
 
 .service-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
   box-shadow: var(--sh-xl);
   border-color: rgba(8, 51, 53, 0.12);
 }
 
 .service-card .service-number {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-body), sans-serif;
   font-weight: 900;
   font-size: var(--t-sm);
   color: var(--clr-accent-dk);
 }
 
 .service-card h3 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading), serif;
   font-size: var(--t-h2);
   font-weight: 700;
   line-height: var(--lh-snug);
@@ -1191,11 +1232,11 @@ button,
 }
 
 .service-image img {
-  transition: transform 700ms var(--ease);
+  transition: transform 700ms var(--ease-premium);
 }
 
 .group:hover .service-image img {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 .service-image-overlay {
@@ -1336,10 +1377,10 @@ button,
   border: 1.5px solid #e5e7eb;
   border-radius: var(--r-sm);
   color: var(--clr-text);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   font-size: var(--t-sm);
   outline: none;
-  transition: border-color 220ms ease, box-shadow 220ms ease;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 .contact-input::placeholder { color: #9ca3af; }
 .contact-input:focus {
@@ -1393,4 +1434,123 @@ iframe {
   .container {
     width: min(100% - 24px, 100%) !important;
   }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: clamp(2.2rem, 11vw, 3.3rem) !important;
+    line-height: 1 !important;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 9vw, 3rem) !important;
+  }
+
+  p {
+    font-size: 0.95rem !important;
+    line-height: 1.62 !important;
+  }
+}
+
+/* ── NEW CUSTOM TRANSITIONS AND ANIMATIONS ───────────────── */
+
+/* Global Transition Utility definitions for mapped classes */
+.project-card,
+.equipment-card,
+.testimonial-card,
+.why-us-card {
+  transition:
+    transform var(--transition-medium),
+    box-shadow var(--transition-medium),
+    border-color var(--transition-medium),
+    background-color var(--transition-medium);
+}
+
+/* Card Hover Lifts */
+.why-us-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--sh-xl);
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--sh-xl) !important;
+}
+
+.equipment-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: var(--sh-xl) !important;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: var(--sh-xl) !important;
+}
+
+/* Navbar Link Underline Animation */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--clr-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-medium);
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+
+/* Custom Form Focus Outline */
+.inp-light:focus,
+.contact-input:focus {
+  border-color: var(--clr-primary) !important;
+  box-shadow: 0 0 0 3px rgba(8, 51, 53, 0.15) !important;
+}
+.inp:focus {
+  border-color: var(--clr-accent) !important;
+  box-shadow: 0 0 0 3px rgba(216, 185, 163, 0.2) !important;
+}
+
+/* Subtle Hero Entry Animations */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-eyebrow,
+.hero-title,
+.hero-description,
+.hero-actions {
+  opacity: 0;
+  animation: heroFadeUp 800ms var(--ease-premium) forwards;
+}
+
+.hero-eyebrow {
+  animation-delay: 150ms;
+}
+
+.hero-title {
+  animation-delay: 300ms;
+}
+
+.hero-description {
+  animation-delay: 450ms;
+}
+
+.hero-actions {
+  animation-delay: 600ms;
 }
