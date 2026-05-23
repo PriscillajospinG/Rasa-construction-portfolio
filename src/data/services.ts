@@ -4,7 +4,7 @@ export const services: Service[] = [
   {
     id:          "scaffolding",
     title:       "Scaffolding Rental",
-    description: "Certified steel scaffolding for residential, commercial, and industrial construction sites.",
+    description: "Safe scaffolding support with cup lock pipes and multiple pipe sizes for construction sites.",
     detail:      "We supply and erect tubular steel scaffolding, frame scaffolding, and ring-lock systems depending on your structure's height, load requirement, and access needs. Every setup is inspected by our site supervisor before handover. We've supported scaffolding for G+4 residential blocks, hospital extensions, and large commercial facades across Tirunelveli and Kanyakumari districts.",
     usedFor:     "Multi-storey residential, commercial facades, industrial sheds, bridge work, repair & renovation",
     tag:         "Most Requested",
@@ -15,7 +15,7 @@ export const services: Service[] = [
   {
     id:          "centring",
     title:       "Centring Materials",
-    description: "Steel props, MS plates, H-frames, and timber planks for slab, beam, and RCC work.",
+    description: "Centring materials and slab support items supplied for concrete and formwork needs.",
     detail:      "Centring is where quality really matters — poorly maintained props bend under load, leading to slab failures. Our inventory is inspected after every return and replaced when necessary. We carry adjustable steel props in multiple heights, MS shuttering plates, channel sections, and all necessary hardware. Same-day delivery within the district is available for confirmed bookings.",
     usedFor:     "Slab casting, beam formwork, staircase shuttering, RCC column centring",
     tag:         "100+ Equipment Types",
@@ -25,9 +25,9 @@ export const services: Service[] = [
   },
   {
     id:          "concrete",
-    title:       "Concrete Works",
-    description: "Column casting, roof slabs, footings, retaining walls, and structural concrete execution.",
-    detail:      "Our concrete team has completed over 180 residential and commercial pours since 2012. We handle shuttering, reinforcement checks, mix design verification, pouring, and vibration compaction. We work with both site-mixed and ready-mix concrete. All work is supervised by Gurusamy sir personally for critical structural elements.",
+    title:       "Concrete Work Support",
+    description: "Concrete machine support and labour-based site assistance for construction work.",
+    detail:      "Our concrete team has completed over 180 residential and commercial pours since 2012. We handle shuttering, reinforcement checks, mix design verification, pouring, and vibration compaction. We work with site-mixed and ready-mix concrete. All work is supervised by Gurusamy sir personally for critical structural elements.",
     usedFor:     "Foundations, columns, roof slabs, retaining walls, commercial flooring",
     tag:         "25+ Years Experience",
     iconName:    "Building",
@@ -37,7 +37,7 @@ export const services: Service[] = [
   {
     id:          "hoist",
     title:       "Vertical Hoist Rental",
-    description: "Material lifting support for multi-floor construction sites with safe setup and operation.",
+    description: "Vertical hoist rental with H-frame support for lifting materials at multi-level sites.",
     detail:      "Our electric material hoists handle up to 500 kg per trip and operate reliably across 6+ storey sites. Renting a hoist compared to manual material carrying typically reduces labour hours by 35–50% on a 4-storey residential project. We include operator training and monthly safety checks. Daily and monthly rental packages available.",
     usedFor:     "Multi-storey residential, hospitals, commercial towers, material transit during construction",
     tag:         "Daily Rental Available",
@@ -47,8 +47,8 @@ export const services: Service[] = [
   },
   {
     id:          "support",
-    title:       "Site Support",
-    description: "On-site equipment delivery, erection, dismantling, and practical construction support.",
+    title:       "Site Material Movement",
+    description: "Vehicle support for moving scaffolding, sheets, pipes, and construction materials to site.",
     detail:      "For larger projects, we provide a dedicated Rasa supervisor who coordinates equipment placement, manages scaffold erection sequences, and ensures safety standards are followed at all times. This service is particularly valued by out-of-district contractors who need a trusted local contact managing on-ground operations.",
     usedFor:     "Large multi-phase projects, out-of-district clients, government contract work",
     tag:         "Available Across TN",

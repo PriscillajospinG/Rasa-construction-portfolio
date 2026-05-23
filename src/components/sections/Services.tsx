@@ -15,12 +15,12 @@ export default function Services() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="services" className="section relative overflow-hidden concrete-grid-bg section-transition" style={{ backgroundColor: "#F4EFE7", borderTop: "4px solid #083335" }} ref={ref}>
-      <div className="container">
+    <section id="services" className="services-section section relative overflow-hidden concrete-grid-bg section-transition" style={{ backgroundColor: "#F4EFE7", borderTop: "4px solid #083335" }} ref={ref}>
+      <div className="container services-container">
         {/* ── Section Header ── */}
         <div className="section-header">
             <Reveal>
-              <p className="section-eyebrow">Services</p>
+              <p className="section-eyebrow">OUR SERVICES</p>
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="section-title">
@@ -29,7 +29,7 @@ export default function Services() {
             </Reveal>
             <Reveal delay={0.1}>
               <p className="section-lead">
-                Built for real field work, site safety, and reliable project execution.
+                Practical construction support for scaffolding, centring, concrete work, hoist rental, and site material movement.
               </p>
             </Reveal>
           </div>
@@ -55,10 +55,10 @@ export default function Services() {
                 <motion.div
                   key={id}
                   variants={itemReveal}
-                  className={`service-card bento-card group ${isFeatured ? "featured" : ""}`}
+                  className={`service-card group ${isFeatured ? "featured" : ""}`}
                 >
                   {image && alt && (
-                    <div className="bento-media service-image relative w-full aspect-[16/10] overflow-hidden rounded-[20px]" style={{ marginBottom: "var(--s2)", flexShrink: 0 }}>
+                    <div className="service-image relative w-full aspect-[16/10] overflow-hidden rounded-[20px]" style={{ marginBottom: "var(--s2)", flexShrink: 0 }}>
                       <Image
                         src={image}
                         alt={alt}
@@ -70,23 +70,23 @@ export default function Services() {
                     </div>
                   )}
                   <div className="service-card-content">
-                    <div className="service-card-number" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                      <span className="text-xs font-mono text-gray-400">{num}</span>
+                    <div className="service-card-number" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
+                      <span className="text-xs font-mono text-[#66706B]">{num}</span>
                       {isFeatured && (
-                        <span className="text-[10px] font-bold text-[var(--clr-accent)] bg-[var(--clr-primary)] px-2 py-0.5 rounded-full uppercase tracking-wider">
+                        <span className="text-[10px] font-bold text-[#FFFFFF] bg-[#083335] px-2 py-0.5 rounded-full uppercase tracking-wider">
                           Most Requested
                         </span>
                       )}
                     </div>
-                    <h3 className="service-card-title" style={{ fontSize: isFeatured ? "1.6rem" : "var(--t-h2)" }}>{title}</h3>
+                    <h3 className="service-card-title">{title}</h3>
                     <p className="service-card-description">{description}</p>
                     {usedFor && (
-                      <p className="service-card-used-for">
-                        <strong>Used for:</strong>{" "}{usedFor}
+                      <p className="service-card-used-for text-xs text-[#66706B] mb-4">
+                        <strong>Used for:</strong> {usedFor}
                       </p>
                     )}
-                    <div className="service-badge">
-                      <Badge variant="dark">✓ {tag}</Badge>
+                    <div className="service-badge mt-auto">
+                      <Badge>✓ {tag}</Badge>
                     </div>
                   </div>
                 </motion.div>
