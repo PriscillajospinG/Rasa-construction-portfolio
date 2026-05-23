@@ -20,11 +20,11 @@ const bodyFont = Manrope({
 
 export const metadata: Metadata = {
   title: "Rasa Construction",
-  description: "Scaffolding, centring materials, concrete works, and vertical hoist rental services in Tamil Nadu.",
+  description: "Rasa Construction - Scaffolding, centring materials, vertical hoist rental and construction support.",
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-icon.png",
+    icon: "/rasa-logo.png",
+    shortcut: "/rasa-logo.png",
+    apple: "/rasa-logo.png",
   },
   keywords:    "Rasa Construction, scaffolding rental, centring materials, concrete works, vertical hoist rental, construction Tamil Nadu, Gurusamy A",
   authors:     [{ name: company.name }],
