@@ -190,7 +190,8 @@
 
 /* ── RESET ──────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+@media (max-width: 1023px) { html { scroll-padding-top: 76px; } }
 body {
   font-family: var(--font-body);
   font-size: var(--t-body);
