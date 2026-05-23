@@ -12,8 +12,8 @@ export default function Footer() {
   const cleanPhone = (phone: string) => phone.replace(/\s/g, "");
 
   return (
-    <footer className="relative overflow-hidden text-white" style={{ backgroundColor: "#083335" }}>
-      <div className="container py-16">
+    <footer className="footer relative overflow-hidden text-white" style={{ backgroundColor: "#083335" }}>
+      <div className="container">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 footer-grid">
           {/* Brand column */}
           <div>

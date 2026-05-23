@@ -86,7 +86,6 @@ export default function Equipment() {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  padding: "var(--s4)",
                 }}
               >
                 {/* Image block at the top */}

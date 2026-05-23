@@ -87,7 +87,6 @@ export default function Testimonials() {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
-                  padding: "var(--s6)",
                   position: "relative"
                 }}
               >
