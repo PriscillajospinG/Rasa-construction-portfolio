@@ -99,8 +99,8 @@ export default function Services() {
             <div style={{ marginTop: "var(--s12)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "var(--s4)", borderTop: "1px solid rgba(8,51,53,0.08)", paddingTop: "var(--s6)" }}>
               <div>
                 <p className="font-p" style={{ fontWeight: 600, fontSize: "var(--t-body)", color: "var(--clr-primary)" }}>Not sure what you need?</p>
-                <p className="t-sm" style={{ color: "var(--clr-text-lt)", marginTop: "var(--s1)" }}>
-                  Call {company.owner} — he&apos;ll tell you exactly what the project requires.
+                <p className="t-sm" style={{ color: "var(--clr-text-lt)", marginTop: "var(--s1)", fontStyle: "italic" }}>
+                  <em>Call {company.owner} — He'll tell you exactly what the project requires.</em>
                 </p>
               </div>
               <Button href={`tel:${company.contact.primary.replace(/\s/g, "")}`} variant="dark">
