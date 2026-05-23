@@ -107,7 +107,7 @@ Message: ${form.message}`;
   };
 
   return (
-    <section id="contact" className="section contact-section">
+    <section id="contact" className="section contact-section section-soft-transition" style={{ backgroundColor: "#FBF7F1" }}>
       <div className="container">
         <div className="contact-grid">
           {/* Left: Map and details */}

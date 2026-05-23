@@ -29,14 +29,14 @@ export default function About() {
       ref={containerRef}
       className="relative overflow-visible"
       style={{
-        background: "#ffffff",
+        background: "#F6F1EA",
       }}
     >
       {/* ── 1. BACKGROUND LAYER ── */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "#ffffff",
+          background: "#F6F1EA",
           zIndex: 1,
         }}
         aria-hidden
@@ -147,7 +147,7 @@ export default function About() {
           >
             {/* Left Column: Core Stats */}
             <Reveal direction="left">
-              <div style={{ display: "flex", flexDirection: "column", gap: "var(--s6)", paddingTop: "var(--s4)", borderLeft: "2px solid rgba(8,51,53,0.10)", paddingLeft: "var(--s4)" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "var(--s6)", paddingTop: "var(--s4)", borderLeft: "2px solid #D8B9A3", paddingLeft: "var(--s4)" }}>
                 {[
                   { n: "25+",  l: "Years Field Experience" },
                   { n: "500+", l: "Completed Projects" },

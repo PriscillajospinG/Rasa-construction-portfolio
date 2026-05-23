@@ -19,14 +19,17 @@ export default function Services() {
       <div className="section" ref={ref}>
         <div className="container">
           {/* ── Section Header ── */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "var(--s2)", marginBottom: "var(--s8)" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "var(--s1)", marginBottom: "var(--s8)" }}>
             <Reveal>
-              <h2 className="t-h1 text-[var(--clr-primary)]">
+              <p className="section-eyebrow">Services</p>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h2 className="section-title">
                 Services We Offer
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="t-body text-[var(--clr-text-md)] max-w-[640px] leading-[var(--lh-normal)]">
+              <p className="section-lead">
                 Built for real field work, site safety, and reliable project execution.
               </p>
             </Reveal>

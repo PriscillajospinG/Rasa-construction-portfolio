@@ -27,28 +27,36 @@ export default function Projects() {
     : galleryProjects.filter((p) => p.category === active);
 
   return (
-    <section id="projects" style={{ background: "var(--clr-bg)" }} className="section relative overflow-hidden">
-      <div className="container" ref={ref}>
+    <section id="projects" style={{ background: "#083335" }} className="section relative overflow-hidden dark-section section-soft-transition">
+      {/* Background Overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "linear-gradient(180deg, rgba(8,51,53,0.86), rgba(8,51,53,0.74))",
+          zIndex: 1,
+        }}
+      />
+      <div className="container relative z-10" ref={ref}>
 
         {/* ── Header: asymmetric — number left, content right ── */}
         <div style={{ gap: "var(--s8)", alignItems: "start", marginBottom: "var(--s12)" }}
           className="grid grid-cols-1 lg:grid-cols-[auto_1fr] projects-header-grid">
           {/* Decorative section number */}
           <Reveal direction="left">
-            <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontWeight: 900, fontSize: "0.7rem", letterSpacing: "0.25em", color: "rgba(8,51,53,0.25)", userSelect: "none", textTransform: "uppercase" }}>
+            <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontWeight: 900, fontSize: "0.7rem", letterSpacing: "0.25em", color: "rgba(255,255,255,0.16)", userSelect: "none", textTransform: "uppercase" }}>
               Portfolio
             </div>
           </Reveal>
           <div>
             <Reveal>
-              <div className="eyebrow t-label" style={{ color: "var(--clr-primary)", marginBottom: "var(--s3)" }}>Our Work</div>
-              <h2 className="t-h1" style={{ color: "var(--clr-primary)", marginBottom: "var(--s4)" }}>
-                Projects that<br /><em className="t-italic-dark">speak for themselves.</em>
+              <p className="section-eyebrow">Our Work</p>
+              <h2 className="section-title">
+                Projects that<br /><em className="text-[var(--clr-accent)]">speak for themselves.</em>
               </h2>
             </Reveal>
             {/* Filter pills — smooth active transition */}
             <Reveal delay={0.1}>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--s1)" }}>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--s1)", marginTop: "var(--s3)" }}>
                 {projectCategories.map((cat) => (
                   <motion.button
                     key={cat}
@@ -62,8 +70,8 @@ export default function Projects() {
                       cursor:       "pointer",
                     }}
                     animate={{
-                      background: active === cat ? "var(--clr-primary)" : "rgba(8,51,53,0.06)",
-                      color:      active === cat ? "#ffffff" : "var(--clr-text-md)",
+                      background: active === cat ? "#D8B9A3" : "rgba(255,255,255,0.08)",
+                      color:      active === cat ? "#083335" : "rgba(255,255,255,0.72)",
                     }}
                     transition={{ duration: 0.25, ease: EASE_CINEMATIC }}
                   >
@@ -173,16 +181,16 @@ export default function Projects() {
 
         {/* ── CTA — editorial, left-aligned ── */}
         <Reveal>
-          <div style={{ marginTop: "var(--s12)", display: "grid", gridTemplateColumns: "1fr auto", alignItems: "center", gap: "var(--s4)", flexWrap: "wrap", borderTop: "1px solid rgba(8,51,53,0.08)", paddingTop: "var(--s6)" }} className="projects-footer-row">
+          <div style={{ marginTop: "var(--s12)", display: "grid", gridTemplateColumns: "1fr auto", alignItems: "center", gap: "var(--s4)", flexWrap: "wrap", borderTop: "1px solid rgba(255,255,255,0.12)", paddingTop: "var(--s6)" }} className="projects-footer-row">
             <div>
-              <p className="font-m" style={{ fontSize: "var(--t-h2)", color: "var(--clr-primary)", lineHeight: 1.2 }}>
+              <p className="font-m" style={{ fontSize: "var(--t-h2)", color: "#FFFFFF", lineHeight: 1.2 }}>
                 Ready to see your project here?
               </p>
-              <p className="t-sm" style={{ color: "var(--clr-text-lt)", marginTop: "var(--s1)" }}>
+              <p className="t-sm" style={{ color: "rgba(255,255,255,0.72)", marginTop: "var(--s1)" }}>
                 Let&apos;s talk about what your site needs.
               </p>
             </div>
-            <Button href="#contact" variant="dark" onClick={(e) => { e.preventDefault(); scrollTo("#contact"); }}>
+            <Button href="#contact" variant="primary" onClick={(e) => { e.preventDefault(); scrollTo("#contact"); }}>
               Request a Quote
             </Button>
           </div>

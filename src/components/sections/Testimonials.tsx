@@ -34,8 +34,8 @@ export default function Testimonials() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="testimonials" className="section relative overflow-hidden grain"
-      style={{ background: "linear-gradient(160deg, var(--clr-primary-dark) 0%, var(--clr-primary) 60%, var(--clr-primary-dark) 100%)" }}>
+    <section id="testimonials" className="section relative overflow-hidden dark-section section-soft-transition"
+      style={{ background: "#06282A" }}>
       <div className="absolute inset-0 pointer-events-none"
         style={{ background: "radial-gradient(ellipse at 50% -10%, rgba(216,185,163,0.06) 0%, transparent 60%)" }} />
 
@@ -44,8 +44,8 @@ export default function Testimonials() {
         <Reveal style={{ marginBottom: "var(--s12)" }}>
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "var(--s4)" }}>
             <div>
-              <div className="eyebrow t-label" style={{ color: "var(--clr-accent)", marginBottom: "var(--s3)" }}>Client Testimonials</div>
-              <h2 className="t-h1 text-white">What our clients say</h2>
+              <p className="section-eyebrow">Client Testimonials</p>
+              <h2 className="section-title">What our clients say</h2>
             </div>
             {/* Aggregate score — top right */}
             <motion.div

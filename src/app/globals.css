@@ -1993,3 +1993,155 @@ section .section {
     margin-bottom: 10px !important;
   }
 }
+
+/* ============================================================
+   RASA POST-HERO UNIFICATION SYSTEM OVERRIDES
+   ============================================================ */
+
+/* ── SPACING & CONTAINERS ── */
+.section {
+  padding-block: 96px !important;
+}
+
+.section-container,
+.container {
+  width: min(100% - 48px, 1240px) !important;
+  margin-inline: auto !important;
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding-block: 76px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding-block: 56px !important;
+  }
+  .section-container,
+  .container {
+    width: min(100% - 24px, 100%) !important;
+  }
+}
+
+/* ── TYPOGRAPHY: SECTION HEADERS ── */
+.section-eyebrow {
+  color: #083335 !important;
+  font-size: 0.74rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 12px !important;
+  display: block !important;
+}
+
+.section-title {
+  color: #102526 !important;
+  font-family: var(--font-heading) !important;
+  font-size: clamp(2.3rem, 4vw, 4.2rem) !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.035em !important;
+  margin: 0 !important;
+  font-weight: 400 !important;
+}
+
+.section-lead {
+  max-width: 680px !important;
+  color: #66706B !important;
+  font-size: 1.05rem !important;
+  line-height: 1.7 !important;
+  margin-top: 18px !important;
+}
+
+/* Dark section header overrides */
+.dark-section .section-eyebrow {
+  color: #D8B9A3 !important;
+}
+
+.dark-section .section-title {
+  color: #FFFFFF !important;
+}
+
+.dark-section .section-lead {
+  color: rgba(255, 255, 255, 0.72) !important;
+}
+
+/* ── CARD STYLE CONSISTENCY ── */
+.card,
+.service-card,
+.project-card,
+.equipment-card,
+.testimonial-card,
+.contact-card,
+.contact-form-card,
+.contact-map-card {
+  border-radius: 28px !important;
+  border: 1px solid rgba(8, 51, 53, 0.10) !important;
+  background: rgba(255, 255, 255, 0.82) !important;
+  box-shadow: 0 18px 50px rgba(8, 51, 53, 0.08) !important;
+  transition:
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 280ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.card:hover,
+.service-card:hover,
+.project-card:hover,
+.equipment-card:hover,
+.testimonial-card:hover,
+.contact-card:hover,
+.contact-form-card:hover,
+.contact-map-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 26px 70px rgba(8, 51, 53, 0.14) !important;
+  border-color: rgba(216, 185, 163, 0.45) !important;
+}
+
+/* Dark section card overrides */
+.dark-section .card,
+.dark-section .project-card,
+.dark-section .testimonial-card {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  color: #FFFFFF !important;
+  backdrop-filter: blur(14px) !important;
+}
+
+/* Clean inputs for contact form */
+.contact-input {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(8, 51, 53, 0.12) !important;
+  border-radius: 12px !important;
+  padding: 12px 16px !important;
+  font-size: 0.95rem !important;
+}
+
+.contact-input:focus {
+  border-color: #083335 !important;
+  box-shadow: 0 0 0 3px rgba(8, 51, 53, 0.08) !important;
+}
+
+/* ── SECTION TRANSITIONS ── */
+.section-soft-transition {
+  position: relative;
+}
+
+.section-soft-transition::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, rgba(8, 51, 53, 0.08), transparent);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Footer Accent Hover */
+footer a:hover,
+footer button:hover {
+  color: #D8B9A3 !important;
+}

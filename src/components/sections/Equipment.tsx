@@ -23,8 +23,8 @@ export default function Equipment() {
     <section
       id="equipment"
       ref={ref}
-      className="section"
-      style={{ background: "white", position: "relative", overflow: "hidden" }}
+      className="section section-soft-transition"
+      style={{ background: "#FBF7F1", position: "relative", overflow: "hidden" }}
     >
       {/* Faint diagonal texture */}
       <div
@@ -43,16 +43,14 @@ export default function Equipment() {
             className="grid grid-cols-1 lg:grid-cols-2 equipment-header-grid"
           >
             <div>
-              <div className="eyebrow t-label" style={{ color: "var(--clr-primary)", marginBottom: "var(--s3)" }}>
-                Rental Inventory
-              </div>
-              <h2 className="t-h1" style={{ color: "var(--clr-primary)", lineHeight: 1.05 }}>
+              <p className="section-eyebrow">Rental Inventory</p>
+              <h2 className="section-title">
                 Equipment &<br />
                 <em className="t-italic-dark">materials we supply.</em>
               </h2>
             </div>
             <div>
-              <p className="t-body" style={{ color: "var(--clr-text-md)", lineHeight: 1.75 }}>
+              <p className="section-lead">
                 All inventory is maintained in-house, inspected between rentals, and delivered to your site.
                 Items are available individually or as combined packages based on your project requirement.
               </p>
@@ -86,10 +84,6 @@ export default function Equipment() {
                 className="group card-hover equipment-card"
                 style={{
                   padding:       "var(--s4)",
-                  borderRadius:  "var(--r-lg)",
-                  background:    "var(--clr-bg)",
-                  border:        "1px solid rgba(8,51,53,0.07)",
-                  boxShadow:     "var(--sh-card)",
                   display:       "flex",
                   flexDirection: "column",
                   gap:           "var(--s2)",
