@@ -190,8 +190,8 @@
 
 /* ── RESET ──────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: 88px; overflow-x: hidden; -webkit-text-size-adjust: 100%; }
-@media (max-width: 1023px) { html { scroll-padding-top: 76px; } }
+html { scroll-behavior: smooth; scroll-padding-top: 106px; overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+@media (max-width: 1023px) { html { scroll-padding-top: 88px; } }
 body {
   font-family: var(--font-body);
   font-size: var(--t-body);
@@ -673,31 +673,47 @@ button,
 /* ── NAVBAR ─────────────────────────────────────────────── */
 .navbar {
   position: fixed;
-  top: 0;
+  top: 14px;
   left: 0;
   right: 0;
-  height: 78px;
+  height: 72px;
   z-index: 9999;
-  background: rgba(8, 51, 53, 0.92);
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(255,255,255,0.10);
-  transition: background 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
+  /* Navbar itself is invisible — pill lives on .navbar-inner */
+  background: transparent;
+  border-bottom: none;
+  pointer-events: none;
+  transition: top 300ms ease;
 }
 
 .navbar-scrolled {
-  background: rgba(8, 51, 53, 0.96);
-  border-bottom: 1px solid rgba(216, 185, 163, 0.12);
-  box-shadow: var(--sh-md);
+  /* No extra override needed — pill handles all scroll states */
 }
 
 .navbar-inner {
-  height: 78px;
+  height: 72px;
   width: min(100% - 48px, 1240px);
   margin-inline: auto;
+  padding: 0 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 32px;
+
+  /* ── Glass pill ── */
+  pointer-events: auto;
+  border-radius: 999px;
+  background: linear-gradient(
+    135deg,
+    rgba(8, 51, 53, 0.82),
+    rgba(8, 51, 53, 0.58)
+  );
+  border: 1px solid rgba(216, 185, 163, 0.22);
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  transition: background 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
 }
 
 .logo-wrap {
@@ -749,7 +765,9 @@ button,
   font-weight: 800 !important;
   text-decoration: none !important;
   white-space: nowrap !important;
-  transition: transform var(--transition-medium), background var(--transition-medium), color var(--transition-medium), border-color var(--transition-medium) !important;
+  border: 1px solid rgba(216, 185, 163, 0.85) !important;
+  box-shadow: 0 8px 20px rgba(216, 185, 163, 0.20) !important;
+  transition: transform var(--transition-medium), background var(--transition-medium), color var(--transition-medium), box-shadow var(--transition-medium) !important;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -759,6 +777,7 @@ button,
   background: #ffffff !important;
   color: #083335 !important;
   transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(216, 185, 163, 0.28) !important;
 }
 
 .mobile-menu-button {
@@ -774,7 +793,8 @@ button,
   height: 100svh;
   min-height: 100svh;
   max-height: 100svh;
-  padding-top: 78px;
+  /* Navbar is 72px + 14px top offset + 14px breathing room = 100px */
+  padding-top: 100px;
   overflow: hidden;
   background: #083335;
 }
@@ -949,21 +969,37 @@ button,
   }
 
   .navbar {
-    height: 68px;
-    min-height: 68px;
-    background: rgba(8, 51, 53, 0.94);
-    border-bottom: 1px solid rgba(216, 185, 163, 0.16);
+    top: 10px;
+    height: 64px;
+    min-height: 64px;
+    /* transparent — pill on .navbar-inner handles appearance */
+    background: transparent;
+    border-bottom: none;
   }
 
   .navbar-inner {
-    height: 68px;
-    min-height: 68px;
-    width: min(100% - 24px, 100%);
+    height: 64px;
+    min-height: 64px;
+    width: min(100% - 20px, 100%);
+    padding: 0 12px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
     overflow: visible;
+    /* Compact pill for mobile */
+    border-radius: 22px;
+    background: linear-gradient(
+      135deg,
+      rgba(8, 51, 53, 0.88),
+      rgba(8, 51, 53, 0.68)
+    );
+    border: 1px solid rgba(216, 185, 163, 0.20);
+    box-shadow:
+      0 12px 36px rgba(0, 0, 0, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px) saturate(130%);
+    -webkit-backdrop-filter: blur(18px) saturate(130%);
   }
 
   /* Keep logo strictly inside navbar height */
@@ -1018,7 +1054,8 @@ button,
   }
 
   .hero {
-    padding-top: 68px;
+    /* Navbar 64px + 10px top offset + 10px buffer = 84px */
+    padding-top: 84px;
     height: 100svh;
     min-height: 100svh;
     max-height: 100svh;
@@ -1026,7 +1063,7 @@ button,
 
   .hero-container {
     width: min(100% - 24px, 100%);
-    height: calc(100svh - 68px);
+    height: calc(100svh - 84px);
     align-items: center;
   }
 
@@ -1084,7 +1121,8 @@ button,
 
   /* Navbar tweaks for very small phones */
   .navbar-inner {
-    width: min(100% - 18px, 100%) !important;
+    width: min(100% - 14px, 100%) !important;
+    padding: 0 10px !important;
     gap: 6px !important;
   }
 
