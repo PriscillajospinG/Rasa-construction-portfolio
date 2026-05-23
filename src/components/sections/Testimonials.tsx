@@ -69,18 +69,18 @@ export default function Testimonials() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          {testimonials.map(({ id, name, role, location, project, rating, text, initials }, idx) => {
+          {testimonials.slice(0, 3).map(({ id, name, role, location, project, rating, text, initials }, idx) => {
             // Bento sizing strategy:
             // 1st is featured large (span 8)
-            // 6th is featured wide at bottom (span 12)
-            // others are standard grid items (span 4)
+            // 2nd is standard (span 4)
+            // 3rd is wide at bottom (span 12)
             const spanClass = idx === 0 
-              ? "md:col-span-8 col-span-12" 
-              : idx === 5 
-                ? "md:col-span-12 col-span-12" 
-                : "md:col-span-4 col-span-12";
+              ? "bento-card-wide md:col-span-8 col-span-12" 
+              : idx === 1 
+                ? "bento-card-md md:col-span-4 col-span-12" 
+                : "md:col-span-12 col-span-12";
             
-            const isLarge = idx === 0 || idx === 5;
+            const isLarge = idx === 0 || idx === 2;
 
             return (
               <motion.div

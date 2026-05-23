@@ -124,8 +124,8 @@ Message: ${form.message}`;
         </div>
 
         <div className="bento-grid">
-          {/* 1. Map Card (span 7) */}
-          <Reveal direction="left" className="col-span-12 md:col-span-7">
+          {/* 1. Map Card (span 8) */}
+          <Reveal direction="left" className="col-span-12 md:col-span-8 order-1">
             <div className="bento-card contact-card contact-map-card h-full" style={{ padding: 0, overflow: "hidden", minHeight: "320px", display: "flex", flexDirection: "column" }}>
               <div className="w-full flex-grow relative" style={{ minHeight: "260px" }}>
                 <iframe
@@ -158,8 +158,41 @@ Message: ${form.message}`;
             </div>
           </Reveal>
 
-          {/* 2. Form Card (span 5, row-span 2) */}
-          <Reveal direction="right" className="col-span-12 md:col-span-5 md:row-span-2">
+          {/* 2. Contact Details Card (span 4) */}
+          <Reveal direction="right" className="col-span-12 md:col-span-4 order-3 md:order-2">
+            <div className="bento-card contact-details-card h-full" style={{ background: "#083335", color: "#FFFFFF", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+              <div>
+                <span className="text-[var(--clr-accent)] font-bold text-xs uppercase tracking-wider block mb-2">Direct Contact</span>
+                <h3 className="text-2xl font-bold text-white mb-4 leading-tight">Get in touch directly</h3>
+                <p className="text-sm text-gray-300 mb-6 leading-relaxed">
+                  {company.contact.address}
+                </p>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-white/10 pt-4">
+                <div className="flex flex-col gap-1">
+                  <span className="text-[10px] text-gray-400 font-semibold uppercase tracking-wider">Phone Numbers</span>
+                  <a href={`tel:${company.contact.primary}`} className="flex items-center gap-2 text-white hover:text-[var(--clr-accent)] transition-colors font-medium text-sm">
+                    <Phone size={14} className="text-[var(--clr-accent)]" />
+                    {company.contact.primary}
+                  </a>
+                  <a href={`tel:${company.contact.secondary}`} className="flex items-center gap-2 text-white hover:text-[var(--clr-accent)] transition-colors font-medium text-sm">
+                    <Phone size={14} className="text-[var(--clr-accent)]" />
+                    {company.contact.secondary}
+                  </a>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <span className="text-[10px] text-gray-400 font-semibold uppercase tracking-wider">Email Address</span>
+                  <a href={`mailto:${company.contact.email}`} className="flex items-center gap-2 text-white hover:text-[var(--clr-accent)] transition-colors font-medium text-sm">
+                    <Mail size={14} className="text-[var(--clr-accent)]" />
+                    {company.contact.email}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* 3. Form Card (span 8) */}
+          <Reveal direction="left" className="col-span-12 md:col-span-8 order-2 md:order-3">
             <div className="bento-card contact-form-card h-full" style={{ background: "#FFFFFF", display: "flex", flexDirection: "column" }}>
               {status === "success" ? (
                 <div className="flex flex-col items-center text-center h-full justify-center py-12">
@@ -266,35 +299,37 @@ Message: ${form.message}`;
             </div>
           </Reveal>
 
-          {/* 3. Quick Contact Details Card (span 7) */}
-          <Reveal direction="left" className="col-span-12 md:col-span-7">
-            <div className="bento-card contact-details-card" style={{ background: "#083335", color: "#FFFFFF", display: "flex", flexDirection: "column", justifyContent: "space-between", height: "100%" }}>
+          {/* 4. WhatsApp / Call Card (span 4) */}
+          <Reveal direction="right" className="col-span-12 md:col-span-4 order-4">
+            <div className="bento-card contact-details-card h-full" style={{ background: "linear-gradient(135deg, #083335, #06282A)", color: "#FFFFFF", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
               <div>
-                <span className="text-[var(--clr-accent)] font-bold text-xs uppercase tracking-wider block mb-2">Direct Contact</span>
-                <h3 className="text-2xl font-bold text-white mb-4 leading-tight">Get in touch directly</h3>
-                <p className="text-sm text-gray-300 mb-6 leading-relaxed">
-                  {company.contact.address}
+                <span className="text-[var(--clr-accent)] font-bold text-xs uppercase tracking-wider block mb-2">Instant Chat</span>
+                <h3 className="text-xl font-bold text-white mb-2 leading-tight">Need a quick response?</h3>
+                <p className="text-xs text-gray-300 mb-4 leading-relaxed">
+                  Send a direct WhatsApp message to Gurusamy sir for instant material and rental availability.
                 </p>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-white/10 pt-4">
-                <div className="flex flex-col gap-1">
-                  <span className="text-[10px] text-gray-400 font-semibold uppercase tracking-wider">Phone Numbers</span>
-                  <a href={`tel:${company.contact.primary}`} className="flex items-center gap-2 text-white hover:text-[var(--clr-accent)] transition-colors font-medium text-sm">
-                    <Phone size={14} className="text-[var(--clr-accent)]" />
-                    {company.contact.primary}
-                  </a>
-                  <a href={`tel:${company.contact.secondary}`} className="flex items-center gap-2 text-white hover:text-[var(--clr-accent)] transition-colors font-medium text-sm">
-                    <Phone size={14} className="text-[var(--clr-accent)]" />
-                    {company.contact.secondary}
-                  </a>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <span className="text-[10px] text-gray-400 font-semibold uppercase tracking-wider">Email Address</span>
-                  <a href={`mailto:${company.contact.email}`} className="flex items-center gap-2 text-white hover:text-[var(--clr-accent)] transition-colors font-medium text-sm">
-                    <Mail size={14} className="text-[var(--clr-accent)]" />
-                    {company.contact.email}
-                  </a>
-                </div>
+              <div className="flex flex-col gap-2">
+                <Button
+                  href={waLink(company.contact.whatsapp, getWhatsAppMessage())}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="primary"
+                  className="w-full justify-center gap-2"
+                  style={{ background: "#25D366", color: "#FFFFFF", border: "none" }}
+                >
+                  <MessageCircle size={15} />
+                  <span>Chat on WhatsApp</span>
+                </Button>
+                <Button
+                  href={`tel:${company.contact.primary.replace(/\s/g, "")}`}
+                  variant="outline"
+                  className="w-full justify-center gap-2"
+                  style={{ borderColor: "rgba(255,255,255,0.2)", color: "white" }}
+                >
+                  <Phone size={14} />
+                  <span>Call Gurusamy A</span>
+                </Button>
               </div>
             </div>
           </Reveal>

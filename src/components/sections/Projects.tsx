@@ -11,6 +11,23 @@ import { projects, projectCategories } from "@/data/projects";
 import { scrollTo } from "@/lib/utils";
 import { cardGridStagger, itemReveal, EASE_CINEMATIC } from "@/lib/animations";
 
+const getProjectBentoClass = (i: number, total: number) => {
+  if (total === 1) return "md:col-span-12 col-span-12";
+  if (total === 2) return "bento-card-half md:col-span-6";
+  if (total === 3) {
+    if (i === 0) return "bento-card-wide md:col-span-8";
+    if (i === 1) return "bento-card-md md:col-span-4";
+    return "md:col-span-12 col-span-12"; // full width at bottom
+  }
+  // For 4 or more projects
+  if (i === 0) return "bento-card-wide md:col-span-8";
+  if (i === 1) return "bento-card-md md:col-span-4";
+  if (i === total - 1 && (total - 2) % 3 !== 0) {
+    return "md:col-span-12 col-span-12";
+  }
+  return "bento-card-md md:col-span-4";
+};
+
 export default function Projects() {
   const ref    = useRef(null);
   const [active,  setActive]  = useState<string>("All");
@@ -88,14 +105,15 @@ export default function Projects() {
             exit={{ opacity: 0, transition: { duration: 0.2 } }}
           >
             {displayed.map(({ id, image, title, category, location, duration, description }, i) => {
-              const isFeatured = i === 0; // First item in filtered results is featured large bento
+              const bentoClass = getProjectBentoClass(i, displayed.length);
+              const isFeatured = i === 0;
               return (
                 <motion.div
                   key={id}
                   variants={itemReveal}
                   layout
-                  className={`project-card bento-card bento-card-dark group ${isFeatured ? "md:col-span-8 md:row-span-2" : "md:col-span-4"} col-span-12`}
-                  style={{ position: "relative", minHeight: isFeatured ? "380px" : "280px" }}
+                  className={`project-card bento-card bento-card-dark group ${bentoClass}`}
+                  style={{ position: "relative" }}
                   onMouseEnter={() => setHovered(id)} onMouseLeave={() => setHovered(null)}
                 >
                   {/* Media wrapper */}

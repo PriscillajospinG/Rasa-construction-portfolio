@@ -10,7 +10,7 @@ import Button from "@/components/ui/Button";
 import { equipment } from "@/data/equipment";
 import { company } from "@/data/company";
 import { scrollTo } from "@/lib/utils";
-import { cardGridStagger, itemReveal, EASE_CINEMATIC } from "@/lib/animations";
+import { cardGridStagger, itemReveal } from "@/lib/animations";
 
 function getIcon(name: string): LucideIcon {
   return (LucideIcons as unknown as Record<string, LucideIcon>)[name] ?? LucideIcons.Package;
@@ -77,20 +77,24 @@ export default function Equipment() {
         >
           {equipment.map(({ id, name, description, variants, iconName, image }) => {
             const Icon = getIcon(iconName);
-            const isLarge = id === "scaffold-tubes" || id === "scaffold-frames" || id === "centring-props" || id === "vertical-hoist";
+            const isFeatured = id === "scaffold-tubes";
             return (
               <motion.div
                 key={id}
                 variants={itemReveal}
-                className={`group bento-card equipment-card ${isLarge ? "md:col-span-6" : "md:col-span-3"} col-span-12`}
+                className={`group bento-card bento-card-dark equipment-card ${isFeatured ? "bento-card-wide md:col-span-8" : "bento-card-md md:col-span-4"} col-span-12`}
                 style={{
-                  display:       "flex",
+                  position: "relative",
+                  display: "flex",
                   flexDirection: "column",
-                  gap:           "var(--s2)",
+                  justifyContent: "flex-end",
+                  padding: "var(--s6)",
+                  minHeight: isFeatured ? "320px" : "280px",
                 }}
               >
+                {/* Background image & gradient overlay */}
                 {image && (
-                  <div className="equipment-image relative w-full aspect-[16/10] overflow-hidden rounded-[20px]" style={{ marginBottom: "var(--s2)" }}>
+                  <div className="absolute inset-0 bento-media">
                     <Image
                       src={image}
                       alt={name}
@@ -98,59 +102,47 @@ export default function Equipment() {
                       className="object-cover"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
+                    <div
+                      className="absolute inset-0 transition-opacity duration-350"
+                      style={{
+                        background: "linear-gradient(to top, rgba(5,31,33,0.95) 0%, rgba(5,31,33,0.3) 60%, transparent 100%)",
+                      }}
+                    />
                   </div>
                 )}
 
-                {/* Icon — scale on reveal */}
-                <motion.div
-                  style={{
-                    width: "38px", height: "38px",
-                    borderRadius: "var(--r-md)",
-                    background: "linear-gradient(135deg, var(--clr-primary), var(--clr-primary-mid))",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    marginBottom: "var(--s1)",
-                    flexShrink: 0,
-                    transition: "transform 300ms ease",
-                  }}
-                  whileHover={{ scale: 1.1, transition: { duration: 0.25, ease: EASE_CINEMATIC } }}
-                >
-                  <Icon size={17} color="var(--clr-accent)" />
-                </motion.div>
-
-                {/* Name */}
-                <h3
-                  className="font-p"
-                  style={{ fontWeight: 700, fontSize: "var(--t-sm)", color: "var(--clr-text)", lineHeight: 1.3 }}
-                >
-                  {name}
-                </h3>
-
-                {/* Description */}
-                <p
-                  className="t-sm"
-                  style={{ color: "var(--clr-text-md)", lineHeight: 1.65, fontSize: "0.78rem", flex: 1 }}
-                >
-                  {description}
-                </p>
-
-                {/* Variants chip */}
-                {variants && (
-                  <div
-                    className="t-label"
-                    style={{
-                      color:        "var(--clr-primary)",
-                      background:   "rgba(8,51,53,0.06)",
-                      padding:      "3px 10px",
-                      borderRadius: "100px",
-                      fontSize:     "0.6rem",
-                      fontWeight:   700,
-                      alignSelf:    "flex-start",
-                      marginTop:    "var(--s1)",
-                    }}
+                {/* Content Overlay */}
+                <div className="relative z-10 mt-auto flex flex-col gap-2">
+                  <div style={{ display: "flex", alignItems: "center", gap: "var(--s2)" }}>
+                    <div
+                      style={{
+                        width: "32px", height: "32px",
+                        borderRadius: "50%",
+                        background: "rgba(216,185,163,0.15)",
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                      }}
+                    >
+                      <Icon size={14} className="text-[var(--clr-accent)]" />
+                    </div>
+                    {variants && (
+                      <span className="text-[10px] font-bold text-[var(--clr-accent)] uppercase tracking-wider bg-white/10 px-2 py-0.5 rounded-full">
+                        {variants}
+                      </span>
+                    )}
+                  </div>
+                  <h3
+                    className="font-p text-white font-extrabold"
+                    style={{ fontSize: isFeatured ? "1.45rem" : "1.1rem", lineHeight: 1.2 }}
                   >
-                    {variants}
-                  </div>
-                )}
+                    {name}
+                  </h3>
+                  <p
+                    className="text-gray-300 leading-relaxed"
+                    style={{ fontSize: "0.78rem", maxWidth: isFeatured ? "520px" : "100%" }}
+                  >
+                    {description}
+                  </p>
+                </div>
               </motion.div>
             );
           })}
