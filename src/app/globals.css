@@ -703,6 +703,8 @@ button,
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  overflow: hidden;          /* never let logo escape its container */
+  flex-shrink: 0;
 }
 
 .nav-right {
@@ -947,24 +949,64 @@ button,
 
   .navbar {
     height: 68px;
+    min-height: 68px;
+    background: rgba(8, 51, 53, 0.94);
+    border-bottom: 1px solid rgba(216, 185, 163, 0.16);
   }
 
   .navbar-inner {
     height: 68px;
+    min-height: 68px;
     width: min(100% - 24px, 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    overflow: visible;
+  }
+
+  /* Keep logo strictly inside navbar height */
+  .logo-wrap {
+    max-height: 48px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  /* Force the Next.js Image to never overflow the navbar */
+  .logo-wrap img,
+  .navbar img {
+    max-height: 40px !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    display: block !important;
   }
 
   .nav-links {
     display: none !important;
   }
 
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
   .nav-cta {
-    padding: 10px 14px !important;
-    font-size: 0.82rem !important;
+    padding: 9px 13px !important;
+    font-size: 0.78rem !important;
+    min-height: 36px !important;
+    white-space: nowrap !important;
   }
 
   .mobile-menu-button {
-    display: flex !important;
+    display: grid !important;
+    place-items: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    flex-shrink: 0 !important;
   }
 
   /* Hide top navbar on mobile when drawer is open — drawer covers the screen */
@@ -1037,6 +1079,26 @@ button,
 
   .hero-actions {
     margin-top: 18px;
+  }
+
+  /* Navbar tweaks for very small phones */
+  .navbar-inner {
+    width: min(100% - 18px, 100%) !important;
+    gap: 6px !important;
+  }
+
+  .logo-wrap {
+    max-height: 42px !important;
+  }
+
+  .logo-wrap img,
+  .navbar img {
+    max-height: 36px !important;
+  }
+
+  .nav-cta {
+    padding: 8px 10px !important;
+    font-size: 0.72rem !important;
   }
 }
 
