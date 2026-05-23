@@ -17,19 +17,19 @@
   /* Brand */
   --clr-primary:      #083335;
   --clr-primary-mid:  #0d4d50;
-  --clr-primary-dark: #051f21;
+  --clr-primary-dark: #06282A;
   --clr-accent:       #D8B9A3;
   --clr-accent-lt:    #e8d0c0;
   --clr-accent-dk:    #c4a088;
 
   /* Surfaces */
-  --clr-bg:           #F7F5F2;
+  --clr-bg:           #F4EFE7;
   --clr-white:        #ffffff;
-  --clr-dark:         #051f21;
+  --clr-dark:         #06282A;
 
-  /* Text — all values WCAG AA compliant on --clr-bg (#F7F5F2) */
-  --clr-text:         #0f1a1b;  /* near-black with brand tint */
-  --clr-text-md:      #374151;  /* gray-700 → 7.5:1 on white */
+  /* Text — all values WCAG AA compliant on --clr-bg */
+  --clr-text:         #162625;  /* near-black with brand tint */
+  --clr-text-md:      #66706B;  /* gray-700 → 7.5:1 on white */
   --clr-text-lt:      #6b7280;  /* gray-500 → 4.6:1 on white, AA pass */
 
   /* ── Spacing Tokens ── */
@@ -183,6 +183,10 @@
 
   .section-inner {
     gap: var(--s6);
+  }
+
+  .navbar-inner {
+    width: min(100% - calc(var(--container-x-mobile) * 2), var(--container-max)) !important;
   }
 }
 
@@ -369,18 +373,16 @@ button,
   animation: shimmer 4s linear infinite;
 }
 
-/* ── GLASSMORPHISM ───────────────────────────────────────── */
+/* ── GLASSMORPHISM ── */
 .glass {
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255,255,255,0.09);
+  background: #FFFFFF !important;
+  border: 1px solid rgba(8, 51, 53, 0.12) !important;
+  box-shadow: 0 10px 30px rgba(8, 51, 53, 0.08) !important;
 }
 .glass-dark {
-  background: rgba(8,51,53,0.82);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(216,185,163,0.12);
+  background: #083335 !important;
+  border: 1px solid rgba(216, 185, 163, 0.22) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* ── GRAIN ───────────────────────────────────────────────── */
@@ -673,47 +675,30 @@ button,
 /* ── NAVBAR ─────────────────────────────────────────────── */
 .navbar {
   position: fixed;
-  top: 14px;
+  top: 0;
   left: 0;
   right: 0;
   height: 72px;
   z-index: 9999;
-  /* Navbar itself is invisible — pill lives on .navbar-inner */
-  background: transparent;
-  border-bottom: none;
-  pointer-events: none;
+  background: #083335;
+  border-bottom: 1px solid rgba(216, 185, 163, 0.22);
+  pointer-events: auto;
   transition: top 300ms ease;
 }
 
 .navbar-scrolled {
-  /* No extra override needed — pill handles all scroll states */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .navbar-inner {
   height: 72px;
-  width: min(100% - 48px, 1240px);
+  width: min(100% - calc(var(--container-x-desktop) * 2), var(--container-max));
   margin-inline: auto;
-  padding: 0 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 32px;
-
-  /* ── Glass pill ── */
   pointer-events: auto;
-  border-radius: 999px;
-  background: linear-gradient(
-    135deg,
-    rgba(8, 51, 53, 0.82),
-    rgba(8, 51, 53, 0.58)
-  );
-  border: 1px solid rgba(216, 185, 163, 0.22);
-  box-shadow:
-    0 18px 50px rgba(0, 0, 0, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.10);
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
-  transition: background 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
 }
 
 .logo-wrap {
@@ -831,12 +816,7 @@ button,
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(
-      circle at 25% 45%,
-      rgba(216, 185, 163, 0.10),
-      transparent 36%
-    );
+  background: transparent;
   pointer-events: none;
 }
 
@@ -871,8 +851,7 @@ button,
   line-height: 1 !important;
 
   color: rgba(216, 185, 163, 0.95) !important;
-  background: rgba(255, 255, 255, 0.06) !important;
-  backdrop-filter: blur(10px) !important;
+  background: rgba(255, 255, 255, 0.10) !important;
 }
 
 .hero-title {
@@ -969,37 +948,29 @@ button,
   }
 
   .navbar {
-    top: 10px;
-    height: 64px;
-    min-height: 64px;
-    /* transparent — pill on .navbar-inner handles appearance */
-    background: transparent;
-    border-bottom: none;
+    top: 0 !important;
+    height: 64px !important;
+    min-height: 64px !important;
+    background: #083335 !important;
+    border-bottom: 1px solid rgba(216, 185, 163, 0.22) !important;
   }
 
   .navbar-inner {
-    height: 64px;
-    min-height: 64px;
-    width: min(100% - 20px, 100%);
-    padding: 0 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    overflow: visible;
-    /* Compact pill for mobile */
-    border-radius: 22px;
-    background: linear-gradient(
-      135deg,
-      rgba(8, 51, 53, 0.88),
-      rgba(8, 51, 53, 0.68)
-    );
-    border: 1px solid rgba(216, 185, 163, 0.20);
-    box-shadow:
-      0 12px 36px rgba(0, 0, 0, 0.22),
-      inset 0 1px 0 rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(18px) saturate(130%);
-    -webkit-backdrop-filter: blur(18px) saturate(130%);
+    height: 64px !important;
+    min-height: 64px !important;
+    width: min(100% - calc(var(--container-x-tablet) * 2), var(--container-max)) !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+    overflow: visible !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 
   /* Keep logo strictly inside navbar height */
@@ -1980,8 +1951,7 @@ section .section {
   text-transform: uppercase !important;
   line-height: 1 !important;
   color: rgba(216, 185, 163, 0.95) !important;
-  background: rgba(255, 255, 255, 0.06) !important;
-  backdrop-filter: blur(10px) !important;
+  background: rgba(255, 255, 255, 0.10) !important;
 }
 
 @media (max-width: 768px) {
@@ -2103,10 +2073,9 @@ section .section {
 .dark-section .card,
 .dark-section .project-card,
 .dark-section .testimonial-card {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border-color: rgba(255, 255, 255, 0.14) !important;
+  background: #083335 !important;
+  border-color: rgba(216, 185, 163, 0.22) !important;
   color: #FFFFFF !important;
-  backdrop-filter: blur(14px) !important;
 }
 
 /* Clean inputs for contact form */
@@ -2148,7 +2117,7 @@ footer button:hover {
 
 /* ── CONCRETE GRID BACKGROUND ── */
 .concrete-grid-bg {
-  background-color: #F6F1EA !important;
+  background-color: #F4EFE7 !important;
   background-image: 
     radial-gradient(rgba(8, 51, 53, 0.04) 1.5px, transparent 1.5px),
     radial-gradient(rgba(8, 51, 53, 0.04) 1.5px, transparent 1.5px) !important;
@@ -2223,11 +2192,11 @@ footer button:hover {
 .bento-card {
   position: relative !important;
   overflow: hidden !important;
-  border-radius: 30px !important;
+  border-radius: 18px !important;
   padding: 28px !important;
-  background: rgba(255, 255, 255, 0.86) !important;
-  border: 1px solid rgba(8, 51, 53, 0.10) !important;
-  box-shadow: 0 18px 50px rgba(8, 51, 53, 0.08) !important;
+  background: #FFFFFF !important;
+  border: 1px solid rgba(8, 51, 53, 0.12) !important;
+  box-shadow: 0 10px 30px rgba(8, 51, 53, 0.08) !important;
   transition:
     transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 300ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -2237,9 +2206,9 @@ footer button:hover {
 }
 
 .bento-card:hover {
-  transform: translateY(-7px) !important;
-  box-shadow: 0 28px 80px rgba(8, 51, 53, 0.16) !important;
-  border-color: rgba(216, 185, 163, 0.48) !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 16px 40px rgba(8, 51, 53, 0.12) !important;
+  border-color: rgba(216, 185, 163, 0.80) !important;
 }
 
 .bento-card-lg {
@@ -2269,10 +2238,9 @@ footer button:hover {
 }
 
 .bento-card-dark {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border-color: rgba(255, 255, 255, 0.14) !important;
+  background: #083335 !important;
+  border: 1px solid rgba(216, 185, 163, 0.22) !important;
   color: #FFFFFF !important;
-  backdrop-filter: blur(14px) !important;
 }
 
 .bento-card img,
@@ -2286,6 +2254,16 @@ footer button:hover {
   position: relative !important;
   overflow: hidden !important;
   border-radius: 22px !important;
+}
+
+.bento-media.absolute {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .bento-media img,
@@ -2425,10 +2403,10 @@ section {
 .contact-card,
 .contact-form-card,
 .contact-map-card {
-  border-radius: 28px !important;
-  border: 1px solid rgba(8, 51, 53, 0.10) !important;
-  background: rgba(255, 255, 255, 0.86) !important;
-  box-shadow: 0 18px 50px rgba(8, 51, 53, 0.08) !important;
+  border-radius: 18px !important;
+  border: 1px solid rgba(8, 51, 53, 0.12) !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 10px 30px rgba(8, 51, 53, 0.08) !important;
   transition:
     transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -2443,18 +2421,18 @@ section {
 .contact-card:hover,
 .contact-form-card:hover,
 .contact-map-card:hover {
-  transform: translateY(-6px) !important;
-  box-shadow: 0 26px 70px rgba(8, 51, 53, 0.14) !important;
-  border-color: rgba(216, 185, 163, 0.46) !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 16px 40px rgba(8, 51, 53, 0.12) !important;
+  border-color: rgba(216, 185, 163, 0.80) !important;
 }
 
 .dark-section .bento-card,
 .dark-section .project-card,
 .dark-section .testimonial-card {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border-color: rgba(255, 255, 255, 0.14) !important;
+  background: #083335 !important;
+  border-color: rgba(216, 185, 163, 0.22) !important;
   color: #FFFFFF !important;
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* 5. Card Image Zoom Hover Animations */

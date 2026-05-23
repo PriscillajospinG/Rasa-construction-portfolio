@@ -158,9 +158,9 @@ export default function Navbar() {
             transition={{ duration: 0.3 }}
             className="mobile-drawer fixed inset-0 z-[2000]"
           >
-            {/* Backdrop blur */}
+            {/* Backdrop cover */}
             <div
-              className="absolute inset-0 bg-black/60 backdrop-blur-[4px]"
+              className="absolute inset-0 bg-black/75"
               onClick={() => setMenuOpen(false)}
             />
 
@@ -172,7 +172,7 @@ export default function Navbar() {
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="mobile-drawer-panel relative ml-auto h-full flex flex-col z-[1100] shadow-[var(--sh-xl)] border-l border-white/5 overflow-y-auto"
               style={{
-                background: "linear-gradient(160deg, var(--clr-primary-dark), var(--clr-primary))",
+                background: "#083335",
                 width: "min(82vw, 340px)",
                 padding: "20px 24px 32px",
               }}

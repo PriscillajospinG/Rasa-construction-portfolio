@@ -25,7 +25,7 @@ export default function Equipment() {
       id="equipment"
       ref={ref}
       className="section section-transition"
-      style={{ background: "#FBF7F1", position: "relative", overflow: "hidden" }}
+      style={{ background: "#F4EFE7", position: "relative", overflow: "hidden" }}
     >
       {/* Faint diagonal texture */}
       <div
@@ -82,19 +82,16 @@ export default function Equipment() {
               <motion.div
                 key={id}
                 variants={itemReveal}
-                className={`group bento-card bento-card-dark equipment-card ${isFeatured ? "bento-card-wide md:col-span-8" : "bento-card-md md:col-span-4"} col-span-12`}
+                className={`group bento-card equipment-card ${isFeatured ? "bento-card-wide md:col-span-8" : "bento-card-md md:col-span-4"} col-span-12`}
                 style={{
-                  position: "relative",
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "flex-end",
-                  padding: "var(--s6)",
-                  minHeight: isFeatured ? "320px" : "280px",
+                  padding: "var(--s4)",
                 }}
               >
-                {/* Background image & gradient overlay */}
+                {/* Image block at the top */}
                 {image && (
-                  <div className="absolute inset-0 bento-media">
+                  <div className="bento-media relative w-full aspect-[16/10] overflow-hidden rounded-[12px] mb-4" style={{ flexShrink: 0 }}>
                     <Image
                       src={image}
                       alt={name}
@@ -102,43 +99,40 @@ export default function Equipment() {
                       className="object-cover"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
-                    <div
-                      className="absolute inset-0 transition-opacity duration-350"
-                      style={{
-                        background: "linear-gradient(to top, rgba(5,31,33,0.95) 0%, rgba(5,31,33,0.3) 60%, transparent 100%)",
-                      }}
-                    />
                   </div>
                 )}
 
-                {/* Content Overlay */}
-                <div className="relative z-10 mt-auto flex flex-col gap-2">
-                  <div style={{ display: "flex", alignItems: "center", gap: "var(--s2)" }}>
-                    <div
-                      style={{
-                        width: "32px", height: "32px",
-                        borderRadius: "50%",
-                        background: "rgba(216,185,163,0.15)",
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                      }}
-                    >
-                      <Icon size={14} className="text-[var(--clr-accent)]" />
+                {/* Content underneath */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "var(--s2)", flexGrow: 1 }}>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--s2)", flexWrap: "wrap" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                      <div
+                        style={{
+                          width: "28px", height: "28px",
+                          borderRadius: "50%",
+                          background: "rgba(8,51,53,0.06)",
+                          display: "flex", alignItems: "center", justifyContent: "center",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Icon size={12} style={{ color: "var(--clr-primary)" }} />
+                      </div>
+                      <h3
+                        className="font-p font-extrabold"
+                        style={{ fontSize: "1.1rem", color: "var(--clr-primary)", lineHeight: 1.2 }}
+                      >
+                        {name}
+                      </h3>
                     </div>
                     {variants && (
-                      <span className="text-[10px] font-bold text-[var(--clr-accent)] uppercase tracking-wider bg-white/10 px-2 py-0.5 rounded-full">
+                      <span className="text-[10px] font-bold text-[var(--clr-primary)] uppercase tracking-wider bg-[var(--clr-accent)] px-2 py-0.5 rounded-full ml-auto">
                         {variants}
                       </span>
                     )}
                   </div>
-                  <h3
-                    className="font-p text-white font-extrabold"
-                    style={{ fontSize: isFeatured ? "1.45rem" : "1.1rem", lineHeight: 1.2 }}
-                  >
-                    {name}
-                  </h3>
                   <p
-                    className="text-gray-300 leading-relaxed"
-                    style={{ fontSize: "0.78rem", maxWidth: isFeatured ? "520px" : "100%" }}
+                    className="leading-relaxed"
+                    style={{ fontSize: "0.85rem", color: "var(--clr-text-md)", marginTop: "2px" }}
                   >
                     {description}
                   </p>

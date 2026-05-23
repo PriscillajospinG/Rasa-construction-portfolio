@@ -38,15 +38,7 @@ export default function Projects() {
     : projects.filter((p) => p.category === active);
 
   return (
-    <section id="projects" style={{ background: "#083335" }} className="section relative overflow-hidden dark-section section-transition">
-      {/* Background Overlay */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: "linear-gradient(180deg, rgba(8,51,53,0.86), rgba(8,51,53,0.74))",
-          zIndex: 1,
-        }}
-      />
+    <section id="projects" style={{ background: "#FFFFFF" }} className="section relative overflow-hidden section-transition">
       <div className="container relative z-10" ref={ref}>
 
         {/* ── Header: asymmetric — number left, content right ── */}
@@ -54,7 +46,7 @@ export default function Projects() {
           className="grid grid-cols-1 lg:grid-cols-[auto_1fr] projects-header-grid">
           {/* Decorative section number */}
           <Reveal direction="left">
-            <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontWeight: 900, fontSize: "0.7rem", letterSpacing: "0.25em", color: "rgba(255,255,255,0.16)", userSelect: "none", textTransform: "uppercase" }}>
+            <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontWeight: 900, fontSize: "0.7rem", letterSpacing: "0.25em", color: "rgba(8,51,53,0.16)", userSelect: "none", textTransform: "uppercase" }}>
               Portfolio
             </div>
           </Reveal>
@@ -62,7 +54,7 @@ export default function Projects() {
             <Reveal>
               <p className="section-eyebrow">Our Work</p>
               <h2 className="section-title">
-                Projects that<br /><em className="text-[var(--clr-accent)]">speak for themselves.</em>
+                Projects that<br /><em className="t-italic-dark">speak for themselves.</em>
               </h2>
             </Reveal>
             {/* Filter pills — smooth active transition */}
@@ -81,8 +73,8 @@ export default function Projects() {
                       cursor:       "pointer",
                     }}
                     animate={{
-                      background: active === cat ? "#D8B9A3" : "rgba(255,255,255,0.08)",
-                      color:      active === cat ? "#083335" : "rgba(255,255,255,0.72)",
+                      background: active === cat ? "#083335" : "rgba(8,51,53,0.06)",
+                      color:      active === cat ? "#FFFFFF" : "#66706B",
                     }}
                     transition={{ duration: 0.25, ease: EASE_CINEMATIC }}
                   >
@@ -112,7 +104,7 @@ export default function Projects() {
                   key={id}
                   variants={itemReveal}
                   layout
-                  className={`project-card bento-card bento-card-dark group ${bentoClass}`}
+                  className={`project-card bento-card group ${bentoClass}`}
                   style={{ position: "relative" }}
                   onMouseEnter={() => setHovered(id)} onMouseLeave={() => setHovered(null)}
                 >
@@ -165,16 +157,16 @@ export default function Projects() {
 
         {/* ── CTA — editorial, left-aligned ── */}
         <Reveal>
-          <div style={{ marginTop: "var(--s12)", display: "grid", gridTemplateColumns: "1fr auto", alignItems: "center", gap: "var(--s4)", flexWrap: "wrap", borderTop: "1px solid rgba(255,255,255,0.12)", paddingTop: "var(--s6)" }} className="projects-footer-row">
+          <div style={{ marginTop: "var(--s12)", display: "grid", gridTemplateColumns: "1fr auto", alignItems: "center", gap: "var(--s4)", flexWrap: "wrap", borderTop: "1px solid rgba(8, 51, 53, 0.12)", paddingTop: "var(--s6)" }} className="projects-footer-row">
             <div>
-              <p className="font-m" style={{ fontSize: "var(--t-h2)", color: "#FFFFFF", lineHeight: 1.2 }}>
+              <p className="font-m" style={{ fontSize: "var(--t-h2)", color: "#083335", lineHeight: 1.2 }}>
                 Ready to see your project here?
               </p>
-              <p className="t-sm" style={{ color: "rgba(255,255,255,0.72)", marginTop: "var(--s1)" }}>
+              <p className="t-sm" style={{ color: "var(--clr-text-md)", marginTop: "var(--s1)" }}>
                 Let&apos;s talk about what your site needs.
               </p>
             </div>
-            <Button href="#contact" variant="primary" onClick={(e) => { e.preventDefault(); scrollTo("#contact"); }}>
+            <Button href="#contact" variant="dark" onClick={(e) => { e.preventDefault(); scrollTo("#contact"); }}>
               Request a Quote
             </Button>
           </div>

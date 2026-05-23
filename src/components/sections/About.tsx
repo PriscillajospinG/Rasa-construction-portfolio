@@ -18,7 +18,8 @@ export default function About() {
     <section
       id="about"
       ref={ref}
-      className="relative overflow-hidden concrete-grid-bg section-transition"
+      className="relative overflow-hidden section-transition"
+      style={{ backgroundColor: "#FFFFFF" }}
     >
       {/* ── 1. GRAIN TEXTURE ── */}
       <div
@@ -66,23 +67,23 @@ export default function About() {
           {/* Card 1: Story Card (span 8) */}
           <motion.div
             variants={itemReveal}
-            className="bento-card bento-card-dark md:col-span-8 col-span-12"
-            style={{ background: "#083335", minHeight: "360px", display: "flex", flexDirection: "column" }}
+            className="bento-card md:col-span-8 col-span-12"
+            style={{ minHeight: "360px", display: "flex", flexDirection: "column" }}
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full items-center">
               <div>
-                <span className="text-[var(--clr-accent)] font-bold text-xs uppercase tracking-wider block mb-2">Our Foundation</span>
-                <h3 className="text-2xl font-bold text-white mb-4 leading-tight">
+                <span className="text-[var(--clr-primary)] font-bold text-xs uppercase tracking-wider block mb-2">Our Foundation</span>
+                <h3 className="text-2xl font-bold text-[var(--clr-primary)] mb-4 leading-tight">
                   25+ Years of<br />Field Experience
                 </h3>
-                <p className="text-sm text-gray-300 leading-relaxed mb-4">
+                <p className="text-sm text-[var(--clr-text-md)] leading-relaxed mb-4">
                   {company.story.paragraphs[0]}
                 </p>
-                <div className="border-t border-white/10 pt-4 mt-4">
-                  <p className="text-sm italic text-white font-medium mb-1">
+                <div className="border-t border-gray-100 pt-4 mt-4">
+                  <p className="text-sm italic text-[var(--clr-primary)] font-medium mb-1">
                     &ldquo;{company.story.ownerQuote}&rdquo;
                   </p>
-                  <span className="text-xs text-[var(--clr-accent)] font-semibold">— {company.owner}, Founder</span>
+                  <span className="text-xs text-[var(--clr-primary-mid)] font-semibold">— {company.owner}, Founder</span>
                 </div>
               </div>
               <div className="relative w-full h-[220px] lg:h-full rounded-2xl overflow-hidden shadow-lg min-h-[220px]">
@@ -152,22 +153,22 @@ export default function About() {
           {/* Card 4: Coverage Card (span 4) */}
           <motion.div
             variants={itemReveal}
-            className="bento-card bento-card-dark md:col-span-4 col-span-12"
-            style={{ background: "#06282A", display: "flex", flexDirection: "column", justifyContent: "space-between" }}
+            className="bento-card md:col-span-4 col-span-12"
+            style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}
           >
             <div>
-              <span className="text-[var(--clr-accent)] font-bold text-xs uppercase tracking-wider block mb-3">Operational Coverage</span>
+              <span className="text-[var(--clr-primary)] font-bold text-xs uppercase tracking-wider block mb-3">Operational Coverage</span>
               <div className="flex items-center gap-2 mb-3">
-                <MapPin className="text-[var(--clr-accent)]" size={16} />
-                <span className="text-sm font-semibold text-white">South Tamil Nadu</span>
+                <MapPin className="text-[var(--clr-primary)]" size={16} />
+                <span className="text-sm font-semibold text-[var(--clr-primary)]">South Tamil Nadu</span>
               </div>
-              <p className="text-xs text-gray-300 leading-relaxed">
+              <p className="text-xs text-[var(--clr-text-md)] leading-relaxed">
                 Serving construction sites and infrastructure projects across Tirunelveli, Tenkasi, Thoothukudi, Nagercoil, Kanyakumari, and surrounding areas.
               </p>
             </div>
-            <div className="border-t border-white/10 pt-3 mt-4 flex items-center justify-between text-xs text-gray-400">
-              <span>Main Depot:</span>
-              <span className="text-white font-medium">{company.location.label}</span>
+            <div className="border-t border-gray-100 pt-3 mt-4 flex items-center justify-between text-xs text-[var(--clr-text-lt)]">
+               <span>Main Depot:</span>
+               <span className="text-[var(--clr-primary)] font-medium">{company.location.label}</span>
             </div>
           </motion.div>
 

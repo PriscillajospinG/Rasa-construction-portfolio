@@ -107,7 +107,7 @@ Message: ${form.message}`;
   };
 
   return (
-    <section id="contact" className="section contact-section section-transition" style={{ backgroundColor: "#FBF7F1" }}>
+    <section id="contact" className="section contact-section section-transition" style={{ backgroundColor: "#F4EFE7" }}>
       <div className="container">
         <div style={{ display: "flex", flexDirection: "column", gap: "var(--s1)", marginBottom: "var(--s8)" }}>
           <Reveal>
@@ -301,7 +301,7 @@ Message: ${form.message}`;
 
           {/* 4. WhatsApp / Call Card (span 4) */}
           <Reveal direction="right" className="col-span-12 md:col-span-4 order-4">
-            <div className="bento-card contact-details-card h-full" style={{ background: "linear-gradient(135deg, #083335, #06282A)", color: "#FFFFFF", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+            <div className="bento-card contact-details-card h-full" style={{ background: "#083335", color: "#FFFFFF", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
               <div>
                 <span className="text-[var(--clr-accent)] font-bold text-xs uppercase tracking-wider block mb-2">Instant Chat</span>
                 <h3 className="text-xl font-bold text-white mb-2 leading-tight">Need a quick response?</h3>

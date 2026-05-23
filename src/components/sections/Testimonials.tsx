@@ -29,10 +29,6 @@ export default function Testimonials() {
       className="section relative overflow-hidden dark-section section-transition"
       style={{ background: "#06282A" }}
     >
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at 50% -10%, rgba(216,185,163,0.06) 0%, transparent 60%)" }}
-      />
 
       <div className="container" ref={ref}>
         {/* ── Section Header ── */}
