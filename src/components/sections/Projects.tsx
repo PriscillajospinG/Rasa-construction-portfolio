@@ -11,21 +11,11 @@ import { projects, projectCategories } from "@/data/projects";
 import { scrollTo } from "@/lib/utils";
 import { cardGridStagger, itemReveal, EASE_CINEMATIC } from "@/lib/animations";
 
-const getProjectBentoClass = (i: number, total: number) => {
-  if (total === 1) return "md:col-span-12 col-span-12";
-  if (total === 2) return "bento-card-half md:col-span-6";
-  if (total === 3) {
-    if (i === 0) return "bento-card-wide md:col-span-8";
-    if (i === 1) return "bento-card-md md:col-span-4";
-    return "md:col-span-12 col-span-12"; // full width at bottom
-  }
-  // For 4 or more projects
-  if (i === 0) return "bento-card-wide md:col-span-8";
-  if (i === 1) return "bento-card-md md:col-span-4";
-  if (i === total - 1 && (total - 2) % 3 !== 0) {
-    return "md:col-span-12 col-span-12";
-  }
-  return "bento-card-md md:col-span-4";
+const getProjectBentoClass = (i: number) => {
+  if (i === 0) return "col-span-12 md:col-span-6";
+  if (i === 1) return "col-span-12 md:col-span-3";
+  if (i === 2) return "col-span-12 md:col-span-3";
+  return "col-span-12 md:col-span-4";
 };
 
 export default function Projects() {
@@ -52,10 +42,13 @@ export default function Projects() {
           </Reveal>
           <div>
             <Reveal>
-              <p className="section-eyebrow">Our Work</p>
+              <p className="section-eyebrow">SITE PHOTOS</p>
               <h2 className="section-title">
-                Projects that<br /><em className="t-italic-dark">speak for themselves.</em>
+                Real work, real sites.
               </h2>
+              <p className="section-lead mt-2 text-[#66706B]">
+                A look at our equipment, site work, scaffolding support, and construction material movement.
+              </p>
             </Reveal>
             {/* Filter pills — smooth active transition */}
             <Reveal delay={0.1}>
@@ -97,7 +90,7 @@ export default function Projects() {
             exit={{ opacity: 0, transition: { duration: 0.2 } }}
           >
             {displayed.map(({ id, image, title, category, location, duration, description }, i) => {
-              const bentoClass = getProjectBentoClass(i, displayed.length);
+              const bentoClass = getProjectBentoClass(i);
               const isFeatured = i === 0;
               return (
                 <motion.div
