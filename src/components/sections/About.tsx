@@ -27,16 +27,13 @@ export default function About() {
     <section
       id="about"
       ref={containerRef}
-      className="relative overflow-visible"
-      style={{
-        background: "#F6F1EA",
-      }}
+      className="relative overflow-visible concrete-grid-bg"
     >
       {/* ── 1. BACKGROUND LAYER ── */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "#F6F1EA",
+          background: "transparent",
           zIndex: 1,
         }}
         aria-hidden
@@ -76,7 +73,7 @@ export default function About() {
             y:              cardY,
             opacity:        cardOpacity,
             scale:          cardScale,
-            background:     "rgba(5, 31, 33, 0.94)",
+            background:     "rgba(8, 51, 53, 0.95)",
             backdropFilter: "blur(18px)",
             WebkitBackdropFilter: "blur(18px)",
             border:         "1px solid rgba(216, 185, 163, 0.22)",
@@ -145,24 +142,38 @@ export default function About() {
             style={{ display: "grid", gridTemplateColumns: "4fr 8fr", gap: "var(--s8)", alignItems: "start" }}
             className="grid-cols-1 lg:grid-cols-[4fr_8fr] about-info-grid"
           >
-            {/* Left Column: Core Stats */}
+            {/* Left Column: Core Stats (Industrial Timeline) */}
             <Reveal direction="left">
-              <div style={{ display: "flex", flexDirection: "column", gap: "var(--s6)", paddingTop: "var(--s4)", borderLeft: "2px solid #D8B9A3", paddingLeft: "var(--s4)" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "var(--s6)", paddingTop: "var(--s4)", borderLeft: "2px solid #D8B9A3", paddingLeft: "var(--s6)", position: "relative" }}>
                 {[
                   { n: "25+",  l: "Years Field Experience" },
                   { n: "500+", l: "Completed Projects" },
                   { n: "100+", l: "Equipment Units" },
                   { n: "300+", l: "Satisfied Clients" },
                 ].map(({ n, l }) => (
-                  <div key={l}>
-                    <div className="font-m" style={{ fontSize: "2rem", fontWeight: 900, color: "var(--clr-primary)", lineHeight: 1 }}>{n}</div>
-                    <div className="t-sm" style={{ color: "var(--clr-text-lt)", marginTop: "var(--s1)", lineHeight: 1.4 }}>{l}</div>
+                  <div key={l} style={{ position: "relative" }}>
+                    {/* Timeline bullet */}
+                    <div style={{
+                      position: "absolute",
+                      left: "-55px",
+                      top: "22px",
+                      width: "12px",
+                      height: "12px",
+                      borderRadius: "50%",
+                      backgroundColor: "#D8B9A3",
+                      border: "3px solid #083335",
+                      zIndex: 5,
+                    }} />
+                    <div className="card" style={{ padding: "16px 20px", background: "#FFFFFF", border: "1px solid rgba(8,51,53,0.08)" }}>
+                      <div className="font-m" style={{ fontSize: "1.75rem", fontWeight: 900, color: "#083335", lineHeight: 1 }}>{n}</div>
+                      <div className="t-sm" style={{ color: "var(--clr-text-lt)", marginTop: "4px", lineHeight: 1.4 }}>{l}</div>
+                    </div>
                   </div>
                 ))}
 
                 <Button href="#contact" variant="dark" size="sm"
                   onClick={(e) => { e.preventDefault(); scrollTo("#contact"); }}
-                  style={{ marginTop: "var(--s3)" }}>
+                  style={{ marginTop: "var(--s1)" }}>
                   Request a Quote
                 </Button>
               </div>

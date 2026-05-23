@@ -15,7 +15,7 @@ export default function Services() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="services" className="relative overflow-hidden" style={{ backgroundColor: "#F6F1EA" }}>
+    <section id="services" className="relative overflow-hidden concrete-grid-bg">
       <div className="section" ref={ref}>
         <div className="container">
           {/* ── Section Header ── */}
@@ -51,11 +51,12 @@ export default function Services() {
           >
             {services.map(({ id, title, description, usedFor, tag, image, alt }, i) => {
               const num = `0${i + 1}`;
+              const isFeatured = id === "scaffolding";
               return (
                 <motion.div
                   key={id}
                   variants={itemReveal}
-                  className="service-card group"
+                  className={`service-card group ${isFeatured ? "md:col-span-8" : "md:col-span-4"} col-span-12`}
                 >
                   {image && alt && (
                     <div className="service-image">

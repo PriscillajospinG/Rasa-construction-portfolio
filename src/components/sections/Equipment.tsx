@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import * as LucideIcons from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import Image from "next/image";
 import Reveal from "@/components/animations/Reveal";
 import Button from "@/components/ui/Button";
 import { equipment } from "@/data/equipment";
@@ -69,26 +70,38 @@ export default function Equipment() {
 
         {/* ── Equipment grid — stagger container ── */}
         <motion.div
-          style={{ gap: "var(--s3)" }}
-          className="equipment-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+          className="equipment-grid"
           variants={cardGridStagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          {equipment.map(({ id, name, description, variants, iconName }) => {
+          {equipment.map(({ id, name, description, variants, iconName, image }) => {
             const Icon = getIcon(iconName);
+            const isLarge = id === "scaffold-tubes" || id === "scaffold-frames";
             return (
               <motion.div
                 key={id}
                 variants={itemReveal}
-                className="group card-hover equipment-card"
+                className={`group card-hover equipment-card ${isLarge ? "md:col-span-6" : "md:col-span-4"} col-span-12`}
                 style={{
-                  padding:       "var(--s4)",
+                  padding:       "var(--s3)",
                   display:       "flex",
                   flexDirection: "column",
                   gap:           "var(--s2)",
                 }}
               >
+                {image && (
+                  <div className="equipment-image relative w-full aspect-[16/10] overflow-hidden rounded-[20px]" style={{ marginBottom: "var(--s2)" }}>
+                    <Image
+                      src={image}
+                      alt={name}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  </div>
+                )}
+
                 {/* Icon — scale on reveal */}
                 <motion.div
                   style={{

@@ -2145,3 +2145,70 @@ footer a:hover,
 footer button:hover {
   color: #D8B9A3 !important;
 }
+
+/* ── CONCRETE GRID BACKGROUND ── */
+.concrete-grid-bg {
+  background-color: #F6F1EA !important;
+  background-image: 
+    radial-gradient(rgba(8, 51, 53, 0.04) 1.5px, transparent 1.5px),
+    radial-gradient(rgba(8, 51, 53, 0.04) 1.5px, transparent 1.5px) !important;
+  background-size: 32px 32px !important;
+  background-position: 0 0, 16px 16px !important;
+}
+
+/* ── STEEL DIVIDER ── */
+.steel-divider {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(102, 112, 107, 0.1) 0%, rgba(102, 112, 107, 0.25) 50%, rgba(102, 112, 107, 0.1) 100%) !important;
+  border: none !important;
+}
+
+/* ── BENTO GRIDS ── */
+.services-grid,
+.equipment-grid {
+  display: grid !important;
+  grid-template-columns: repeat(12, 1fr) !important;
+  gap: var(--s4) !important;
+}
+
+@media (max-width: 1024px) {
+  .services-grid,
+  .equipment-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: var(--s3) !important;
+  }
+  
+  .service-card,
+  .equipment-card {
+    grid-column: span 1 !important;
+  }
+  
+  .service-card:first-child {
+    grid-column: span 2 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-grid,
+  .equipment-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .service-card,
+  .equipment-card {
+    grid-column: span 1 !important;
+  }
+  
+  .service-card:first-child {
+    grid-column: span 1 !important;
+  }
+}
+
+/* ── EQUIPMENT ZOOM TRANSITION ── */
+.equipment-image img {
+  transition: transform 700ms var(--ease-premium) !important;
+}
+
+.group:hover .equipment-image img {
+  transform: scale(1.04) !important;
+}
