@@ -42,8 +42,8 @@ export default function Projects() {
       <div className="container relative z-10" ref={ref}>
 
         {/* ── Header: asymmetric — number left, content right ── */}
-        <div style={{ gap: "var(--s8)", alignItems: "start", marginBottom: "var(--s12)" }}
-          className="grid grid-cols-1 lg:grid-cols-[auto_1fr] projects-header-grid">
+        <div style={{ gap: "var(--s8)", alignItems: "start" }}
+          className="section-header grid grid-cols-1 lg:grid-cols-[auto_1fr] projects-header-grid">
           {/* Decorative section number */}
           <Reveal direction="left">
             <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontWeight: 900, fontSize: "0.7rem", letterSpacing: "0.25em", color: "rgba(8,51,53,0.16)", userSelect: "none", textTransform: "uppercase" }}>

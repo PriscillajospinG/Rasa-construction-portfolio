@@ -109,7 +109,7 @@ Message: ${form.message}`;
   return (
     <section id="contact" className="section contact-section section-transition" style={{ backgroundColor: "#F4EFE7" }}>
       <div className="container">
-        <div style={{ display: "flex", flexDirection: "column", gap: "var(--s1)", marginBottom: "var(--s8)" }}>
+        <div className="section-header">
           <Reveal>
             <p className="section-eyebrow">Contact</p>
           </Reveal>
@@ -126,8 +126,8 @@ Message: ${form.message}`;
         <div className="bento-grid">
           {/* 1. Map Card (span 8) */}
           <Reveal direction="left" className="col-span-12 md:col-span-8 order-1">
-            <div className="bento-card contact-card contact-map-card h-full" style={{ padding: 0, overflow: "hidden", minHeight: "320px", display: "flex", flexDirection: "column" }}>
-              <div className="w-full flex-grow relative" style={{ minHeight: "260px" }}>
+            <div className="bento-card contact-card contact-map-card h-full" style={{ background: "#083335", color: "#FFFFFF", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+              <div className="contact-map-frame relative w-full flex-grow">
                 <iframe
                   title="Rasa Construction location map"
                   src="https://www.google.com/maps?q=Rasa%20Office%20Achankuttam%20627861%20Tamil%20Nadu%20India&output=embed"
@@ -139,7 +139,7 @@ Message: ${form.message}`;
                   referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
               </div>
-              <div style={{ padding: "var(--s3) var(--s4)", display: "flex", justifyContent: "space-between", alignItems: "center", background: "#083335", borderTop: "1px solid rgba(255,255,255,0.1)" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "16px" }}>
                 <span className="text-white text-xs font-semibold flex items-center gap-2">
                   <MapPin size={14} className="text-[var(--clr-accent)]" />
                   Achankuttam, Tirunelveli district
@@ -213,7 +213,7 @@ Message: ${form.message}`;
                   <p className="t-sm text-gray-500 mb-6">
                     We&apos;ll respond within one business day.
                   </p>
-                  <form onSubmit={submit} className="flex flex-col gap-4 flex-grow justify-between">
+                  <form onSubmit={submit} className="flex-grow">
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className="contact-field">
                         <label className="t-label">Full Name <span className="text-red-500">*</span></label>

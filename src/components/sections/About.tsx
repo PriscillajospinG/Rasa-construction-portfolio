@@ -34,7 +34,7 @@ export default function About() {
 
       <div className="container relative z-10">
         {/* Section Header */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "var(--s1)", marginBottom: "var(--s8)" }}>
+        <div className="section-header">
           <Reveal>
             <p className="section-eyebrow">About Us</p>
           </Reveal>

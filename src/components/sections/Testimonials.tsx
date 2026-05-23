@@ -32,7 +32,7 @@ export default function Testimonials() {
 
       <div className="container" ref={ref}>
         {/* ── Section Header ── */}
-        <Reveal style={{ marginBottom: "var(--s12)" }}>
+        <Reveal className="section-header">
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "var(--s4)" }}>
             <div>
               <p className="section-eyebrow">Client Testimonials</p>

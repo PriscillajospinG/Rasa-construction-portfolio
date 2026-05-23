@@ -23,11 +23,10 @@ export default function Services() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="services" className="relative overflow-hidden concrete-grid-bg section-transition" style={{ backgroundColor: "#F4EFE7" }}>
-      <div className="section" ref={ref}>
-        <div className="container">
-          {/* ── Section Header ── */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "var(--s1)", marginBottom: "var(--s8)" }}>
+    <section id="services" className="section relative overflow-hidden concrete-grid-bg section-transition" style={{ backgroundColor: "#F4EFE7" }} ref={ref}>
+      <div className="container">
+        {/* ── Section Header ── */}
+        <div className="section-header">
             <Reveal>
               <p className="section-eyebrow">Services</p>
             </Reveal>
@@ -119,7 +118,6 @@ export default function Services() {
             </div>
           </Reveal>
         </div>
-      </div>
-    </section>
+      </section>
   );
 }

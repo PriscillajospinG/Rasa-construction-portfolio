@@ -100,13 +100,15 @@
 }
 
 /* ── CONTAINER & SECTION SYSTEM ─────────────────────────── */
-.container {
-  width: min(100% - calc(var(--container-x-desktop) * 2), var(--container-max));
+.container,
+.section-container {
+  width: min(100% - 48px, 1240px);
   margin-inline: auto;
 }
 
+section,
 .section {
-  padding-block: var(--section-y-desktop);
+  padding-block: 96px;
 }
 
 .section-sm {
@@ -148,16 +150,16 @@
 @media (max-width: 1024px) {
   :root {
     --nav-h: var(--nav-h-tablet);
-    --container-px: var(--container-x-tablet);
-    --section-y: var(--section-y-tablet);
   }
 
-  .container {
-    width: min(100% - calc(var(--container-x-tablet) * 2), var(--container-max));
+  .container,
+  .section-container {
+    width: min(100% - 36px, 100%);
   }
 
+  section,
   .section {
-    padding-block: var(--section-y-tablet);
+    padding-block: 76px;
   }
 }
 
@@ -165,28 +167,27 @@
   :root {
     --nav-h: var(--nav-h-mobile);
   }
+
+  .container,
+  .section-container {
+    width: min(100% - 24px, 100%);
+  }
+
+  section,
+  .section {
+    padding-block: 56px;
+  }
 }
 
-@media (max-width: 640px) {
-  :root {
-    --container-px: var(--container-x-mobile);
-    --section-y: var(--section-y-mobile);
+@media (max-width: 380px) {
+  .container,
+  .section-container {
+    width: min(100% - 20px, 100%);
   }
 
-  .container {
-    width: min(100% - calc(var(--container-x-mobile) * 2), var(--container-max));
-  }
-
+  section,
   .section {
-    padding-block: var(--section-y-mobile);
-  }
-
-  .section-inner {
-    gap: var(--s6);
-  }
-
-  .navbar-inner {
-    width: min(100% - calc(var(--container-x-mobile) * 2), var(--container-max)) !important;
+    padding-block: 44px;
   }
 }
 
@@ -692,13 +693,28 @@ button,
 
 .navbar-inner {
   height: 72px;
-  width: min(100% - calc(var(--container-x-desktop) * 2), var(--container-max));
+  width: min(100% - 48px, 1240px) !important;
   margin-inline: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 32px;
   pointer-events: auto;
+}
+
+@media (max-width: 1024px) {
+  .navbar-inner {
+    width: min(100% - 24px, 100%) !important;
+    height: 64px !important;
+    min-height: 64px !important;
+    padding: 0 !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .navbar-inner {
+    width: min(100% - 18px, 100%) !important;
+  }
 }
 
 .logo-wrap {
@@ -775,13 +791,19 @@ button,
 /* ── HERO RESPONSIVE & LAYOUT SYSTEM ────────────────────────── */
 .hero {
   position: relative;
-  height: 100svh;
-  min-height: 100svh;
-  max-height: 100svh;
-  /* Navbar is 72px + 14px top offset + 14px breathing room = 100px */
-  padding-top: 100px;
+  min-height: calc(100svh - var(--nav-h)) !important;
+  padding-top: var(--nav-h) !important;
+  padding-bottom: 48px !important;
   overflow: hidden;
   background: #083335;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: calc(100svh - var(--nav-h-mobile)) !important;
+    padding-top: var(--nav-h-mobile) !important;
+    padding-bottom: 28px !important;
+  }
 }
 
 .hero + section {
@@ -820,14 +842,23 @@ button,
   pointer-events: none;
 }
 
-.hero-container {
+.hero-container,
+.hero-inner {
   position: relative;
   z-index: 2;
-  width: min(100% - 48px, 1240px);
-  height: calc(100svh - 78px);
+  width: min(100% - 48px, 1240px) !important;
   margin-inline: auto;
   display: flex;
   align-items: center;
+  min-height: calc(100svh - var(--nav-h) - 48px) !important;
+}
+
+@media (max-width: 768px) {
+  .hero-container,
+  .hero-inner {
+    width: min(100% - 24px, 100%) !important;
+    min-height: calc(100svh - var(--nav-h-mobile) - 28px) !important;
+  }
 }
 
 .hero-content {
@@ -1719,7 +1750,10 @@ section .section {
   }
 }
 
-/* Footer Grid Responsive Override */
+/* Footer Padding and Grid System */
+.footer {
+  padding-block: 64px 28px !important;
+}
 .footer-grid {
   display: grid !important;
   grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
@@ -1733,42 +1767,58 @@ section .section {
 }
 
 @media (max-width: 768px) {
+  .footer {
+    padding-block: 48px 24px !important;
+  }
   .footer-grid {
     grid-template-columns: 1fr !important;
+    gap: 24px !important;
   }
 }
 
-/* Contact Grid Override */
+/* Contact Spacing System */
 .contact-grid {
   display: grid !important;
   grid-template-columns: 0.95fr 1.05fr !important;
-  gap: 32px !important;
+  align-items: stretch !important;
+  gap: 28px !important;
+}
+
+.contact-form-card,
+.contact-map-card {
+  padding: 28px !important;
+}
+
+.contact-form-card form {
+  display: grid !important;
+  gap: 16px !important;
+}
+
+.contact-map-frame {
+  min-height: 360px !important;
+  border-radius: 18px !important;
+  overflow: hidden !important;
 }
 
 @media (max-width: 900px) {
   .contact-grid {
     grid-template-columns: 1fr !important;
   }
+
   .contact-map-frame {
-    height: 280px !important;
+    min-height: 280px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-form-card,
+  .contact-map-card {
+    padding: 22px !important;
   }
 }
 
 /* ── CARD RESPONSIVE ── */
 @media (max-width: 768px) {
-  .service-card,
-  .project-card,
-  .equipment-card,
-  .testimonial-card,
-  .contact-form-card,
-  .contact-map-card {
-    padding: 20px !important;
-    border-radius: 22px !important;
-  }
-  .service-card {
-    padding: 20px !important;
-    border-radius: 22px !important;
-  }
   .service-card .service-image {
     border-radius: 12px !important;
   }
@@ -2321,19 +2371,29 @@ footer button:hover {
 /* ── VISUAL SYSTEM & SECTION FLOW POLISH OVERRIDES ── */
 
 /* 1. Consistent Section Spacing */
-section {
+section,
+.section {
   padding-block: 96px !important;
 }
 
 @media (max-width: 1024px) {
-  section {
+  section,
+  .section {
     padding-block: 76px !important;
   }
 }
 
 @media (max-width: 768px) {
-  section {
+  section,
+  .section {
     padding-block: 56px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  section,
+  .section {
+    padding-block: 44px !important;
   }
 }
 
@@ -2355,6 +2415,12 @@ section {
 }
 
 /* 3. Consistent Section Headers */
+.section-header {
+  margin-bottom: 42px !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
 .section-eyebrow {
   font-size: 0.72rem !important;
   font-weight: 800 !important;
@@ -2379,7 +2445,17 @@ section {
   color: #66706B !important;
   font-size: 1.05rem !important;
   line-height: 1.7 !important;
-  margin-top: 18px !important;
+  margin-top: 16px !important;
+}
+
+@media (max-width: 768px) {
+  .section-header {
+    margin-bottom: 30px !important;
+  }
+
+  .section-lead {
+    margin-top: 14px !important;
+  }
 }
 
 .dark-section .section-eyebrow {
@@ -2407,6 +2483,7 @@ section {
   border: 1px solid rgba(8, 51, 53, 0.12) !important;
   background: #FFFFFF !important;
   box-shadow: 0 10px 30px rgba(8, 51, 53, 0.08) !important;
+  padding: 28px !important;
   transition:
     transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -2433,6 +2510,53 @@ section {
   border-color: rgba(216, 185, 163, 0.22) !important;
   color: #FFFFFF !important;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+@media (max-width: 768px) {
+  .bento-card,
+  .service-card,
+  .project-card,
+  .equipment-card,
+  .testimonial-card,
+  .contact-card,
+  .contact-form-card,
+  .contact-map-card {
+    padding: 22px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .bento-card,
+  .service-card,
+  .project-card,
+  .equipment-card,
+  .testimonial-card,
+  .contact-card,
+  .contact-form-card,
+  .contact-map-card {
+    padding: 18px !important;
+  }
+}
+
+/* 4b. Consistent Grid Gaps */
+.services-grid,
+.projects-grid,
+.equipment-grid,
+.testimonial-grid,
+.contact-grid,
+.bento-grid {
+  gap: 24px !important;
+}
+
+@media (max-width: 768px) {
+  .services-grid,
+  .projects-grid,
+  .equipment-grid,
+  .testimonial-grid,
+  .contact-grid,
+  .bento-grid {
+    gap: 18px !important;
+  }
 }
 
 /* 5. Card Image Zoom Hover Animations */
