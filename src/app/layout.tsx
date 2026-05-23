@@ -17,22 +17,44 @@ const bodyFont = Manrope({
   weight: ["400", "500", "600", "700", "800"],
   variable: "--font-body",
 });
+const siteUrl = "https://rasa-construction-portfolio.vercel.app";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Rasa Construction",
-  description: "Rasa Construction - Scaffolding, centring materials, vertical hoist rental and construction support.",
+  description:
+    "Rasa Construction provides scaffolding rental, centring materials, vertical hoist rental, concrete work support, and site material movement across South Tamil Nadu.",
   icons: {
-    icon: "/rasa-logo.png",
-    shortcut: "/rasa-logo.png",
-    apple: "/rasa-logo.png",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-icon.png",
   },
-  keywords:    "Rasa Construction, scaffolding rental, centring materials, concrete works, vertical hoist rental, construction Tamil Nadu, Gurusamy A",
-  authors:     [{ name: company.name }],
   openGraph: {
-    title:       `${company.name} | Building Strength. Delivering Trust.`,
-    description: "Premium construction services – Scaffolding, Centring Materials, Concrete Works & Vertical Hoist Rental.",
-    type:        "website",
+    title: "Rasa Construction",
+    description:
+      "Scaffolding, centring materials, vertical hoist rental and construction support across South Tamil Nadu.",
+    url: siteUrl,
+    siteName: "Rasa Construction",
+    images: [
+      {
+        url: "/og-rasa-construction.png",
+        width: 1200,
+        height: 630,
+        alt: "Rasa Construction company logo and services",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Rasa Construction",
+    description:
+      "Scaffolding, centring materials, vertical hoist rental and construction support across South Tamil Nadu.",
+    images: ["/og-rasa-construction.png"],
+  },
+  keywords: "Rasa Construction, scaffolding rental, centring materials, concrete works, vertical hoist rental, construction Tamil Nadu, Gurusamy A",
+  authors: [{ name: company.name }],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
