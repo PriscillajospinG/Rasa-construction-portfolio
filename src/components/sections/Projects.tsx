@@ -38,7 +38,7 @@ export default function Projects() {
     : projects.filter((p) => p.category === active);
 
   return (
-    <section id="projects" style={{ background: "#FFFFFF" }} className="section relative overflow-hidden section-transition">
+    <section id="projects" style={{ background: "#FFFFFF" }} className="section-bridge bridge-cream-to-white section relative overflow-hidden section-transition">
       <div className="container relative z-10" ref={ref}>
 
         {/* ── Header: asymmetric — number left, content right ── */}

@@ -10,20 +10,12 @@ import { services } from "@/data/services";
 import { company } from "@/data/company";
 import { itemReveal } from "@/lib/animations";
 
-const getServiceBentoClass = (id: string) => {
-  if (id === "scaffolding") return "bento-card-lg md:col-span-6";
-  if (id === "centring") return "bento-card-half md:col-span-6";
-  if (id === "concrete") return "bento-card-sm md:col-span-3";
-  if (id === "hoist") return "bento-card-sm md:col-span-3";
-  return "md:col-span-12 col-span-12"; // for site support
-};
-
 export default function Services() {
   const ref    = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="services" className="section relative overflow-hidden concrete-grid-bg section-transition" style={{ backgroundColor: "#F4EFE7" }} ref={ref}>
+    <section id="services" className="section relative overflow-hidden concrete-grid-bg section-transition" style={{ backgroundColor: "#F4EFE7", borderTop: "4px solid #083335" }} ref={ref}>
       <div className="container">
         {/* ── Section Header ── */}
         <div className="section-header">
@@ -44,7 +36,7 @@ export default function Services() {
 
           {/* ── Services Grid ── */}
           <motion.div
-            className="bento-grid mb-[var(--s6)]"
+            className="services-grid mb-[var(--s6)]"
             variants={{
               hidden: {},
               visible: {
@@ -58,16 +50,15 @@ export default function Services() {
           >
             {services.map(({ id, title, description, usedFor, tag, image, alt }, i) => {
               const num = `0${i + 1}`;
-              const bentoClass = getServiceBentoClass(id);
               const isFeatured = id === "scaffolding";
               return (
                 <motion.div
                   key={id}
                   variants={itemReveal}
-                  className={`service-card bento-card group ${bentoClass}`}
+                  className={`service-card bento-card group ${isFeatured ? "featured" : ""}`}
                 >
                   {image && alt && (
-                    <div className="bento-media relative w-full aspect-[16/10] overflow-hidden rounded-[20px]" style={{ marginBottom: "var(--s2)", flexShrink: 0 }}>
+                    <div className="bento-media service-image relative w-full aspect-[16/10] overflow-hidden rounded-[20px]" style={{ marginBottom: "var(--s2)", flexShrink: 0 }}>
                       <Image
                         src={image}
                         alt={alt}
@@ -78,23 +69,23 @@ export default function Services() {
                       <div className="service-image-overlay" />
                     </div>
                   )}
-                  <div className="service-card-content" style={{ display: "flex", flexDirection: "column", flexGrow: 1, gap: "var(--s2)", paddingTop: "var(--s1)" }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                      <span className="service-number text-xs font-mono text-gray-400">{num}</span>
+                  <div className="service-card-content">
+                    <div className="service-card-number" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <span className="text-xs font-mono text-gray-400">{num}</span>
                       {isFeatured && (
                         <span className="text-[10px] font-bold text-[var(--clr-accent)] bg-[var(--clr-primary)] px-2 py-0.5 rounded-full uppercase tracking-wider">
                           Most Requested
                         </span>
                       )}
                     </div>
-                    <h3 style={{ fontSize: isFeatured ? "1.6rem" : "var(--t-h2)", color: "var(--clr-primary)", fontWeight: 800, lineHeight: 1.2 }}>{title}</h3>
-                    <p className="service-description" style={{ fontSize: "var(--t-sm)", color: "var(--clr-text-md)", lineHeight: 1.6 }}>{description}</p>
+                    <h3 className="service-card-title" style={{ fontSize: isFeatured ? "1.6rem" : "var(--t-h2)" }}>{title}</h3>
+                    <p className="service-card-description">{description}</p>
                     {usedFor && (
-                      <p className="used-for" style={{ fontSize: "0.78rem", color: "var(--clr-text-lt)", marginTop: "2px", lineHeight: 1.5 }}>
+                      <p className="service-card-used-for">
                         <strong>Used for:</strong>{" "}{usedFor}
                       </p>
                     )}
-                    <div className="service-badge" style={{ marginTop: "auto", paddingTop: "var(--s2)" }}>
+                    <div className="service-badge">
                       <Badge variant="dark">✓ {tag}</Badge>
                     </div>
                   </div>

@@ -26,7 +26,7 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="section relative overflow-hidden dark-section section-transition"
+      className="section-bridge bridge-cream-to-dark section relative overflow-hidden dark-section section-transition"
       style={{ background: "#06282A" }}
     >
 

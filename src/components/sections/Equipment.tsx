@@ -24,7 +24,7 @@ export default function Equipment() {
     <section
       id="equipment"
       ref={ref}
-      className="section section-transition"
+      className="section-bridge bridge-white-to-cream section section-transition"
       style={{ background: "#F4EFE7", position: "relative", overflow: "hidden" }}
     >
       {/* Faint diagonal texture */}
