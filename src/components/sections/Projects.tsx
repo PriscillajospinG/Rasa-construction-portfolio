@@ -1,33 +1,27 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { ZoomIn, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import { projects, projectCategories } from "@/data/projects";
 import { scrollTo } from "@/lib/utils";
-import { scaleIn, cardGridStagger, itemReveal, EASE_CINEMATIC } from "@/lib/animations";
-
-// Hero project — always the first, spans 2 columns wide
-const heroProject = projects[0];
-// Gallery row — everything else
-const galleryProjects = projects.slice(1);
+import { cardGridStagger, itemReveal, EASE_CINEMATIC } from "@/lib/animations";
 
 export default function Projects() {
   const ref    = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
   const [active,  setActive]  = useState<string>("All");
   const [hovered, setHovered] = useState<string | null>(null);
 
   const displayed = active === "All"
-    ? galleryProjects
-    : galleryProjects.filter((p) => p.category === active);
+    ? projects
+    : projects.filter((p) => p.category === active);
 
   return (
-    <section id="projects" style={{ background: "#083335" }} className="section relative overflow-hidden dark-section section-soft-transition">
+    <section id="projects" style={{ background: "#083335" }} className="section relative overflow-hidden dark-section section-transition">
       {/* Background Overlay */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -83,99 +77,71 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* ── Hero project — full-width cinematic banner ── */}
-        <motion.div
-          variants={scaleIn}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="project-hero-card"
-          style={{ marginBottom: "var(--s3)", borderRadius: "var(--r-xl)", overflow: "hidden", position: "relative", aspectRatio: "21/9", boxShadow: "var(--sh-xl)" }}
-          onMouseEnter={() => setHovered("hero")} onMouseLeave={() => setHovered(null)}>
-          <Image src={heroProject.image} alt={heroProject.title}
-            fill sizes="100vw" className="object-cover transition-transform duration-700"
-            style={{ transform: hovered === "hero" ? "scale(1.04)" : "scale(1)" }} />
-          <div className="absolute inset-0 transition-opacity duration-400"
-            style={{ background: "linear-gradient(to right, rgba(5,31,33,0.92) 0%, rgba(5,31,33,0.45) 50%, rgba(5,31,33,0.15) 100%)", opacity: hovered === "hero" ? 1 : 0.8 }} />
-          {/* Editorial content — left-anchored */}
-          <div className="absolute" style={{ top: "50%", left: "var(--s8)", transform: "translateY(-50%)", maxWidth: "500px" }}>
-            <Badge variant="light" style={{ marginBottom: "var(--s3)" }}>{heroProject.category}</Badge>
-            <h3 className="font-m text-white" style={{ fontSize: "var(--t-h1)", lineHeight: 1.1, marginBottom: "var(--s2)" }}>
-              {heroProject.title}
-            </h3>
-            {heroProject.description && (
-              <p className="t-sm" style={{ color: "rgba(255,255,255,0.62)", lineHeight: 1.65, maxWidth: "380px", marginBottom: "var(--s3)" }}>
-                {heroProject.description}
-              </p>
-            )}
-            <div style={{ display: "flex", alignItems: "center", gap: "var(--s3)", flexWrap: "wrap" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-                <MapPin size={13} color="rgba(255,255,255,0.50)" />
-                <span className="t-sm" style={{ color: "rgba(255,255,255,0.50)" }}>{heroProject.location}</span>
-              </div>
-              {heroProject.duration && (
-                <span className="t-label" style={{ color: "rgba(216,185,163,0.60)", fontSize: "0.6rem" }}>{heroProject.duration}</span>
-              )}
-            </div>
-          </div>
-          {/* Hover zoom icon */}
-          <div className="absolute transition-all duration-300"
-            style={{ bottom: "var(--s4)", right: "var(--s4)", width: "40px", height: "40px", borderRadius: "50%", background: "rgba(216,185,163,0.90)", display: "flex", alignItems: "center", justifyContent: "center", opacity: hovered === "hero" ? 1 : 0, transform: hovered === "hero" ? "scale(1)" : "scale(0.7)" }}>
-            <ZoomIn size={16} color="var(--clr-primary-dark)" />
-          </div>
-        </motion.div>
-
-        {/* ── Gallery grid — AnimatePresence for filter transitions ── */}
+        {/* ── Bento Grid — AnimatePresence for filter transitions ── */}
         <AnimatePresence mode="popLayout">
           <motion.div
             key={active} /* Re-mounts stagger on filter change */
-            style={{ columnGap: "var(--s3)" }}
-            className="columns-1 sm:columns-2 lg:columns-3"
+            className="bento-grid"
             variants={cardGridStagger}
             initial="hidden"
             animate="visible"
             exit={{ opacity: 0, transition: { duration: 0.2 } }}
           >
-            {displayed.map(({ id, image, title, category, location, tall, duration }) => (
-              <motion.div
-                key={id}
-                variants={itemReveal}
-                layout
-                style={{ breakInside: "avoid", marginBottom: "var(--s3)" }}
-                onMouseEnter={() => setHovered(id)} onMouseLeave={() => setHovered(null)}
-              >
-                <div
-                  className="project-card img-zoom"
-                  style={{ position: "relative", width: "100%", aspectRatio: tall ? "3/4" : "4/3", borderRadius: "var(--r-lg)", overflow: "hidden", boxShadow: hovered === id ? "var(--sh-xl)" : "var(--sh-md)" }}
+            {displayed.map(({ id, image, title, category, location, duration, description }, i) => {
+              const isFeatured = i === 0; // First item in filtered results is featured large bento
+              return (
+                <motion.div
+                  key={id}
+                  variants={itemReveal}
+                  layout
+                  className={`project-card bento-card bento-card-dark group ${isFeatured ? "md:col-span-8 md:row-span-2" : "md:col-span-4"} col-span-12`}
+                  style={{ position: "relative", minHeight: isFeatured ? "380px" : "280px" }}
+                  onMouseEnter={() => setHovered(id)} onMouseLeave={() => setHovered(null)}
                 >
-                  <Image src={image} alt={title} fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-700"
-                    style={{ transform: hovered === id ? "scale(1.06)" : "scale(1)" }} />
-                  <div className="absolute inset-0 transition-opacity duration-350"
-                    style={{ background: "linear-gradient(to top, rgba(5,31,33,0.92) 0%, rgba(5,31,33,0.28) 55%, transparent 100%)", opacity: hovered === id ? 1 : 0.65 }} />
-                    {/* Info — slides up on hover */}
-                    <div className="absolute transition-transform duration-350"
-                      style={{ bottom: "var(--s3)", left: "var(--s3)", right: "var(--s3)", transform: hovered === id ? "translateY(0)" : "translateY(4px)" }}>
-                      <Badge variant="light" style={{ marginBottom: "var(--s1)" }}>{category}</Badge>
-                      <h3 className="font-m text-white" style={{ fontSize: "var(--t-h2)", lineHeight: 1.2, marginBottom: "3px" }}>{title}</h3>
-                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--s2)" }}>
-                        <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-                          <MapPin size={11} color="rgba(255,255,255,0.45)" />
-                          <span className="t-sm" style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.72rem" }}>{location}</span>
-                        </div>
-                        {duration && (
-                          <span className="t-label" style={{ color: "rgba(216,185,163,0.60)", fontSize: "0.58rem" }}>{duration}</span>
-                        )}
-                      </div>
-                    </div>
-                  {/* Zoom badge */}
-                  <div className="transition-all duration-300"
-                    style={{ position: "absolute", top: "var(--s2)", right: "var(--s2)", width: "34px", height: "34px", borderRadius: "50%", background: "rgba(216,185,163,0.90)", display: "flex", alignItems: "center", justifyContent: "center", opacity: hovered === id ? 1 : 0, transform: hovered === id ? "scale(1)" : "scale(0.7)" }}>
-                    <ZoomIn size={14} color="var(--clr-primary-dark)" />
+                  {/* Media wrapper */}
+                  <div className="absolute inset-0 bento-media">
+                    <Image
+                      src={image}
+                      alt={title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                    <div
+                      className="absolute inset-0 transition-opacity duration-350"
+                      style={{
+                        background: "linear-gradient(to top, rgba(5,31,33,0.95) 0%, rgba(5,31,33,0.3) 60%, transparent 100%)",
+                        opacity: hovered === id ? 1 : 0.75
+                      }}
+                    />
                   </div>
-                </div>
-              </motion.div>
-            ))}
+
+                  {/* Content Overlay */}
+                  <div className="relative z-10 mt-auto flex flex-col gap-2">
+                    <div style={{ alignSelf: "flex-start" }}>
+                      <Badge variant="light">{category}</Badge>
+                    </div>
+                    <h3 className="font-m text-white" style={{ fontSize: isFeatured ? "var(--t-h1)" : "var(--t-h2)", lineHeight: 1.2 }}>
+                      {title}
+                    </h3>
+                    {isFeatured && description && (
+                      <p className="t-sm" style={{ color: "rgba(255,255,255,0.72)", maxWidth: "460px", lineHeight: 1.6 }}>
+                        {description}
+                      </p>
+                    )}
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--s2)", marginTop: "4px" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+                        <MapPin size={12} color="rgba(255,255,255,0.6)" />
+                        <span className="t-sm" style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.76rem" }}>{location}</span>
+                      </div>
+                      {duration && (
+                        <span className="t-label" style={{ color: "rgba(216,185,163,0.80)", fontSize: "0.6rem" }}>{duration}</span>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </AnimatePresence>
 

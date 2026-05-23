@@ -107,70 +107,66 @@ Message: ${form.message}`;
   };
 
   return (
-    <section id="contact" className="section contact-section section-soft-transition" style={{ backgroundColor: "#FBF7F1" }}>
+    <section id="contact" className="section contact-section section-transition" style={{ backgroundColor: "#FBF7F1" }}>
       <div className="container">
-        <div className="contact-grid">
-          {/* Left: Map and details */}
-          <Reveal direction="left">
-            <div className="contact-map-card">
-              {/* Map Iframe */}
-              <div className="contact-map-frame">
+        <div style={{ display: "flex", flexDirection: "column", gap: "var(--s1)", marginBottom: "var(--s8)" }}>
+          <Reveal>
+            <p className="section-eyebrow">Contact</p>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="section-title">Request a Quote</h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="section-lead">
+              Get in touch to check current inventory availability, delivery schedules, or custom service packages.
+            </p>
+          </Reveal>
+        </div>
+
+        <div className="bento-grid">
+          {/* 1. Map Card (span 7) */}
+          <Reveal direction="left" className="col-span-12 md:col-span-7">
+            <div className="bento-card contact-card contact-map-card h-full" style={{ padding: 0, overflow: "hidden", minHeight: "320px", display: "flex", flexDirection: "column" }}>
+              <div className="w-full flex-grow relative" style={{ minHeight: "260px" }}>
                 <iframe
                   title="Rasa Construction location map"
                   src="https://www.google.com/maps?q=Rasa%20Office%20Achankuttam%20627861%20Tamil%20Nadu%20India&output=embed"
                   width="100%"
                   height="100%"
-                  style={{ border: 0 }}
+                  style={{ border: 0, position: "absolute", top: 0, left: 0 }}
                   loading="lazy"
                   allowFullScreen
                   referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
               </div>
-
-              {/* Location Info */}
-              <div className="contact-location-content">
-                <div>
-                  <p className="t-label text-[var(--clr-accent)]">Visit / Locate Us</p>
-                  <h3 className="t-h2 text-white">Rasa Construction</h3>
-                </div>
-                <p className="text-gray-300" style={{ lineHeight: 1.65 }}>
-                  {company.contact.address}
-                </p>
-
-                <div className="contact-location-links">
-                  <a href={`tel:${company.contact.primary}`} className="flex items-center gap-3 text-gray-200 hover:text-white transition-colors">
-                    <Phone size={16} className="text-[var(--clr-accent)] flex-shrink-0" />
-                    <span>{company.contact.primary} &nbsp;/&nbsp; {company.contact.secondary}</span>
-                  </a>
-                  <a href={`mailto:${company.contact.email}`} className="flex items-center gap-3 text-gray-200 hover:text-white transition-colors">
-                    <Mail size={16} className="text-[var(--clr-accent)] flex-shrink-0" />
-                    <span>{company.contact.email}</span>
-                  </a>
-                </div>
-
+              <div style={{ padding: "var(--s3) var(--s4)", display: "flex", justifyContent: "space-between", alignItems: "center", background: "#083335", borderTop: "1px solid rgba(255,255,255,0.1)" }}>
+                <span className="text-white text-xs font-semibold flex items-center gap-2">
+                  <MapPin size={14} className="text-[var(--clr-accent)]" />
+                  Achankuttam, Tirunelveli district
+                </span>
                 <Button
                   href={company.contact.mapLinkUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   variant="outline"
-                  className="w-full justify-center"
+                  size="sm"
+                  style={{ borderColor: "rgba(255,255,255,0.2)", color: "white" }}
                 >
-                  <MapPin size={16} className="mr-2" />
-                  Open in Google Maps
+                  Directions
                 </Button>
               </div>
             </div>
           </Reveal>
 
-          {/* Right: Form panel */}
-          <Reveal direction="right">
-            <div className="contact-form-card">
+          {/* 2. Form Card (span 5, row-span 2) */}
+          <Reveal direction="right" className="col-span-12 md:col-span-5 md:row-span-2">
+            <div className="bento-card contact-form-card h-full" style={{ background: "#FFFFFF", display: "flex", flexDirection: "column" }}>
               {status === "success" ? (
-                <div className="flex flex-col items-center text-center h-full justify-center">
+                <div className="flex flex-col items-center text-center h-full justify-center py-12">
                   <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
-                    <CheckCircle2 size={36} className="text-green-600" />
+                     <CheckCircle2 size={36} className="text-green-600" />
                   </div>
-                  <h3 className="t-h2 text-gray-800">Enquiry Sent!</h3>
+                  <h3 className="t-h2 text-gray-800 font-extrabold">Enquiry Sent!</h3>
                   <p className="t-sm text-gray-600 mt-2">We will contact you within one business day.</p>
                   <Button href={`tel:${(company.contact.primary ?? "").replace(/\s/g, "")}`} variant="primary" className="mt-6">
                     Call Now
@@ -178,14 +174,13 @@ Message: ${form.message}`;
                 </div>
               ) : (
                 <>
-                  <h3 className="font-m font-extrabold text-2xl text-gray-800 mb-2">
+                  <h3 className="font-m font-extrabold text-2xl text-gray-800 mb-1">
                     Request a Free Quote
                   </h3>
                   <p className="t-sm text-gray-500 mb-6">
                     We&apos;ll respond within one business day.
                   </p>
-                  <form onSubmit={submit} className="flex flex-col gap-4">
-                    {/* ... form fields ... */}
+                  <form onSubmit={submit} className="flex flex-col gap-4 flex-grow justify-between">
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className="contact-field">
                         <label className="t-label">Full Name <span className="text-red-500">*</span></label>
@@ -244,7 +239,7 @@ Message: ${form.message}`;
                     </div>
                     <div className="contact-field">
                       <label className="t-label">Project Details</label>
-                      <textarea rows={5} placeholder="Location, duration, scale, requirements..."
+                      <textarea rows={4} placeholder="Location, duration, scale, requirements..."
                         className="contact-input"
                         value={form.message} onChange={update("message")} />
                     </div>
@@ -260,7 +255,7 @@ Message: ${form.message}`;
                       <p className="t-sm text-red-700 font-semibold">
                         {errorMessage}
                       </p>
-                      <Button href={waLink(company.contact.whatsapp, getWhatsAppMessage())} target="_blank" rel="noopener noreferrer" variant="dark" className="mt-3 inline-flex items-center gap-2">
+                      <Button href={waLink(company.contact.whatsapp, getWhatsAppMessage())} target="_blank" rel="noopener noreferrer" variant="dark" className="mt-3 inline-flex items-center gap-2 w-full justify-center">
                         <MessageCircle size={15} />
                         <span>Send on WhatsApp</span>
                       </Button>
@@ -268,6 +263,39 @@ Message: ${form.message}`;
                   )}
                 </>
               )}
+            </div>
+          </Reveal>
+
+          {/* 3. Quick Contact Details Card (span 7) */}
+          <Reveal direction="left" className="col-span-12 md:col-span-7">
+            <div className="bento-card contact-details-card" style={{ background: "#083335", color: "#FFFFFF", display: "flex", flexDirection: "column", justifyContent: "space-between", height: "100%" }}>
+              <div>
+                <span className="text-[var(--clr-accent)] font-bold text-xs uppercase tracking-wider block mb-2">Direct Contact</span>
+                <h3 className="text-2xl font-bold text-white mb-4 leading-tight">Get in touch directly</h3>
+                <p className="text-sm text-gray-300 mb-6 leading-relaxed">
+                  {company.contact.address}
+                </p>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-white/10 pt-4">
+                <div className="flex flex-col gap-1">
+                  <span className="text-[10px] text-gray-400 font-semibold uppercase tracking-wider">Phone Numbers</span>
+                  <a href={`tel:${company.contact.primary}`} className="flex items-center gap-2 text-white hover:text-[var(--clr-accent)] transition-colors font-medium text-sm">
+                    <Phone size={14} className="text-[var(--clr-accent)]" />
+                    {company.contact.primary}
+                  </a>
+                  <a href={`tel:${company.contact.secondary}`} className="flex items-center gap-2 text-white hover:text-[var(--clr-accent)] transition-colors font-medium text-sm">
+                    <Phone size={14} className="text-[var(--clr-accent)]" />
+                    {company.contact.secondary}
+                  </a>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <span className="text-[10px] text-gray-400 font-semibold uppercase tracking-wider">Email Address</span>
+                  <a href={`mailto:${company.contact.email}`} className="flex items-center gap-2 text-white hover:text-[var(--clr-accent)] transition-colors font-medium text-sm">
+                    <Mail size={14} className="text-[var(--clr-accent)]" />
+                    {company.contact.email}
+                  </a>
+                </div>
+              </div>
             </div>
           </Reveal>
         </div>

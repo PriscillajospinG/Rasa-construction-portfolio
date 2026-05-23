@@ -15,7 +15,7 @@ export default function Services() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="services" className="relative overflow-hidden concrete-grid-bg">
+    <section id="services" className="relative overflow-hidden concrete-grid-bg section-transition">
       <div className="section" ref={ref}>
         <div className="container">
           {/* ── Section Header ── */}
@@ -37,7 +37,7 @@ export default function Services() {
 
           {/* ── Services Grid ── */}
           <motion.div
-            className="services-grid mb-[var(--s6)]"
+            className="bento-grid mb-[var(--s6)]"
             variants={{
               hidden: {},
               visible: {
@@ -56,10 +56,10 @@ export default function Services() {
                 <motion.div
                   key={id}
                   variants={itemReveal}
-                  className={`service-card group ${isFeatured ? "md:col-span-8" : "md:col-span-4"} col-span-12`}
+                  className={`service-card bento-card group ${isFeatured ? "featured" : "normal"}`}
                 >
                   {image && alt && (
-                    <div className="service-image">
+                    <div className="bento-media" style={{ aspectRatio: "4/3", width: "100%", position: "relative" }}>
                       <Image
                         src={image}
                         alt={alt}
@@ -70,16 +70,16 @@ export default function Services() {
                       <div className="service-image-overlay" />
                     </div>
                   )}
-                  <div className="service-card-content">
+                  <div className="service-card-content" style={{ display: "flex", flexDirection: "column", flexGrow: 1, gap: "var(--s2)", paddingTop: "var(--s3)" }}>
                     <span className="service-number">{num}</span>
-                    <h3>{title}</h3>
-                    <p className="service-description">{description}</p>
+                    <h3 style={{ fontSize: "var(--t-h2)", color: "var(--clr-primary)", fontWeight: 700 }}>{title}</h3>
+                    <p className="service-description" style={{ fontSize: "var(--t-sm)", color: "var(--clr-text-md)", lineHeight: 1.6 }}>{description}</p>
                     {usedFor && (
-                      <p className="used-for">
+                      <p className="used-for" style={{ fontSize: "var(--t-sm)", color: "var(--clr-text-md)", marginTop: "4px" }}>
                         <strong>Used for:</strong>{" "}{usedFor}
                       </p>
                     )}
-                    <div className="service-badge">
+                    <div className="service-badge" style={{ marginTop: "auto", paddingTop: "var(--s2)" }}>
                       <Badge variant="dark">✓ {tag}</Badge>
                     </div>
                   </div>

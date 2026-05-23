@@ -1,45 +1,26 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import Image from "next/image";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, MapPin } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
 import Button from "@/components/ui/Button";
 import { company } from "@/data/company";
 import { scrollTo } from "@/lib/utils";
+import { itemReveal } from "@/lib/animations";
 
 export default function About() {
-  const containerRef = useRef<HTMLElement>(null);
-  const triggerRef   = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target:  containerRef,
-    offset:  ["start end", "end start"],
-  });
-
-  /* Emerging scroll transforms for the floating card */
-  const cardY       = useTransform(scrollYProgress, [0.08, 0.35], [140, 0]);
-  const cardOpacity = useTransform(scrollYProgress, [0.08, 0.32], [0, 1]);
-  const cardScale   = useTransform(scrollYProgress, [0.08, 0.35], [0.95, 1]);
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
     <section
       id="about"
-      ref={containerRef}
-      className="relative overflow-visible concrete-grid-bg"
+      ref={ref}
+      className="relative overflow-hidden concrete-grid-bg section-transition"
     >
-      {/* ── 1. BACKGROUND LAYER ── */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: "transparent",
-          zIndex: 1,
-        }}
-        aria-hidden
-      />
-
-      {/* ── 2. GRAIN TEXTURE CONTINUITY ── */}
+      {/* ── 1. GRAIN TEXTURE ── */}
       <div
         className="absolute inset-0 grain pointer-events-none"
         style={{
@@ -50,199 +31,182 @@ export default function About() {
         aria-hidden
       />
 
-      {/* ── 3. ARCHITECTURAL GRID CONTINUITY ── */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(216,185,163,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(216,185,163,0.04) 1px, transparent 1px)",
-          backgroundSize: "52px 52px",
-          zIndex: 2,
-          maskImage:
-            "linear-gradient(to bottom right, black 0%, rgba(0,0,0,0.2) 20%, transparent 45%)",
-          WebkitMaskImage:
-            "linear-gradient(to bottom right, black 0%, rgba(0,0,0,0.2) 20%, transparent 45%)",
-        }}
-        aria-hidden
-      />
-
-      {/* ── Zone 1: Editorial Header ── */}
-      <div className="container relative z-10 py-[var(--s6)]">
-        <motion.div
-          style={{
-            y:              cardY,
-            opacity:        cardOpacity,
-            scale:          cardScale,
-            background:     "rgba(8, 51, 53, 0.95)",
-            backdropFilter: "blur(18px)",
-            WebkitBackdropFilter: "blur(18px)",
-            border:         "1px solid rgba(216, 185, 163, 0.22)",
-            borderRadius:   "var(--r-xl)",
-            padding:        "var(--s8) var(--s8)",
-            boxShadow:      "0 40px 110px rgba(0, 0, 0, 0.55)",
-            position:       "relative",
-            zIndex:         10,
-            marginTop:      "0rem",
-          }}
-          className="about-story-card p-6 md:p-12"
-        >
-          <div
-            style={{ display: "grid", gridTemplateColumns: "1.1fr 1.9fr", alignItems: "center", gap: "var(--s8)" }}
-            className="grid-cols-1 lg:grid-cols-[1.1fr_1.9fr] about-hero-grid"
-          >
-            {/* Left: stats / number */}
-            <div>
-              <div className="eyebrow t-label" style={{ color: "var(--clr-accent)", marginBottom: "var(--s3)" }}>Our Story</div>
-              <div style={{ position: "relative", lineHeight: 0.85 }}>
-                <span className="font-m" style={{ fontSize: "clamp(6rem, 15vw, 11rem)", fontWeight: 900, color: "rgba(216, 185, 163, 0.08)", letterSpacing: "-0.04em", userSelect: "none", display: "block" }}>
-                  25
-                </span>
-                <div className="absolute" style={{ bottom: "0.5rem", left: "0.75rem" }}>
-                  <div className="font-m text-white" style={{ fontSize: "var(--t-h2)", fontWeight: 700, letterSpacing: "-0.01em" }}>
-                    25+ Years of
-                  </div>
-                  <div className="t-label" style={{ color: "var(--clr-accent)", letterSpacing: "0.2em" }}>
-                    Field Experience
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right: story intro text */}
-            <div>
-              <h2 className="t-h1 text-white" style={{ lineHeight: 1.08, marginBottom: "var(--s4)" }}>
-                {company.story.headline.split(".")[0]}.<br />
-                <span style={{ color: "var(--clr-accent)" }}>{company.story.headline.split(".")[1]?.trim()}</span>
-              </h2>
-              <p className="t-body" style={{ color: "rgba(255, 255, 255, 0.72)", lineHeight: 1.75 }}>
-                {company.story.paragraphs[0]}
-              </p>
-            </div>
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Spacing trigger for Zone 2 fade in */}
-      <div ref={triggerRef} style={{ height: "1px" }} />
-
-      {/* Architectural divider — inside the light/white area */}
-      <div
-        className="relative z-10"
-        style={{
-          height: "1px",
-          background: "linear-gradient(90deg, transparent, rgba(8,51,53,0.10) 20%, rgba(8,51,53,0.10) 80%, transparent)",
-          marginTop: "var(--s12)",
-        }}
-      />
-
-      {/* ── Zone 2: Content (Light background, details) ── */}
       <div className="container relative z-10">
-        <div style={{ paddingTop: "var(--s10)", paddingBottom: "var(--s16)" }}>
-          <div
-            style={{ display: "grid", gridTemplateColumns: "4fr 8fr", gap: "var(--s8)", alignItems: "start" }}
-            className="grid-cols-1 lg:grid-cols-[4fr_8fr] about-info-grid"
+        {/* Section Header */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "var(--s1)", marginBottom: "var(--s8)" }}>
+          <Reveal>
+            <p className="section-eyebrow">About Us</p>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="section-title">
+              Our Story & Standards
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="section-lead">
+              A solid foundation built on 25+ years of experience, safety, and operational excellence in Tamil Nadu.
+            </p>
+          </Reveal>
+        </div>
+
+        {/* Bento Grid */}
+        <motion.div
+          className="bento-grid"
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.1,
+              }
+            }
+          }}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+        >
+          {/* Card 1: Story Card (span 8) */}
+          <motion.div
+            variants={itemReveal}
+            className="bento-card bento-card-dark md:col-span-8 col-span-12"
+            style={{ background: "#083335", minHeight: "360px", display: "flex", flexDirection: "column" }}
           >
-            {/* Left Column: Core Stats (Industrial Timeline) */}
-            <Reveal direction="left">
-              <div style={{ display: "flex", flexDirection: "column", gap: "var(--s6)", paddingTop: "var(--s4)", borderLeft: "2px solid #D8B9A3", paddingLeft: "var(--s6)", position: "relative" }}>
-                {[
-                  { n: "25+",  l: "Years Field Experience" },
-                  { n: "500+", l: "Completed Projects" },
-                  { n: "100+", l: "Equipment Units" },
-                  { n: "300+", l: "Satisfied Clients" },
-                ].map(({ n, l }) => (
-                  <div key={l} style={{ position: "relative" }}>
-                    {/* Timeline bullet */}
-                    <div style={{
-                      position: "absolute",
-                      left: "-55px",
-                      top: "22px",
-                      width: "12px",
-                      height: "12px",
-                      borderRadius: "50%",
-                      backgroundColor: "#D8B9A3",
-                      border: "3px solid #083335",
-                      zIndex: 5,
-                    }} />
-                    <div className="card" style={{ padding: "16px 20px", background: "#FFFFFF", border: "1px solid rgba(8,51,53,0.08)" }}>
-                      <div className="font-m" style={{ fontSize: "1.75rem", fontWeight: 900, color: "#083335", lineHeight: 1 }}>{n}</div>
-                      <div className="t-sm" style={{ color: "var(--clr-text-lt)", marginTop: "4px", lineHeight: 1.4 }}>{l}</div>
-                    </div>
-                  </div>
-                ))}
-
-                <Button href="#contact" variant="dark" size="sm"
-                  onClick={(e) => { e.preventDefault(); scrollTo("#contact"); }}
-                  style={{ marginTop: "var(--s1)" }}>
-                  Request a Quote
-                </Button>
-              </div>
-            </Reveal>
-
-            {/* Right Column: Founder Quote, Images, Differentiators */}
-            <Reveal direction="right">
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s4)", alignItems: "start" }} className="about-details-grid">
-
-                {/* Team Image Banner with Editorial Overlap */}
-                <div style={{ gridColumn: "1 / -1", position: "relative", marginBottom: "var(--s8)" }}>
-                  {/* Main Large Image */}
-                  <div className="about-owner-image-wrapper" style={{ position: "relative", aspectRatio: "16/9", borderRadius: "var(--r-lg)", overflow: "hidden", boxShadow: "var(--sh-xl)" }}>
-                    <Image
-                      src="/about/about-owner-site.jpg"
-                      alt="Rasa Construction site photo showing the team and Rasa Name Board"
-                      fill sizes="(max-width: 1024px) 100vw, 60vw"
-                      className="object-cover"
-                      loading="eager"
-                    />
-                    <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(5,31,33,0.75) 0%, transparent 55%)" }} />
-                    
-                    {/* Overlapping Caption */}
-                    <div className="absolute about-owner-caption" style={{ top: "50%", left: "var(--s4)", transform: "translateY(-50%)", maxWidth: "260px" }}>
-                      <div className="t-label" style={{ color: "var(--clr-accent)", marginBottom: "var(--s1)" }}>Founded by</div>
-                      <div className="font-m text-white" style={{ fontSize: "var(--t-h2)", fontWeight: 800, lineHeight: 1.2 }}>
-                        {company.owner}
-                      </div>
-                      <div className="t-sm" style={{ color: "rgba(255,255,255,0.65)", marginTop: "var(--s1)" }}>
-                        {company.location.label}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Founder Quote Block */}
-                <div style={{ gridColumn: "1 / -1", paddingTop: "var(--s4)", borderTop: "2px solid rgba(8,51,53,0.08)" }}>
-                  <p className="font-m" style={{ fontSize: "var(--t-body)", fontStyle: "italic", fontWeight: 700, color: "var(--clr-primary)", lineHeight: 1.5, marginBottom: "var(--s3)" }}>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full items-center">
+              <div>
+                <span className="text-[var(--clr-accent)] font-bold text-xs uppercase tracking-wider block mb-2">Our Foundation</span>
+                <h3 className="text-2xl font-bold text-white mb-4 leading-tight">
+                  25+ Years of<br />Field Experience
+                </h3>
+                <p className="text-sm text-gray-300 leading-relaxed mb-4">
+                  {company.story.paragraphs[0]}
+                </p>
+                <div className="border-t border-white/10 pt-4 mt-4">
+                  <p className="text-sm italic text-white font-medium mb-1">
                     &ldquo;{company.story.ownerQuote}&rdquo;
                   </p>
-                  <div className="t-label" style={{ color: "var(--clr-text-lt)" }}>— {company.owner}, Founder</div>
-                </div>
-
-                {/* Differentiators Check List */}
-                <div style={{ gridColumn: "1 / -1", paddingTop: "var(--s4)", borderTop: "2px solid rgba(8,51,53,0.08)" }}>
-                  <ul style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s3)" }} className="about-checklist-grid">
-                    {company.differentiators.slice(0, 4).map(({ title, description }) => (
-                      <li key={title} style={{ display: "flex", alignItems: "flex-start", gap: "var(--s2)" }}>
-                        <CheckCircle2 size={15} style={{ color: "var(--clr-primary)", flexShrink: 0, marginTop: "3px" }} />
-                        <div>
-                          <div className="t-sm" style={{ color: "var(--clr-text)", fontWeight: 600, lineHeight: 1.3 }}>{title}</div>
-                          <div className="t-sm" style={{ color: "var(--clr-text-md)", lineHeight: 1.6, fontSize: "0.82rem" }}>{description}</div>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Narrative Paragraph */}
-                <div style={{ gridColumn: "1 / -1", paddingTop: "var(--s4)", borderTop: "1px solid rgba(8,51,53,0.06)" }}>
-                  <p className="t-body" style={{ color: "var(--clr-text-md)", lineHeight: 1.75 }}>
-                    {company.story.paragraphs[1]}
-                  </p>
+                  <span className="text-xs text-[var(--clr-accent)] font-semibold">— {company.owner}, Founder</span>
                 </div>
               </div>
-            </Reveal>
+              <div className="relative w-full h-[220px] lg:h-full rounded-2xl overflow-hidden shadow-lg min-h-[220px]">
+                <Image
+                  src="/about/about-owner-site.jpg"
+                  alt="Rasa Construction site photo showing the team and Rasa Name Board"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                  loading="eager"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="text-xs text-[var(--clr-accent)] font-bold block">Founded by</span>
+                  <span className="text-sm text-white font-bold block">{company.owner}</span>
+                  <span className="text-[11px] text-gray-300 block">{company.location.label}</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
 
-          </div>
-        </div>
+          {/* Card 2: Timeline Card (span 4) */}
+          <motion.div
+            variants={itemReveal}
+            className="bento-card md:col-span-4 col-span-12"
+            style={{ display: "flex", flexDirection: "column" }}
+          >
+            <span className="text-[var(--clr-primary)] font-bold text-xs uppercase tracking-wider block mb-4">Our Journey</span>
+            <div className="flex flex-col gap-4 relative pl-4 border-l border-[var(--clr-accent)] ml-2 flex-grow justify-between py-1">
+              {[
+                { year: "2000", text: "Rasa Construction started" },
+                { year: "Early years", text: "Local centring and construction support" },
+                { year: "Growth", text: "Scaffolding and equipment supply expanded" },
+                { year: "Today", text: "Serving projects across South Tamil Nadu" }
+              ].map((item, idx) => (
+                <div key={idx} className="relative">
+                  <div className="absolute -left-[22px] top-1.5 w-2.5 h-2.5 rounded-full bg-[var(--clr-accent)] border-2 border-white" />
+                  <span className="text-[11px] font-bold text-[var(--clr-primary)] block leading-none mb-1">{item.year}</span>
+                  <span className="text-xs text-gray-600 font-medium leading-tight block">{item.text}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Card 3: Stats Card (span 4) */}
+          <motion.div
+            variants={itemReveal}
+            className="bento-card md:col-span-4 col-span-12"
+            style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}
+          >
+            <span className="text-[var(--clr-primary)] font-bold text-xs uppercase tracking-wider block mb-3">By the Numbers</span>
+            <div className="grid grid-cols-2 gap-3 flex-grow mt-2">
+              {[
+                { val: "25+", label: "Years Experience" },
+                { val: "500+", label: "Completed Projects" },
+                { val: "100+", label: "Equipment Units" },
+                { val: "300+", label: "Satisfied Clients" }
+              ].map((stat, idx) => (
+                <div key={idx} className="border border-gray-100 p-3 rounded-2xl bg-gray-50/50 flex flex-col justify-center items-center text-center shadow-sm">
+                  <span className="text-xl font-extrabold text-[var(--clr-primary)]">{stat.val}</span>
+                  <span className="text-[10px] text-gray-500 font-bold mt-1 leading-tight">{stat.label}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Card 4: Coverage Card (span 4) */}
+          <motion.div
+            variants={itemReveal}
+            className="bento-card bento-card-dark md:col-span-4 col-span-12"
+            style={{ background: "#06282A", display: "flex", flexDirection: "column", justifyContent: "space-between" }}
+          >
+            <div>
+              <span className="text-[var(--clr-accent)] font-bold text-xs uppercase tracking-wider block mb-3">Operational Coverage</span>
+              <div className="flex items-center gap-2 mb-3">
+                <MapPin className="text-[var(--clr-accent)]" size={16} />
+                <span className="text-sm font-semibold text-white">South Tamil Nadu</span>
+              </div>
+              <p className="text-xs text-gray-300 leading-relaxed">
+                Serving construction sites and infrastructure projects across Tirunelveli, Tenkasi, Thoothukudi, Nagercoil, Kanyakumari, and surrounding areas.
+              </p>
+            </div>
+            <div className="border-t border-white/10 pt-3 mt-4 flex items-center justify-between text-xs text-gray-400">
+              <span>Main Depot:</span>
+              <span className="text-white font-medium">{company.location.label}</span>
+            </div>
+          </motion.div>
+
+          {/* Card 5: Safety & Quality Card (span 4) */}
+          <motion.div
+            variants={itemReveal}
+            className="bento-card md:col-span-4 col-span-12"
+            style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}
+          >
+            <div>
+              <span className="text-[var(--clr-primary)] font-bold text-xs uppercase tracking-wider block mb-3">Our Standards</span>
+              <p className="text-xs text-gray-500 leading-relaxed mb-3">
+                Every dispatch is checked for safe structural loads.
+              </p>
+              <ul className="flex flex-col gap-2">
+                {[
+                  "100% Load-Tested Material",
+                  "Strict Site Safety Focus",
+                  "On-Time Project Delivery",
+                  "Direct Owner Involvement"
+                ].map((diff, idx) => (
+                  <li key={idx} className="flex items-center gap-2">
+                    <CheckCircle2 className="text-green-600 flex-shrink-0" size={13} />
+                    <span className="text-xs text-gray-700 font-medium">{diff}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <Button
+              href="#contact"
+              variant="dark"
+              size="sm"
+              onClick={(e) => { e.preventDefault(); scrollTo("#contact"); }}
+              className="mt-4 w-full justify-center"
+            >
+              Get a Quote
+            </Button>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

@@ -2212,3 +2212,277 @@ footer button:hover {
 .group:hover .equipment-image img {
   transform: scale(1.04) !important;
 }
+
+/* ── GLOBAL BENTO SYSTEM ── */
+.bento-grid {
+  display: grid !important;
+  grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+  gap: 20px !important;
+}
+
+.bento-card {
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 28px !important;
+  padding: 28px !important;
+  background: rgba(255,255,255,0.84) !important;
+  border: 1px solid rgba(8, 51, 53, 0.10) !important;
+  box-shadow: 0 18px 50px rgba(8, 51, 53, 0.08) !important;
+  transition:
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 280ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.bento-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 26px 70px rgba(8, 51, 53, 0.14) !important;
+  border-color: rgba(216, 185, 163, 0.45) !important;
+}
+
+.bento-card-dark {
+  background: rgba(255,255,255,0.08) !important;
+  border-color: rgba(255,255,255,0.14) !important;
+  color: #FFFFFF !important;
+  backdrop-filter: blur(14px) !important;
+}
+
+.bento-card img,
+.bento-card video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.bento-media {
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 22px !important;
+}
+
+.bento-media img,
+.bento-media video {
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.bento-card:hover .bento-media img,
+.bento-card:hover .bento-media video {
+  transform: scale(1.05) !important;
+}
+
+/* Bento card size presets */
+.featured {
+  grid-column: span 6 !important;
+  grid-row: span 2 !important;
+}
+
+.normal {
+  grid-column: span 3 !important;
+}
+
+/* ── RESPONSIVE BENTO ── */
+@media (max-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+    gap: 18px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .bento-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .bento-card {
+    grid-column: 1 / -1 !important;
+    padding: 22px !important;
+    border-radius: 24px !important;
+  }
+}
+
+/* ── VISUAL SYSTEM & SECTION FLOW POLISH OVERRIDES ── */
+
+/* 1. Consistent Section Spacing */
+section {
+  padding-block: 96px !important;
+}
+
+@media (max-width: 1024px) {
+  section {
+    padding-block: 76px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  section {
+    padding-block: 56px !important;
+  }
+}
+
+/* 2. Smooth Section Transitions */
+.section-transition {
+  position: relative !important;
+}
+
+.section-transition::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -1px !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 72px !important;
+  pointer-events: none !important;
+  background: linear-gradient(to bottom, rgba(8, 51, 53, 0.08), transparent) !important;
+  z-index: 10 !important;
+}
+
+/* 3. Consistent Section Headers */
+.section-eyebrow {
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: #083335 !important;
+  margin-bottom: 12px !important;
+  display: block !important;
+}
+
+.section-title {
+  color: #102526 !important;
+  font-family: var(--font-heading) !important;
+  font-size: clamp(2.2rem, 4vw, 4.2rem) !important;
+  line-height: 1 !important;
+  letter-spacing: -0.035em !important;
+  margin: 0 !important;
+}
+
+.section-lead {
+  max-width: 700px !important;
+  color: #66706B !important;
+  font-size: 1.05rem !important;
+  line-height: 1.7 !important;
+  margin-top: 18px !important;
+}
+
+.dark-section .section-eyebrow {
+  color: #D8B9A3 !important;
+}
+
+.dark-section .section-title {
+  color: #FFFFFF !important;
+}
+
+.dark-section .section-lead {
+  color: rgba(255, 255, 255, 0.72) !important;
+}
+
+/* 4. Consistent Cards Visuals */
+.bento-card,
+.service-card,
+.project-card,
+.equipment-card,
+.testimonial-card,
+.contact-card,
+.contact-form-card,
+.contact-map-card {
+  border-radius: 28px !important;
+  border: 1px solid rgba(8, 51, 53, 0.10) !important;
+  background: rgba(255, 255, 255, 0.86) !important;
+  box-shadow: 0 18px 50px rgba(8, 51, 53, 0.08) !important;
+  transition:
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 280ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.bento-card:hover,
+.service-card:hover,
+.project-card:hover,
+.equipment-card:hover,
+.testimonial-card:hover,
+.contact-card:hover,
+.contact-form-card:hover,
+.contact-map-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 26px 70px rgba(8, 51, 53, 0.14) !important;
+  border-color: rgba(216, 185, 163, 0.46) !important;
+}
+
+.dark-section .bento-card,
+.dark-section .project-card,
+.dark-section .testimonial-card {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18) !important;
+}
+
+/* 5. Card Image Zoom Hover Animations */
+.bento-card img,
+.service-card img,
+.project-card img,
+.equipment-card img {
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.bento-card:hover img,
+.service-card:hover img,
+.project-card:hover img,
+.equipment-card:hover img {
+  transform: scale(1.05) !important;
+}
+
+.bento-media,
+.service-image,
+.project-card,
+.equipment-image {
+  overflow: hidden !important;
+}
+
+/* 6. safe CSS-only Section Reveal */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: revealUp 780ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes revealUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 7. Consistent Button Transitions */
+.btn,
+.btn-primary,
+.btn-secondary,
+.nav-cta {
+  transition:
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 260ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.btn:hover,
+.btn-primary:hover,
+.btn-secondary:hover,
+.nav-cta:hover {
+  transform: translateY(-2px) !important;
+}
+
+/* 8. Reduced Motion Accessability Rules */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

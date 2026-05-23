@@ -24,7 +24,7 @@ export default function Equipment() {
     <section
       id="equipment"
       ref={ref}
-      className="section section-soft-transition"
+      className="section section-transition"
       style={{ background: "#FBF7F1", position: "relative", overflow: "hidden" }}
     >
       {/* Faint diagonal texture */}
@@ -68,23 +68,22 @@ export default function Equipment() {
           </div>
         </Reveal>
 
-        {/* ── Equipment grid — stagger container ── */}
+        {/* ── Equipment grid — bento layout ── */}
         <motion.div
-          className="equipment-grid"
+          className="bento-grid"
           variants={cardGridStagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
           {equipment.map(({ id, name, description, variants, iconName, image }) => {
             const Icon = getIcon(iconName);
-            const isLarge = id === "scaffold-tubes" || id === "scaffold-frames";
+            const isLarge = id === "scaffold-tubes" || id === "scaffold-frames" || id === "centring-props" || id === "vertical-hoist";
             return (
               <motion.div
                 key={id}
                 variants={itemReveal}
-                className={`group card-hover equipment-card ${isLarge ? "md:col-span-6" : "md:col-span-4"} col-span-12`}
+                className={`group bento-card equipment-card ${isLarge ? "md:col-span-6" : "md:col-span-3"} col-span-12`}
                 style={{
-                  padding:       "var(--s3)",
                   display:       "flex",
                   flexDirection: "column",
                   gap:           "var(--s2)",
