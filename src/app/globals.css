@@ -833,12 +833,23 @@ button,
 }
 
 .hero-eyebrow {
-  margin-bottom: 18px;
-  color: #D8B9A3;
-  font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 14px;
+  padding: 7px 12px;
+  border: 1px solid rgba(216, 185, 163, 0.24);
+  border-radius: 999px;
+
+  font-size: 0.66rem;
   font-weight: 800;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
+  line-height: 1;
+
+  color: rgba(216, 185, 163, 0.94);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
 }
 
 .hero-title {
@@ -1018,6 +1029,8 @@ button,
   }
 
   .hero-eyebrow {
+    font-size: 0.62rem;
+    letter-spacing: 0.11em;
     margin-bottom: 12px;
   }
 
