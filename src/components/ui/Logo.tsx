@@ -5,6 +5,7 @@ interface RasaLogoProps {
   variant?: "light" | "dark";
   className?: string;
   color?: string; // Kept for backward compatibility
+  imgClassName?: string;
 }
 
 /**
@@ -15,6 +16,7 @@ export default function RasaLogo({
   size = "md",
   variant = "light",
   className = "",
+  imgClassName = "",
 }: RasaLogoProps) {
   let width = 86;
   let height = 54;
@@ -50,7 +52,7 @@ export default function RasaLogo({
         width={width}
         height={height}
         priority
-        className="object-contain nav-logo-img"
+        className={`object-contain ${imgClassName}`}
         style={{ height: "100%", width: "auto" }}
       />
     </div>

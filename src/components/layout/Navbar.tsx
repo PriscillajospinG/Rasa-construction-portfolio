@@ -92,11 +92,13 @@ export default function Navbar() {
               size={44}
               variant="light"
               className="hidden md:flex"
+              imgClassName="navbar-logo-img"
             />
             <RasaLogo
               size={36}
               variant="light"
               className="flex md:hidden"
+              imgClassName="navbar-logo-img"
             />
           </button>
 
@@ -193,7 +195,7 @@ export default function Navbar() {
                   borderBottom: "1px solid rgba(255,255,255,0.10)",
                 }}
               >
-                <RasaLogo size="sm" variant="light" />
+                <RasaLogo size="sm" variant="light" imgClassName="navbar-logo-img" />
                 <button
                   onClick={() => setMenuOpen(false)}
                   aria-label="Close menu"

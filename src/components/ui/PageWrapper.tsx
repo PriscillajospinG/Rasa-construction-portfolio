@@ -114,7 +114,7 @@ export default function PageWrapper({ children }: Props) {
                 animate={{ opacity: 1, y: 0,  scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2, ease: EASE }}
               >
-                <RasaLogo size="xl" variant="light" className="loading-logo" />
+                <RasaLogo size="xl" variant="light" className="loading-logo" imgClassName="loading-logo-img" />
               </motion.div>
 
               {/* Thin separator */}

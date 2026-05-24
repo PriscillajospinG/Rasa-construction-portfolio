@@ -705,11 +705,36 @@ button,
   pointer-events: auto;
 }
 
-.nav-logo-img {
+.navbar-logo-img {
+  height: 34px !important;
+  max-height: 34px !important;
   width: auto !important;
-  height: 40px !important;
-  max-height: 40px !important;
   object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .navbar-logo-img {
+    height: 30px !important;
+    max-height: 30px !important;
+  }
+}
+
+.loading-logo-img,
+.splash-logo-img,
+.preloader-logo-img {
+  height: 120px !important;
+  max-height: 120px !important;
+  width: auto !important;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .loading-logo-img,
+  .splash-logo-img,
+  .preloader-logo-img {
+    height: 96px !important;
+    max-height: 96px !important;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -3266,10 +3291,6 @@ html {
     padding-block: 6px !important;
   }
 
-  .nav-logo-img {
-    height: 34px !important;
-    max-height: 34px !important;
-  }
 }
 
 /* ── CONTACT & OWNER SECTION LAYOUT REDESIGN ── */
