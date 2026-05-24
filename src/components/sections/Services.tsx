@@ -1,14 +1,13 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, CSSProperties } from "react";
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
+import { useInView } from "framer-motion";
 import Reveal from "@/components/animations/Reveal";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import { services } from "@/data/services";
 import { company } from "@/data/company";
-import { itemReveal } from "@/lib/animations";
 
 export default function Services() {
   const ref    = useRef(null);
@@ -22,11 +21,17 @@ export default function Services() {
             <Reveal>
               <p className="section-eyebrow">OUR SERVICES</p>
             </Reveal>
-            <Reveal delay={0.05}>
-              <h2 className="section-title">
-                Services We Offer
-              </h2>
-            </Reveal>
+            <h2 className={`section-title services-title-animated ${inView ? "run-letter-animation" : ""}`} aria-label="Services We Offer">
+              {"Services We Offer".split("").map((char, index) => (
+                <span
+                  key={index}
+                  className="services-title-letter"
+                  style={{ "--i": index } as CSSProperties}
+                >
+                  {char === " " ? "\u00A0" : char}
+                </span>
+              ))}
+            </h2>
             <Reveal delay={0.1}>
               <p className="section-lead">
                 Practical construction support for scaffolding, centring, concrete work, hoist rental, and site material movement.
@@ -35,26 +40,15 @@ export default function Services() {
           </div>
 
           {/* ── Services Grid ── */}
-          <motion.div
-            className="services-grid mb-[var(--s6)]"
-            variants={{
-              hidden: {},
-              visible: {
-                transition: {
-                  staggerChildren: 0.12,
-                }
-              }
-            }}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
+          <div
+            className={`services-grid mb-[var(--s6)] ${inView ? "run-card-animation" : ""}`}
           >
             {services.map(({ id, title, description, usedFor, tag, image, alt }, i) => {
               const num = `0${i + 1}`;
               const isFeatured = id === "scaffolding";
               return (
-                <motion.div
+                <div
                   key={id}
-                  variants={itemReveal}
                   className={`service-card group ${isFeatured ? "featured" : ""}`}
                 >
                   {image && alt && (
@@ -89,10 +83,10 @@ export default function Services() {
                       <Badge>✓ {tag}</Badge>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               );
             })}
-          </motion.div>
+          </div>
 
           {/* ── Editorial footer row ── */}
           <Reveal delay={0.1}>
@@ -100,7 +94,7 @@ export default function Services() {
               <div>
                 <p className="font-p" style={{ fontWeight: 600, fontSize: "var(--t-body)", color: "var(--clr-primary)" }}>Not sure what you need?</p>
                 <p className="t-sm" style={{ color: "var(--clr-text-lt)", marginTop: "var(--s1)", fontStyle: "italic" }}>
-                  <em>Call {company.owner} — He'll tell you exactly what the project requires.</em>
+                  <em>Call {company.owner} — He&apos;ll tell you exactly what the project requires.</em>
                 </p>
               </div>
               <Button href={`tel:${company.contact.primary.replace(/\s/g, "")}`} variant="dark">

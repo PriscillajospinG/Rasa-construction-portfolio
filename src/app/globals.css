@@ -986,7 +986,7 @@ button,
 .hero-title {
   position: relative;
   z-index: 2;
-  animation: heroFadeUp 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: heroTitleReveal 950ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
 }
 
 .hero-highlight {
@@ -995,7 +995,7 @@ button,
   font-size: 1.16em !important;
   color: #D8B9A3 !important;
   position: relative;
-  animation: heroHighlightPop 900ms cubic-bezier(0.22, 1, 0.36, 1) 350ms both;
+  animation: heroHighlightReveal 900ms cubic-bezier(0.22, 1, 0.36, 1) 420ms both;
 }
 
 .hero-highlight::after {
@@ -1015,15 +1015,31 @@ button,
 }
 
 .hero-description {
-  animation: heroFadeUp 850ms cubic-bezier(0.22, 1, 0.36, 1) 260ms both;
+  animation: heroFadeUp 850ms cubic-bezier(0.22, 1, 0.36, 1) 300ms both;
 }
 
-.hero-actions {
-  animation: heroFadeUp 850ms cubic-bezier(0.22, 1, 0.36, 1) 420ms both;
+.hero-actions,
+.hero-buttons {
+  animation: heroFadeUp 850ms cubic-bezier(0.22, 1, 0.36, 1) 480ms both;
 }
 
-.hero-bg {
-  animation: heroSlowZoom 14s ease-out both;
+.hero-bg,
+.hero-bg img,
+.hero-background img,
+.hero-media img {
+  animation: heroSlowZoom 16s ease-out both;
+  transform-origin: center;
+}
+
+@keyframes heroFadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes heroFadeUp {
@@ -1037,21 +1053,23 @@ button,
   }
 }
 
-@keyframes heroFadeDown {
+@keyframes heroTitleReveal {
   from {
     opacity: 0;
-    transform: translateY(-12px);
+    transform: translateY(28px);
+    filter: blur(6px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0);
   }
 }
 
-@keyframes heroHighlightPop {
+@keyframes heroHighlightReveal {
   from {
     opacity: 0;
-    transform: translateY(16px) scale(0.94);
+    transform: translateY(16px) scale(0.96);
   }
   to {
     opacity: 1;
@@ -1061,10 +1079,57 @@ button,
 
 @keyframes heroSlowZoom {
   from {
-    transform: scale(1.03);
+    transform: scale(1.02);
   }
   to {
-    transform: scale(1.08);
+    transform: scale(1.07);
+  }
+}
+
+/* ── Services Section Title & Cards Animations ── */
+.services-title-animated {
+  display: inline-flex !important;
+  flex-wrap: wrap !important;
+  overflow: hidden !important;
+}
+
+.services-title-letter {
+  display: inline-block !important;
+  opacity: 0 !important;
+  transform: translateY(18px) !important;
+}
+
+.run-letter-animation .services-title-letter {
+  animation: serviceLetterReveal 520ms cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+  animation-delay: calc(var(--i) * 35ms) !important;
+}
+
+@keyframes serviceLetterReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.service-card {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.run-card-animation .service-card {
+  animation: serviceCardReveal 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+}
+
+.run-card-animation .service-card:nth-child(1) { animation-delay: 120ms !important; }
+.run-card-animation .service-card:nth-child(2) { animation-delay: 220ms !important; }
+.run-card-animation .service-card:nth-child(3) { animation-delay: 320ms !important; }
+.run-card-animation .service-card:nth-child(4) { animation-delay: 420ms !important; }
+.run-card-animation .service-card:nth-child(5) { animation-delay: 520ms !important; }
+
+@keyframes serviceCardReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -1080,8 +1145,18 @@ button,
   .hero-highlight,
   .hero-description,
   .hero-actions,
-  .hero-bg {
+  .hero-buttons,
+  .hero-bg,
+  .hero-bg img,
+  .hero-background img,
+  .hero-media img,
+  .services-title-letter,
+  .service-card {
     animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
   }
 }
 
