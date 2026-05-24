@@ -953,6 +953,99 @@ button,
   transform: translateY(-2px);
 }
 
+/* Hero Highlight Accent and Animations */
+.hero-highlight {
+  display: inline-block;
+  font-weight: 800;
+  font-size: 1.08em;
+  color: #D8B9A3;
+  letter-spacing: -0.035em;
+  position: relative;
+}
+
+.hero-eyebrow {
+  animation: heroFadeDown 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-title {
+  animation: heroFadeUp 850ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
+}
+
+.hero-highlight {
+  animation: heroHighlight 900ms cubic-bezier(0.22, 1, 0.36, 1) 420ms both;
+}
+
+.hero-description {
+  animation: heroFadeUp 850ms cubic-bezier(0.22, 1, 0.36, 1) 260ms both;
+}
+
+.hero-actions {
+  animation: heroFadeUp 850ms cubic-bezier(0.22, 1, 0.36, 1) 420ms both;
+}
+
+.hero-bg {
+  animation: heroSlowZoom 14s ease-out both;
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroFadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroHighlight {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes heroSlowZoom {
+  from {
+    transform: scale(1.03);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-highlight {
+    font-size: 1.04em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-eyebrow,
+  .hero-title,
+  .hero-highlight,
+  .hero-description,
+  .hero-actions,
+  .hero-bg {
+    animation: none !important;
+  }
+}
+
 /* Laptop Height Adjustments */
 @media (min-width: 901px) and (max-height: 820px) {
   .hero-title {
