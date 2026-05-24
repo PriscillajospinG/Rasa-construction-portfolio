@@ -871,22 +871,16 @@ button,
 }
 
 .hero-eyebrow {
-  display: inline-flex !important;
-  align-items: center !important;
-  width: fit-content !important;
+  display: block !important;
   margin-bottom: 14px !important;
-  padding: 7px 12px !important;
-  border: 1px solid rgba(216, 185, 163, 0.24) !important;
-  border-radius: 999px !important;
-
-  font-size: 10px !important;
+  font-size: 0.68rem !important;
   font-weight: 800 !important;
-  letter-spacing: 1.4px !important;
+  letter-spacing: 0.14em !important;
   text-transform: uppercase !important;
-  line-height: 1 !important;
-
-  color: rgba(216, 185, 163, 0.95) !important;
-  background: rgba(255, 255, 255, 0.10) !important;
+  color: #D8B9A3 !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
 }
 
 .hero-title {
@@ -1945,6 +1939,21 @@ section .section {
     width: 100% !important;
     justify-content: center !important;
   }
+}
+
+/* ── HERO EYEBROW: final override — wins over all other rules ── */
+.hero .hero-eyebrow,
+#home .hero-eyebrow {
+  display: block !important;
+  margin-bottom: 14px !important;
+  font-size: 0.68rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: #D8B9A3 !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
 }
 
 /* ── TYPOGRAPHY RESPONSIVE ── */

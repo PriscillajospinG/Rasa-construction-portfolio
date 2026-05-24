@@ -16,7 +16,7 @@ export default function Hero() {
 
       <div className="hero-container">
         <div className="hero-content">
-          <p className="hero-eyebrow">Since 2000 • South Tamil Nadu</p>
+          <p className="hero-eyebrow">Trusted Site Support Since 2000</p>
           <h1 className="hero-title">
             <span className="hero-highlight">Reliable construction support</span> for real site work.
           </h1>
