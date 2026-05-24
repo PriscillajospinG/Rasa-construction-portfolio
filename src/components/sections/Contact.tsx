@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import emailjs from "@emailjs/browser";
 import { Phone, MessageCircle, Mail, MapPin, CheckCircle2 } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
@@ -33,10 +34,12 @@ export default function Contact() {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
-    const img = new Image();
-    img.src = "/images/owner.jpg";
-    img.onload = () => setImageLoaded(true);
-    img.onerror = () => setImageLoaded(false);
+    if (typeof window !== "undefined") {
+      const img = new window.Image();
+      img.src = "/images/owner.jpg";
+      img.onload = () => setImageLoaded(true);
+      img.onerror = () => setImageLoaded(false);
+    }
   }, []);
 
   const update = (k: keyof FormData) => (
@@ -280,21 +283,29 @@ Message: ${form.message}`;
             
             {/* Owner Image Card */}
             <Reveal direction="right" className="w-full">
-              <div className="owner-bg-card">
-                <div className="owner-bg-overlay" />
-                
-                {!imageLoaded && (
+              <div className="contact-owner-card">
+                {imageLoaded ? (
+                  <Image
+                    src="/images/owner.jpg"
+                    alt="Gurusamy A from Rasa Construction"
+                    fill
+                    className="contact-owner-image"
+                  />
+                ) : (
                   <div className="owner-placeholder-overlay">
                     <span className="owner-placeholder-text">
                       Owner image can be added here
                     </span>
                   </div>
                 )}
-
-                <div className="owner-bg-content">
-                  <p>Rasa Construction</p>
-                  <h3>Speak directly with the owner</h3>
-                  <span className="italic">Call Gurusamy A — he will tell you exactly what the project requires.</span>
+                <div className="contact-owner-overlay" />
+                <div className="contact-owner-content">
+                  <p className="contact-owner-label">DIRECT PROJECT GUIDANCE</p>
+                  <h3>Speak with Gurusamy A</h3>
+                  <p className="contact-owner-line">
+                    Call Gurusamy A — he will tell you exactly what the project requires.
+                  </p>
+                  <span>Rasa Construction • South Tamil Nadu</span>
                 </div>
               </div>
             </Reveal>
