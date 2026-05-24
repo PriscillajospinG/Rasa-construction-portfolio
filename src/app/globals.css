@@ -2686,7 +2686,7 @@ section,
    ═══════════════════════════════════════════════════════════ */
 
 .about-section {
-  background: #F4EFE7 !important;
+  background: #FBF7F1 !important;
   padding-block: 96px !important;
 }
 
@@ -2808,42 +2808,57 @@ section,
    Soft transition bridges, unified card systems, buttons & hover.
 ═══════════════════════════════════════════════════════════ */
 
-/* ── Hero Soft Transition ── */
+/* ── Hero Soft Transition & Section Bridges ── */
+html {
+  scroll-behavior: smooth;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
 .hero::after {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
   bottom: -1px;
-  height: 24px;
+  height: 110px;
   background: linear-gradient(
     to bottom,
-    rgba(8, 51, 53, 0),
-    #F4EFE7
+    rgba(8, 51, 53, 0) 0%,
+    #F4EFE7 100%
   );
   pointer-events: none;
-  z-index: 3;
+  z-index: 1;
 }
 
-/* ── Transition Bridges ── */
-.section-bridge {
+.hero-content {
   position: relative;
+  z-index: 2;
 }
 
-.section-bridge > .container,
-.section-bridge > .section-container {
+.section-with-bridge {
   position: relative;
-  z-index: 10;
+  overflow: hidden;
+}
+
+.section-with-bridge > .container,
+.section-with-bridge > .section-container,
+.section-with-bridge > footer > .container,
+.section-content {
+  position: relative !important;
+  z-index: 2 !important;
 }
 
 .bridge-dark-to-cream::before {
   content: "";
   position: absolute;
+  inset-inline: 0;
   top: -1px;
-  left: 0;
-  right: 0;
-  height: 110px;
-  background: linear-gradient(to bottom, #06282A, #F4EFE7);
+  height: 96px;
+  background: linear-gradient(to bottom, #083335 0%, #F4EFE7 100%);
   pointer-events: none;
   z-index: 1;
 }
@@ -2851,11 +2866,10 @@ section,
 .bridge-cream-to-white::before {
   content: "";
   position: absolute;
+  inset-inline: 0;
   top: -1px;
-  left: 0;
-  right: 0;
   height: 80px;
-  background: linear-gradient(to bottom, #F4EFE7, #FFFFFF);
+  background: linear-gradient(to bottom, #F4EFE7 0%, #FFFFFF 100%);
   pointer-events: none;
   z-index: 1;
 }
@@ -2863,11 +2877,32 @@ section,
 .bridge-white-to-cream::before {
   content: "";
   position: absolute;
+  inset-inline: 0;
   top: -1px;
-  left: 0;
-  right: 0;
   height: 80px;
-  background: linear-gradient(to bottom, #FFFFFF, #F4EFE7);
+  background: linear-gradient(to bottom, #FFFFFF 0%, #F4EFE7 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bridge-cream-to-soft::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: -1px;
+  height: 80px;
+  background: linear-gradient(to bottom, #F4EFE7 0%, #FBF7F1 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bridge-soft-to-cream::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: -1px;
+  height: 80px;
+  background: linear-gradient(to bottom, #FBF7F1 0%, #F4EFE7 100%);
   pointer-events: none;
   z-index: 1;
 }
@@ -2875,34 +2910,61 @@ section,
 .bridge-cream-to-dark::before {
   content: "";
   position: absolute;
+  inset-inline: 0;
   top: -1px;
-  left: 0;
-  right: 0;
-  height: 110px;
-  background: linear-gradient(to bottom, #F4EFE7, #06282A);
+  height: 96px;
+  background: linear-gradient(to bottom, #F4EFE7 0%, #083335 100%);
   pointer-events: none;
   z-index: 1;
 }
 
-.bridge-white-to-dark::before {
+.bridge-soft-to-dark::before {
   content: "";
   position: absolute;
+  inset-inline: 0;
   top: -1px;
-  left: 0;
-  right: 0;
-  height: 110px;
-  background: linear-gradient(to bottom, #FFFFFF, #06282A);
+  height: 96px;
+  background: linear-gradient(to bottom, #FBF7F1 0%, #06282A 100%);
   pointer-events: none;
   z-index: 1;
+}
+
+.section-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 2px;
+  background: #D8B9A3;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: revealUp 650ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes revealUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 768px) {
   .bridge-dark-to-cream::before,
   .bridge-cream-to-white::before,
   .bridge-white-to-cream::before,
+  .bridge-cream-to-soft::before,
+  .bridge-soft-to-cream::before,
   .bridge-cream-to-dark::before,
-  .bridge-white-to-dark::before {
-    height: 56px !important;
+  .bridge-soft-to-dark::before {
+    height: 54px !important;
+  }
+
+  .hero::after {
+    height: 64px !important;
   }
 }
 

@@ -15,7 +15,7 @@ export default function Services() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="services" className="services-section section relative overflow-hidden concrete-grid-bg section-transition" style={{ backgroundColor: "#F4EFE7", borderTop: "4px solid #083335" }} ref={ref}>
+    <section id="services" className="services-section section relative overflow-hidden concrete-grid-bg section-with-bridge bridge-dark-to-cream" style={{ backgroundColor: "#F4EFE7" }} ref={ref}>
       <div className="container services-container">
         {/* ── Section Header ── */}
         <div className="section-header">

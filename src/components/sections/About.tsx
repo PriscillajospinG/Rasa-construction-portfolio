@@ -103,7 +103,7 @@ export default function About() {
     <section
       id="about"
       ref={ref}
-      className="section-bridge bridge-cream-to-white about-section py-20 relative overflow-hidden bg-[#F4EFE7]"
+      className="section-with-bridge bridge-cream-to-soft about-section py-20 relative overflow-hidden bg-[#FBF7F1]"
     >
       <div className="container about-container relative z-10">
         
