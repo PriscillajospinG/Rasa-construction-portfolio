@@ -33,10 +33,10 @@
   --clr-text-lt:      #6b7280;  /* gray-500 → 4.6:1 on white, AA pass */
 
   /* ── Spacing Tokens ── */
-  --nav-h: 80px;
-  --nav-h-desktop: 80px;
-  --nav-h-tablet: 76px;
-  --nav-h-mobile: 68px;
+  --nav-h: 72px;
+  --nav-h-desktop: 72px;
+  --nav-h-tablet: 68px;
+  --nav-h-mobile: 64px;
 
   --container-max: 1280px;
 

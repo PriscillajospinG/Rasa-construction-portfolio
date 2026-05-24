@@ -89,12 +89,12 @@ export default function Navbar() {
             className="logo-wrap relative flex items-center h-full focus:outline-none"
           >
             <RasaLogo
-              size="md"
+              size={44}
               variant="light"
               className="hidden md:flex"
             />
             <RasaLogo
-              size="sm"
+              size={36}
               variant="light"
               className="flex md:hidden"
             />
