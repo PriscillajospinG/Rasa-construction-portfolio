@@ -679,7 +679,8 @@ button,
   top: 0;
   left: 0;
   right: 0;
-  height: 72px;
+  min-height: 70px !important;
+  height: 70px !important;
   z-index: 9999;
   background: #083335;
   border-bottom: 1px solid rgba(216, 185, 163, 0.22);
@@ -692,7 +693,9 @@ button,
 }
 
 .navbar-inner {
-  height: 72px;
+  min-height: 70px !important;
+  height: 70px !important;
+  padding-block: 8px !important;
   width: min(100% - 48px, 1240px) !important;
   margin-inline: auto;
   display: flex;
@@ -700,6 +703,13 @@ button,
   justify-content: space-between;
   gap: 32px;
   pointer-events: auto;
+}
+
+.nav-logo-img {
+  width: auto !important;
+  height: 40px !important;
+  max-height: 40px !important;
+  object-fit: contain;
 }
 
 @media (max-width: 1024px) {
@@ -3177,4 +3187,25 @@ section,
   background: rgba(120, 35, 35, 0.08) !important;
   color: #7A1F1F !important;
   border: 1px solid rgba(120, 35, 35, 0.18) !important;
+}
+
+/* Navbar Mobile Sizing Overrides */
+@media (max-width: 768px) {
+  .navbar,
+  .site-header {
+    min-height: 62px !important;
+    height: 62px !important;
+  }
+
+  .navbar-inner,
+  .nav-inner {
+    min-height: 62px !important;
+    height: 62px !important;
+    padding-block: 6px !important;
+  }
+
+  .nav-logo-img {
+    height: 34px !important;
+    max-height: 34px !important;
+  }
 }

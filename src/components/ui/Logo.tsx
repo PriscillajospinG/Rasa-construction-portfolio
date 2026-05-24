@@ -50,8 +50,8 @@ export default function RasaLogo({
         width={width}
         height={height}
         priority
-        className="object-contain"
-        style={{ width: "auto", height: "auto" }}
+        className="object-contain nav-logo-img"
+        style={{ height: "100%", width: "auto" }}
       />
     </div>
   );
