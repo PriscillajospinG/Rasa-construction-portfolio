@@ -289,6 +289,7 @@ Message: ${form.message}`;
                     src="/images/owner.jpg"
                     alt="Gurusamy A from Rasa Construction"
                     fill
+                    sizes="(max-width: 900px) 100vw, 45vw"
                     className="contact-owner-image"
                   />
                 ) : (

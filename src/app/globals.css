@@ -716,6 +716,7 @@ button,
   .navbar-logo-img {
     height: 30px !important;
     max-height: 30px !important;
+    width: auto !important;
   }
 }
 
@@ -734,6 +735,7 @@ button,
   .preloader-logo-img {
     height: 96px !important;
     max-height: 96px !important;
+    width: auto !important;
   }
 }
 
