@@ -284,23 +284,25 @@ Message: ${form.message}`;
             {/* Owner Image Card */}
             <Reveal direction="right" className="w-full">
               <div className="contact-owner-card">
-                {imageLoaded ? (
-                  <Image
-                    src="/images/owner.jpg"
-                    alt="Gurusamy A from Rasa Construction"
-                    fill
-                    sizes="(max-width: 900px) 100vw, 45vw"
-                    className="contact-owner-image"
-                  />
-                ) : (
-                  <div className="owner-placeholder-overlay">
-                    <span className="owner-placeholder-text">
-                      Owner image can be added here
-                    </span>
-                  </div>
-                )}
-                <div className="contact-owner-overlay" />
-                <div className="contact-owner-content">
+                <div className="contact-owner-photo-wrap">
+                  {imageLoaded ? (
+                    <Image
+                      src="/images/owner.jpg"
+                      alt="Gurusamy A from Rasa Construction"
+                      fill
+                      sizes="(max-width: 900px) 100vw, 45vw"
+                      className="contact-owner-photo"
+                    />
+                  ) : (
+                    <div className="owner-placeholder-overlay">
+                      <span className="owner-placeholder-text">
+                        Owner image can be added here
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                <div className="contact-owner-info">
                   <p className="contact-owner-label">DIRECT PROJECT GUIDANCE</p>
                   <h3>Speak with Gurusamy A</h3>
                   <p className="contact-owner-line">

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { company } from "@/data/company";
 import { scrollTo } from "@/lib/utils";
 
@@ -10,9 +11,19 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="hero">
-      <div className="hero-bg"></div>
-      <div className="hero-overlay"></div>
+    <section id="home" className="hero hero-section">
+      <div className="hero-image-layer">
+        <Image
+          src="/hero/hero-site.jpg"
+          alt="Rasa Construction site work"
+          fill
+          priority
+          sizes="100vw"
+          className="hero-bg-image"
+        />
+      </div>
+
+      <div className="hero-green-overlay" />
 
       <div className="hero-container">
         <div className="hero-content">
