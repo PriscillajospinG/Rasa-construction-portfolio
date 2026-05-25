@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, PhoneCall } from "lucide-react";
-import RasaLogo from "@/components/ui/Logo";
 import { useScroll } from "@/hooks/useScroll";
 import { company } from "@/data/company";
 import { scrollTo, waLink } from "@/lib/utils";
@@ -88,17 +88,13 @@ export default function Navbar() {
             aria-label="Rasa Construction – Home"
             className="logo-wrap relative flex items-center h-full focus:outline-none"
           >
-            <RasaLogo
-              size={44}
-              variant="light"
-              className="hidden md:flex"
-              imgClassName="navbar-logo-img"
-            />
-            <RasaLogo
-              size={36}
-              variant="light"
-              className="flex md:hidden"
-              imgClassName="navbar-logo-img"
+            <Image
+              src="/logos/rasa-logo-light.png"
+              alt="Rasa Construction"
+              width={110}
+              height={38}
+              priority
+              className="navbar-logo-img"
             />
           </button>
 
@@ -195,7 +191,14 @@ export default function Navbar() {
                   borderBottom: "1px solid rgba(255,255,255,0.10)",
                 }}
               >
-                <RasaLogo size="sm" variant="light" imgClassName="navbar-logo-img" />
+                <Image
+                  src="/logos/rasa-logo-light.png"
+                  alt="Rasa Construction"
+                  width={110}
+                  height={38}
+                  priority
+                  className="navbar-logo-img"
+                />
                 <button
                   onClick={() => setMenuOpen(false)}
                   aria-label="Close menu"
