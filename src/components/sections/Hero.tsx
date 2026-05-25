@@ -11,19 +11,19 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="hero hero-section">
-      <div className="hero-image-layer">
+    <section id="home" className="hero-section hero">
+      <div className="hero-bg-layer" aria-hidden="true">
         <Image
-          src="/hero/hero-site.jpg"
-          alt="Rasa Construction site work"
+          src="/images/hero.jpg"
+          alt=""
           fill
           priority
           sizes="100vw"
-          className="hero-bg-image"
+          className="hero-bg-img"
         />
       </div>
 
-      <div className="hero-green-overlay" />
+      <div className="hero-overlay-layer" aria-hidden="true" />
 
       <div className="hero-container">
         <div className="hero-content">

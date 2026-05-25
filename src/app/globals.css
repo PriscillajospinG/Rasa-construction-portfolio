@@ -839,13 +839,13 @@ button,
   z-index: 1;
 }
 
-.hero-image-layer {
+.hero-bg-layer {
   position: absolute;
   inset: 0;
   z-index: 0;
 }
 
-.hero-bg-image {
+.hero-bg-img {
   object-fit: cover;
   object-position: center;
   opacity: 1 !important;
@@ -853,7 +853,7 @@ button,
   transform: none !important;
 }
 
-.hero-green-overlay {
+.hero-overlay-layer {
   position: absolute !important;
   inset: 0 !important;
   z-index: 1 !important;
@@ -1139,8 +1139,8 @@ button,
   .hero-description,
   .hero-actions,
   .hero-buttons,
-  .hero-image-layer,
-  .hero-bg-image,
+  .hero-bg-layer,
+  .hero-bg-img,
   .hero-bg,
   .hero-bg img,
   .hero-background img,
@@ -1174,7 +1174,7 @@ button,
 
 /* Mobile specific styling (< 1023px) */
 @media (max-width: 1023px) {
-  .hero-green-overlay {
+  .hero-overlay-layer {
     background:
       linear-gradient(
         180deg,
