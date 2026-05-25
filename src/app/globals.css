@@ -846,23 +846,20 @@ button,
   background-size: cover;
   background-position: center;
   opacity: 1;
+  z-index: 0;
 }
 
-.hero::before,
 .hero-overlay {
   position: absolute !important;
   inset: 0 !important;
   pointer-events: none !important;
+  z-index: 1 !important;
   background: linear-gradient(
     90deg,
     rgba(8, 51, 53, 0.94) 0%,
-    rgba(8, 51, 53, 0.82) 42%,
-    rgba(8, 51, 53, 0.48) 72%,
-    rgba(8, 51, 53, 0.30) 100%
+    rgba(8, 51, 53, 0.78) 45%,
+    rgba(8, 51, 53, 0.42) 100%
   ) !important;
-}
-.hero::before {
-  content: "" !important;
 }
 
 .hero-overlay::after {
@@ -1176,10 +1173,10 @@ button,
       linear-gradient(
         180deg,
         rgba(8, 51, 53, 0.94) 0%,
-        rgba(8, 51, 53, 0.82) 42%,
-        rgba(8, 51, 53, 0.48) 72%,
-        rgba(8, 51, 53, 0.30) 100%
+        rgba(8, 51, 53, 0.78) 45%,
+        rgba(8, 51, 53, 0.42) 100%
       ) !important;
+    z-index: 1 !important;
   }
 
   .navbar {
@@ -3369,7 +3366,7 @@ html {
 
 .contact-section .contact-owner-card {
   position: relative !important;
-  min-height: 360px !important;
+  min-height: 380px !important;
   border-radius: 22px !important;
   overflow: hidden !important;
   background: #083335 !important;
@@ -3380,13 +3377,13 @@ html {
 
 .contact-section .contact-owner-image {
   object-fit: cover !important;
-  object-position: center !important;
-  transform: scale(1.01) !important;
+  object-position: center 28% !important;
+  transform: none !important;
   transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1) !important;
 }
 
 .contact-section .contact-owner-card:hover .contact-owner-image {
-  transform: scale(1.045) !important;
+  transform: none !important;
 }
 
 .contact-section .contact-owner-overlay {
@@ -3395,9 +3392,9 @@ html {
   background:
     linear-gradient(
       180deg,
-      rgba(8, 51, 53, 0.18) 0%,
-      rgba(8, 51, 53, 0.62) 55%,
-      rgba(8, 51, 53, 0.88) 100%
+      rgba(8, 51, 53, 0.10) 0%,
+      rgba(8, 51, 53, 0.36) 48%,
+      rgba(8, 51, 53, 0.82) 100%
     ) !important;
   z-index: 1 !important;
 }
@@ -3406,7 +3403,7 @@ html {
   position: absolute !important;
   left: 26px !important;
   right: 26px !important;
-  bottom: 26px !important;
+  bottom: 24px !important;
   z-index: 2 !important;
   color: #FFFFFF !important;
 }
@@ -3555,8 +3552,12 @@ html {
   }
 
   .contact-section .contact-owner-card {
-    min-height: 300px !important;
+    min-height: 340px !important;
     border-radius: 18px !important;
+  }
+
+  .contact-section .contact-owner-image {
+    object-position: center 22% !important;
   }
 }
 
