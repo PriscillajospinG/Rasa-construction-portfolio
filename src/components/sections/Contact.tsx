@@ -118,7 +118,7 @@ Message: ${form.message}`;
   };
 
   return (
-    <section id="contact" className="section-with-bridge bridge-dark-to-cream section contact-section" style={{ backgroundColor: "#F4EFE7" }}>
+    <section id="contact" className="section contact-section" style={{ backgroundColor: "#F4EFE7" }}>
       <div className="container">
         
         {/* Section Header */}

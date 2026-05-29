@@ -103,7 +103,7 @@ export default function About() {
     <section
       id="about"
       ref={ref}
-      className="section-with-bridge bridge-cream-to-soft about-section py-20 relative overflow-hidden bg-[#FBF7F1]"
+      className="about-section py-20 bg-[#FBF7F1]"
     >
       <div className="container about-container relative z-10">
         
@@ -320,6 +320,14 @@ export default function About() {
           </Reveal>
 
         </div>
+
+        {/* ── Narrative cue ── */}
+        <Reveal delay={0.15}>
+          <a href="#contact" className="section-cue" onClick={(e) => { e.preventDefault(); const el = document.getElementById("contact"); el?.scrollIntoView({ behavior: "smooth" }); }}>
+            Need support on your next site?
+            <span className="section-cue-arrow" aria-hidden="true">→</span>
+          </a>
+        </Reveal>
 
       </div>
     </section>

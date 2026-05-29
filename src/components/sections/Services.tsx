@@ -14,7 +14,7 @@ export default function Services() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="services" className="services-section section relative overflow-hidden concrete-grid-bg section-with-bridge bridge-dark-to-cream" style={{ backgroundColor: "#F4EFE7" }} ref={ref}>
+    <section id="services" className="services-section section" style={{ backgroundColor: "#F4EFE7" }} ref={ref}>
       <div className="container services-container">
         {/* ── Section Header ── */}
         <div className="section-header">
@@ -101,6 +101,14 @@ export default function Services() {
                 Call for Advice
               </Button>
             </div>
+          </Reveal>
+
+          {/* ── Narrative cue ── */}
+          <Reveal delay={0.2}>
+            <a href="#projects" className="section-cue" onClick={(e) => { e.preventDefault(); const el = document.getElementById("projects"); el?.scrollIntoView({ behavior: "smooth" }); }}>
+              See the projects supported by our equipment
+              <span className="section-cue-arrow" aria-hidden="true">→</span>
+            </a>
           </Reveal>
         </div>
       </section>

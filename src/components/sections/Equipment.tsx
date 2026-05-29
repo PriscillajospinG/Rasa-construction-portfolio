@@ -169,6 +169,14 @@ export default function Equipment() {
             </Button>
           </div>
         </Reveal>
+
+        {/* ── Narrative cue ── */}
+        <Reveal delay={0.2}>
+          <a href="#about" className="section-cue" onClick={(e) => { e.preventDefault(); const el = document.getElementById("about"); el?.scrollIntoView({ behavior: "smooth" }); }}>
+            Learn how the company grew
+            <span className="section-cue-arrow" aria-hidden="true">→</span>
+          </a>
+        </Reveal>
       </div>
     </section>
   );

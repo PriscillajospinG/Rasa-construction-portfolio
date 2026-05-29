@@ -164,6 +164,14 @@ export default function Projects() {
             </Button>
           </div>
         </Reveal>
+
+        {/* ── Narrative cue ── */}
+        <Reveal delay={0.15}>
+          <a href="#equipment" className="section-cue" onClick={(e) => { e.preventDefault(); const el = document.getElementById("equipment"); el?.scrollIntoView({ behavior: "smooth" }); }}>
+            Explore the equipment behind these projects
+            <span className="section-cue-arrow" aria-hidden="true">→</span>
+          </a>
+        </Reveal>
       </div>
     </section>
   );

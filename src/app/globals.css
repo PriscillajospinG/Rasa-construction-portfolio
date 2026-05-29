@@ -108,7 +108,7 @@
 
 section,
 .section {
-  padding-block: 96px;
+  padding-block: 120px;
 }
 
 .section-sm {
@@ -159,7 +159,7 @@ section,
 
   section,
   .section {
-    padding-block: 76px;
+    padding-block: 96px;
   }
 }
 
@@ -175,7 +175,7 @@ section,
 
   section,
   .section {
-    padding-block: 56px;
+    padding-block: 72px;
   }
 }
 
@@ -187,7 +187,7 @@ section,
 
   section,
   .section {
-    padding-block: 44px;
+    padding-block: 56px;
   }
 }
 
@@ -885,10 +885,7 @@ button,
   align-items: center;
 }
 
-.hero::after {
-  display: none !important;
-  content: none !important;
-}
+
 
 .hero-eyebrow {
   display: block !important;
@@ -1774,7 +1771,7 @@ svg {
 /* ── SECTION RESPONSIVE RULES ── */
 section,
 .section {
-  padding-block: 96px !important;
+  padding-block: 120px !important;
 }
 section .section {
   padding-block: 0 !important;
@@ -1783,21 +1780,21 @@ section .section {
 @media (max-width: 1024px) {
   section,
   .section {
-    padding-block: 76px !important;
+    padding-block: 96px !important;
   }
 }
 
 @media (max-width: 768px) {
   section,
   .section {
-    padding-block: 56px !important;
+    padding-block: 72px !important;
   }
 }
 
 @media (max-width: 380px) {
   section,
   .section {
-    padding-block: 44px !important;
+    padding-block: 56px !important;
   }
 }
 
@@ -2170,7 +2167,7 @@ section .section {
 
 /* ── SPACING & CONTAINERS ── */
 .section {
-  padding-block: 96px !important;
+  padding-block: 120px !important;
 }
 
 .section-container,
@@ -2181,13 +2178,13 @@ section .section {
 
 @media (max-width: 1024px) {
   .section {
-    padding-block: 76px !important;
+    padding-block: 96px !important;
   }
 }
 
 @media (max-width: 768px) {
   .section {
-    padding-block: 56px !important;
+    padding-block: 72px !important;
   }
   .section-container,
   .container {
@@ -2510,27 +2507,27 @@ footer button:hover {
 /* 1. Consistent Section Spacing */
 section,
 .section {
-  padding-block: 96px !important;
+  padding-block: 120px !important;
 }
 
 @media (max-width: 1024px) {
   section,
   .section {
-    padding-block: 76px !important;
+    padding-block: 96px !important;
   }
 }
 
 @media (max-width: 768px) {
   section,
   .section {
-    padding-block: 56px !important;
+    padding-block: 72px !important;
   }
 }
 
 @media (max-width: 380px) {
   section,
   .section {
-    padding-block: 44px !important;
+    padding-block: 56px !important;
   }
 }
 
@@ -2540,15 +2537,7 @@ section,
 }
 
 .section-transition::before {
-  content: "" !important;
-  position: absolute !important;
-  top: -1px !important;
-  left: 0 !important;
-  right: 0 !important;
-  height: 72px !important;
-  pointer-events: none !important;
-  background: linear-gradient(to bottom, rgba(8, 51, 53, 0.08), transparent) !important;
-  z-index: 10 !important;
+  display: none !important;
 }
 
 /* 3. Consistent Section Headers */
@@ -2768,7 +2757,7 @@ section,
 
 .about-section {
   background: #FBF7F1 !important;
-  padding-block: 96px !important;
+  padding-block: 120px !important;
 }
 
 .about-container {
@@ -2884,142 +2873,7 @@ section,
   }
 }
 
-/* ═══════════════════════════════════════════════════════════
-   VISUAL FLOW & TRANSITION REFRESH
-   Soft transition bridges, unified card systems, buttons & hover.
-═══════════════════════════════════════════════════════════ */
-
-/* ── Hero Soft Transition & Section Bridges ── */
-html {
-  scroll-behavior: smooth;
-}
-
-.hero {
-  position: relative;
-  overflow: hidden;
-}
-
-.hero::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -1px;
-  height: 110px;
-  background: linear-gradient(
-    to bottom,
-    rgba(8, 51, 53, 0) 0%,
-    #F4EFE7 100%
-  );
-  pointer-events: none;
-  z-index: 1;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-}
-
-.section-with-bridge {
-  position: relative;
-  overflow: hidden;
-}
-
-.section-with-bridge > .container,
-.section-with-bridge > .section-container,
-.section-with-bridge > footer > .container,
-.section-content {
-  position: relative !important;
-  z-index: 2 !important;
-}
-
-.bridge-dark-to-cream::before {
-  content: "";
-  position: absolute;
-  inset-inline: 0;
-  top: -1px;
-  height: 96px;
-  background: linear-gradient(to bottom, #083335 0%, #F4EFE7 100%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.bridge-cream-to-white::before {
-  content: "";
-  position: absolute;
-  inset-inline: 0;
-  top: -1px;
-  height: 80px;
-  background: linear-gradient(to bottom, #F4EFE7 0%, #FFFFFF 100%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.bridge-white-to-cream::before {
-  content: "";
-  position: absolute;
-  inset-inline: 0;
-  top: -1px;
-  height: 80px;
-  background: linear-gradient(to bottom, #FFFFFF 0%, #F4EFE7 100%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.bridge-cream-to-soft::before {
-  content: "";
-  position: absolute;
-  inset-inline: 0;
-  top: -1px;
-  height: 80px;
-  background: linear-gradient(to bottom, #F4EFE7 0%, #FBF7F1 100%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.bridge-soft-to-cream::before {
-  content: "";
-  position: absolute;
-  inset-inline: 0;
-  top: -1px;
-  height: 80px;
-  background: linear-gradient(to bottom, #FBF7F1 0%, #F4EFE7 100%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.bridge-cream-to-dark::before {
-  content: "";
-  position: absolute;
-  inset-inline: 0;
-  top: -1px;
-  height: 96px;
-  background: linear-gradient(to bottom, #F4EFE7 0%, #083335 100%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.bridge-soft-to-dark::before {
-  content: "";
-  position: absolute;
-  inset-inline: 0;
-  top: -1px;
-  height: 96px;
-  background: linear-gradient(to bottom, #FBF7F1 0%, #06282A 100%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.section-eyebrow::before {
-  content: "";
-  display: inline-block;
-  width: 28px;
-  height: 2px;
-  background: #D8B9A3;
-  margin-right: 10px;
-  vertical-align: middle;
-}
-
+/* ── Reveal utility (CSS only fallback) ── */
 .reveal-up {
   opacity: 0;
   transform: translateY(18px);
@@ -3033,20 +2887,14 @@ html {
   }
 }
 
-@media (max-width: 768px) {
-  .bridge-dark-to-cream::before,
-  .bridge-cream-to-white::before,
-  .bridge-white-to-cream::before,
-  .bridge-cream-to-soft::before,
-  .bridge-soft-to-cream::before,
-  .bridge-cream-to-dark::before,
-  .bridge-soft-to-dark::before {
-    height: 54px !important;
-  }
-
-  .hero::after {
-    height: 64px !important;
-  }
+.section-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 2px;
+  background: #D8B9A3;
+  margin-right: 10px;
+  vertical-align: middle;
 }
 
 /* ── Unified Card System ── */
@@ -3151,7 +2999,7 @@ html {
 
 /* ── SERVICES SECTION REDESIGN OVERRIDES ── */
 .services-section {
-  padding-block: 96px !important;
+  padding-block: 120px !important;
 }
 
 .services-container {
@@ -3564,164 +3412,28 @@ html {
   }
 }
 
-/* ── Disable Old Tiny Section Bridges ── */
-.bridge-dark-to-cream::before,
-.bridge-cream-to-white::before,
-.bridge-white-to-cream::before,
-.bridge-cream-to-soft::before,
-.bridge-soft-to-cream::before,
-.bridge-cream-to-dark::before,
-.bridge-soft-to-dark::before {
-  display: none !important;
+/* ── Section continuity cue ── */
+.section-cue {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--clr-text-md);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: color 200ms ease, gap 200ms ease;
+  margin-top: var(--s6);
 }
-
-/* ── Section Z-Index and Isolation Safety ── */
-.hero,
-.services-section,
-.projects-section,
-.equipment-section,
-.about-section,
-.testimonials-section,
-.contact-section {
-  position: relative !important;
-  overflow: hidden !important;
-  isolation: isolate !important;
+.section-cue:hover {
+  color: var(--clr-primary);
+  gap: 10px;
 }
-
-.hero > *,
-.services-section > *,
-.projects-section > *,
-.equipment-section > *,
-.about-section > *,
-.testimonials-section > *,
-.contact-section > * {
-  position: relative !important;
-  z-index: 2 !important;
+.section-cue-arrow {
+  display: inline-block;
+  transition: transform 200ms ease;
 }
-
-/* ── Section Spacing Adjustment ── */
-.services-section,
-.projects-section,
-.equipment-section,
-.about-section,
-.testimonials-section,
-.contact-section {
-  padding-bottom: calc(96px + 70px) !important;
-}
-
-@media (max-width: 768px) {
-  .services-section,
-  .projects-section,
-  .equipment-section,
-  .about-section,
-  .testimonials-section,
-  .contact-section {
-    padding-bottom: calc(56px + 42px) !important;
-  }
-}
-
-/* ── Reusable Transition Overlay Base ── */
-.hero::after,
-.services-section::after,
-.projects-section::after,
-.equipment-section::after,
-.about-section::after,
-.testimonials-section::after,
-.contact-section::after {
-  content: "" !important;
-  position: absolute !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: -1px !important;
-  pointer-events: none !important;
-  z-index: 1 !important;
-}
-
-/* 1. Hero (#083335 overlay) to Services (#F4EFE7 concrete cream) */
-.hero::after {
-  height: 150px !important;
-  background: linear-gradient(
-    to bottom,
-    rgba(8, 51, 53, 0) 0%,
-    rgba(8, 51, 53, 0.35) 35%,
-    #F4EFE7 100%
-  ) !important;
-  z-index: 2 !important; /* hero container is relative, needs z-index 2 */
-}
-
-/* 2. Services (#F4EFE7) to Projects (#FFFFFF) */
-.services-section::after {
-  height: 130px !important;
-  background: linear-gradient(
-    to bottom,
-    rgba(244, 239, 231, 0) 0%,
-    #FFFFFF 100%
-  ) !important;
-}
-
-/* 3. Projects (#FFFFFF) to Equipment (#F4EFE7) */
-.projects-section::after {
-  height: 130px !important;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0) 0%,
-    #F4EFE7 100%
-  ) !important;
-}
-
-/* 4. Equipment (#F4EFE7) to About (#FBF7F1 soft cream) */
-.equipment-section::after {
-  height: 130px !important;
-  background: linear-gradient(
-    to bottom,
-    rgba(244, 239, 231, 0) 0%,
-    #FBF7F1 100%
-  ) !important;
-}
-
-/* 5. About (#FBF7F1) to Testimonials (#06282A deep green) */
-.about-section::after {
-  height: 150px !important;
-  background: linear-gradient(
-    to bottom,
-    rgba(251, 247, 241, 0) 0%,
-    rgba(6, 40, 42, 0.35) 45%,
-    #06282A 100%
-  ) !important;
-}
-
-/* 6. Testimonials (#06282A) to Contact (#F4EFE7 concrete cream) */
-.testimonials-section::after {
-  height: 150px !important;
-  background: linear-gradient(
-    to bottom,
-    rgba(6, 40, 42, 0) 0%,
-    rgba(6, 40, 42, 0.35) 35%,
-    #F4EFE7 100%
-  ) !important;
-}
-
-/* 7. Contact (#F4EFE7) to Footer (#083335 dark green) */
-.contact-section::after {
-  height: 150px !important;
-  background: linear-gradient(
-    to bottom,
-    rgba(244, 239, 231, 0) 0%,
-    rgba(8, 51, 53, 0.35) 55%,
-    #083335 100%
-  ) !important;
-}
-
-/* Optional Human Touch: subtle blueprint grid texture */
-body::before {
-  content: "" !important;
-  position: fixed !important;
-  inset: 0 !important;
-  pointer-events: none !important;
-  background-image:
-    linear-gradient(rgba(8, 51, 53, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(8, 51, 53, 0.02) 1px, transparent 1px) !important;
-  background-size: 48px 48px !important;
-  opacity: 0.35 !important;
-  z-index: -1 !important;
+.section-cue:hover .section-cue-arrow {
+  transform: translateX(3px);
 }
