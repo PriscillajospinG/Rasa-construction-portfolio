@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { company } from "@/data/company";
 import { scrollTo } from "@/lib/utils";
 import BlueprintBg from "@/components/ui/BlueprintBg";
@@ -61,22 +62,44 @@ export default function Hero() {
       <div className="hero-content">
         <div className="container">
           <div style={{ maxWidth: "720px", paddingBottom: "24px" }}>
-            <p className="hero-eyebrow">Trusted Site Support Since 2000</p>
-            <h1 className="hero-title">
+            <motion.p
+              className="hero-eyebrow"
+              initial={{ opacity: 0, y: -15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Trusted Site Support Since 2000
+            </motion.p>
+            <motion.h1
+              className="hero-title"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            >
               <span className="hero-highlight">Reliable construction support</span> for real site work.
-            </h1>
-            <p className="hero-description">
+            </motion.h1>
+            <motion.p
+              className="hero-description"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            >
               Scaffolding rental, centring materials, concrete works, vertical hoist rental, and site support handled with safety, timing, and direct owner involvement.
-            </p>
+            </motion.p>
 
-            <div className="hero-actions">
+            <motion.div
+              className="hero-actions"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            >
               <a href="#contact" onClick={handleQuoteClick} className="btn-primary">
                 Request a Quote
               </a>
               <a href={`tel:${company.contact.primary.replace(/\s/g, "")}`} className="btn-secondary">
                 Call for Advice
               </a>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

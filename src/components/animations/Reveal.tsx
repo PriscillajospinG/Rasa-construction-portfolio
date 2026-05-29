@@ -1,30 +1,16 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
-import { EASE_OUT } from "@/lib/animations";
-import type { Variants } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 interface RevealProps {
   children:   React.ReactNode;
   delay?:     number;
-  direction?: "up" | "left" | "right";
-  distance?:  number;   /* y/x travel in px, default 32 */
-  duration?:  number;   /* animation duration, default 0.75 */
-  threshold?: string;   /* IntersectionObserver margin, default "-72px" */
+  direction?: string;
+  distance?:  number;
+  duration?:  number;
+  threshold?: string;
   className?: string;
   style?:     React.CSSProperties;
-}
-
-function buildVariant(
-  direction: "up" | "left" | "right",
-  distance: number,
-  duration: number
-): Variants {
-  const transition = { duration, ease: EASE_OUT };
-  if (direction === "left")  return { hidden: { opacity: 0, x: -distance }, visible: { opacity: 1, x: 0, transition } };
-  if (direction === "right") return { hidden: { opacity: 0, x:  distance }, visible: { opacity: 1, x: 0, transition } };
-  return { hidden: { opacity: 0, y: distance }, visible: { opacity: 1, y: 0, transition } };
 }
 
 /**
@@ -34,12 +20,30 @@ function buildVariant(
  */
 export default function Reveal({
   children,
+  delay = 0,
   className,
   style,
 }: RevealProps) {
+  const reducedMotion = useReducedMotion();
+
+  if (reducedMotion) {
+    return (
+      <div className={className} style={style}>
+        {children}
+      </div>
+    );
+  }
+
   return (
-    <div className={className} style={style}>
+    <motion.div
+      className={className}
+      style={style}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay }}
+    >
       {children}
-    </div>
+    </motion.div>
   );
 }

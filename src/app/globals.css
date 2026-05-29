@@ -3617,3 +3617,94 @@ section,
     gap: var(--s6) !important;
   }
 }
+
+/* ══════════════════════════════════════════════════════════
+   HOVER MICRO-INTERACTIONS & TRANSITIONS
+   ══════════════════════════════════════════════════════════ */
+
+/* Project Cards Hover (300ms ease) */
+.project-card {
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 300ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+.project-card:hover {
+  transform: translateY(-6px) !important;
+}
+.project-card .bento-media img {
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+.project-card:hover .bento-media img {
+  transform: scale(1.04) !important;
+}
+
+/* Equipment Cards Hover (250ms ease, box shadow stronger) */
+.equipment-card {
+  transition: transform 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+.equipment-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 16px 36px rgba(8, 51, 53, 0.14) !important;
+}
+
+/* Owner Image Hover (700ms ease, scale 1.03) */
+.contact-owner-photo {
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+.contact-owner-photo-wrap:hover .contact-owner-photo {
+  transform: scale(1.03) !important;
+}
+
+/* Button Transitions (300ms ease, darker hover background) */
+button,
+.btn,
+.btn-primary,
+.btn-secondary,
+.btn-dark,
+.btn-outline,
+.btn-ghost,
+.cta-button,
+.nav-cta {
+  transition: transform 300ms ease, background-color 300ms ease, border-color 300ms ease, color 300ms ease, box-shadow 300ms ease !important;
+}
+
+.btn:hover,
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-dark:hover,
+.btn-outline:hover,
+.btn-ghost:hover,
+.cta-button:hover,
+.nav-cta:hover {
+  transform: translateY(-2px) !important;
+}
+
+.btn-primary:hover {
+  background-color: var(--clr-accent-dk) !important; /* #c4a088 is darker than #D8B9A3 */
+  border-color: var(--clr-accent-dk) !important;
+}
+
+.btn-dark:hover {
+  background-color: #041c1d !important; /* darker than #06282A */
+  border-color: #041c1d !important;
+}
+
+/* Navbar Link Underline Animation duration override (250ms) */
+.nav-link::after {
+  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* Global scroll behavior */
+html {
+  scroll-behavior: smooth !important;
+}
+
+/* REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-delay: 0s !important;
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+    transform: none !important;
+  }
+}

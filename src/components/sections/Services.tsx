@@ -2,7 +2,7 @@
 
 import { useRef, CSSProperties } from "react";
 import Image from "next/image";
-import { useInView } from "framer-motion";
+import { useInView, motion } from "framer-motion";
 import Reveal from "@/components/animations/Reveal";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
@@ -64,6 +64,27 @@ function ServiceIcon({ id }: { id: string }) {
   return null;
 }
 
+const gridVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
+  },
+};
+
 export default function Services() {
   const ref    = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
@@ -93,13 +114,20 @@ export default function Services() {
           </div>
 
           {/* ── Services Grid ── */}
-          <div className="services-grid mb-[var(--s6)] run-card-animation">
+          <motion.div
+            className="services-grid mb-[var(--s6)]"
+            variants={gridVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+          >
             {services.map(({ id, title, description, usedFor, tag, image, alt }, i) => {
               const num = `0${i + 1}`;
               const isFeatured = id === "scaffolding";
               return (
-                <div
+                <motion.div
                   key={id}
+                  variants={cardVariants}
                   className={`service-card group ${isFeatured ? "featured" : ""}`}
                 >
                   {isFeatured && image && alt && (
@@ -146,10 +174,10 @@ export default function Services() {
                       <Badge>✓ {tag}</Badge>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
 
           {/* ── Editorial footer row ── */}
           <Reveal delay={0.1}>
