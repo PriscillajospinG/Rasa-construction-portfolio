@@ -34,40 +34,12 @@ function buildVariant(
  */
 export default function Reveal({
   children,
-  delay     = 0,
-  direction = "up",
-  distance  = 32,
-  duration  = 0.75,
-  threshold = "-72px",
   className,
   style,
 }: RevealProps) {
-  const ref          = useRef(null);
-  const inView       = useInView(ref, { once: true, margin: threshold as `${number}px` });
-  const reducedMotion = useReducedMotion();
-
-  /* If reduced motion is preferred, render children instantly */
-  if (reducedMotion) {
-    return (
-      <div ref={ref} className={className} style={style}>
-        {children}
-      </div>
-    );
-  }
-
-  const variants = buildVariant(direction, distance, duration);
-
   return (
-    <motion.div
-      ref={ref}
-      className={className}
-      style={style}
-      variants={variants}
-      initial="hidden"
-      animate={inView ? "visible" : "hidden"}
-      transition={{ delay }}
-    >
+    <div className={className} style={style}>
       {children}
-    </motion.div>
+    </div>
   );
 }

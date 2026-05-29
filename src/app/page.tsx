@@ -5,6 +5,7 @@
 // ─────────────────────────────────────────────────────────
 import Hero          from "@/components/sections/Hero";
 import Services      from "@/components/sections/Services";
+import StatsStrip    from "@/components/sections/StatsStrip";
 import Projects      from "@/components/sections/Projects";
 import Equipment     from "@/components/sections/Equipment";
 import About         from "@/components/sections/About";
@@ -28,19 +29,22 @@ export default function Home() {
       {/* 2. Services — 5-card layout under services we offer */}
       <Services />
 
-      {/* 3. Projects — masonry gallery with filter */}
+      {/* 3. Stats Strip — horizontal editorial statistics strip */}
+      <StatsStrip />
+
+      {/* 4. Projects — masonry gallery with filter */}
       <Projects />
 
-      {/* 4. Equipment — rental inventory grid */}
+      {/* 5. Equipment — rental inventory grid */}
       <Equipment />
 
-      {/* 5. About — company story, founder, differentiators */}
+      {/* 6. About — company story, founder, differentiators */}
       <About />
 
-      {/* 6. Testimonials — 3-tier client reviews */}
+      {/* 7. Testimonials — 3-tier client reviews */}
       <Testimonials />
 
-      {/* 7. Contact — form + contact list + map */}
+      {/* 8. Contact — form + contact list + map */}
       <Contact />
 
       {/* Floating WhatsApp button */}

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
 import { motion, AnimatePresence } from "framer-motion";
+import SectionWatermark from "@/components/ui/SectionWatermark";
 
 interface TimelineItem {
   year: string;
@@ -103,8 +104,11 @@ export default function About() {
     <section
       id="about"
       ref={ref}
-      className="about-section py-20 bg-[#FBF7F1]"
+      className="about-section py-20 bg-[#FBF7F1] relative overflow-hidden"
     >
+      {/* Huge background watermark */}
+      <SectionWatermark text="OUR JOURNEY" align="center" variant="light" top="40%" opacity={0.015} />
+
       <div className="container about-container relative z-10">
         
         {/* 1. Intro Content and 2. Founder/Company Image Area in 2-Column layout */}
@@ -117,7 +121,14 @@ export default function About() {
                 Rasa Construction Today
               </h2>
             </Reveal>
-            
+
+            {/* Heritage line */}
+            <Reveal delay={0.05}>
+              <div className="heritage-rule">
+                <span className="heritage-rule-text">Est. 2000</span>
+              </div>
+            </Reveal>
+
             <Reveal delay={0.1}>
               <p className="text-[#162625] text-base md:text-lg leading-relaxed font-medium">
                 Rasa Construction now supports builders and contractors across South Tamil Nadu with scaffolding rental, centring materials, concrete work support, vertical hoist rental, jockey span sheets, and site material movement.

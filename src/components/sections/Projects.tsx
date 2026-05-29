@@ -10,6 +10,7 @@ import Button from "@/components/ui/Button";
 import { projects, projectCategories } from "@/data/projects";
 import { scrollTo } from "@/lib/utils";
 import { cardGridStagger, itemReveal, EASE_CINEMATIC } from "@/lib/animations";
+import SectionWatermark from "@/components/ui/SectionWatermark";
 
 const getProjectBentoClass = (i: number) => {
   if (i === 0) return "col-span-12 md:col-span-6";
@@ -29,6 +30,9 @@ export default function Projects() {
 
   return (
     <section id="projects" style={{ background: "#FFFFFF" }} className="projects-section section relative overflow-hidden">
+      {/* Huge background watermark */}
+      <SectionWatermark text="PROJECTS" align="left" variant="light" top="40%" opacity={0.02} />
+
       <div className="container relative z-10" ref={ref}>
 
         {/* ── Header: asymmetric — number left, content right ── */}

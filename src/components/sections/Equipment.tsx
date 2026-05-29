@@ -11,6 +11,7 @@ import { equipment } from "@/data/equipment";
 import { company } from "@/data/company";
 import { scrollTo } from "@/lib/utils";
 import { cardGridStagger, itemReveal } from "@/lib/animations";
+import SectionWatermark from "@/components/ui/SectionWatermark";
 
 function getIcon(name: string): LucideIcon {
   return (LucideIcons as unknown as Record<string, LucideIcon>)[name] ?? LucideIcons.Package;
@@ -27,6 +28,8 @@ export default function Equipment() {
       className="equipment-section section relative overflow-hidden"
       style={{ background: "#F4EFE7" }}
     >
+      {/* Huge background watermark */}
+      <SectionWatermark text="EQUIPMENT" align="right" variant="light" top="30%" opacity={0.02} />
       {/* Faint diagonal texture */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -72,8 +75,8 @@ export default function Equipment() {
         <motion.div
           className="bento-grid"
           variants={cardGridStagger}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
+          initial="visible"
+          animate="visible"
         >
           {equipment.map(({ id, name, description, variants, iconName, image }) => {
             const Icon = getIcon(iconName);

@@ -8,29 +8,82 @@ import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import { services } from "@/data/services";
 import { company } from "@/data/company";
+import SectionWatermark from "@/components/ui/SectionWatermark";
+import BlueprintBg from "@/components/ui/BlueprintBg";
+
+function ServiceIcon({ id }: { id: string }) {
+  if (id === "centring") {
+    return (
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[#083335]">
+        {/* Shuttering plates / stacked layers */}
+        <path d="M6,10 L34,10 L28,16 L0,16 Z" fill="rgba(216,185,163,0.2)" />
+        <path d="M6,18 L34,18 L28,24 L0,24 Z" fill="rgba(216,185,163,0.4)" />
+        <path d="M6,26 L34,26 L28,32 L0,32 Z" fill="rgba(8,51,53,0.1)" />
+        <line x1="6" y1="10" x2="6" y2="26" />
+        <line x1="34" y1="10" x2="34" y2="26" />
+        <line x1="28" y1="16" x2="28" y2="32" />
+        <line x1="0" y1="16" x2="0" y2="32" />
+      </svg>
+    );
+  }
+  if (id === "concrete") {
+    return (
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[#083335]">
+        {/* Concrete block / foundation structure */}
+        <rect x="4" y="24" width="32" height="12" rx="1" fill="rgba(216,185,163,0.3)" />
+        <line x1="4" y1="30" x2="36" y2="30" strokeDasharray="2,2" />
+        <path d="M8,24 L14,6 L26,6 L32,24" />
+        <circle cx="20" cy="15" r="4" fill="rgba(8,51,53,0.1)" />
+      </svg>
+    );
+  }
+  if (id === "hoist") {
+    return (
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[#083335]">
+        {/* Hoist cage + vertical frame */}
+        <line x1="12" y1="2" x2="12" y2="38" />
+        <line x1="28" y1="2" x2="28" y2="38" />
+        <path d="M12,8 L28,14 M12,20 L28,26 M12,32 L28,38" strokeDasharray="3,3" />
+        <rect x="15" y="12" width="10" height="14" fill="rgba(216,185,163,0.4)" />
+        <path d="M20,6 L20,12" />
+        <path d="M17,19 L23,19" />
+      </svg>
+    );
+  }
+  if (id === "support") {
+    return (
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[#083335]">
+        {/* Hard hat silhouette */}
+        <path d="M6,22 C6,12 12,8 20,8 C28,8 34,12 34,22" fill="rgba(216,185,163,0.3)" />
+        <path d="M4,22 L36,22 C38,22 38,24 36,24 L4,24 C2,24 2,22 4,22 Z" fill="#D8B9A3" />
+        <path d="M20,8 L20,14" />
+        <path d="M15,9 C15,9 18,12 20,12 C22,12 25,9 25,9" />
+      </svg>
+    );
+  }
+  return null;
+}
 
 export default function Services() {
   const ref    = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="services" className="services-section section" style={{ backgroundColor: "#F4EFE7" }} ref={ref}>
-      <div className="container services-container">
+    <section id="services" className="services-section section relative overflow-hidden" style={{ backgroundColor: "#F4EFE7" }} ref={ref}>
+      {/* Blueprint grid background */}
+      <BlueprintBg variant="light" opacity={0.04} />
+
+      {/* Large watermark text */}
+      <SectionWatermark text="SERVICES" align="right" variant="light" top="40%" opacity={0.02} />
+
+      <div className="container services-container relative z-10">
         {/* ── Section Header ── */}
         <div className="section-header">
             <Reveal>
               <p className="section-eyebrow">OUR SERVICES</p>
             </Reveal>
-            <h2 className={`section-title services-title-animated ${inView ? "run-letter-animation" : ""}`} aria-label="Services We Offer">
-              {"Services We Offer".split("").map((char, index) => (
-                <span
-                  key={index}
-                  className="services-title-letter"
-                  style={{ "--i": index } as CSSProperties}
-                >
-                  {char === " " ? "\u00A0" : char}
-                </span>
-              ))}
+            <h2 className="section-title" aria-label="Services We Offer">
+              Services We Offer
             </h2>
             <Reveal delay={0.1}>
               <p className="section-lead">
@@ -40,9 +93,7 @@ export default function Services() {
           </div>
 
           {/* ── Services Grid ── */}
-          <div
-            className={`services-grid mb-[var(--s6)] ${inView ? "run-card-animation" : ""}`}
-          >
+          <div className="services-grid mb-[var(--s6)] run-card-animation">
             {services.map(({ id, title, description, usedFor, tag, image, alt }, i) => {
               const num = `0${i + 1}`;
               const isFeatured = id === "scaffolding";
@@ -51,7 +102,7 @@ export default function Services() {
                   key={id}
                   className={`service-card group ${isFeatured ? "featured" : ""}`}
                 >
-                  {image && alt && (
+                  {isFeatured && image && alt && (
                     <div className="service-image relative w-full aspect-[16/10] overflow-hidden rounded-[20px]" style={{ marginBottom: "var(--s2)", flexShrink: 0 }}>
                       <Image
                         src={image}
@@ -63,6 +114,18 @@ export default function Services() {
                       <div className="service-image-overlay" />
                     </div>
                   )}
+
+                  {!isFeatured && (
+                    <div className="service-icon-wrap" style={{ marginBottom: "var(--s3)", display: "inline-flex", padding: "10px", borderRadius: "12px", background: "rgba(8,51,53,0.04)", width: "fit-content" }}>
+                      <ServiceIcon id={id} />
+                    </div>
+                  )}
+
+                  {/* Faded background watermark number */}
+                  <div className="service-card-bg-num" aria-hidden="true">
+                    {num}
+                  </div>
+
                   <div className="service-card-content">
                     <div className="service-card-number" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
                       <span className="text-xs font-mono text-[#66706B]">{num}</span>

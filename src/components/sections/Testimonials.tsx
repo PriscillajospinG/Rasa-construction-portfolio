@@ -6,6 +6,7 @@ import { Star, Quote } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
 import { testimonials } from "@/data/testimonials";
 import { cardGridStagger, itemReveal, EASE_CINEMATIC } from "@/lib/animations";
+import BlueprintBg from "@/components/ui/BlueprintBg";
 
 function Stars({ count }: { count: number }) {
   return (
@@ -29,6 +30,8 @@ export default function Testimonials() {
       className="testimonials-section section relative overflow-hidden dark-section"
       style={{ background: "#06282A" }}
     >
+      {/* Blueprint grid accent inside dark testimonials section */}
+      <BlueprintBg variant="dark" opacity={0.035} />
 
       <div className="container" ref={ref}>
         {/* ── Section Header ── */}
@@ -41,8 +44,8 @@ export default function Testimonials() {
             {/* Aggregate score — top right */}
             <motion.div
               style={{ textAlign: "right" }}
-              initial={{ opacity: 0, y: 16 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              initial={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2, ease: EASE_CINEMATIC }}
             >
               <div style={{ display: "flex", justifyContent: "flex-end", gap: "3px", marginBottom: "var(--s1)" }}>
@@ -62,8 +65,8 @@ export default function Testimonials() {
         <motion.div
           className="bento-grid"
           variants={cardGridStagger}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
+          initial="visible"
+          animate="visible"
         >
           {testimonials.slice(0, 3).map(({ id, name, role, location, project, rating, text, initials }, idx) => {
             // Bento sizing strategy:
