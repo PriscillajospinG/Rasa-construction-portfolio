@@ -61,7 +61,7 @@ export default function Hero() {
 
       <div className="hero-content">
         <div className="container">
-          <div style={{ maxWidth: "720px", paddingBottom: "24px" }}>
+          <div className="hero-copy" style={{ maxWidth: "720px", paddingBottom: "24px" }}>
             <motion.p
               className="hero-eyebrow"
               initial={{ opacity: 0, y: -15 }}

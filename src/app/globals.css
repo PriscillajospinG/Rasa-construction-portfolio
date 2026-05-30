@@ -831,6 +831,9 @@ button,
     min-height: 100svh !important;
     height: 100svh !important;
   }
+  .hero-copy {
+    margin-top: 0;
+  }
 }
 
 .hero + section,
@@ -885,11 +888,16 @@ button,
   align-items: center;
 }
 
+.hero-copy {
+  padding-top: 0;
+  margin-top: -40px;
+}
+
 
 
 .hero-eyebrow {
   display: block !important;
-  margin-bottom: 14px !important;
+  margin-bottom: 16px !important;
   font-size: 0.68rem !important;
   font-weight: 800 !important;
   letter-spacing: 0.14em !important;
@@ -911,7 +919,7 @@ button,
 }
 
 .hero-description {
-  margin-top: 24px;
+  margin-top: 20px;
   max-width: 620px;
   color: rgba(255,255,255,0.78);
   font-family: var(--font-body);
@@ -921,7 +929,7 @@ button,
 }
 
 .hero-actions {
-  margin-top: 34px;
+  margin-top: 28px;
   display: flex;
   gap: 14px;
   flex-wrap: wrap;
@@ -2028,7 +2036,7 @@ section .section {
 .hero .hero-eyebrow,
 #home .hero-eyebrow {
   display: block !important;
-  margin-bottom: 14px !important;
+  margin-bottom: 16px !important;
   font-size: 0.68rem !important;
   font-weight: 800 !important;
   letter-spacing: 0.14em !important;
@@ -2134,7 +2142,7 @@ section .section {
   align-items: center !important;
   width: fit-content !important;
   padding: 7px 12px !important;
-  margin-bottom: 12px !important;
+  margin-bottom: 16px !important;
   border: 1px solid rgba(216, 185, 163, 0.28) !important;
   border-radius: 999px !important;
   font-size: 10px !important;
