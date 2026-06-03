@@ -885,20 +885,16 @@ button,
   z-index: 2;
   min-height: 100svh;
   display: flex;
-  align-items: flex-start;
-  /*
-   * Navbar = 70px.
-   * Target: copy block starts at ~42% of viewport height.
-   * 42svh - 70px (navbar) = the padding needed.
-   * We add a few more px to account for the copy block's own height pulling it down.
-   */
-  padding-top: calc(38svh - 70px);
+  align-items: center;   /* true vertical center in full viewport */
+  padding-top: 0;        /* no padding fighting the centering */
 }
 
 .hero-copy {
-  /* No transform — padding-top on .hero-content handles vertical position */
-  padding-top: 0;
-  transform: none;
+  /*
+   * Pull the block above dead-center so it reads at ~40–43% from top.
+   * translateY does not affect layout — no risk of clipping sibling elements.
+   */
+  transform: translateY(-80px);
 }
 
 
@@ -1275,13 +1271,13 @@ button,
 
   .hero-content {
     max-width: 100%;
-    /* Mobile: simpler — just clear space for navbar, then center-ish */
-    padding-top: 80px;
-    align-items: flex-start;
+    padding-top: 0;         /* rely on align-items:center + translateY below */
+    align-items: center;
   }
 
   .hero-copy {
-    transform: none;
+    /* Mobile: smaller shift — keeps all content fully visible */
+    transform: translateY(-20px);
   }
 
   .hero-title {

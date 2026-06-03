@@ -285,6 +285,7 @@ export default function About() {
                     key={item.year}
                     type="button"
                     onClick={() => goTo(idx)}
+                    onMouseDown={(e) => e.preventDefault()}
                     className={`about-year-btn ${idx === activeIndex ? "active" : ""}`}
                     aria-current={idx === activeIndex ? "step" : undefined}
                   >
@@ -304,6 +305,7 @@ export default function About() {
                       key={item.year}
                       type="button"
                       onClick={() => goTo(idx)}
+                      onMouseDown={(e) => e.preventDefault()}
                       className={`about-year-chip ${idx === activeIndex ? "active" : ""}`}
                     >
                       {item.year}
@@ -332,6 +334,7 @@ export default function About() {
                         type="button"
                         className="about-gallery-img-btn"
                         onClick={handleImageClick}
+                        onMouseDown={(e) => e.preventDefault()}
                         aria-label={
                           isLast
                             ? "Loop back to 2026"
