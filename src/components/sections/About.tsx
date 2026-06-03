@@ -8,6 +8,27 @@ import Reveal from "@/components/animations/Reveal";
 import { motion, AnimatePresence } from "framer-motion";
 import SectionWatermark from "@/components/ui/SectionWatermark";
 
+/** Direction-aware card variants */
+const cardVariants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 48 : -48,
+    opacity: 0,
+    scale: 0.96,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+  },
+  exit: (direction: number) => ({
+    x: direction > 0 ? -48 : 48,
+    opacity: 0,
+    scale: 0.96,
+    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+  }),
+};
+
 interface TimelineItem {
   year: string;
   title: string;
@@ -80,22 +101,25 @@ const timelineItems: TimelineItem[] = [
 export default function About() {
   const ref = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [direction, setDirection]     = useState(1); // 1 = forward, -1 = backward
 
-  const active = timelineItems[activeIndex];
+  const active   = timelineItems[activeIndex];
   const nextIndex = (activeIndex + 1) % timelineItems.length;
-  const nextItem = timelineItems[nextIndex];
+  const nextItem  = timelineItems[nextIndex];
 
-  // Clicking Left Arrow: Goes BACKWARD in time (moves from latest 2026 -> oldest 2000, i.e., index goes UP)
+  // Left arrow: goes BACKWARD in time (index UP = older)
   const goToPrevTime = () => {
+    setDirection(-1);
     setActiveIndex((prev) => (prev + 1) % timelineItems.length);
   };
 
-  // Clicking Right Arrow: Goes FORWARD in time (moves from oldest 2000 -> latest 2026, i.e., index goes DOWN)
+  // Right arrow: goes FORWARD in time (index DOWN = newer)
   const goToNextTime = () => {
+    setDirection(1);
     setActiveIndex((prev) => (prev - 1 + timelineItems.length) % timelineItems.length);
   };
 
-  // Clicking the card itself: Goes BACKWARD in time (index goes UP)
+  // Clicking card: goes backward in time
   const handleCardClick = () => {
     goToPrevTime();
   };
@@ -258,14 +282,15 @@ export default function About() {
 
                 {/* Big Center Milestone Card Stack */}
                 <div className="relative w-full max-w-[440px] min-h-[420px] flex items-center justify-center">
-                  <AnimatePresence mode="popLayout" initial={false}>
+                  <AnimatePresence mode="popLayout" custom={direction} initial={false}>
                     <motion.div
                       key={activeIndex}
+                      custom={direction}
+                      variants={cardVariants}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
                       onClick={handleCardClick}
-                      initial={{ scale: 0.92, y: 15, opacity: 0, rotate: -1 }}
-                      animate={{ scale: 1, y: 0, opacity: 1, rotate: 0 }}
-                      exit={{ scale: 0.92, y: -15, opacity: 0, rotate: 1, zIndex: 0 }}
-                      transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
                       className="w-full bg-white border border-[rgba(8,51,53,0.12)] rounded-2xl shadow-[0_12px_32px_rgba(8,51,53,0.08)] cursor-pointer p-6 flex flex-col select-none hover:shadow-[0_16px_40px_rgba(8,51,53,0.12)] hover:-translate-y-[2px] transition-all duration-300 z-20"
                     >
                       {/* Image Placeholder */}

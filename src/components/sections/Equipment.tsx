@@ -75,8 +75,9 @@ export default function Equipment() {
         <motion.div
           className="bento-grid"
           variants={cardGridStagger}
-          initial="visible"
-          animate="visible"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
         >
           {equipment.map(({ id, name, description, variants, iconName, image }) => {
             const Icon = getIcon(iconName);
@@ -90,17 +91,29 @@ export default function Equipment() {
                   display: "flex",
                   flexDirection: "column",
                 }}
+                whileHover={{
+                  y: -6,
+                  boxShadow: "0 20px 60px rgba(8,51,53,0.18), 0 0 0 1px rgba(216,185,163,0.18)",
+                  transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+                }}
               >
                 {/* Image block at the top */}
                 {image && (
                   <div className="bento-media relative w-full aspect-[16/10] overflow-hidden rounded-[12px] mb-4" style={{ flexShrink: 0 }}>
-                    <Image
-                      src={image}
-                      alt={name}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
+                    <motion.div
+                      className="absolute inset-0"
+                      whileHover={{ scale: 1.04 }}
+                      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                      style={{ originX: 0.5, originY: 0.5 }}
+                    >
+                      <Image
+                        src={image}
+                        alt={name}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    </motion.div>
                   </div>
                 )}
 

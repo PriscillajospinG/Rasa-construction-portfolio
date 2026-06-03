@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import { Phone, MessageCircle, Mail, MapPin, CheckCircle2 } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
@@ -283,16 +284,30 @@ Message: ${form.message}`;
             
             {/* Owner Image Card */}
             <Reveal direction="right" className="w-full">
-              <div className="contact-owner-card">
+              <motion.div
+                className="contact-owner-card"
+                whileHover={{
+                  y: -4,
+                  scale: 1.01,
+                  boxShadow: "0 24px 64px rgba(8,51,53,0.16)",
+                  transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+                }}
+              >
                 <div className="contact-owner-photo-wrap">
                   {imageLoaded ? (
-                    <Image
-                      src="/images/owner.jpg"
-                      alt="Gurusamy A from Rasa Construction"
-                      fill
-                      sizes="(max-width: 900px) 100vw, 45vw"
-                      className="contact-owner-photo"
-                    />
+                    <motion.div
+                      className="absolute inset-0"
+                      whileHover={{ scale: 1.04 }}
+                      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      <Image
+                        src="/images/owner.jpg"
+                        alt="Gurusamy A from Rasa Construction"
+                        fill
+                        sizes="(max-width: 900px) 100vw, 45vw"
+                        className="contact-owner-photo"
+                      />
+                    </motion.div>
                   ) : (
                     <div className="owner-placeholder-overlay">
                       <span className="owner-placeholder-text">
@@ -310,7 +325,7 @@ Message: ${form.message}`;
                   </p>
                   <span>Rasa Construction • South Tamil Nadu</span>
                 </div>
-              </div>
+              </motion.div>
             </Reveal>
 
             {/* Google Map below Owner Image Card */}

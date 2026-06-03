@@ -976,7 +976,7 @@ button,
 .hero-title {
   position: relative;
   z-index: 2;
-  animation: heroTitleReveal 950ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
+  /* Framer Motion handles entrance — no CSS animation needed */
 }
 
 .hero-highlight {
@@ -985,7 +985,7 @@ button,
   font-size: 1.16em !important;
   color: #D8B9A3 !important;
   position: relative;
-  animation: heroHighlightReveal 900ms cubic-bezier(0.22, 1, 0.36, 1) 420ms both;
+  /* Framer Motion handles entrance — no CSS animation needed */
 }
 
 .hero-highlight::after {
@@ -1001,16 +1001,16 @@ button,
 }
 
 .hero-eyebrow {
-  animation: heroFadeDown 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  /* Framer Motion handles entrance — animation removed */
 }
 
 .hero-description {
-  animation: heroFadeUp 850ms cubic-bezier(0.22, 1, 0.36, 1) 300ms both;
+  /* Framer Motion handles entrance — animation removed */
 }
 
 .hero-actions,
 .hero-buttons {
-  animation: heroFadeUp 850ms cubic-bezier(0.22, 1, 0.36, 1) 480ms both;
+  /* Framer Motion handles entrance — animation removed */
 }
 
 .hero-bg,
@@ -3715,4 +3715,193 @@ html {
     scroll-behavior: auto !important;
     transform: none !important;
   }
+}
+
+/* ══════════════════════════════════════════════════════════
+   PREMIUM MOTION ADDITIONS — RASA 2.0
+   Easing: cubic-bezier(0.22, 1, 0.36, 1)
+   Duration range: 300ms – 800ms
+   ══════════════════════════════════════════════════════════ */
+
+/* ── NAVBAR: Animated active pill indicator ─────────────── */
+/*
+ * .nav-active-pill is a motion.span with layoutId="nav-pill"
+ * Framer Motion handles its position transitions automatically.
+ */
+.nav-active-pill {
+  position: absolute;
+  inset: -6px -10px;
+  border-radius: 6px;
+  background: rgba(216, 185, 163, 0.14);
+  border: 1px solid rgba(216, 185, 163, 0.22);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Hover underline slide-in for nav links */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: var(--clr-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  border-radius: 1px;
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+/* Don't show underline when pill is active */
+.nav-link.active::after {
+  display: none;
+}
+
+/* ── SERVICE CARDS: Icon hover float ─────────────────────── */
+/*
+ * Icon container inside service card.
+ * Group hover: icon rises 4px, background deepens.
+ */
+.service-icon-hover {
+  transition:
+    transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.service-card.group:hover .service-icon-hover {
+  transform: translateY(-4px);
+  background: rgba(8, 51, 53, 0.08) !important;
+}
+
+/* Service card: image scale on hover */
+.service-img-inner {
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+.service-card.group:hover .service-img-inner {
+  transform: scale(1.04) !important;
+}
+
+/* Service card: enhanced card lift */
+.service-card {
+  transition:
+    transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 400ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 400ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+.service-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 24px 64px rgba(8, 51, 53, 0.14) !important;
+  border-color: rgba(8, 51, 53, 0.14) !important;
+}
+
+/* ── EQUIPMENT BENTO: Industrial glow hover ─────────────── */
+/*
+ * Framer's whileHover handles the box-shadow + y transform.
+ * This ensures the transition on the border itself is smooth.
+ */
+.equipment-card {
+  transition:
+    transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 400ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 400ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* ── CONTACT FORM: Animated focus ring ──────────────────── */
+/*
+ * Focus ring expands outward from the border edge.
+ * Uses box-shadow layering: inner border + outer glow ring.
+ */
+.contact-input,
+.inp-light {
+  transition:
+    border-color 250ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 250ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+.contact-input:focus,
+.inp-light:focus {
+  border-color: var(--clr-primary) !important;
+  box-shadow:
+    0 0 0 1px rgba(8, 51, 53, 0.20),
+    0 0 0 4px rgba(8, 51, 53, 0.07) !important;
+  background: #fefefe !important;
+  outline: none !important;
+}
+
+/* ── PROJECT CARDS: Premium hover state ─────────────────── */
+.project-card {
+  transition:
+    transform 500ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 500ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+.project-card:hover {
+  transform: translateY(-6px) !important;
+}
+/* Overlay becomes slightly more dramatic on hover */
+.project-card .bento-media > div[class*="transition-opacity"] {
+  transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* ── HERO: Remove conflicting CSS keyframes on bg-layer ─── */
+/*
+ * Hero bg image uses Framer Motion for scale reveal now.
+ * Disable CSS keyframe to prevent conflict.
+ */
+.hero-bg-layer {
+  animation: none !important;
+}
+.hero-bg-img {
+  animation: none !important;
+}
+
+/* ── SECTION REVEALS: Global scroll transition polish ────── */
+/*
+ * The Reveal component and Framer variants handle all motion.
+ * These ensure will-change: transform is on the right elements.
+ */
+[data-framer-component-type],
+[style*="transform"],
+[style*="opacity"] {
+  will-change: transform, opacity;
+}
+
+/* ── CARD: Enhanced hover lift ──────────────────────────── */
+.card:hover,
+.card-dark:hover {
+  transition:
+    transform 450ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 450ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 450ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* ── ABOUT TIMELINE: Card cursor enhancement ────────────── */
+.about-timeline-section .cursor-pointer {
+  transition:
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 300ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+.about-timeline-section .cursor-pointer:hover {
+  transform: translateY(-3px) !important;
+}
+
+/* ── SCROLL CUE HOVER ───────────────────────────────────── */
+.section-cue {
+  transition:
+    color 250ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.section-cue:hover {
+  transform: translateX(4px);
+}
+.section-cue-arrow {
+  display: inline-block;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.section-cue:hover .section-cue-arrow {
+  transform: translateX(5px);
 }

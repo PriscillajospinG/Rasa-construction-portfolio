@@ -105,12 +105,20 @@ export default function Navbar() {
               {company.navLinks.map(({ label, href }) => {
                 const active = activeSection === href.slice(1);
                 return (
-                  <li key={href}>
+                  <li key={href} style={{ position: "relative" }}>
                     <button
                       onClick={() => go(href)}
                       className={`nav-link focus:outline-none ${active ? "active" : ""}`}
+                      style={{ position: "relative", zIndex: 1 }}
                     >
-                      {label}
+                      {active && (
+                        <motion.span
+                          layoutId="nav-pill"
+                          className="nav-active-pill"
+                          transition={{ type: "spring", stiffness: 380, damping: 38 }}
+                        />
+                      )}
+                      <span style={{ position: "relative", zIndex: 1 }}>{label}</span>
                     </button>
                   </li>
                 );

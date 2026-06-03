@@ -68,18 +68,20 @@ const gridVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.12,  // 120ms per spec
+      delayChildren: 0.05,
     },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden:  { opacity: 0, y: 28, scale: 0.97 },
   visible: {
     opacity: 1,
     y: 0,
+    scale: 1,
     transition: {
-      duration: 0.7,
+      duration: 0.8,
       ease: [0.22, 1, 0.36, 1] as const,
     },
   },
@@ -119,7 +121,7 @@ export default function Services() {
             variants={gridVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
+            viewport={{ once: true, margin: "-80px" }}
           >
             {services.map(({ id, title, description, usedFor, tag, image, alt }, i) => {
               const num = `0${i + 1}`;
@@ -130,13 +132,16 @@ export default function Services() {
                   variants={cardVariants}
                   className={`service-card group ${isFeatured ? "featured" : ""}`}
                 >
+                  {/* Accent line — grows left→right on card hover */}
+                  <div className="accent-line" style={{ marginBottom: "var(--s3)" }} />
+
                   {isFeatured && image && alt && (
                     <div className="service-image relative w-full aspect-[16/10] overflow-hidden rounded-[20px]" style={{ marginBottom: "var(--s2)", flexShrink: 0 }}>
                       <Image
                         src={image}
                         alt={alt}
                         fill
-                        className="object-cover"
+                        className="object-cover service-img-inner"
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                       <div className="service-image-overlay" />
@@ -144,7 +149,7 @@ export default function Services() {
                   )}
 
                   {!isFeatured && (
-                    <div className="service-icon-wrap" style={{ marginBottom: "var(--s3)", display: "inline-flex", padding: "10px", borderRadius: "12px", background: "rgba(8,51,53,0.04)", width: "fit-content" }}>
+                    <div className="service-icon-wrap service-icon-hover" style={{ marginBottom: "var(--s3)", display: "inline-flex", padding: "10px", borderRadius: "12px", background: "rgba(8,51,53,0.04)", width: "fit-content" }}>
                       <ServiceIcon id={id} />
                     </div>
                   )}
