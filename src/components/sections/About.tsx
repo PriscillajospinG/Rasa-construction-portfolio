@@ -179,7 +179,6 @@ export default function About() {
     <section
       id="about"
       className="about-section bg-[#FBF7F1] relative overflow-hidden"
-      style={{ paddingBlock: "120px" }}
     >
       <SectionWatermark text="JOURNEY" align="center" variant="light" top="35%" opacity={0.012} />
 

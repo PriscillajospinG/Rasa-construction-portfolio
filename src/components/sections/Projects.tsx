@@ -35,52 +35,49 @@ export default function Projects() {
 
       <div className="container relative z-10" ref={ref}>
 
-        {/* ── Header: asymmetric — number left, content right ── */}
-        <div style={{ gap: "var(--s8)", alignItems: "start" }}
-          className="section-header grid grid-cols-1 lg:grid-cols-[auto_1fr] projects-header-grid">
-          {/* Decorative section number */}
-          <Reveal direction="left">
-            <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontWeight: 900, fontSize: "0.7rem", letterSpacing: "0.25em", color: "rgba(8,51,53,0.16)", userSelect: "none", textTransform: "uppercase" }}>
-              Portfolio
+        {/* ── Section Header ── */}
+        <div className="section-header relative w-full">
+          {/* Decorative vertical section name positioned absolutely on the right */}
+          <div className="absolute right-0 top-0 hidden lg:block" style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontWeight: 900, fontSize: "0.7rem", letterSpacing: "0.25em", color: "rgba(8,51,53,0.16)", userSelect: "none", textTransform: "uppercase" }}>
+            Portfolio
+          </div>
+          <Reveal>
+            <p className="section-eyebrow">SITE PHOTOS</p>
+          </Reveal>
+          <h2 className="section-title">
+            Real work, real sites.
+          </h2>
+          <Reveal delay={0.1}>
+            <p className="section-lead">
+              A look at our equipment, site work, scaffolding support, and construction material movement.
+            </p>
+          </Reveal>
+          {/* Filter pills — smooth active transition */}
+          <Reveal delay={0.15}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--s1)", marginTop: "var(--s3)" }}>
+              {projectCategories.map((cat) => (
+                <motion.button
+                  key={cat}
+                  onClick={() => setActive(cat)}
+                  className="t-label font-p"
+                  style={{
+                    padding:      "6px 18px",
+                    borderRadius: "100px",
+                    fontWeight:   active === cat ? 600 : 400,
+                    border:       "none",
+                    cursor:       "pointer",
+                  }}
+                  animate={{
+                    background: active === cat ? "#083335" : "rgba(8,51,53,0.06)",
+                    color:      active === cat ? "#FFFFFF" : "#66706B",
+                  }}
+                  transition={{ duration: 0.25, ease: EASE_CINEMATIC }}
+                >
+                  {cat}
+                </motion.button>
+              ))}
             </div>
           </Reveal>
-          <div>
-            <Reveal>
-              <p className="section-eyebrow">SITE PHOTOS</p>
-              <h2 className="section-title">
-                Real work, real sites.
-              </h2>
-              <p className="section-lead mt-2 text-[#66706B]">
-                A look at our equipment, site work, scaffolding support, and construction material movement.
-              </p>
-            </Reveal>
-            {/* Filter pills — smooth active transition */}
-            <Reveal delay={0.1}>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--s1)", marginTop: "var(--s3)" }}>
-                {projectCategories.map((cat) => (
-                  <motion.button
-                    key={cat}
-                    onClick={() => setActive(cat)}
-                    className="t-label font-p"
-                    style={{
-                      padding:      "6px 18px",
-                      borderRadius: "100px",
-                      fontWeight:   active === cat ? 600 : 400,
-                      border:       "none",
-                      cursor:       "pointer",
-                    }}
-                    animate={{
-                      background: active === cat ? "#083335" : "rgba(8,51,53,0.06)",
-                      color:      active === cat ? "#FFFFFF" : "#66706B",
-                    }}
-                    transition={{ duration: 0.25, ease: EASE_CINEMATIC }}
-                  >
-                    {cat}
-                  </motion.button>
-                ))}
-              </div>
-            </Reveal>
-          </div>
         </div>
 
         {/* ── Bento Grid — AnimatePresence for filter transitions ── */}
