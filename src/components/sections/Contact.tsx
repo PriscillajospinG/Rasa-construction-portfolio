@@ -316,12 +316,12 @@ Message: ${form.message}`;
                     site support, and construction guidance.
                   </p>
 
-                  {/* Trust Footer */}
+                  {/* Trust Footer
                   <div className="contact-owner-trust">
                     <span className="contact-trust-item">✓ Since 2000</span>
                     <span className="contact-trust-item">✓ Direct Owner Support</span>
                     <span className="contact-trust-item">✓ South Tamil Nadu</span>
-                  </div>
+                  </div> */}
                 </div>
 
               </div>
