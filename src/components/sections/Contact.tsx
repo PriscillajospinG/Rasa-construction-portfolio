@@ -37,7 +37,7 @@ export default function Contact() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const img = new window.Image();
-      img.src = "/images/owner.jpg";
+      img.src = "/images/owner-enhanced.jpg";
       img.onload = () => setImageLoaded(true);
       img.onerror = () => setImageLoaded(false);
     }
@@ -290,7 +290,7 @@ Message: ${form.message}`;
                 <div className="contact-owner-photo-wrap">
                   {imageLoaded ? (
                     <Image
-                      src="/images/owner.jpg"
+                      src="/images/owner-enhanced.jpg"
                       alt="Gurusamy A, Founder of Rasa Construction"
                       fill
                       sizes="(max-width: 900px) 100vw, 45vw"

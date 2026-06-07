@@ -3224,91 +3224,107 @@ section,
 }
 
 .contact-section .contact-owner-card {
-  background: #083335 !important;
-  border-radius: 22px !important;
+  background: #FFFFFF !important;
+  border-radius: 24px !important;
   overflow: hidden !important;
-  border: 1px solid rgba(8, 51, 53, 0.14) !important;
-  box-shadow: 0 14px 34px rgba(8, 51, 53, 0.12) !important;
+  border: 1px solid rgba(8, 51, 53, 0.10) !important;
+  box-shadow: 0 12px 40px rgba(8, 51, 53, 0.09) !important;
   padding: 0 !important;
   display: flex !important;
   flex-direction: column !important;
 }
 
+/* Image occupies top ~65–70% of the card */
 .contact-section .contact-owner-photo-wrap {
   position: relative !important;
   width: 100% !important;
-  height: 360px !important;
-  background: #F4EFE7 !important;
+  height: 400px !important;
+  background: #F0EAE0 !important; /* warm off-white matches image bg */
+  border-bottom: 3px solid var(--clr-primary) !important;
+  overflow: hidden !important;
 }
 
+/* Image: cover fills frame cleanly for chest-up portrait */
 .contact-section .contact-owner-photo {
-  object-fit: contain !important;
+  object-fit: cover !important;
   object-position: center top !important;
-  background: #F4EFE7 !important;
   transform: none !important;
+  transition: none !important;
   filter: none !important;
 }
 
+/* Content area */
 .contact-section .contact-owner-info {
-  padding: 24px 26px 26px !important;
-  color: #FFFFFF !important;
-  background: #083335 !important;
+  padding: 26px 28px 24px !important;
+  color: #162625 !important;
+  background: #FFFFFF !important;
+  flex-grow: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
 }
 
+/* Small uppercase eyebrow label */
 .contact-section .contact-owner-label {
-  color: #D8B9A3 !important;
-  font-size: 0.72rem !important;
+  color: var(--clr-primary) !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.68rem !important;
   font-weight: 800 !important;
-  letter-spacing: 0.13em !important;
+  letter-spacing: 0.14em !important;
   text-transform: uppercase !important;
-  margin-bottom: 10px !important;
-}
-
-.contact-section .contact-owner-info h3 {
-  color: #FFFFFF !important;
-  margin: 0 0 10px !important;
-  font-size: clamp(1.55rem, 2vw, 2rem) !important;
-  line-height: 1.05 !important;
-}
-
-.contact-section .contact-owner-line {
-  color: rgba(255,255,255,0.88) !important;
-  font-style: italic !important;
-  line-height: 1.6 !important;
   margin: 0 0 14px !important;
 }
 
-.contact-section .contact-owner-info span {
-  color: rgba(255,255,255,0.72) !important;
-  font-size: 0.9rem !important;
+/* Owner name — prominent */
+.contact-section .contact-owner-name {
+  font-family: var(--font-heading), serif !important;
+  font-size: clamp(1.75rem, 2.5vw, 2.2rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.1 !important;
+  color: var(--clr-primary) !important;
+  margin: 0 0 4px !important;
+  letter-spacing: -0.02em !important;
 }
 
-.contact-section .contact-owner-label {
-  color: #D8B9A3 !important;
-  font-size: 0.72rem !important;
-  font-weight: 800 !important;
-  letter-spacing: 0.13em !important;
+/* Role line */
+.contact-section .contact-owner-role {
+  font-family: var(--font-body) !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  color: var(--clr-accent-dk) !important;
   text-transform: uppercase !important;
-  margin-bottom: 10px !important;
+  letter-spacing: 0.06em !important;
+  margin: 0 0 18px !important;
 }
 
-.contact-section .contact-owner-content h3 {
-  color: #FFFFFF !important;
-  font-size: clamp(1.55rem, 2vw, 2rem) !important;
-  line-height: 1.05 !important;
-  margin: 0 0 10px !important;
-}
-
+/* Description paragraph */
 .contact-section .contact-owner-line {
-  color: rgba(255, 255, 255, 0.9) !important;
-  font-style: italic !important;
-  line-height: 1.6 !important;
-  margin: 0 0 14px !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.92rem !important;
+  line-height: 1.65 !important;
+  color: var(--clr-text-md) !important;
+  font-style: normal !important;
+  margin: 0 0 20px !important;
 }
 
-.contact-section .contact-owner-content span {
-  color: rgba(255, 255, 255, 0.76) !important;
-  font-size: 0.9rem !important;
+/* Trust footer — three credibility signals */
+.contact-owner-trust {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  padding-top: 18px !important;
+  border-top: 1px solid rgba(8, 51, 53, 0.08) !important;
+  margin-top: auto !important;
+}
+
+.contact-trust-item {
+  font-family: var(--font-body) !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  color: var(--clr-primary) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
 }
 
 .contact-section .owner-placeholder-overlay {
@@ -3320,18 +3336,32 @@ section,
   pointer-events: none !important;
   padding: 16px !important;
   z-index: 10 !important;
+  background: #F0EAE0 !important;
 }
 
 .contact-section .owner-placeholder-text {
-  font-size: 11px !important;
-  color: rgba(255, 255, 255, 0.35) !important;
-  border: 1px dashed rgba(255, 255, 255, 0.2) !important;
+  font-size: 0.85rem !important;
+  color: rgba(8, 51, 53, 0.5) !important;
+  border: 1px dashed rgba(8, 51, 53, 0.2) !important;
   border-radius: 8px !important;
-  padding: 6px 12px !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.1em !important;
+  padding: 8px 14px !important;
   font-weight: 600 !important;
-  background: transparent !important;
+}
+
+@media (max-width: 768px) {
+  .contact-section .contact-owner-photo-wrap {
+    height: 340px !important;
+  }
+
+  .contact-section .contact-owner-info {
+    padding: 22px 20px 20px !important;
+  }
+
+  .contact-owner-trust {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 8px 16px !important;
+  }
 }
 
 .contact-section .contact-map-card {
