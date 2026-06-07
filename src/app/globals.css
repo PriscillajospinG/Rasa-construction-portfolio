@@ -3239,14 +3239,14 @@ section,
   position: relative !important;
   width: 100% !important;
   height: 400px !important;
-  background: #F0EAE0 !important; /* warm off-white matches image bg */
-  border-bottom: 3px solid var(--clr-primary) !important;
+  background: #FFFFFF !important;
+  border-bottom: 2px solid rgba(8, 51, 53, 0.08) !important;
   overflow: hidden !important;
 }
 
-/* Image: cover fills frame cleanly for chest-up portrait */
+/* Image: contain — keeps full waist-up figure visible on white bg */
 .contact-section .contact-owner-photo {
-  object-fit: cover !important;
+  object-fit: contain !important;
   object-position: center top !important;
   transform: none !important;
   transition: none !important;
