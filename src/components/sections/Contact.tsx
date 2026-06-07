@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+
 import emailjs from "@emailjs/browser";
 import { Phone, MessageCircle, Mail, MapPin, CheckCircle2 } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
@@ -282,50 +282,49 @@ Message: ${form.message}`;
           {/* RIGHT SIDE: Owner Image Card and Map below it */}
           <div className="contact-right flex flex-col">
             
-            {/* Owner Image Card */}
+            {/* Owner Profile Card */}
             <Reveal direction="right" className="w-full">
-              <motion.div
-                className="contact-owner-card"
-                whileHover={{
-                  y: -4,
-                  scale: 1.01,
-                  boxShadow: "0 24px 64px rgba(8,51,53,0.16)",
-                  transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
-                }}
-              >
+              <div className="contact-owner-card">
+
+                {/* Image Area — 70% of card */}
                 <div className="contact-owner-photo-wrap">
                   {imageLoaded ? (
-                    <motion.div
-                      className="absolute inset-0"
-                      whileHover={{ scale: 1.04 }}
-                      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                    >
-                      <Image
-                        src="/images/owner.jpg"
-                        alt="Gurusamy A from Rasa Construction"
-                        fill
-                        sizes="(max-width: 900px) 100vw, 45vw"
-                        className="contact-owner-photo"
-                      />
-                    </motion.div>
+                    <Image
+                      src="/images/owner.jpg"
+                      alt="Gurusamy A, Founder of Rasa Construction"
+                      fill
+                      sizes="(max-width: 900px) 100vw, 45vw"
+                      className="contact-owner-photo"
+                      priority
+                    />
                   ) : (
                     <div className="owner-placeholder-overlay">
-                      <span className="owner-placeholder-text">
-                        Owner image can be added here
-                      </span>
+                      <span className="owner-placeholder-text">Gurusamy A</span>
                     </div>
                   )}
                 </div>
 
+                {/* Content Area */}
                 <div className="contact-owner-info">
                   <p className="contact-owner-label">DIRECT PROJECT GUIDANCE</p>
-                  <h3>Speak with Gurusamy A</h3>
+
+                  <h3 className="contact-owner-name">Gurusamy A</h3>
+                  <p className="contact-owner-role">Founder &amp; Site Consultant</p>
+
                   <p className="contact-owner-line">
-                    Call Gurusamy A — he will tell you exactly what the project requires.
+                    Call Gurusamy A directly for project planning, equipment requirements,
+                    site support, and construction guidance.
                   </p>
-                  <span>Rasa Construction • South Tamil Nadu</span>
+
+                  {/* Trust Footer */}
+                  <div className="contact-owner-trust">
+                    <span className="contact-trust-item">✓ Since 2000</span>
+                    <span className="contact-trust-item">✓ Direct Owner Support</span>
+                    <span className="contact-trust-item">✓ South Tamil Nadu</span>
+                  </div>
                 </div>
-              </motion.div>
+
+              </div>
             </Reveal>
 
             {/* Google Map below Owner Image Card */}
