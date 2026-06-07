@@ -13,6 +13,8 @@ interface TimelineItem {
   title: string;
   description: string;
   tag: string;
+  image: string;
+  imageAlt: string;
 }
 
 const timelineItems: TimelineItem[] = [
@@ -22,6 +24,8 @@ const timelineItems: TimelineItem[] = [
     description:
       "Added Ashok Leyland HB1215 to improve transport capacity for scaffolding, centring materials, and site equipment.",
     tag: "Fleet",
+    image: "/gallery/gallery-01.jpg",
+    imageAlt: "Rasa Construction active church renovation site with hoist — 2026",
   },
   {
     year: "2025",
@@ -29,6 +33,8 @@ const timelineItems: TimelineItem[] = [
     description:
       "Improved site support, material handling, and rental readiness for regular construction customers.",
     tag: "Expansion",
+    image: "/gallery/gallery-09.jpg",
+    imageAlt: "High-rise scaffolding on multi-storey building — 2025",
   },
   {
     year: "2024",
@@ -36,6 +42,8 @@ const timelineItems: TimelineItem[] = [
     description:
       "Added Tata Intra for faster local delivery and flexible site support.",
     tag: "Fleet",
+    image: "/projects/tenkasi-residential.jpg",
+    imageAlt: "Residential construction site supported by Rasa — 2024",
   },
   {
     year: "2023",
@@ -43,6 +51,8 @@ const timelineItems: TimelineItem[] = [
     description:
       "Started supplying jockey span sheets in two sizes for slab and centring work.",
     tag: "Rental Service",
+    image: "/gallery/gallery-10.jpg",
+    imageAlt: "Full-facade residential scaffolding — 2023",
   },
   {
     year: "2020",
@@ -50,6 +60,8 @@ const timelineItems: TimelineItem[] = [
     description:
       "During the corona period, expanded into scaffolding rental and supply with cup lock pipes and multiple pipe sizes.",
     tag: "Scaffolding",
+    image: "/gallery/gallery-06.jpg",
+    imageAlt: "Multi-storey scaffolding with concrete mixer — 2020",
   },
   {
     year: "2015",
@@ -57,6 +69,8 @@ const timelineItems: TimelineItem[] = [
     description:
       "Added more vehicle support to serve more construction sites.",
     tag: "Fleet",
+    image: "/equipment/scaffold-tubes.jpg",
+    imageAlt: "Tower construction scaffolding structure — 2015",
   },
   {
     year: "2012",
@@ -64,6 +78,8 @@ const timelineItems: TimelineItem[] = [
     description:
       "Started vertical hoist rental with H-frame support for multi-level construction work.",
     tag: "Hoist",
+    image: "/equipment/vertical-hoist.jpg",
+    imageAlt: "Vertical hoist rental on construction site — 2012",
   },
   {
     year: "2011",
@@ -71,6 +87,8 @@ const timelineItems: TimelineItem[] = [
     description:
       "Assembled and added another vehicle for site material movement.",
     tag: "Vehicle",
+    image: "/gallery/gallery-07.jpg",
+    imageAlt: "Hoist installed alongside a completed building — 2011",
   },
   {
     year: "2009",
@@ -78,18 +96,24 @@ const timelineItems: TimelineItem[] = [
     description:
       "Continued adding equipment and site support capacity as customer demand grew.",
     tag: "Equipment",
+    image: "/projects/commercial-facade-scaffold.jpg",
+    imageAlt: "Commercial facade scaffolding project — 2009",
   },
   {
     year: "2007",
     title: "Tata Ace Added",
     description: "Added Tata Ace and expanded daily site movement.",
     tag: "Vehicle",
+    image: "/gallery/gallery-08.jpg",
+    imageAlt: "Early residential construction site supported by Rasa — 2007",
   },
   {
     year: "2005",
     title: "Lift Machine and 407 Vehicle Added",
     description: "Added another machine, lift support, and 407 vehicle.",
     tag: "Equipment",
+    image: "/projects/hospital-hoist.jpg",
+    imageAlt: "Hoist and lift support for multi-storey hospital project — 2005",
   },
   {
     year: "2000",
@@ -97,8 +121,11 @@ const timelineItems: TimelineItem[] = [
     description:
       "Started with one concrete machine and around ten labourers travelling to nearby sites for construction support.",
     tag: "Founded",
+    image: "/images/project-concrete.png",
+    imageAlt: "Concrete works — Rasa Construction founding year 2000",
   },
 ];
+
 
 const TOTAL = timelineItems.length;
 
@@ -340,26 +367,14 @@ export default function About() {
                             : `View ${timelineItems[activeIndex + 1]?.year} milestone`
                         }
                       >
-                        {/* Placeholder always behind */}
-                        <div className="about-gallery-img-placeholder">
-                          <svg width="36" height="36" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                            <rect x="2" y="8" width="28" height="20" rx="2" stroke="#D8B9A3" strokeWidth="1.5" />
-                            <circle cx="10" cy="16" r="3" stroke="#D8B9A3" strokeWidth="1.5" />
-                            <path d="M2 22l7-5 5 4 5-3 11 7" stroke="#D8B9A3" strokeWidth="1.5" strokeLinejoin="round" />
-                          </svg>
-                          <span>Add historical image here</span>
-                        </div>
-
-                        {/* Actual image — hides on error */}
+                        {/* Real image — mapped from existing project assets */}
                         <Image
-                          src={`/images/timeline-${active.year}.jpg`}
-                          alt={`Rasa Construction ${active.year}`}
+                          src={active.image}
+                          alt={active.imageAlt}
                           fill
                           className="about-gallery-img"
                           sizes="(max-width: 768px) 100vw, 680px"
-                          onError={(e) => {
-                            (e.target as HTMLElement).style.display = "none";
-                          }}
+                          priority={activeIndex === 0}
                         />
 
                         {/* Hover overlay — shows next action */}
@@ -377,6 +392,7 @@ export default function About() {
                           />
                         </div>
                       </button>
+
 
                       {/* ── Text content below image ── */}
                       <div className="about-gallery-body">
