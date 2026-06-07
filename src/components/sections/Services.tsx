@@ -50,9 +50,11 @@ export default function Services() {
           <Reveal>
             <p className="section-eyebrow">OUR SERVICES</p>
           </Reveal>
-          <h2 className="section-title" aria-label="Services We Offer">
-            Services We Offer
-          </h2>
+          <Reveal delay={0.05}>
+            <h2 className="section-title" aria-label="Services We Offer">
+              Services We Offer
+            </h2>
+          </Reveal>
           <Reveal delay={0.1}>
             <p className="section-lead">
               Reliable equipment, scaffolding systems, hoist rentals and construction support trusted across South Tamil Nadu.
