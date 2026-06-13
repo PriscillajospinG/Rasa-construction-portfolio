@@ -708,6 +708,8 @@ button,
 .navbar-logo-img {
   display: block;
   object-fit: contain;
+  height: 32px;
+  width: auto;
 }
 
 .loading-logo-img,
@@ -720,6 +722,9 @@ button,
 }
 
 @media (max-width: 768px) {
+  .navbar-logo-img {
+    height: 28px;
+  }
   .loading-logo-img,
   .splash-logo-img,
   .preloader-logo-img {
