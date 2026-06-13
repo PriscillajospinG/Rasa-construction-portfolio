@@ -463,6 +463,7 @@ button,
 }
 .btn-dark:hover {
   background: var(--clr-primary);
+  color: var(--clr-white);
   border-color: var(--clr-primary);
 }
 
@@ -5090,4 +5091,83 @@ html {
   line-height: 1.72 !important;
   color: var(--clr-text-md) !important;
   max-width: 640px !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   CONTACT SECTION — BUTTON TEXT VISIBILITY FIX
+   Bug: btn-dark:hover and other states lost color inheritance,
+   making text invisible (dark-on-dark) inside the contact form.
+   This block is the last word — it wins the cascade.
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Submit / Send Enquiry (btn-dark inside contact form) ── */
+.contact-section .btn-dark,
+.contact-section button[type="submit"],
+.contact-section .contact-submit {
+  background: #083335 !important;
+  color: #FFFFFF !important;
+  border-color: #083335 !important;
+}
+
+.contact-section .btn-dark:hover,
+.contact-section button[type="submit"]:hover,
+.contact-section .contact-submit:hover {
+  background: #0B4042 !important;
+  color: #FFFFFF !important;
+  border-color: #0B4042 !important;
+}
+
+.contact-section .btn-dark:focus-visible,
+.contact-section button[type="submit"]:focus-visible,
+.contact-section .contact-submit:focus-visible {
+  background: #083335 !important;
+  color: #FFFFFF !important;
+  outline: 2px solid #D8B9A3 !important;
+  outline-offset: 2px !important;
+}
+
+.contact-section .btn-dark:disabled,
+.contact-section button[type="submit"]:disabled,
+.contact-section .contact-submit:disabled {
+  background: #083335 !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+  border-color: #083335 !important;
+  opacity: 0.75 !important;
+  cursor: not-allowed !important;
+}
+
+/* ── btn-label span: must always inherit the button text colour ── */
+.contact-section .btn .btn-label,
+.contact-section button .btn-label {
+  color: inherit !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* ── Accent buttons: Directions, WhatsApp, Call Now ── */
+.contact-section .btn-primary,
+.contact-section .map-link,
+.contact-section .whatsapp-link {
+  background: #D8B9A3 !important;
+  color: #083335 !important;
+  border-color: #D8B9A3 !important;
+}
+
+.contact-section .btn-primary:hover,
+.contact-section .map-link:hover,
+.contact-section .whatsapp-link:hover {
+  background: #c9a98e !important;
+  color: #083335 !important;
+  border-color: #c9a98e !important;
+}
+
+/* ── Call Now button (btn-dark in success state) ── */
+.contact-section .btn-dark a,
+.contact-section a.btn-dark {
+  color: #FFFFFF !important;
+}
+
+.contact-section a.btn-dark:hover {
+  color: #FFFFFF !important;
 }
